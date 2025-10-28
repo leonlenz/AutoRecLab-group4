@@ -516,7 +516,7 @@ class MinimalAgent:
             Each requirement should be specific, actionable, and directly related to the research task. 
             Include all critical conceptual and technical requirements necessary for a successful experiment, but do not add unnecessary or generic requirements.
             A successful experiment means the code is technically AND conceptually correct, runs without errors, and produces meaningful results that align with the research task.
-            Avoid vague language and keep each requirement as brief and precise as possible.
+            Avoid vague language and keep each requirement as concise and precise as possible.
             """
         requirements_result = query(
             system_message=requirements_prompt,
@@ -526,6 +526,35 @@ class MinimalAgent:
             func_spec=set_code_requirements_spec,
         )
         self.code_requirements = requirements_result.get(
+            "requirements", "No specific requirements provided."
+        )
+        
+        # Requirements reflection round
+        reflection_prompt = f"""You are an expert recommender systems researcher conducting a quality review.
+            Your colleague generated code requirements that, when fulfilled, should result in a successful implementation of the research task.
+
+            This is the research task: {self.task_desc}
+
+            Your colleague generated the following code requirements:
+            {self.code_requirements}
+            
+            Review these requirements and verify they meet ALL these criteria:
+            1. Each requirement is specific, actionable, and measurable
+            2. All requirements are directly relevant to the research task
+            3. ALL critical technical AND conceptual aspects are covered
+            4. No vague, generic, or redundant requirements are included
+            5. Requirements focus on successful experiment execution and meaningful results
+            
+            Provide an updated, refined list of requirements that fixes any issues found. Keep requirements that already meet the criteria unchanged.
+            """
+        reflection_result = query(
+            system_message=reflection_prompt,
+            user_message=None,
+            model=self.cfg.agent.code.model,
+            temperature=self.cfg.agent.code.model_temp,
+            func_spec=set_code_requirements_spec,
+        )
+        self.code_requirements = reflection_result.get(
             "requirements", "No specific requirements provided."
         )
         logger.info("Done.")

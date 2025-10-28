@@ -79,18 +79,20 @@ score_code_func_spec = FunctionSpec(
     description="Score the code implementation and provide feedback on its quality.",
 )
 
-# TODO: Change requirements from string to dict with requirement and boolean or int (0/1)
 set_code_requirements_spec = FunctionSpec(
     name="set_code_requirements",
     json_schema={
         "type": "object",
         "properties": {
             "requirements": {
-                "type": "string",
-                "description": "A numbered list of clear, specific code requirements.",
+                "type": "array",
+                "description": "A list of concise, clear and specific code requirements.",
+                "items": {
+                    "type": "string",
+                    "description": "One specific requirement that must be met."
+                }
             }
-        },
-        "required": ["requirements"],
+        }
     },
     description=(
         "Set clear and specific code requirements for the implementation based on the research task."
