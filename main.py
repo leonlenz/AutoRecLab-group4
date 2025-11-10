@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 
 from config import load_config
 from treesearch.search import TreeSearch
-from utils.log import set_log_level, _ROOT_LOGGER
+from utils.log import _ROOT_LOGGER, attach_file_handler, set_log_level
 from utils.path import mkdir
 
 logger = _ROOT_LOGGER.getChild("main")
@@ -18,6 +18,8 @@ def main():
     if args.init:
         mkdir(out_dir / "workspace")
         return
+
+    attach_file_handler(out_dir)
 
     user_req_lines: list[str] = []
     print('Enter you request, write "!start" to start:')
