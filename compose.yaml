@@ -6,5 +6,7 @@ services:
       - ./sandbox:/app/out
     env_file:
       - .env
+    environment:
+      - ARL_out_dir=/app/out
     stdin_open: true
     tty: true
