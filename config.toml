@@ -1,3 +1,5 @@
+out_dir = "./out"
+
 [treesearch]
 num_draft_nodes = 3
 debug_prob = 0.3
@@ -6,7 +8,6 @@ max_iterations = 10
 
 [exec]
 timeout = 3600
-workspace = "./workspace"
 
 [agent]
 k_fold_validation = 1
