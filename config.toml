@@ -3,15 +3,15 @@ out_dir = "./out"
 [treesearch]
 num_draft_nodes = 3
 debug_prob = 0.3
-epsilon = 0.3
-max_iterations = 10
+epsilon = 0.2
+max_iterations = 20
 
 [exec]
-timeout = 3600
+timeout = 5400
 
 [agent]
 k_fold_validation = 1
 
 [agent.code]
-model = "gpt-5-mini"
+model = "gpt-5.1"
 model_temp = 1.0

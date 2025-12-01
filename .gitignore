@@ -13,3 +13,5 @@ wheels/
 
 # Config
 config.toml
+
+/sandbox

@@ -50,14 +50,26 @@ class TreeSearch:
         good_nodes = self.good_nodes
         good_nodes.sort(key=lambda n: n.score.score, reverse=True)
         return good_nodes[0]
+    
+    def best_buggy_node(self):
+        buggy_nodes = self.buggy_nodes
+        buggy_nodes.sort(key=lambda n: n.score.score, reverse=True)
+        return buggy_nodes[0]
 
     def select_next_node(self) -> Node:
+        # Select buggy node with debug_prob probability
         if (
             len(self.buggy_nodes) > 0
             and random.random() < self._config.treesearch.debug_prob
             or len(self.good_nodes) == 0
         ):
-            return random.choice(self.buggy_nodes)
+            # Epsilon-greedy explore vs. exploit:
+            if random.random() < self._config.treesearch.epsilon:
+                logger.info("Selecting random buggy node for debugging...")
+                return random.choice(self.buggy_nodes)
+            else:
+                logger.info("Selecting best buggy node for debugging...")
+                return self.best_buggy_node()
 
         # Epsilon-greedy explore vs. exploit:
         if random.random() < self._config.treesearch.epsilon:

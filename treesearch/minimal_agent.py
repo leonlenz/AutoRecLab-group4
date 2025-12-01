@@ -60,87 +60,117 @@ class MinimalAgent:
         pkg_str = ", ".join([f"`{p}`" for p in pkgs])
 
         env_prompt = {
-            "Installed Packages": f"Your solution can use any relevant machine learning packages such as: {pkg_str}. Feel free to use any other packages too (all packages are already installed!)."
+            "Installed Packages": f"Your solution can use the following machine learning packages: {pkg_str}. You MUST use these libraries as much as possible instead of implementing from scratch."
         }
         return env_prompt
 
     @property
     def _prompt_impl_guideline(self):
         impl_guideline = [
-            "CRITICAL REQUIREMENTS - You should use lenskit as much as possible",
-            "CRITICAL MODEL INPUT GUIDELINES:",
-            "  - Always pay extra attention to the input to the model being properly normalized",
-            "  - This is extremely important because the input to the model's forward pass directly affects the output, and the loss function is computed based on the output",
+            "Implementation Guidelines:",
+            "1. Libraries: Use standard libraries (pandas, numpy, scikit-learn, lenskit) whenever possible. Avoid implementing algorithms from scratch.",
+            "2. Code Structure:",
+            "   - Single-file, self-contained Python script.",
+            "   - No `if __name__ == '__main__':` blocks. Code should execute immediately.",
+            "   - All code at global scope or in functions called from global scope.",
+            "3. Environment & Output:",
+            "   - Start with:",
+            "     import os",
+            "     working_dir = os.path.join(os.getcwd(), 'working')",
+            "     os.makedirs(working_dir, exist_ok=True)",
+            f"   - Ensure execution completes within {humanize.naturaldelta(self.cfg.exec.timeout)}.",
+            "4. Data Saving:",
+            "   - Save all metrics, losses, and predictions in a dictionary `experiment_data`.",
+            "   - Save this dictionary at the end: `np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)`.",
+            "5. Evaluation:",
+            "   - Track and print validation loss/metrics at each epoch.",
+            f"   - Calculate and log these specific metrics: {self.evaluation_metrics}.",
         ]
-
-        impl_guideline.extend(
-            [
-                "For generative modeling tasks, you must:",
-                "  - Generate a set of samples from your model",
-                "  - Compare these samples with ground truth data using appropriate visualizations",
-                "  - When saving plots, always use the 'working_dir' variable that will be defined at the start of the script",
-                "  - Make sure to give each figure a unique and appropriate name based on the dataset it represents, rather than reusing the same filename.",
-                "Important code structure requirements:",
-                "  - Do NOT put any execution code inside 'if __name__ == \"__main__\":' block",
-                "  - All code should be at the global scope or in functions that are called from the global scope",
-                "  - The script should execute immediately when run, without requiring any special entry point",
-                "The code should start with:",
-                "  import os",
-                "  working_dir = os.path.join(os.getcwd(), 'working')",
-                "  os.makedirs(working_dir, exist_ok=True)",
-                "The code should be a single-file python program that is self-contained and can be executed as-is.",
-                "No parts of the code should be skipped, don't terminate the code execution before finishing the script.",
-                "Your response should only contain a single code block.",
-                f"Be aware of the running time of the code, it should complete within {humanize.naturaldelta(self.cfg.exec.timeout)}.",
-                'You can also use the "./working" directory to store any temporary files that your code needs to create.',
-                "Data saving requirements:",
-                "- Save all plottable data (metrics, losses, predictions, etc.) as numpy arrays using np.save()",
-                "- Use the following naming convention for saved files:",
-                "  ```python",
-                "  # At the start of your code",
-                "  experiment_data = {",
-                "      'dataset_name_1': {",
-                "          'metrics': {'train': [], 'val': []},",
-                "          'losses': {'train': [], 'val': []},",
-                "          'predictions': [],",
-                "          'ground_truth': [],",
-                "          # Add other relevant data",
-                "      },",
-                "      # Add additional datasets as needed:",
-                "      'dataset_name_2': {",
-                "          'metrics': {'train': [], 'val': []},",
-                "          'losses': {'train': [], 'val': []},",
-                "          'predictions': [],",
-                "          'ground_truth': [],",
-                "          # Add other relevant data",
-                "      },",
-                "  }",
-                "  # During training/evaluation:",
-                "  experiment_data['dataset_name_1']['metrics']['train'].append(train_metric)",
-                "  ```",
-                "- Include timestamps or epochs with the saved metrics",
-                "- For large datasets, consider saving in chunks or using np.savez_compressed()",
-                "CRITICAL EVALUATION REQUIREMENTS - Your code MUST include ALL of these:",
-                "  1. Track and print validation loss (if applicable) at each epoch or at suitable intervals:",
-                "     ```python",
-                "     print(f'Epoch {{epoch}}: validation_loss = {{val_loss:.4f}}')",
-                "     ```",
-                "  2. Track and update ALL these additional metrics: "
-                + str(self.evaluation_metrics),
-                "  3. Update metrics at EACH epoch:",
-                "  4. Save ALL metrics at the end:",
-                "     ```python",
-                "     np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)",
-                "     ```",
-            ]
-        )
 
         if self.cfg.agent.k_fold_validation > 1:
             impl_guideline.append(
-                f"The evaluation should be based on {self.cfg.agent.k_fold_validation}-fold cross-validation but only if that's an appropriate evaluation for the task at hand."
+                f"6. Validation: Use {self.cfg.agent.k_fold_validation}-fold cross-validation if appropriate."
             )
 
         return {"Implementation guideline": impl_guideline}
+
+    # @property
+    # def _prompt_impl_guideline(self):
+    #     impl_guideline = [
+    #         "CRITICAL REQUIREMENTS - Use appropriate libraries if possible, avoid implementing from scratch:",
+    #         "CRITICAL MODEL INPUT GUIDELINES:",
+    #         "  - Always pay extra attention to the input to the model being properly normalized",
+    #         "  - This is extremely important because the input to the model's forward pass directly affects the output, and the loss function is computed based on the output",
+    #     ]
+    #
+    #     impl_guideline.extend(
+    #         [
+    #             "For generative modeling tasks, you must:",
+    #             "  - Generate a set of samples from your model",
+    #             "  - Compare these samples with ground truth data using appropriate visualizations",
+    #             "  - When saving plots, always use the 'working_dir' variable that will be defined at the start of the script",
+    #             "  - Make sure to give each figure a unique and appropriate name based on the dataset it represents, rather than reusing the same filename.",
+    #             "Important code structure requirements:",
+    #             "  - Do NOT put any execution code inside 'if __name__ == \"__main__\":' block",
+    #             "  - All code should be at the global scope or in functions that are called from the global scope",
+    #             "  - The script should execute immediately when run, without requiring any special entry point",
+    #             "The code should start with:",
+    #             "  import os",
+    #             "  working_dir = os.path.join(os.getcwd(), 'working')",
+    #             "  os.makedirs(working_dir, exist_ok=True)",
+    #             "The code should be a single-file python program that is self-contained and can be executed as-is.",
+    #             "No parts of the code should be skipped, don't terminate the code execution before finishing the script.",
+    #             "Your response should only contain a single code block.",
+    #             f"Be aware of the running time of the code, it should complete within {humanize.naturaldelta(self.cfg.exec.timeout)}.",
+    #             'You can also use the "./working" directory to store any temporary files that your code needs to create.',
+    #             "Data saving requirements:",
+    #             "- Save all plottable data (metrics, losses, predictions, etc.) as numpy arrays using np.save()",
+    #             "- Use the following naming convention for saved files:",
+    #             "  ```python",
+    #             "  # At the start of your code",
+    #             "  experiment_data = {",
+    #             "      'dataset_name_1': {",
+    #             "          'metrics': {'train': [], 'val': []},",
+    #             "          'losses': {'train': [], 'val': []},",
+    #             "          'predictions': [],",
+    #             "          'ground_truth': [],",
+    #             "          # Add other relevant data",
+    #             "      },",
+    #             "      # Add additional datasets as needed:",
+    #             "      'dataset_name_2': {",
+    #             "          'metrics': {'train': [], 'val': []},",
+    #             "          'losses': {'train': [], 'val': []},",
+    #             "          'predictions': [],",
+    #             "          'ground_truth': [],",
+    #             "          # Add other relevant data",
+    #             "      },",
+    #             "  }",
+    #             "  # During training/evaluation:",
+    #             "  experiment_data['dataset_name_1']['metrics']['train'].append(train_metric)",
+    #             "  ```",
+    #             "- Include timestamps or epochs with the saved metrics",
+    #             "- For large datasets, consider saving in chunks or using np.savez_compressed()",
+    #             "CRITICAL EVALUATION REQUIREMENTS - Your code MUST include ALL of these:",
+    #             "  1. Track and print validation loss (if applicable) at each epoch or at suitable intervals:",
+    #             "     ```python",
+    #             "     print(f'Epoch {{epoch}}: validation_loss = {{val_loss:.4f}}')",
+    #             "     ```",
+    #             "  2. Track and update ALL these additional metrics: "
+    #             + str(self.evaluation_metrics),
+    #             "  3. Update metrics at EACH epoch:",
+    #             "  4. Save ALL metrics at the end:",
+    #             "     ```python",
+    #             "     np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)",
+    #             "     ```",
+    #         ]
+    #     )
+    #
+    #     if self.cfg.agent.k_fold_validation > 1:
+    #         impl_guideline.append(
+    #             f"The evaluation should be based on {self.cfg.agent.k_fold_validation}-fold cross-validation but only if that's an appropriate evaluation for the task at hand."
+    #         )
+    #
+    #     return {"Implementation guideline": impl_guideline}
 
     @property
     def _prompt_resp_fmt(self):
@@ -168,13 +198,14 @@ class MinimalAgent:
     def _draft(self) -> Node:
         prompt: Any = {
             "Introduction": (
-                "You are an recommender systems researcher who is looking to publish a paper that will contribute significantly to the field."
-                "Your first task is to write a python code to implement a solid baseline based on your research task provided below, "
+                "You are a recommender systems researcher who is looking to publish a paper that will contribute significantly to the field."
+                "Your first task is to write a python code to implement a solid baseline based on your research task and code requirements provided below, "
                 "from data preparation to model training, as well as evaluation and visualization. "
                 "Focus on getting a simple but working implementation first, before any sophisticated improvements. "
                 "We will explore more advanced variations in later stages."
             ),
             "Research task": self.task_desc,
+            "Code Requirements": self.code_requirements if hasattr(self, "code_requirements") else "",
             "Memory": self.memory_summary if self.memory_summary else "",
             "Instructions": {},
         }
@@ -212,7 +243,7 @@ class MinimalAgent:
         if hasattr(parent_node, "score") and parent_node.score:
             score_info = f"""
                 Previous Implementation Scores:
-                - Score: {parent_node.score.score}%
+                - Score: {parent_node.score.score * 100:.1f}%
                 - Is Satisfactory: {parent_node.score.is_satisfactory}
                 - Feedback: {parent_node.score.feedback}
                 """
@@ -269,7 +300,7 @@ class MinimalAgent:
         if hasattr(parent_node, "score") and parent_node.score:
             score_info = f"""
                 Previous Implementation Scores:
-                - Score: {parent_node.score.score}%
+                - Score: {parent_node.score.score * 100:.1f}%
                 - Is Satisfactory: {parent_node.score.is_satisfactory}
                 - Feedback: {parent_node.score.feedback}
                 """
@@ -310,8 +341,6 @@ class MinimalAgent:
         )
 
     def plan_and_code_query(self, prompt, retries=3) -> tuple[str, str]:
-        # TODO: Refactor this to use the function spec
-        # TODO: Integrate the code requirements in the plan. Must be removed in other functions like _debug and _improve since they call this function.
         """Generate a natural language plan + code in the same LLM call and split them apart."""
         completion_text = None
         for _ in range(retries):
@@ -338,14 +367,25 @@ class MinimalAgent:
 
     def _set_code_requirements(self):
         logger.info("Engineering code requirements...")
-        requirements_prompt = f"""You are an expert recommender systems researcher. 
-            You are provided with the following research task:\n{self.task_desc}\n" 
-            Your job is to formulate a clear, concise list of essential requirements that the code implementation must fulfill to successfully address this research task. 
-            Each requirement should be specific, actionable, and directly related to the research task. 
-            Include all critical conceptual and technical requirements necessary for a successful experiment, but do not add unnecessary or generic requirements.
-            A successful experiment means the code is technically AND conceptually correct, runs without errors, and produces meaningful results that align with the research task.
-            Avoid vague language and keep each requirement as concise and precise as possible.
-            """
+        requirements_prompt = f"""
+        ROLE:
+        You are an expert recommender systems researcher with extensive experience in designing and implementing experiments to advance the field.
+
+        CONTEXT:
+        You are provided with the following research task:
+        {self.task_desc}
+
+        GOAL:
+        Formulate a clear, concise list of essential requirements that the code implementation must fulfill to successfully address this research task.
+
+        CRITICAL REQUIREMENT GUIDELINES:
+        1. Specificity: Each requirement must be actionable and directly related to the research task.
+        2. Scope: Requirements should be specific enough for the task but broad enough to allow for valid implementation variations.
+        3. Atomicity: Requirements MUST NOT include any sub-requirements and must be atomic.
+        4. Coverage: Include all critical conceptual (!IMPORTANT!) and technical requirements necessary for a successful experiment. Do not add unnecessary requirements.
+        5. Success Criteria: A successful experiment means the code is technically AND conceptually correct and follows best practices, runs without errors, and produces meaningful results that align with the research task. The data splitting, algorithm configuration and evaluation MUST BE suitable for the provided data (explicit or implicit) and the research task.
+        6. Style: Avoid vague and verbose language. Keep each requirement as concise and precise as possible.
+        """
         requirements_result = query(
             system_message=requirements_prompt,
             user_message=None,
@@ -358,23 +398,27 @@ class MinimalAgent:
         )
 
         # Requirements reflection round
-        reflection_prompt = f"""You are an expert recommender systems researcher conducting a quality review.
-            Your colleague generated code requirements that, when fulfilled, should result in a successful implementation of the research task.
+        reflection_prompt = f"""
+        You are an expert recommender systems researcher conducting a quality review.
+        Your colleague generated code requirements that, when fulfilled, should result in a successful implementation of the research task.
+        This is the research task:
+        {self.task_desc}
 
-            This is the research task: {self.task_desc}
+        And here are the generated requirements:
+        {self.code_requirements}
 
-            Your colleague generated the following code requirements:
-            {self.code_requirements}
-            
-            Review these requirements and verify they meet ALL these criteria:
-            1. Each requirement is specific, actionable, and measurable
-            2. All requirements are directly relevant to the research task
-            3. ALL critical technical AND conceptual aspects are covered
-            4. No vague, generic, or redundant requirements are included
-            5. Requirements focus on successful experiment execution and meaningful results
-            
-            Provide an updated, refined list of requirements that fixes any issues found. Keep requirements that already meet the criteria unchanged.
-            """
+        GOAL:
+        Review these requirements critically but fairly and provide an updated, refined list.
+
+        GUIDELINES:
+        1. Verification: Verify that the requirements meet ALL these criteria:
+           - Specificity & Atomicity: Each requirement MUST BE specific, actionable, and atomic (no sub-requirements).
+           - Relevance & Scope: Requirements MUST BE directly relevant but broad enough to allow for valid implementation variations (avoid over-specificity).
+           - Coverage: ALL critical technical AND conceptual aspects (!IMPORTANT!) are covered, including data splitting, algorithm configuration, and evaluation suitability for the provided data (explicit or implicit) and research task.
+           - Clarity: No vague, generic, or redundant requirements are included.
+           - Focus: Requirements focus on successful experiment execution and meaningful results.
+        2. Refinement: Fix any issues found. Keep requirements that already meet the criteria unchanged.
+        """
         reflection_result = query(
             system_message=reflection_prompt,
             user_message=None,
@@ -415,6 +459,8 @@ class MinimalAgent:
             ],
         }
 
+        bug_feedback = ""
+
         try:
             review_result = query(
                 system_message=review_prompt,
@@ -431,7 +477,7 @@ class MinimalAgent:
             if node.is_buggy:
                 logger.info(f"Node identified as buggy: {node.analysis}")
                 # Create more helpful feedback for buggy nodes
-                helpful_feedback = f"""EXECUTION FAILURE DETECTED:
+                bug_feedback = f"""EXECUTION FAILURE DETECTED:
 
                     {node.analysis}
 
@@ -442,15 +488,7 @@ class MinimalAgent:
                     - Ensure all required data files are accessible
                     - Consider simplifying the code to isolate the issue
 
-                    This implementation scored 0% due to execution failure. Focus on resolving the error before optimizing."""
-
-                # If buggy, set minimal scores and return early
-                node.score = NodeScore(
-                    score=0.0,
-                    feedback=helpful_feedback,
-                    is_satisfactory=False,
-                )
-                return node
+                    This implementation failed execution. Focus on resolving the error before optimizing."""
 
         except Exception as e:
             logger.error(f"Error in code review: {e}")
@@ -458,7 +496,7 @@ class MinimalAgent:
             node.is_buggy = True
             node.analysis = f"Review analysis failed: {str(e)}"
 
-            fallback_feedback = f"""ANALYSIS SYSTEM ERROR:
+            bug_feedback = f"""ANALYSIS SYSTEM ERROR:
 
                 The automated review system encountered an error: {str(e)}
 
@@ -470,23 +508,16 @@ class MinimalAgent:
 
                 This implementation scored 0% due to analysis failure. Manual debugging recommended."""
 
-            node.score = NodeScore(
-                score=0.0,
-                feedback=fallback_feedback,
-                is_satisfactory=False,
-            )
-            return node
+        # Proceed with detailed scoring regardless of bug status
+        logger.info("Proceeding with detailed scoring")
 
-        # If not buggy, proceed with detailed scoring
-        logger.info("Node execution successful, proceeding with detailed scoring")
-
-        # If the node is not buggy, use the scoring system
+        # Use the scoring system
         for req in node.requirements:
             scoring_prompt = {
                 "Instructions": (
                     "You are an expert recommender system researcher reviewing code for an experiment."
                     "You are provided the research task, the code implementation and the execution output."
-                    "Judge if the following requirement is fulfilled by the implementation."
+                    "Judge if the following requirement is fulfilled by the implementation. Be critical but fair."
                     "If the requirement is not fulfilled provide a short feedback of maximum a sentence on why it is not fulfilled and what needs to be changed to fulfill it."
                 ),
                 "Requirement": req.description,
@@ -519,6 +550,10 @@ class MinimalAgent:
         # Build overall feedback:
         num_fulfilled = 0
         overall_feedback = "Below is a list of requirements that are not yet met and some feedback for each:"
+        
+        if node.is_buggy:
+            overall_feedback = "This code contains one or multiple bugs:\n" + bug_feedback + "\n\n" + overall_feedback
+
         for req in node.requirements:
             if req.is_fulfilled:
                 num_fulfilled += 1
@@ -530,15 +565,20 @@ class MinimalAgent:
 
         score = num_fulfilled / len(node.requirements)
 
+        if node.is_buggy:
+            is_satisfactory = False
+        else:
+            is_satisfactory = score == 1.0
+            
         node.score = NodeScore(
             score=score,
             feedback=overall_feedback,
-            is_satisfactory=score == 100,
-        )
-        logger.info(
-            f"Scored node: {score * 100}% ({num_fulfilled}/{len(node.requirements)})"
+            is_satisfactory=is_satisfactory,
         )
 
+        logger.info(
+            f"Scored node: {score * 100}% ({num_fulfilled}/{len(node.requirements)}), buggy: {node.is_buggy}"
+        )
         logger.debug(node.score)
 
         return node
