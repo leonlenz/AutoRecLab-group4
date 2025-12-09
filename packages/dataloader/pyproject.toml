@@ -1,0 +1,12 @@
+[project]
+name = "dataloader"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "Moritz Baumgart", email = "baumgartmoritz@web.de" }]
+requires-python = ">=3.11"
+dependencies = ["pandas>=2.3.3", "requests>=2.32.5", "tqdm>=4.67.1"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
