@@ -1,5 +1,24 @@
 from treesearch.backend.utils import FunctionSpec
 
+select_datasets_spec = FunctionSpec(
+    name="select_datasets",
+    json_schema={
+        "type": "object",
+        "properties": {
+            "selected_datasets": {
+                "type": "array",
+                "description": "List of dataset identifiers selected for the research task.",
+                "items": {
+                    "type": "string",
+                    "description": "A dataset identifier from the available datasets list.",
+                },
+            }
+        },
+        "required": ["selected_datasets"],
+    },
+    description="Select appropriate datasets for the recommender system research task based on the task description and available datasets.",
+)
+
 vlm_feedback_spec = FunctionSpec(
     name="analyze_experiment_plots",
     json_schema={

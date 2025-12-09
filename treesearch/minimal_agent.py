@@ -1,6 +1,7 @@
 import json
 import random
 from pathlib import Path
+from treesearch.utils.available_datasets import get_datasets_table
 from typing import Any, Optional
 
 import humanize
@@ -12,6 +13,7 @@ from treesearch.function_specs import (
     review_func_spec,
     score_code_func_spec,
     set_code_requirements_spec,
+    select_datasets_spec,
 )
 from treesearch.interpreter import ExecutionResult
 from treesearch.node import Node, NodeScore, Requirement
@@ -20,6 +22,13 @@ from utils.log import _ROOT_LOGGER
 from utils.path import mkdir
 
 logger = _ROOT_LOGGER.getChild("nodeAgent")
+
+
+load_code = """from dataloader import load_dataset
+df = load_dataset("<DATASET IDENTIFIER>")
+# df will be a pandas dataframe with columns "user", "item", "rating" and optinally "timestamp"
+# for implicit feedback the rating will always be 1"""
+load_code = wrap_code(load_code)
 
 
 class MinimalAgent:
@@ -39,6 +48,7 @@ class MinimalAgent:
         self.cfg = cfg
         self.evaluation_metrics = evaluation_metrics
         self.stage_name = stage_name
+        self.selected_datasets = self._select_datasets()
         self._set_code_requirements()
         self._out_dir = mkdir(Path(cfg.out_dir))
         (self._out_dir / "code_requirements.json").write_text(
@@ -69,20 +79,22 @@ class MinimalAgent:
         impl_guideline = [
             "Implementation Guidelines:",
             "1. Libraries: Use standard libraries (pandas, numpy, scikit-learn, lenskit) whenever possible. Avoid implementing algorithms from scratch.",
-            "2. Code Structure:",
+            f"2. Datasets: Use only the following selected datasets for training and evaluation: {self.selected_datasets}",
+            f"   You MUST load the datasets like this:\n{load_code}\n",
+            "3. Code Structure:",
             "   - Single-file, self-contained Python script.",
             "   - ALWAYS wrap the program’s starting point in `if __name__ == '__main__':` so it only runs when the script is executed directly.",
             "   - All code at global scope or in functions called from global scope.",
-            "3. Environment & Output:",
+            "4. Environment & Output:",
             "   - Start with:",
             "     import os",
             "     working_dir = os.path.join(os.getcwd(), 'working')",
             "     os.makedirs(working_dir, exist_ok=True)",
             f"   - Ensure execution completes within {humanize.naturaldelta(self.cfg.exec.timeout)}.",
-            "4. Data Saving:",
+            "5. Data Saving:",
             "   - Save all metrics, losses, and predictions in a dictionary `experiment_data`.",
             "   - Save this dictionary at the end: `np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)`.",
-            "5. Evaluation:",
+            "6. Evaluation:",
             "   - Track and print validation loss/metrics at each epoch.",
             f"   - Calculate and log these specific metrics: {self.evaluation_metrics}.",
         ]
@@ -367,6 +379,27 @@ class MinimalAgent:
         print("Final plan + code extraction attempt failed, giving up...")
         return "", completion_text  # type: ignore
 
+    def _select_datasets(self) -> list[str]:
+        """Select appropriate datasets for the research task using LLM."""
+        prompt = {
+            "Instruction:": (
+                f"You are a recommender system researcher who wants to implement a given research task. "
+                f"Your first task is to select suitable datasets for the task. "
+                f"Please first look at the research task and see if it specifies any datasets:\n{self.task_desc}\n"
+                "Select the identifiers of the specified datasets or if none are specified choose appropriate datasets from the list of available datasets below."
+                "Your response MUST just be a simple list of dataset identifiers."
+                f"Here are all available datasets with their identifiers and brief statistics:\n{get_datasets_table()}"
+            )
+        }
+        result = query(
+            system_message=prompt,
+            user_message=None,
+            model=self.cfg.agent.code.model,
+            temperature=self.cfg.agent.code.model_temp,
+            func_spec=select_datasets_spec,
+        )
+        return result.get("selected_datasets", [])
+
     def _set_code_requirements(self):
         logger.info("Engineering code requirements...")
         requirements_prompt = f"""
@@ -376,6 +409,9 @@ class MinimalAgent:
         CONTEXT:
         You are provided with the following research task:
         {self.task_desc}
+        And here are the selected datasets for this task:
+        {self.selected_datasets}
+        They MUST be loaded like this:\n{load_code}
 
         GOAL:
         Formulate a clear, concise list of essential requirements that the code implementation must fulfill to successfully address this research task.
