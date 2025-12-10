@@ -7,9 +7,9 @@ RUN apt install -y graphviz
 
 COPY pyproject.toml uv.lock .python-version /app/
 
-COPY . /app
-
 RUN uv sync
+
+COPY . /app
 
 RUN echo 'PS1="\[\e[96;1m\]AutoRecLab\[\e[0m\] \\$ "' >> /etc/bash.bashrc
 
