@@ -6,8 +6,8 @@ RUN apt update -y
 RUN apt install -y graphviz 
 
 COPY pyproject.toml uv.lock .python-version /app/
-RUN uv sync
 COPY packages/ /app/packages/
+RUN --mount=type=cache,target=/root/.cache/uv --mount=type=cache,target=/root/.local/share/uv/python uv sync
 
 COPY . /app
 
