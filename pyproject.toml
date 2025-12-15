@@ -15,8 +15,12 @@ dependencies = [
     "graphviz>=0.21",
     "humanize>=4.13.0",
     "jsonschema>=4.25.1",
+    "langchain>=1.1.3",
+    "langchain-mcp-adapters>=0.2.1",
+    "langchain-openai>=1.1.3",
     "lenskit==0.14.4",
     "matplotlib>=3.10.7",
+    "mcp[cli]>=1.24.0",
     "numpy>=1.26.4",
     "openai>=1.108.1",
     "pydantic-settings>=2.10.1",
@@ -28,9 +32,7 @@ dependencies = [
 ]
 
 [tool.uv.workspace]
-members = [
-    "packages/dataloader",
-]
+members = ["packages/dataloader"]
 
 [tool.uv.sources]
 dataloader = { workspace = true, editable = true }
