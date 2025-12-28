@@ -1,4 +1,5 @@
 from treesearch.backend.utils import FunctionSpec
+from dataclasses import dataclass
 
 select_datasets_spec = FunctionSpec(
     name="select_datasets",
@@ -18,6 +19,11 @@ select_datasets_spec = FunctionSpec(
     },
     description="Select appropriate datasets for the recommender system research task based on the task description and available datasets.",
 )
+@dataclass
+class SelectDatasets:
+    """Select appropriate datasets for the recommender system research task based on the task description and available datasets."""
+    
+    selected_datasets: list[str] # A List of dataset identifiers selected for the research task.
 
 vlm_feedback_spec = FunctionSpec(
     name="analyze_experiment_plots",
@@ -50,6 +56,19 @@ vlm_feedback_spec = FunctionSpec(
     },
     description="Analyze experimental plots and provide detailed feedback on the results.",
 )
+@dataclass
+class PlotAnalyses:
+    """ Detailed analysis of the plot's results and implications """
+    analysis: str # Detailed analysis of the plot's results and implications
+    
+@dataclass
+class VLMFeedback:
+    """ Analyze experimental plots and provide detailed feedback on the results. """
+    plot_analyses : list[PlotAnalyses] # Detailed analysis of the plot's results and implications
+    valid_plots_received : bool # True if valid plots were received, False otherwise. For example, if the plots are empty or not meaningful, this should be False.
+    vlm_feedback_summary : str # Summarize the feedback from the VLM. If the task involves generative modeling, make sure to focus on the generated samples.
+
+
 
 review_func_spec = FunctionSpec(
     name="submit_review",
@@ -72,6 +91,13 @@ review_func_spec = FunctionSpec(
     },
     description="Submit a review evaluating the output of the training script.",
 )
+
+@dataclass
+class ReviewFunction:
+    """ Submit a review evaluating the output of the training script. """
+
+    is_bug : bool # true if the output log shows that the execution failed or has some bug, otherwise false.
+    summary : str # if there is a bug, summarize the bug and propose a fix. Otherwise, leave it empty.
 
 score_code_func_spec = FunctionSpec(
     name="score_code",
@@ -98,6 +124,17 @@ score_code_func_spec = FunctionSpec(
     description="Score the code implementation and provide feedback on its quality.",
 )
 
+@dataclass
+class ScoreCode:
+    """ Score the code implementation and provide feedback on its quality. """
+    score : int
+    is_satisfactory : bool
+    feedback : str
+
+    def __post_init__(self):
+        if not (0 <= self.score <= 100):
+            raise ValueError("score must be between 0 and 100")
+
 score_code_func_spec = FunctionSpec(
     name="score_code",
     json_schema={
@@ -116,6 +153,13 @@ score_code_func_spec = FunctionSpec(
     },
     description="Judge whether a single requirement is fulfilled by the code implementation and explain briefly.",
 )
+
+@dataclass
+class RequirementJudgement:
+    """ Judge whether a single requirement is fulfilled by the code implementation and explain briefly. """
+
+    fulfilled : bool # True if the specified requirement is fulfilled, false otherwise.
+    feedback : str # Short feedback explaining why the requirement is or isn't fulfilled.
 
 set_code_requirements_spec = FunctionSpec(
     name="set_code_requirements",
@@ -137,6 +181,13 @@ set_code_requirements_spec = FunctionSpec(
     ),
 )
 
+@dataclass
+class CodeRequirements:
+        """Set clear and specific code requirements for the implementation based on the research task."""
+
+        requirements: list[str]  # A list of concise, clear and specific code requirements.
+
+
 plot_selection_spec = FunctionSpec(
     name="select_plots",
     json_schema={
@@ -153,6 +204,17 @@ plot_selection_spec = FunctionSpec(
     },
     description="Select the 10 most relevant plots for analysis",
 )
+
+@dataclass
+class PlotSelection:
+    """Select the 10 most relevant plots for analysis"""
+
+    selected_plots : list[str] # description": "List of selected plot file paths
+
+    def __post_init__(self):
+        if len(self.selected_plots) >10:
+            raise ValueError(" list can not exceed 10 elements")
+        
 
 plan_and_code_spec = FunctionSpec(
     name="return_plan_and_code",
@@ -172,3 +234,10 @@ plan_and_code_spec = FunctionSpec(
     },
     description="Return a natural language plan and the Python code that implements it.",
 )
+
+@dataclass
+class PlanAndCode:
+    """ Return a natural language plan and the Python code that implements it."""
+
+    nl_text : str # Explanatory natural language text describing the plan or reasoning behind the code.
+    code : str # The complete Python source code implementing the plan.
