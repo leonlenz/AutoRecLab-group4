@@ -10,6 +10,7 @@ from langchain.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import Connection
 
+from config import get_config
 from utils.log import _ROOT_LOGGER
 
 logger = _ROOT_LOGGER.getChild("llm")
@@ -33,11 +34,22 @@ class MCPConnection:
 
 
 class Query:
-    def __init__(self, model: str, temperature: float | None = None, max_iterations: int = 25) -> None:
+    def __init__(
+        self,
+        model: str | None = None,
+        temperature: float | None = None,
+        max_iterations: int = 25,
+    ) -> None:
         self._mcp_connections: list[MCPConnection] = []
         self._tools: list[BaseTool] = []
         self._system_prompt: Optional[str] = None
-        self._model = model
+
+        config = get_config()
+        if model is None:
+            self._model = config.agent.code.model
+        else:
+            self._model = model
+
         self._temperature = temperature
         self._max_iterations = max_iterations
 
@@ -66,7 +78,7 @@ class Query:
         tools = await self._get_all_tools()
 
         logger.info(f"Using model: {self._model}")
-        
+
         agent = create_agent(
             model=self._model,
             tools=tools,

@@ -56,7 +56,17 @@ class Config(BaseSettings):
         )
 
 
-def load_config():
+_CONFIG: Config | None = None
+
+
+def get_config() -> Config:
+    global _CONFIG
+    if _CONFIG is None:
+        _CONFIG = _load_config()
+    return _CONFIG
+
+
+def _load_config() -> Config:
     config = Config()
     if not CONFIG_PATH.exists():
         # write default config if file doesn't exist
