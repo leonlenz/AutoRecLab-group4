@@ -9,6 +9,7 @@ from langchain.messages import AIMessage, HumanMessage
 from langchain.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import Connection
+from langchain_openai import ChatOpenAI
 
 from config import get_config
 from utils.log import _ROOT_LOGGER
@@ -50,7 +51,11 @@ class Query:
         else:
             self._model = model
 
-        self._temperature = temperature
+        if temperature is None:
+            self._temperature = config.agent.code.model_temp
+        else:
+            self._temperature = temperature
+
         self._max_iterations = max_iterations
 
     def with_tool(self, *tool: BaseTool) -> Self:
@@ -79,8 +84,9 @@ class Query:
 
         logger.info(f"Using model: {self._model}")
 
+        model = ChatOpenAI(model=self._model, temperature=self._temperature)
         agent = create_agent(
-            model=self._model,
+            model=model,
             tools=tools,
             response_format=response_format,
             system_prompt=self._system_prompt,
