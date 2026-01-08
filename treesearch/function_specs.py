@@ -99,41 +99,13 @@ class ReviewFunction:
     is_bug : bool # true if the output log shows that the execution failed or has some bug, otherwise false.
     summary : str # if there is a bug, summarize the bug and propose a fix. Otherwise, leave it empty.
 
-score_code_func_spec = FunctionSpec(
-    name="score_code",
-    json_schema={
-        "type": "object",
-        "properties": {
-            "score": {
-                "type": "number",
-                "description": "A percentage score grading the quality of the code implementation. A higher percentage indicates better quality.",
-                "minimum": 0,
-                "maximum": 100,
-            },
-            "is_satisfactory": {
-                "type": "boolean",
-                "description": "true if the code implementation is satisfactory and meets all requirements, otherwise false.",
-            },
-            "feedback": {
-                "type": "string",
-                "description": "A short general feedback and the list of all requirements and whether they are fulfilled or not.",
-            },
-        },
-        "required": ["score", "is_satisfactory", "feedback"],
-    },
-    description="Score the code implementation and provide feedback on its quality.",
-)
 
 @dataclass
 class ScoreCode:
-    """ Score the code implementation and provide feedback on its quality. """
-    score : int
-    is_satisfactory : bool
-    feedback : str
-
-    def __post_init__(self):
-        if not (0 <= self.score <= 100):
-            raise ValueError("score must be between 0 and 100")
+    """Judge whether a single requirement is fulfilled by the code implementation and explain briefly."""
+    
+    fulfilled: bool # True if the specified requirement is fulfilled, false otherwise."""
+    feedback: str # Short feedback explaining why the requirement is or isn't fulfilled."""
 
 score_code_func_spec = FunctionSpec(
     name="score_code",
