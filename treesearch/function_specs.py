@@ -209,7 +209,9 @@ plan_and_code_spec = FunctionSpec(
 
 @dataclass
 class PlanAndCode:
-    """ Return a natural language plan and the Python code that implements it."""
+    """Return a natural language plan and the Python code that implements it.
+    IMPORTANT: Do not use any markdown tags or similar in the code field. It MUST be plain and executable code.
+    """
 
     nl_text : str # Explanatory natural language text describing the plan or reasoning behind the code.
-    code : str # The complete Python source code implementing the plan.
+    code : str # The complete plain and executable Python source code implementing the plan.
