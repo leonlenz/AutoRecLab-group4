@@ -82,6 +82,8 @@ class Query:
         input = prompt_to_md(input)
         tools = await self._get_all_tools()
 
+        logger.info(f"Using model: {self._model}")
+
         model = ChatOpenAI(model=self._model, temperature=self._temperature)
         agent = create_agent(
             model=model,
@@ -166,9 +168,6 @@ def _prompt_to_md(prompt: Prompt | None, level=1) -> tuple[str, bool]:
     elif isinstance(prompt, str):
         stripped = prompt.strip()
         return stripped, bool(stripped)
-
-    elif prompt is None:
-        return "", False
 
     else:
         print(f"Invalid prompt type: {type(prompt)}")
