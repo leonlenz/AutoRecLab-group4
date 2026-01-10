@@ -82,8 +82,6 @@ class Query:
         input = prompt_to_md(input)
         tools = await self._get_all_tools()
 
-        logger.info(f"Using model: {self._model}")
-
         model = ChatOpenAI(model=self._model, temperature=self._temperature)
         agent = create_agent(
             model=model,
