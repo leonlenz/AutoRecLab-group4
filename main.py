@@ -1,3 +1,4 @@
+import asyncio
 import os
 from argparse import ArgumentParser
 
@@ -9,7 +10,7 @@ from utils.path import mkdir
 logger = _ROOT_LOGGER.getChild("main")
 
 
-def main():
+async def main():
     set_log_level(os.getenv("ISGSA_LOG", "INFO"))
 
     config = get_config()
@@ -34,7 +35,8 @@ def main():
     logger.info("Starting AutoRecLab...")
 
     ts = TreeSearch(user_request, config=config)
-    ts.run()
+    await ts._async_init()
+    await ts.run()
 
 
 def get_args():
@@ -45,4 +47,4 @@ def get_args():
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
