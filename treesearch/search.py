@@ -33,6 +33,9 @@ class TreeSearch:
         self._minimal_agent = MinimalAgent(self._task_desc, self._config)
         self._interpreter = Interpreter(self._workspace, self._config.exec.timeout)
 
+    async def _async_init(self):
+        await self._minimal_agent._async_init()
+
     @property
     def all_nodes(self):
         return [n for root in self._draft_nodes for n in PreOrderIter(root)]
@@ -50,7 +53,7 @@ class TreeSearch:
         good_nodes = self.good_nodes
         good_nodes.sort(key=lambda n: n.score.score, reverse=True)
         return good_nodes[0]
-    
+
     def best_buggy_node(self):
         buggy_nodes = self.buggy_nodes
         buggy_nodes.sort(key=lambda n: n.score.score, reverse=True)
@@ -77,15 +80,15 @@ class TreeSearch:
         else:
             return self.best_good_node
 
-    def run(self):
+    async def run(self):
         logger.info("Starting tree search...")
         # Step 1: Generate draft nodes:
         for i in range(self._config.treesearch.num_draft_nodes):
             logger.info(
                 f"Generating draft node {i + 1}/{self._config.treesearch.num_draft_nodes}"
             )
-            draft_node = self._minimal_agent._draft()
-            self.exec_node(draft_node)
+            draft_node = await self._minimal_agent._draft()
+            await self.exec_node(draft_node)
             self._draft_nodes.append(draft_node)
 
         for i in range(self._config.treesearch.max_iterations):
@@ -95,16 +98,16 @@ class TreeSearch:
             parent_node = self.select_next_node()
 
             if parent_node.is_buggy:
-                child_node = self._minimal_agent._debug(parent_node)
+                child_node = await self._minimal_agent._debug(parent_node)
             else:
-                child_node = self._minimal_agent._improve(parent_node)
+                child_node = await self._minimal_agent._improve(parent_node)
 
-            self.exec_node(child_node)
+            await self.exec_node(child_node)
 
             if child_node.score.is_satisfactory:
                 logger.info("Found satisfactory node:")
                 self.save()
-                self.finalize_search(child_node)
+                await self.finalize_search(child_node)
                 return
 
         self.save()
@@ -112,9 +115,9 @@ class TreeSearch:
         logger.warning("Found no satisfactory node; Using best node instead...")
 
         best_node = self.best_good_node
-        self.finalize_search(best_node)
+        await self.finalize_search(best_node)
 
-    def exec_node(self, node: Node) -> Node:
+    async def exec_node(self, node: Node) -> Node:
         exec_result = self._interpreter.run(node.code)
         logger.debug(exec_result)
 
@@ -123,13 +126,13 @@ class TreeSearch:
         (node_dir / "out.log").write_text("".join(exec_result.term_out))
         (node_dir / "exec_result.pkl").write_bytes(pickle.dumps(exec_result))
 
-        self._minimal_agent.score_code(node, exec_result)
+        await self._minimal_agent.score_code(node, exec_result)
         return node
 
-    def finalize_search(self, result_node: Node):
+    async def finalize_search(self, result_node: Node):
         self._interpreter.cleanup_session()
         logger.info("Final response:")
-        print(self._minimal_agent._summarize(self._user_request, result_node))
+        print(await self._minimal_agent._summarize(self._user_request, result_node))
 
     @property
     def _task_desc(self) -> str:

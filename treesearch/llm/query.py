@@ -3,8 +3,7 @@ from dataclasses import dataclass
 from typing import Optional, Self, TypeAlias, TypeVar, overload
 
 from langchain.agents import create_agent
-from langchain.agents.middleware.types import ResponseT
-from langchain.agents.structured_output import ResponseFormat
+from langchain.agents.structured_output import ProviderStrategy, ResponseFormat, SchemaT
 from langchain.messages import AIMessage, HumanMessage
 from langchain.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
@@ -16,7 +15,7 @@ from utils.log import _ROOT_LOGGER
 
 logger = _ROOT_LOGGER.getChild("llm")
 
-ResponseFormatType: TypeAlias = ResponseFormat[ResponseT] | type[ResponseT]
+ResponseFormatType: TypeAlias = type[SchemaT]
 RT = TypeVar("RT", bound=ResponseFormatType)
 
 Prompt: TypeAlias = str | list["Prompt"] | dict[str, "Prompt"]
@@ -44,6 +43,7 @@ class Query:
         self._mcp_connections: list[MCPConnection] = []
         self._tools: list[BaseTool] = []
         self._system_prompt: Optional[str] = None
+        self._strict = True
 
         config = get_config()
         if model is None:
@@ -70,17 +70,26 @@ class Query:
         self._system_prompt = system_prompt
         return self
 
+    def non_strict(self) -> Self:
+        self._strict = False
+        return self
+
     @overload
     async def run(self, input: Prompt) -> str: ...
 
     @overload
-    async def run(self, input: Prompt, response_format: RT) -> RT: ...
+    async def run(self, input: Prompt, response_schema: RT) -> RT: ...
 
     async def run(
-        self, input: Prompt, response_format: Optional[RT] = None
+        self, input: Prompt, response_schema: Optional[RT] = None
     ) -> RT | str:
         input = prompt_to_md(input)
         tools = await self._get_all_tools()
+
+        if response_schema is None:
+            response_format = None
+        else:
+            response_format = ProviderStrategy(response_schema, strict=self._strict)
 
         model = ChatOpenAI(model=self._model, temperature=self._temperature)
         agent = create_agent(
@@ -95,7 +104,7 @@ class Query:
             config={"recursion_limit": self._max_iterations},
         )
 
-        if response_format:
+        if response_schema:
             structured_resp: RT = resp["structured_response"]
             return structured_resp
 

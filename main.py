@@ -1,3 +1,4 @@
+import asyncio
 import os
 from argparse import ArgumentParser
 
@@ -35,6 +36,7 @@ async def main():
     logger.info("Starting AutoRecLab...")
 
     ts = TreeSearch(user_request, config=config)
+    await ts._async_init()
     await ts.run()
 
 
@@ -46,10 +48,4 @@ def get_args():
 
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except Exception as e:
-        print(f"Error: {e}")
-        import traceback
-        traceback.print_exc()
-        raise
+    asyncio.run(main())

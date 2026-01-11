@@ -1,22 +1,22 @@
 import json
 import random
 from pathlib import Path
-from treesearch.utils.available_datasets import get_datasets_table
 from typing import Any, Optional
 
 import humanize
 
 from config import Config
-from treesearch.backend.llm import query
 from treesearch.function_specs import (
-    plan_and_code_spec,
-    review_func_spec,
-    score_code_func_spec,
-    set_code_requirements_spec,
-    select_datasets_spec,
+    CodeRequirements,
+    PlanAndCode,
+    ReviewFunction,
+    ScoreCode,
+    SelectDatasets,
 )
 from treesearch.interpreter import ExecutionResult
+from treesearch.llm.query import Prompt, Query
 from treesearch.node import Node, NodeScore, Requirement
+from treesearch.utils.available_datasets import get_datasets_table
 from treesearch.utils.response import wrap_code
 from utils.log import _ROOT_LOGGER
 from utils.path import mkdir
@@ -48,13 +48,15 @@ class MinimalAgent:
         self.cfg = cfg
         self.evaluation_metrics = evaluation_metrics
         self.stage_name = stage_name
-        self.selected_datasets = self._select_datasets()
-        self._set_code_requirements()
         self._out_dir = mkdir(Path(cfg.out_dir))
+        logger.info("Agent initialized!")
+
+    async def _async_init(self):
+        self.selected_datasets = await self._select_datasets()
+        await self._set_code_requirements()
         (self._out_dir / "code_requirements.json").write_text(
             json.dumps(self.code_requirements)
         )
-        logger.info("Agent initialized!")
 
     @property
     def _prompt_environment(self):
@@ -184,30 +186,7 @@ class MinimalAgent:
     #
     #     return {"Implementation guideline": impl_guideline}
 
-    @property
-    def _prompt_resp_fmt(self):
-        return {
-            "Response format": (
-                "Your response should be a brief outline/sketch of your proposed solution in natural language (7-10 sentences), "
-                "followed by a single markdown code block (using the format ```python ... ```) which implements this solution and prints out the evaluation metric(s) if applicable. "
-                "There should be no additional headings or text in your response. Just natural language text followed by a newline and then the markdown code block. "
-                "Make sure to write concise code."
-            )
-        }
-
-    @property
-    def _prompt_debug_resp_fmt(self):
-        return {
-            "Response format": (
-                "Your response should be a brief outline/sketch of your proposed solution in natural language (3-5 sentences), "
-                "followed by a single markdown code block (using the format ```python ... ```) which implements the full code including the bugfix/solution. "
-                "There should be no additional headings or text in your response. Just natural language text followed by a newline and then the markdown code block. "
-                "Your generated code should be complete and executable. Do not omit any part of the code, even if it was part of a previous implementation."
-                "Make sure to write concise code."
-            )
-        }
-
-    def _draft(self) -> Node:
+    async def _draft(self) -> Node:
         prompt: Any = {
             "Introduction": (
                 "You are a recommender systems researcher who is looking to publish a paper that will contribute significantly to the field."
@@ -223,7 +202,6 @@ class MinimalAgent:
             "Memory": self.memory_summary if self.memory_summary else "",
             "Instructions": {},
         }
-        prompt["Instructions"] |= self._prompt_resp_fmt
         prompt["Instructions"] |= {
             "Experiment design sketch guideline": [
                 "This first experiment design should be relatively simple, without extensive hyper-parameter optimization.",
@@ -247,11 +225,11 @@ class MinimalAgent:
         print("[cyan]--------------------------------[/cyan]")
 
         print("MinimalAgent: Getting plan and code")
-        plan, code = self.plan_and_code_query(prompt)
+        plan, code = await self.plan_and_code_query(prompt)
         print("MinimalAgent: Draft complete")
         return self._new_node(plan, code)
 
-    def _debug(self, parent_node: Node) -> Node:
+    async def _debug(self, parent_node: Node) -> Node:
         # Format node scores for the prompt
         score_info = ""
         if hasattr(parent_node, "score") and parent_node.score:
@@ -291,7 +269,6 @@ class MinimalAgent:
             "Feedback about execution time": parent_node.exec_time_feedback,
             "Instructions": {},
         }
-        prompt["Instructions"] |= self._prompt_debug_resp_fmt
         prompt["Instructions"] |= {
             "Bugfix improvement sketch guideline": [
                 "You should write a brief natural language description (3-5 sentences) of how the issue in the previous implementation can be fixed.",
@@ -305,10 +282,10 @@ class MinimalAgent:
         # if self.cfg.agent.data_preview:
         #     prompt["Data Overview"] = self.data_preview
 
-        plan, code = self.plan_and_code_query(prompt)
+        plan, code = await self.plan_and_code_query(prompt)
         return self._new_node(plan, code, parent_node)
 
-    def _improve(self, parent_node: Node) -> Node:
+    async def _improve(self, parent_node: Node) -> Node:
         # Format node scores for the prompt
         score_info = ""
         if hasattr(parent_node, "score") and parent_node.score:
@@ -334,7 +311,6 @@ class MinimalAgent:
             "Code": wrap_code(parent_node.code),
         }
 
-        prompt["Instructions"] |= self._prompt_resp_fmt
         prompt["Instructions"] |= {
             "Improvement guidelines": [
                 "Based on the scoring feedback above, focus on the requirements that need improvement.",
@@ -343,7 +319,7 @@ class MinimalAgent:
         }
         prompt["Instructions"] |= self._prompt_impl_guideline
 
-        plan, code = self.plan_and_code_query(prompt)
+        plan, code = await self.plan_and_code_query(prompt)
         return self._new_node(plan, code, parent_node)
 
     def _new_node(self, plan: str, code: str, parent: Optional[Node] = None):
@@ -354,34 +330,17 @@ class MinimalAgent:
             requirements=[Requirement(r) for r in self.code_requirements],
         )
 
-    def plan_and_code_query(self, prompt, retries=3) -> tuple[str, str]:
+    async def plan_and_code_query(self, prompt, retries=3) -> tuple[str, str]:
         """Generate a natural language plan + code in the same LLM call and split them apart."""
-        completion_text = None
-        for _ in range(retries):
-            plan_and_code_result = query(
-                system_message=prompt,
-                user_message=None,
-                func_spec=plan_and_code_spec,
-                model=self.cfg.agent.code.model,
-                temperature=self.cfg.agent.code.model_temp,
-            )
+        plan_and_code_result = await Query().run(prompt, PlanAndCode)
 
-            nl_text = plan_and_code_result.get("nl_text", "")
-            code = plan_and_code_result.get("code", "")
-            if code and nl_text:
-                # merge all code blocks into a single string
-                return nl_text, code
+        nl_text = plan_and_code_result.nl_text
+        code = plan_and_code_result.code
+        return nl_text, code
 
-            print("Plan + code extraction failed, retrying...")
-            prompt["Parsing Feedback"] = (
-                "The code extraction failed. Make sure to use the format ```python ... ``` for the code blocks."
-            )
-        print("Final plan + code extraction attempt failed, giving up...")
-        return "", completion_text  # type: ignore
-
-    def _select_datasets(self) -> list[str]:
+    async def _select_datasets(self) -> list[str]:
         """Select appropriate datasets for the research task using LLM."""
-        prompt = {
+        prompt: Prompt = {
             "Instruction:": (
                 f"You are a recommender system researcher who wants to implement a given research task. "
                 f"Your first task is to select suitable datasets for the task. "
@@ -391,16 +350,10 @@ class MinimalAgent:
                 f"Here are all available datasets with their identifiers and brief statistics:\n{get_datasets_table()}"
             )
         }
-        result = query(
-            system_message=prompt,
-            user_message=None,
-            model=self.cfg.agent.code.model,
-            temperature=self.cfg.agent.code.model_temp,
-            func_spec=select_datasets_spec,
-        )
-        return result.get("selected_datasets", [])
+        result = await Query().run(prompt, SelectDatasets)
+        return result.selected_datasets
 
-    def _set_code_requirements(self):
+    async def _set_code_requirements(self):
         logger.info("Engineering code requirements...")
         requirements_prompt = f"""
         ROLE:
@@ -424,16 +377,11 @@ class MinimalAgent:
         5. Success Criteria: A successful experiment means the code is technically AND conceptually correct and follows best practices, runs without errors, and produces meaningful results that align with the research task. The data splitting, algorithm configuration and evaluation MUST BE suitable for the provided data (explicit or implicit) and the research task.
         6. Style: Avoid vague and verbose language. Keep each requirement as concise and precise as possible.
         """
-        requirements_result = query(
-            system_message=requirements_prompt,
-            user_message=None,
-            model=self.cfg.agent.code.model,
-            temperature=self.cfg.agent.code.model_temp,
-            func_spec=set_code_requirements_spec,
-        )
-        self.code_requirements = requirements_result.get(
-            "requirements", "No specific requirements provided."
-        )
+        requirements_result = await Query().run(requirements_prompt, CodeRequirements)
+        if len(requirements_result.requirements) == 0:
+            self.code_requirements = "No specific requirements provided."
+        else:
+            self.code_requirements = requirements_result.requirements
 
         # Requirements reflection round
         reflection_prompt = f"""
@@ -457,19 +405,14 @@ class MinimalAgent:
            - Focus: Requirements focus on successful experiment execution and meaningful results.
         2. Refinement: Fix any issues found. Keep requirements that already meet the criteria unchanged.
         """
-        reflection_result = query(
-            system_message=reflection_prompt,
-            user_message=None,
-            model=self.cfg.agent.code.model,
-            temperature=self.cfg.agent.code.model_temp,
-            func_spec=set_code_requirements_spec,
-        )
-        self.code_requirements = reflection_result.get(
-            "requirements", "No specific requirements provided."
-        )
+        reflection_result = await Query().run(reflection_prompt, CodeRequirements)
+        if len(reflection_result.requirements) == 0:
+            self.code_requirements = "No specific requirements provided."
+        else:
+            self.code_requirements = reflection_result.requirements
         logger.info("Done.")
 
-    def score_code(self, node: Node, exec_result: ExecutionResult) -> Node:
+    async def score_code(self, node: Node, exec_result: ExecutionResult) -> Node:
         """Analyze execution results using both review function spec and scoring system."""
         node.absorb_exec_result(exec_result)
 
@@ -500,17 +443,11 @@ class MinimalAgent:
         bug_feedback = ""
 
         try:
-            review_result = query(
-                system_message=review_prompt,
-                user_message=None,
-                func_spec=review_func_spec,
-                model=self.cfg.agent.code.model,
-                temperature=self.cfg.agent.code.model_temp,
-            )
+            review_result = await Query().run(review_prompt, ReviewFunction)
 
             # Update node with review results
-            node.is_buggy = review_result.get("is_bug", True)
-            node.analysis = review_result.get("summary", "")
+            node.is_buggy = review_result.is_bug
+            node.analysis = review_result.summary
 
             if node.is_buggy:
                 logger.info(f"Node identified as buggy: {node.analysis}")
@@ -551,7 +488,7 @@ class MinimalAgent:
 
         # Use the scoring system
         for req in node.requirements:
-            scoring_prompt = {
+            scoring_prompt: Prompt = {
                 "Instructions": (
                     "You are an expert recommender system researcher reviewing code for an experiment."
                     "You are provided the research task, the code implementation and the execution output."
@@ -565,18 +502,10 @@ class MinimalAgent:
             }
 
             try:
-                scoring_result = query(
-                    system_message=scoring_prompt,
-                    user_message=None,
-                    model=self.cfg.agent.code.model,
-                    temperature=self.cfg.agent.code.model_temp,
-                    func_spec=score_code_func_spec,
-                )
+                scoring_result = await Query().run(scoring_prompt, ScoreCode)
 
-                req.is_fulfilled = scoring_result.get("fulfilled", False)
-                req.feedback = scoring_result.get(
-                    "feedback", "No specific feedback provided."
-                )
+                req.is_fulfilled = scoring_result.fulfilled
+                req.feedback = scoring_result.feedback
 
             except Exception as e:
                 logger.error(f"Error generate feedback for requirement: {req}")
@@ -626,7 +555,7 @@ class MinimalAgent:
 
         return node
 
-    def _summarize(self, user_request: str, node: Node) -> str:
+    async def _summarize(self, user_request: str, node: Node) -> str:
         """Summarizes the results of a node and returns a human readable report.
 
         Args:
@@ -663,13 +592,4 @@ class MinimalAgent:
             ],
         }
 
-        # HACK: Str casting:
-        # We should make query generic or split it into 2 function for normal query and for tool usage or smth
-        return str(
-            query(
-                summary_prompt,
-                None,
-                self.cfg.agent.code.model,
-                self.cfg.agent.code.model_temp,
-            )
-        )
+        return await Query().run(summary_prompt)
