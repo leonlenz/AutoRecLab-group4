@@ -13,5 +13,5 @@ timeout = 5400
 k_fold_validation = 1
 
 [agent.code]
-model = "gpt-5.1"
+model = "gpt-5.2"
 model_temp = 1.0

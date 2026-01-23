@@ -20,7 +20,7 @@ def main():
     generators: dict[str, Preprocessor] = {
         "--omnirec": GitRepoPreprocessor("https://github.com/ISG-Siegen/OmniRec"),
         "--lenskit": GitRepoPreprocessor(
-            "https://github.com/lenskit/lkpy.git", "0.14.4"
+            "https://github.com/lenskit/lkpy.git", "main"
         ),
         "--recbole": GitRepoPreprocessor(
             "https://github.com/RUCAIBox/RecBole.git", "1.2.x"
@@ -31,7 +31,7 @@ def main():
         action = generate.add_argument(key, action="store_true")
         generator_destinations[action.dest] = key
     generate.add_argument("--all", action="store_true")
-    generate.add_argument("--chunk-size", type=int, default=2500)
+    generate.add_argument("--chunk-size", type=int, default=4000)
     generate.add_argument("--chunk-overlap", type=int, default=200)
     generate.add_argument(
         "--embedding-model", type=str, default="text-embedding-3-large"

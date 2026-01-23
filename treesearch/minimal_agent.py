@@ -23,12 +23,13 @@ from utils.path import mkdir
 
 logger = _ROOT_LOGGER.getChild("nodeAgent")
 
+#  Depreacted dataset loading code snippet
 
-load_code = """from dataloader import load_dataset
-df = load_dataset("<DATASET IDENTIFIER>")
-# df will be a pandas dataframe with columns "user", "item", "rating" and optinally "timestamp"
-# for implicit feedback the rating will always be 1"""
-load_code = wrap_code(load_code)
+# load_code = """from dataloader import load_dataset
+# df = load_dataset("<DATASET IDENTIFIER>")
+# # df will be a pandas dataframe with columns "user", "item", "rating" and optinally "timestamp"
+# # for implicit feedback the rating will always be 1"""
+# load_code = wrap_code(load_code)
 
 
 class MinimalAgent:
@@ -76,7 +77,8 @@ class MinimalAgent:
             "pandas==2.3.2",
             "scipy==1.16.2",
             "scikit-learn==1.7.1",
-            "lenskit==0.14.4",
+            "lenskit==2025.6.2",
+            "omnirec==0.2.0",
         ]
         random.shuffle(pkgs)
         pkg_str = ", ".join([f"`{p}`" for p in pkgs])
@@ -90,9 +92,8 @@ class MinimalAgent:
     def _prompt_impl_guideline(self):
         impl_guideline = [
             "Implementation Guidelines:",
-            "1. Libraries: Use standard libraries (pandas, numpy, scikit-learn, lenskit) whenever possible. Avoid implementing algorithms from scratch.",
+            "1. Python Framework - !CRITICAL!: You have access to the OmniRec python library, a new comprehensive recommender system framework. Within this framework you can use algorithms from Lenskit, RecBole, RecPack and Elliot. If you use algorithms from these libraries, you MUST use OmniRec.",
             f"2. Datasets: Use only the following selected datasets for training and evaluation: {self.selected_datasets}",
-            f"   You MUST load the datasets like this:\n{load_code}\n",
             "3. Code Structure:",
             "   - Single-file, self-contained Python script.",
             "   - ALWAYS wrap the program’s starting point in `if __name__ == '__main__':` so it only runs when the script is executed directly.",
@@ -342,7 +343,10 @@ class MinimalAgent:
 
     async def plan_and_code_query(self, prompt, retries=3) -> tuple[str, str]:
         """Generate a natural language plan + code in the same LLM call and split them apart."""
-        plan_and_code_result = await Query().with_mcp(self._mcp_docs).run(prompt, PlanAndCode)
+        plan_and_code_result = await Query().with_mcp(self._mcp_docs).with_system(
+            "Search OmniRec, Lenskit, and RecBole documentation for API usage examples and tutorials before writing code. "
+            "Focus on user guides and practical examples, not internal implementations."
+        ).run(prompt, PlanAndCode)
 
         nl_text = plan_and_code_result.nl_text
         code = plan_and_code_result.code
@@ -360,7 +364,9 @@ class MinimalAgent:
                 f"Here are all available datasets with their identifiers and brief statistics:\n{get_datasets_table()}"
             )
         }
-        result = await Query().with_mcp(self._mcp_docs).run(prompt, SelectDatasets)
+        result = await Query().with_mcp(self._mcp_docs).with_system(
+            "If you need information about dataset characteristics or recommender system domains, search the OmniRec documentation for dataset usage."
+        ).run(prompt, SelectDatasets)
         return result.selected_datasets
 
     async def _set_code_requirements(self):
@@ -374,20 +380,22 @@ class MinimalAgent:
         {self.task_desc}
         And here are the selected datasets for this task:
         {self.selected_datasets}
-        They MUST be loaded like this:\n{load_code}
 
         GOAL:
         Formulate a clear, concise list of essential requirements that the code implementation must fulfill to successfully address this research task.
 
         CRITICAL REQUIREMENT GUIDELINES:
-        1. Specificity: Each requirement must be actionable and directly related to the research task.
-        2. Scope: Requirements should be specific enough for the task but broad enough to allow for valid implementation variations.
-        3. Atomicity: Requirements MUST NOT include any sub-requirements and must be atomic.
-        4. Coverage: Include all critical conceptual (!IMPORTANT!) and technical requirements necessary for a successful experiment. Do not add unnecessary requirements.
-        5. Success Criteria: A successful experiment means the code is technically AND conceptually correct and follows best practices, runs without errors, and produces meaningful results that align with the research task. The data splitting, algorithm configuration and evaluation MUST BE suitable for the provided data (explicit or implicit) and the research task.
-        6. Style: Avoid vague and verbose language. Keep each requirement as concise and precise as possible.
+        1. Function over Form: You MUST only focus on whats really necessary for the experiment to work.
+        2. Specificity: Each requirement must be actionable and directly related to the research task.
+        3. Scope: Requirements should be specific enough for the task but broad enough to allow for valid implementation variations.
+        4. Atomicity: Requirements MUST NOT include any sub-requirements and must be atomic.
+        5. Coverage: Include all critical conceptual (!IMPORTANT!) and technical requirements necessary for a successful experiment. DO NOT add unnecessary requirements.
+        6. Success Criteria: A successful experiment means the code is technically AND conceptually correct and follows best practices, runs without errors, and produces meaningful results that align with the research task. The data splitting, algorithm configuration and evaluation MUST BE suitable for the provided data (explicit or implicit) and the research task.
+        7. Style: Avoid vague and verbose language. Keep each requirement as concise and precise as possible.
         """
-        requirements_result = await Query().run(requirements_prompt, CodeRequirements)
+        requirements_result = await Query().with_mcp(self._mcp_docs).with_system(
+            "Search documentation technical details of the OmniRec framework and selected datasets to ensure requirements are feasible. Prioritize implementation guides and API references."
+        ).run(requirements_prompt, CodeRequirements)
         if len(requirements_result.requirements) == 0:
             self.code_requirements = "No specific requirements provided."
         else:
@@ -411,11 +419,13 @@ class MinimalAgent:
            - Specificity & Atomicity: Each requirement MUST BE specific, actionable, and atomic (no sub-requirements).
            - Relevance & Scope: Requirements MUST BE directly relevant but broad enough to allow for valid implementation variations (avoid over-specificity).
            - Coverage: ALL critical technical AND conceptual aspects (!IMPORTANT!) are covered, including data splitting, algorithm configuration, and evaluation suitability for the provided data (explicit or implicit) and research task.
-           - Clarity: No vague, generic, or redundant requirements are included.
+           - Clarity: No vague, generic, redundant or unecessarily strict requirements are included.
            - Focus: Requirements focus on successful experiment execution and meaningful results.
         2. Refinement: Fix any issues found. Keep requirements that already meet the criteria unchanged.
         """
-        reflection_result = await Query().with_mcp(self._mcp_docs).run(reflection_prompt, CodeRequirements)
+        reflection_result = await Query().with_mcp(self._mcp_docs).with_system(
+            "Verify requirements against documented best practices. Search the documentation to make sure that the technical details of the requirements are correct."
+        ).run(reflection_prompt, CodeRequirements)
         if len(reflection_result.requirements) == 0:
             self.code_requirements = "No specific requirements provided."
         else:
@@ -444,7 +454,6 @@ class MinimalAgent:
                 "- Missing required outputs or metrics",
                 "- Execution timeouts or crashes",
                 "- Incorrect or nonsensical results",
-                "",
                 "If there's a bug, provide a clear summary of the issue and suggest how to fix it.",
                 "If the execution was successful, leave the summary empty.",
             ],
@@ -453,7 +462,9 @@ class MinimalAgent:
         bug_feedback = ""
 
         try:
-            review_result = await Query().with_mcp(self._mcp_docs).run(review_prompt, ReviewFunction)
+            review_result = await Query().with_mcp(self._mcp_docs).with_system(
+                "When diagnosing bugs, search for usage examples in documentation. Look for common error patterns and correct API usage."
+            ).run(review_prompt, ReviewFunction)
 
             # Update node with review results
             node.is_buggy = review_result.is_bug
@@ -512,7 +523,9 @@ class MinimalAgent:
             }
 
             try:
-                scoring_result = await Query().with_mcp(self._mcp_docs).run(scoring_prompt, ScoreCode)
+                scoring_result = await Query().with_mcp(self._mcp_docs).with_system(
+                    "Check implementation against documented APIs and examples. Search for usage documentation to verify correctness, prioritizing tutorials and user guides over source code."
+                ).run(scoring_prompt, ScoreCode)
 
                 req.is_fulfilled = scoring_result.fulfilled
                 req.feedback = scoring_result.feedback
@@ -602,4 +615,6 @@ class MinimalAgent:
             ],
         }
 
-        return await Query().with_mcp(self._mcp_docs).run(summary_prompt)
+        return await Query().with_mcp(self._mcp_docs).with_system(
+            "If you need to explain results or metrics, search for documentation about evaluation metrics and their interpretation. Focus on user-facing explanations."
+        ).run(summary_prompt)
