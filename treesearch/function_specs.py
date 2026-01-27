@@ -199,12 +199,12 @@ plan_and_code_spec = FunctionSpec(
             },
             "code": {
                 "type": "string",
-                "description": "The complete Python source code implementing the plan.",
+                "description": "The complete Python source code implementing the plan. MUST be plain executable code without markdown backticks, code block markers (```python or ```), or any other formatting. Start directly with the Python code.",
             },
         },
         "required": ["nl_text", "code"],
     },
-    description="Return a natural language plan and the Python code that implements it.",
+    description="Return a natural language plan and the Python code that implements it. The code field must contain only plain executable Python code.",
 )
 
 @dataclass
