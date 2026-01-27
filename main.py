@@ -6,6 +6,7 @@ from config import get_config
 from treesearch.search import TreeSearch
 from utils.log import _ROOT_LOGGER, attach_file_handler, set_log_level
 from utils.path import mkdir
+from utils.checks import require_executable
 import asyncio
 
 logger = _ROOT_LOGGER.getChild("main")
@@ -22,6 +23,8 @@ async def main():
         return
 
     attach_file_handler(out_dir)
+    
+    require_executable("dot")
 
     user_req_lines: list[str] = []
     print('Enter you request, write "!start" to start:')
@@ -32,7 +35,7 @@ async def main():
         user_req_lines.append(line)
 
     user_request = "\n".join(user_req_lines)
-
+    
     logger.info("Starting AutoRecLab...")
 
     ts = TreeSearch(user_request, config=config)
