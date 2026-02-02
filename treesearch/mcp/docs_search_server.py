@@ -12,7 +12,7 @@ mcp = FastMCP("Documentation search")
 
 config = get_config()
 
-if config.local_llm.llm_mode != "local":
+if config.local_llm.embedding_mode == "api":
     embedding_model = OpenAIEmbeddings(model="text-embedding-3-large")
 
 else:

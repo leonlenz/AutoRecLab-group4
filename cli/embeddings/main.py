@@ -48,7 +48,7 @@ def main():
             for dest in generator_destinations.keys():
                 setattr(args, dest, True)
 
-        if config.local_llm.llm_mode != "local":
+        if config.local_llm.embedding_mode == "api":
             embedding_model = OpenAIEmbeddings(model=args.embedding_model)
 
         else:

@@ -10,6 +10,7 @@ import os
 # Local-only LLM config
 class LocalLLMConfig(BaseModel):
     llm_mode: Literal["api", "local"]
+    embedding_mode: Literal["api", "local"]
     base_url: str 
     local_model: str
     local_embedding_model: str
