@@ -4,7 +4,7 @@ out_dir = "./out"
 num_draft_nodes = 3
 debug_prob = 0.3
 epsilon = 0.2
-max_iterations = 20
+max_iterations = 10
 
 [exec]
 timeout = 5400

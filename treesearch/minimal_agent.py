@@ -17,7 +17,6 @@ from treesearch.interpreter import ExecutionResult
 from treesearch.llm.query import MCPConnection, Prompt, Query
 from treesearch.node import Node, NodeScore, Requirement
 from treesearch.utils.available_datasets import get_datasets_table
-from treesearch.utils.response import strip_markdown_fences
 from utils.log import _ROOT_LOGGER
 from utils.path import mkdir
 
@@ -92,24 +91,30 @@ class MinimalAgent:
     def _prompt_impl_guideline(self):
         impl_guideline = [
             "Implementation Guidelines:",
-            "1. Python Framework - !CRITICAL!: You have access to the OmniRec python library, a new comprehensive recommender system framework. Within this framework you can use algorithms from Lenskit, RecBole, RecPack and Elliot. If you use algorithms from these libraries, you MUST use OmniRec.",
-            f"2. Datasets: Use only the following selected datasets for training and evaluation: {self.selected_datasets}",
-            "3. Code Structure:",
+            "1. OmniRec for Python - !CRITICAL!: You have access to the OmniRec python library, a new comprehensive recommender system framework with integrated data loading, preprocessing, and evaluation utilities. Within this framework you can use algorithms from Lenskit, RecBole, RecPack and Elliot. If you use algorithms from these libraries, you MUST use OmniRec. You MUST NOT import these libraries directly.",
+            "2 Data Handling - !CRITICAL!: YOU MUST use OmniRec's data loading, splitting, and preprocessing utilities to handle datasets. Do NOT implement data loading or processing from scratch.",
+            f"3. Datasets: Use only the following selected datasets for training and evaluation: {self.selected_datasets}",
+            "4. Code Structure:",
             "   - Single-file, self-contained Python script.",
             "   - ALWAYS wrap the program’s starting point in `if __name__ == '__main__':` so it only runs when the script is executed directly.",
             "   - All code at global scope or in functions called from global scope.",
-            "4. Environment & Output:",
+            "   - Keep it SIMPLE: Use only essential, well-documented APIs. Avoid unnecessary operations and complexity.",
+            "5. Environment & Output:",
             "   - Start with:",
             "     import os",
             "     working_dir = os.path.join(os.getcwd(), 'working')",
             "     os.makedirs(working_dir, exist_ok=True)",
             f"   - Ensure execution completes within {humanize.naturaldelta(self.cfg.exec.timeout)}.",
-            "5. Data Saving:",
+            "6. Data Saving:",
             "   - Save all metrics, losses, and predictions in a dictionary `experiment_data`.",
             "   - Save this dictionary at the end: `np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)`.",
-            "6. Evaluation:",
+            "7. Evaluation:",
             "   - Track and print validation loss/metrics at each epoch.",
             f"   - Calculate and log these specific metrics: {self.evaluation_metrics}.",
+            "8. CRITICAL API USAGE - Verify in documentation to avoid common errors:",
+            "   - Verify object attributes exist before accessing (e.g., check SplitData structure)",
+            "   - Always check constructor signatures - don't assume parameters exist",
+            "   - Use public attributes/methods, NOT private ones starting with underscore",
         ]
 
         if self.cfg.agent.k_fold_validation > 1:
@@ -270,12 +275,12 @@ class MinimalAgent:
         prompt: Any = {
             "Introduction": (
                 "You are an experienced recommender systems researcher. Your previous code for research experiment had a bug, so based on the information below, you should revise it in order to fix this bug. "
-                "Your response should be an implementation outline in natural language,"
-                " followed by a single markdown code block which implements the bugfix/solution."
+                "You will provide a natural language implementation outline and the complete Python code that implements the bugfix/solution. "
+                "CRITICAL: Your code must be plain executable Python - do NOT wrap it in markdown backticks or code block markers."
             ),
             "Research task": self.task_desc,
-            "Previous (buggy) implementation": parent_node.code,
-            "Execution output": parent_node.term_out,
+            "Previous (buggy) implementation (Python code)": parent_node.code,
+            "Execution output (console output)": parent_node.term_out,
             "Bug Analysis & Scoring": enhanced_bug_info + score_info,
             "Feedback about execution time": parent_node.exec_time_feedback,
             "Instructions": {},
@@ -319,7 +324,7 @@ class MinimalAgent:
             "Instructions": {},
         }
         prompt["Previous solution"] = {
-            "Code": parent_node.code,
+            "Python Code": parent_node.code,
         }
 
         prompt["Instructions"] |= {
@@ -343,18 +348,16 @@ class MinimalAgent:
 
     async def plan_and_code_query(self, prompt, retries=3) -> tuple[str, str]:
         """Generate a natural language plan + code in the same LLM call and split them apart."""
-        plan_and_code_result = (
-            await Query()
-            .with_mcp(self._mcp_docs)
-            .with_system(
-                "Search OmniRec, Lenskit, and RecBole documentation for API usage examples and tutorials before writing code. "
-                "Focus on user guides and practical examples, not internal implementations."
-            )
-            .run(prompt, PlanAndCode)
-        )
+        plan_and_code_result = await Query().with_mcp(self._mcp_docs).with_system(
+            "CRITICAL: Before writing code, search OmniRec and other documentation to verify: "
+            "1) Exact function signatures (parameter names, types, valid value ranges), "
+            "2) Object attributes (use public APIs, not private _attributes), "
+            "3) Data structures."
+            "Never guess - always verify in docs."
+        ).run(prompt, PlanAndCode)
 
         nl_text = plan_and_code_result.nl_text
-        code = strip_markdown_fences(plan_and_code_result.code)
+        code = plan_and_code_result.code
         return nl_text, code
 
     async def _select_datasets(self) -> list[str]:
@@ -464,10 +467,8 @@ class MinimalAgent:
                 "Focus on identifying execution failures, errors, or other issues that would prevent the code from working properly."
             ),
             "Research Task": self.task_desc,
-            "Implementation": node.code,
-            "Execution Output": node.term_out
-            if node.term_out
-            else "No output generated",
+            "Implementation (Python code)": node.code,
+            "Execution Output (console output)": node.term_out if node.term_out else "No output generated",
             "Instructions": [
                 "Carefully analyze the execution output for signs of bugs or failures:",
                 "- Syntax errors, import errors, or runtime exceptions",
@@ -543,8 +544,8 @@ class MinimalAgent:
                 ),
                 "Requirement": req.description,
                 "Research Task": self.task_desc,
-                "Implementation": node.code,
-                "Execution output": node.term_out,
+                "Implementation (Python code)": node.code,
+                "Execution output (console output)": node.term_out,
             }
 
             try:
@@ -630,10 +631,8 @@ class MinimalAgent:
                 "If the available information is insufficient, explain the limitation clearly and remain factual."
             ),
             "User Request": user_request,
-            "Experiment Code": node.code,
-            "Experiment Output": node.term_out
-            if node.term_out
-            else "No experiment output available.",
+            "Experiment Code (Python)": node.code,
+            "Experiment Output (console)": node.term_out if node.term_out else "No experiment output available.",
             "Instructions": [
                 "1. Use the code to interpret what the experiment did and what metrics or results are relevant.",
                 "2. Read the output carefully and extract factual findings that answer the user request.",
