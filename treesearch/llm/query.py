@@ -12,8 +12,10 @@ from langchain_openai import ChatOpenAI
 
 from config import get_config
 from utils.log import _ROOT_LOGGER
+from treesearch.utils.costs_tracker import TokenUsageOpenAi, get_cost_tracker
 
 logger = _ROOT_LOGGER.getChild("llm")
+tracker = get_cost_tracker()
 
 ResponseFormatType: TypeAlias = type[SchemaT]
 RT = TypeVar("RT", bound=ResponseFormatType)
@@ -103,6 +105,10 @@ class Query:
             {"messages": [HumanMessage(input)]},
             config={"recursion_limit": self._max_iterations},
         )
+
+        usage = TokenUsageOpenAi(resp, self._model)
+        tracker.add(usage)
+        logger.info(usage)
 
         if response_schema:
             structured_resp: RT = resp["structured_response"]

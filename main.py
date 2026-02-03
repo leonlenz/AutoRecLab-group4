@@ -7,9 +7,11 @@ from treesearch.search import TreeSearch
 from utils.log import _ROOT_LOGGER, attach_file_handler, set_log_level
 from utils.path import mkdir
 from utils.checks import require_executable
+from treesearch.utils.costs_tracker import get_cost_tracker
 import asyncio
 
 logger = _ROOT_LOGGER.getChild("main")
+tracker = get_cost_tracker()
 
 
 async def main():
@@ -23,6 +25,8 @@ async def main():
         return
 
     attach_file_handler(out_dir)
+
+    tracker.set_out_dir(out_dir)
     
     require_executable("dot")
 
