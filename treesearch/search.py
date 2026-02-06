@@ -126,6 +126,29 @@ class TreeSearch:
         (node_dir / "out.log").write_text("".join(exec_result.term_out))
         (node_dir / "exec_result.pkl").write_bytes(pickle.dumps(exec_result))
 
+        # Move all generated files from the workspace to checkpoint for this node
+        workspace_dir = Path(self._workspace)
+        working_dir = workspace_dir / "working"
+        
+        # Collect files from workspace (excluding runfile.py and working dir)
+        generated_files = [
+            item for item in workspace_dir.iterdir()
+            if item.name not in ("runfile.py", "working") and not item.name.startswith(".")
+        ]
+        
+        # Also collect files from working subdirectory if it exists
+        if working_dir.exists():
+            generated_files.extend(list(working_dir.iterdir()))
+        
+        if generated_files:
+            generated_dir = mkdir(node_dir / "generated")
+            for item in generated_files:
+                try:
+                    shutil.move(str(item), str(generated_dir / item.name))
+                    logger.info(f"Moved {item.name} to checkpoint")
+                except Exception as e:
+                    logger.warning(f"Failed to move {item.name}: {e}")
+
         await self._minimal_agent.score_code(node, exec_result)
         return node
 
