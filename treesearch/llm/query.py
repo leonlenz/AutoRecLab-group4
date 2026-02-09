@@ -60,7 +60,7 @@ class Query:
         else:
             self._temperature = temperature
         #TODO REMOVE HARD CODE
-        self._max_iterations = 50
+        self._max_iterations = max_iterations
         
         self._mode = config.local_llm.llm_mode
         self._local_model=config.local_llm.local_model
@@ -107,7 +107,8 @@ class Query:
                 temperature=self._temperature,
                 base_url=self._local_base_url,
                 api_key="not needed",
-                use_responses_api=False
+                use_responses_api=False,
+                
             
             )
         
@@ -116,6 +117,7 @@ class Query:
             tools=tools,
             response_format=response_format,
             system_prompt=self._system_prompt,
+            
             
         )
         # TODO make this more elegant instead of using an large if / else

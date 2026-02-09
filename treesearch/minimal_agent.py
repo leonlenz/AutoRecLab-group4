@@ -19,6 +19,7 @@ from treesearch.node import Node, NodeScore, Requirement
 from treesearch.utils.available_datasets import get_datasets_table
 from utils.log import _ROOT_LOGGER
 from utils.path import mkdir
+from langgraph.errors import GraphRecursionError
 
 logger = _ROOT_LOGGER.getChild("nodeAgent")
 
@@ -345,48 +346,54 @@ class MinimalAgent:
             _parent=parent,
             requirements=[Requirement(r) for r in self.code_requirements],
         )
-
     async def plan_and_code_query(self, prompt, retries=3) -> tuple[str, str]:
-        # 1) Retrieve docs first (NO response schema, allow tool calling)
+        # --- 1) Tool/RAG phase: bounded recursion so it cannot spiral forever ---
         rag_prompt = {
             "Instruction": (
-                "Use the tool `documentation_query` to fetch the exact OmniRec APIs needed "
-                "for this task: loading datasets, converting to implicit (if needed), splitting 80/10/10, "
-                "training NeuMF via OmniRec (not direct RecBole import), evaluating Recall@10 and NDCG@10, "
-                "and producing boxplots + saving raw results.\n"
-                "Call the tool multiple times if needed (omnirec + recbole). "
-                "Return ONLY the retrieved excerpts and their sources."
+            "Decide you need too Use the tool `documentation_query` to retrieve authoritative documentation excerpts "
+            "needed to implement the user’s request.\n\n"
+            "Output requirements:\n"
+            "- Return ONLY the retrieved excerpts (verbatim or near-verbatim) and their sources/links.\n"
+            "- Do NOT write code, plans, or analysis.\n"
+            "- Do NOT infer or invent APIs; rely strictly on retrieved documentation."
             ),
             "Task": self.task_desc,
             "Context": prompt,
         }
-
-        # IMPORTANT: run without schema so the model can call tools
-        retrieved_docs_text = await (
-            Query()
-            .with_mcp(self._mcp_docs)
-            .with_system(
-                "You MUST call documentation_query. Do not write code yet."
+        try:
+            retrieved_docs_text = await (
+                Query(max_iterations=25)
+                .with_mcp(self._mcp_docs)
+                .with_system("You can call documentation_query.\n"
+                "You may call tools AT MOST 8 TIMES total.\n"
+                "if you have enough info, STOP calling tools and return the excerpts + sources.\n"
+                "If a tool call errors twice, stop immediately and return partial results.\n"
+                "Treat tool calls as a finite resource that costs a lot of reasources per call, therefore limit the number of toll calls and dotn call the tool if you can already perform the described task. \n"
+                "Do NOT write code.")
+                .run(rag_prompt)
             )
-            .run(rag_prompt)  # <-- no PlanAndCode schema here
-        )
+        except GraphRecursionError:
+            retrieved_docs_text = (    
+                "RAG phase aborted due to recursion limit."
+                "Proceed using prior knowledge and task description only.")
 
-        # 2) Now produce structured PlanAndCode with docs injected (schema ON)
+
+        # --- 2) Structured generation phase: low recursion, ideally no tools needed ---
         prompt_with_docs = dict(prompt)
         prompt_with_docs["Retrieved Docs (authoritative)"] = retrieved_docs_text
 
         plan_and_code_result = await (
-            Query()
+            Query(max_iterations=6)  # ✅ smaller, faster; avoids long agent loops
             .with_mcp(self._mcp_docs)
             .with_system(
-                "Use ONLY the Retrieved Docs for OmniRec/RecBole API usage. "
-                "Do not guess any imports or function names. "
+                "Use ONLY the Retrieved Docs for OmniRec/RecBole/Lenskit API usage.\n"
                 "Now produce a PlanAndCode response."
             )
             .run(prompt_with_docs, PlanAndCode)
         )
 
         return plan_and_code_result.nl_text, plan_and_code_result.code
+
 
 
     async def _select_datasets(self) -> list[str]:
