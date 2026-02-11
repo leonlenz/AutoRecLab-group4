@@ -26,7 +26,7 @@ dependencies = [
     "mcp[cli]>=1.24.0",
     "numpy>=1.26.4",
     "openai>=1.108.1",
-    "omnirec==0.2.0",
+    "omnirec @ git+https://github.com/ISG-Siegen/OmniRec.git@develop",
     "pydantic-settings>=2.10.1",
     "pytest>=9.0.2",
     "python-dotenv>=1.2.0",

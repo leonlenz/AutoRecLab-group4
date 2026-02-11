@@ -24,6 +24,7 @@ class CodeConfig(BaseSettings):
 
 class AgentConfig(BaseSettings):
     k_fold_validation: int = 1
+    evaluation_metrics: list[str] | None = None
     code: CodeConfig = CodeConfig()
 
 

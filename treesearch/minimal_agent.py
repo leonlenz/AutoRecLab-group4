@@ -17,19 +17,12 @@ from treesearch.interpreter import ExecutionResult
 from treesearch.llm.query import MCPConnection, Prompt, Query
 from treesearch.node import Node, NodeScore, Requirement
 from treesearch.utils.available_datasets import get_datasets_table
+from treesearch.mcp.docs_search_server import VECTOR_STORE_NAMES
 from treesearch.utils.response import strip_markdown_fences
 from utils.log import _ROOT_LOGGER
 from utils.path import mkdir
 
 logger = _ROOT_LOGGER.getChild("nodeAgent")
-
-#  Depreacted dataset loading code snippet
-
-# load_code = """from dataloader import load_dataset
-# df = load_dataset("<DATASET IDENTIFIER>")
-# # df will be a pandas dataframe with columns "user", "item", "rating" and optinally "timestamp"
-# # for implicit feedback the rating will always be 1"""
-# load_code = wrap_code(load_code)
 
 
 class MinimalAgent:
@@ -79,6 +72,7 @@ class MinimalAgent:
             "scipy==1.16.2",
             "scikit-learn==1.7.1",
             "lenskit==2025.6.2",
+            "matplotlib==3.10.7",
         ]
         pkg_str = ", ".join([f"`{p}`" for p in pkgs])
 
@@ -91,111 +85,38 @@ class MinimalAgent:
     def _prompt_impl_guideline(self):
         impl_guideline = [
             "Implementation Guidelines:",
-            "0. Documentation Protocol: OmniRec is the primary framework. Before writing a single line of code, you MUST use the documentation tool to search for the specific classes and methods you plan to use. Do not guess parameters.",
+            f"0. Documentation Protocol: OmniRec is the primary framework. Before writing a single line of code, you MUST use the documentation tool to search for the specific classes and methods you plan to use. Do not guess parameters. You have access to the documentation of these libraries: {VECTOR_STORE_NAMES}",
             "1. Python Framework - !CRITICAL!: You have access to the OmniRec python library, a new comprehensive recommender system framework. Within this framework you can use algorithms from Lenskit, RecBole, RecPack and Elliot. If you use algorithms from these libraries, you MUST use OmniRec.",
             f"2. Datasets: Use only the following selected datasets for training and evaluation: {self.selected_datasets}",
             "3. Code Structure:",
             "   - Single-file, self-contained Python script.",
             "   - ALWAYS wrap the program’s starting point in `if __name__ == '__main__':` so it only runs when the script is executed directly.",
             "   - All code at global scope or in functions called from global scope.",
-            "4. Environment & Output:",
+            "   - Keep it SIMPLE: Use only essential, well-documented APIs. Avoid unnecessary operations and complexity.",
+            "5. Environment & Output:",
             "   - Start with:",
             "     import os",
             "     working_dir = os.path.join(os.getcwd(), 'working')",
             "     os.makedirs(working_dir, exist_ok=True)",
             f"   - Ensure execution completes within {humanize.naturaldelta(self.cfg.exec.timeout)}.",
-            "5. Data Saving:",
+            "6. Data Saving:",
             "   - Save all metrics, losses, and predictions in a dictionary `experiment_data`.",
             "   - Save this dictionary at the end: `np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)`.",
-            "6. Evaluation:",
-            "   - Track and print validation loss/metrics at each epoch.",
-            f"   - Calculate and log these specific metrics: {self.evaluation_metrics}.",
+            "7. Evaluation - Track these throughout execution and use for final evaluation:",
+            f"   - Metrics: {', '.join(self.evaluation_metrics) if self.evaluation_metrics else 'Use metrics from task description if specified, otherwise choose appropriate ones'}",
+            "   - Print metrics during training for monitoring if practical.",
+            "8. CRITICAL API USAGE - Verify in documentation to avoid common errors:",
+            "   - Verify object attributes exist before accessing (e.g., check SplitData structure)",
+            "   - Always check constructor signatures - don't assume parameters exist",
+            "   - Use public attributes/methods, NOT private ones starting with underscore",
         ]
 
         if self.cfg.agent.k_fold_validation > 1:
             impl_guideline.append(
-                f"6. Validation: Use {self.cfg.agent.k_fold_validation}-fold cross-validation if appropriate."
+                f"9. Validation: Use {self.cfg.agent.k_fold_validation}-fold cross-validation if appropriate."
             )
 
         return {"Implementation guideline": impl_guideline}
-
-    # @property
-    # def _prompt_impl_guideline(self):
-    #     impl_guideline = [
-    #         "CRITICAL REQUIREMENTS - Use appropriate libraries if possible, avoid implementing from scratch:",
-    #         "CRITICAL MODEL INPUT GUIDELINES:",
-    #         "  - Always pay extra attention to the input to the model being properly normalized",
-    #         "  - This is extremely important because the input to the model's forward pass directly affects the output, and the loss function is computed based on the output",
-    #     ]
-    #
-    #     impl_guideline.extend(
-    #         [
-    #             "For generative modeling tasks, you must:",
-    #             "  - Generate a set of samples from your model",
-    #             "  - Compare these samples with ground truth data using appropriate visualizations",
-    #             "  - When saving plots, always use the 'working_dir' variable that will be defined at the start of the script",
-    #             "  - Make sure to give each figure a unique and appropriate name based on the dataset it represents, rather than reusing the same filename.",
-    #             "Important code structure requirements:",
-    #             "  - Do NOT put any execution code inside 'if __name__ == \"__main__\":' block",
-    #             "  - All code should be at the global scope or in functions that are called from the global scope",
-    #             "  - The script should execute immediately when run, without requiring any special entry point",
-    #             "The code should start with:",
-    #             "  import os",
-    #             "  working_dir = os.path.join(os.getcwd(), 'working')",
-    #             "  os.makedirs(working_dir, exist_ok=True)",
-    #             "The code should be a single-file python program that is self-contained and can be executed as-is.",
-    #             "No parts of the code should be skipped, don't terminate the code execution before finishing the script.",
-    #             "Your response should only contain a single code block.",
-    #             f"Be aware of the running time of the code, it should complete within {humanize.naturaldelta(self.cfg.exec.timeout)}.",
-    #             'You can also use the "./working" directory to store any temporary files that your code needs to create.',
-    #             "Data saving requirements:",
-    #             "- Save all plottable data (metrics, losses, predictions, etc.) as numpy arrays using np.save()",
-    #             "- Use the following naming convention for saved files:",
-    #             "  ```python",
-    #             "  # At the start of your code",
-    #             "  experiment_data = {",
-    #             "      'dataset_name_1': {",
-    #             "          'metrics': {'train': [], 'val': []},",
-    #             "          'losses': {'train': [], 'val': []},",
-    #             "          'predictions': [],",
-    #             "          'ground_truth': [],",
-    #             "          # Add other relevant data",
-    #             "      },",
-    #             "      # Add additional datasets as needed:",
-    #             "      'dataset_name_2': {",
-    #             "          'metrics': {'train': [], 'val': []},",
-    #             "          'losses': {'train': [], 'val': []},",
-    #             "          'predictions': [],",
-    #             "          'ground_truth': [],",
-    #             "          # Add other relevant data",
-    #             "      },",
-    #             "  }",
-    #             "  # During training/evaluation:",
-    #             "  experiment_data['dataset_name_1']['metrics']['train'].append(train_metric)",
-    #             "  ```",
-    #             "- Include timestamps or epochs with the saved metrics",
-    #             "- For large datasets, consider saving in chunks or using np.savez_compressed()",
-    #             "CRITICAL EVALUATION REQUIREMENTS - Your code MUST include ALL of these:",
-    #             "  1. Track and print validation loss (if applicable) at each epoch or at suitable intervals:",
-    #             "     ```python",
-    #             "     print(f'Epoch {{epoch}}: validation_loss = {{val_loss:.4f}}')",
-    #             "     ```",
-    #             "  2. Track and update ALL these additional metrics: "
-    #             + str(self.evaluation_metrics),
-    #             "  3. Update metrics at EACH epoch:",
-    #             "  4. Save ALL metrics at the end:",
-    #             "     ```python",
-    #             "     np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)",
-    #             "     ```",
-    #         ]
-    #     )
-    #
-    #     if self.cfg.agent.k_fold_validation > 1:
-    #         impl_guideline.append(
-    #             f"The evaluation should be based on {self.cfg.agent.k_fold_validation}-fold cross-validation but only if that's an appropriate evaluation for the task at hand."
-    #         )
-    #
-    #     return {"Implementation guideline": impl_guideline}
 
     async def _draft(self) -> Node:
         prompt: Any = {
@@ -221,13 +142,9 @@ class MinimalAgent:
                 "Make sure to use the provided dataset(s).",
                 "",
             ],
-            "Evaluation Metric(s)": self.evaluation_metrics,
         }
         prompt["Instructions"] |= self._prompt_impl_guideline
         prompt["Instructions"] |= self._prompt_environment
-
-        # if self.cfg.agent.data_preview:
-        #     prompt["Data Overview"] = self.data_preview
 
         print("[cyan]--------------------------------[/cyan]")
         print("[cyan]self.task_desc[/cyan]")
@@ -286,9 +203,6 @@ class MinimalAgent:
             ],
         }
         prompt["Instructions"] |= self._prompt_impl_guideline
-
-        # if self.cfg.agent.data_preview:
-        #     prompt["Data Overview"] = self.data_preview
 
         plan, code = await self.plan_and_code_query(prompt)
         return self._new_node(plan, code, parent_node)
@@ -366,6 +280,15 @@ class MinimalAgent:
         nl_text = plan_and_code_result.nl_text
         code = strip_markdown_fences(plan_and_code_result.code)
         return nl_text, code
+    
+    # Alternative, shorter system prompt:
+    """
+        f"CRITICAL: Before writing code, search the respective documentation. You have access to comprehensive documentation for these libraries: {VECTOR_STORE_NAMES}. Always verify the following technical details in the documentation before using them in your code: "
+        "1) Exact function signatures (parameter names, types, valid value ranges), "
+        "2) Object attributes (use public APIs, not private _attributes), "
+        "3) Data structures."
+        "Never guess - always verify in docs."
+    """
 
     async def _select_datasets(self) -> list[str]:
         """Select appropriate datasets for the research task using LLM."""
