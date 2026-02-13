@@ -1,80 +1,16 @@
 from langchain.messages import AIMessage
 from datetime import datetime
+import warnings
 import time
+import json
 
-prices = [
-    {
-        "model": "gpt-5.2",
-        "input": 1.75,          # USD pro 1M Input-Tokens
-        "output": 14.0          # USD pro 1M Output-Tokens
-    },
-    {
-        "model": "gpt-5.2-pro",
-        "input": 21.0,
-        "output": 168.0
-    },
-    {
-        "model": "gpt-5.1",
-        "input": 1.25,
-        "output": 10.0
-    },
-    {
-        "model": "gpt-5",
-        "input": 1.25,
-        "output": 10.0
-    },
-    {
-        "model": "gpt-5-mini",
-        "input": 0.25,
-        "output": 2.0
-    },
-    {
-        "model": "gpt-5-nano",
-        "input": 0.05,
-        "output": 0.40
-    },
-    {
-        "model": "gpt-5-pro",
-        "input": 15.0,
-        "output": 120.0
-    },
-    {
-        "model": "gpt-4.1",
-        "input": 2.0,
-        "output": 8.0
-    },
-    {
-        "model": "gpt-4.1-mini",
-        "input": 0.40,
-        "output": 1.60
-    },
-    {
-        "model": "gpt-4.1-nano",
-        "input": 0.10,
-        "output": 0.40
-    },
-    {
-        "model": "gpt-4o",
-        "input": 2.50,
-        "output": 10.0
-    },
-    {
-        "model": "gpt-4o-mini",
-        "input": 0.15,
-        "output": 0.60
-    },
-    {
-        "model": "gpt-realtime",
-        "input": 4.0,
-        "output": 16.0
-    },
-    {
-        "model": "gpt-realtime-mini",
-        "input": 0.60,
-        "output": 2.40
-    }
-]
 
+def load_pricing():
+    with open("pricing.json", "r") as f:
+        data = json.load(f)
+    return data["models"]
+
+prices = load_pricing()
 
 # Base class for tracking token usage
 class TokenUsage:
@@ -116,11 +52,15 @@ class TokenUsage:
         return f"Used Tokens:  Prompt_Tokens={self.prompt_tokens}={self.prompt_USD}$ Completion_Tokens={self.completion_tokens}={self.completion_USD}$ Total_Tokens={self.total_tokens}={self.total_USD}$"
     
     def calc_USD(self):
+        self.foundModel = False
         for price in prices:
             if price["model"] == self.model:
                 self.prompt_USD = (self.prompt_tokens / 1_000_000) * price["input"]
                 self.completion_USD = (self.completion_tokens / 1_000_000) * price["output"]
                 self.total_USD = self.prompt_USD + self.completion_USD
+                self.foundModel = True
+        if not self.foundModel:
+            warnings.warn(f"Model '{self.model}' not found in price list. USD costs cannot be calculated. Please update 'pricing.json' with the correct model name and pricing information.")
 
  
 
