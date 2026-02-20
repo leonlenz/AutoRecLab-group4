@@ -54,34 +54,35 @@ class TreeSearch:
     @property
     def best_good_node(self):
         good_nodes = self.good_nodes
-        good_nodes.sort(key=lambda n: n.score.score * (1 / len(n.children) if n.children else 1), reverse=True)
+        good_nodes.sort(key=lambda n: n.score.score, reverse=True)
         return good_nodes[0]
 
     def best_buggy_node(self):
         buggy_nodes = self.buggy_nodes
-        buggy_nodes.sort(key=lambda n: n.score.score * (1 / len(n.children) if n.children else 1), reverse=True)
+        buggy_nodes.sort(key=lambda n: n.score.score, reverse=True)
         return buggy_nodes[0]
 
     def select_next_node(self) -> Node:
-        # Select buggy node with debug_prob probability
         if (
             len(self.buggy_nodes) > 0
             and random.random() < self._config.treesearch.debug_prob
             or len(self.good_nodes) == 0
         ):
-            # Epsilon-greedy explore vs. exploit:
             if random.random() < self._config.treesearch.epsilon:
                 logger.info("Selecting random buggy node for debugging...")
-                return random.choice(self.buggy_nodes)
+                nodes = self.buggy_nodes
+                weights = [1 / (len(n.children) + 1) for n in nodes]
+                return random.choices(nodes, weights=weights, k=1)[0]
             else:
                 logger.info("Selecting best buggy node for debugging...")
-                return self.best_buggy_node()
+                return max(self.buggy_nodes, key=lambda n: n.score.score * (1 / (len(n.children) + 1)))
 
-        # Epsilon-greedy explore vs. exploit:
         if random.random() < self._config.treesearch.epsilon:
-            return random.choice(self.good_nodes)
+            nodes = self.good_nodes
+            weights = [1 / (len(n.children) + 1) for n in nodes]
+            return random.choices(nodes, weights=weights, k=1)[0]
         else:
-            return self.best_good_node
+            return max(self.good_nodes, key=lambda n: n.score.score * (1 / (len(n.children) + 1)))
 
     async def run(self):
         logger.info("Starting tree search...")
