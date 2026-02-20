@@ -57,6 +57,7 @@ class TreeSearch:
         good_nodes.sort(key=lambda n: n.score.score, reverse=True)
         return good_nodes[0]
 
+    @property
     def best_buggy_node(self):
         buggy_nodes = self.buggy_nodes
         buggy_nodes.sort(key=lambda n: n.score.score, reverse=True)
@@ -120,7 +121,7 @@ class TreeSearch:
 
         if len(self.good_nodes) == 0:
             logger.warning("No good nodes found; Using best buggy node...")
-            best_node = self.best_buggy_node()
+            best_node = self.best_buggy_node
         else:
             best_node = self.best_good_node
         await self.finalize_search(result_node=best_node)

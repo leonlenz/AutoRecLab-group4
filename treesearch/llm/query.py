@@ -93,7 +93,7 @@ class Query:
         else:
             response_format = ProviderStrategy(response_schema, strict=self._strict)
 
-        model = ChatOpenAI(model=self._model, temperature=self._temperature)
+        model = ChatOpenAI(model=self._model, temperature=self._temperature, use_responses_api=True)
         agent = create_agent(
             model=model,
             tools=tools,

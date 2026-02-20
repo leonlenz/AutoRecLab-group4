@@ -85,30 +85,24 @@ class MinimalAgent:
     def _prompt_impl_guideline(self):
         impl_guideline = [
             "Implementation Guidelines:",
-            f"0. Documentation Protocol: OmniRec is the primary framework. Before writing a single line of code, you MUST use the documentation tool to search for the specific classes and methods you plan to use. Do not guess parameters. You have access to the documentation of these libraries: {VECTOR_STORE_NAMES}",
-            "1. Python Framework - !CRITICAL!: You have access to the OmniRec python library, a new comprehensive recommender system framework. Within this framework you can use algorithms from Lenskit, RecBole, RecPack and Elliot. If you use algorithms from these libraries, you MUST use OmniRec.",
-            f"2. Datasets: Use only the following selected datasets for training and evaluation: {self.selected_datasets}",
+            f"1. Framework: Use OmniRec exclusively (wraps Lenskit, RecBole, RecPack, Elliot, etc.). Search these docs when unsure: {VECTOR_STORE_NAMES}",
+            f"2. Datasets: Use only: {', '.join(self.selected_datasets)}",
             "3. Code Structure:",
-            "   - Single-file, self-contained Python script.",
-            "   - ALWAYS wrap the program’s starting point in `if __name__ == '__main__':` so it only runs when the script is executed directly.",
-            "   - All code at global scope or in functions called from global scope.",
-            "   - Keep it SIMPLE: Use only essential, well-documented APIs. Avoid unnecessary operations and complexity.",
-            "5. Environment & Output:",
-            "   - Start with:",
-            "     import os",
-            "     working_dir = os.path.join(os.getcwd(), 'working')",
-            "     os.makedirs(working_dir, exist_ok=True)",
-            f"   - Ensure execution completes within {humanize.naturaldelta(self.cfg.exec.timeout)}.",
-            "6. Data Saving:",
-            "   - Save all metrics, losses, and predictions in a dictionary `experiment_data`.",
-            "   - Save this dictionary at the end: `np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)`.",
-            "7. Evaluation - Track these throughout execution and use for final evaluation:",
-            f"   - Metrics: {', '.join(self.evaluation_metrics) if self.evaluation_metrics else 'Use metrics from task description if specified, otherwise choose appropriate ones'}",
-            "   - Print metrics during training for monitoring if practical.",
-            "8. CRITICAL API USAGE - Verify in documentation to avoid common errors:",
-            "   - Verify object attributes exist before accessing (e.g., check SplitData structure)",
-            "   - Always check constructor signatures - don't assume parameters exist",
-            "   - Use public attributes/methods, NOT private ones starting with underscore",
+            "   - Single-file Python script with `if __name__ == '__main__':`",
+            "   - Keep simple - use only well-documented APIs",
+            "4. Environment Setup:",
+            "   - Create working directory: `working_dir = os.path.join(os.getcwd(), 'working'); os.makedirs(working_dir, exist_ok=True)`",
+            f"   - Complete execution within {humanize.naturaldelta(self.cfg.exec.timeout)}",
+            "5. Data Saving:",
+            "   - Store all metrics/losses in `experiment_data` dict",
+            "   - Save: `np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)`",
+            "6. Evaluation:",
+            f"   - Metrics: {', '.join(self.evaluation_metrics) if self.evaluation_metrics else 'Choose appropriate metrics'}",
+            "   - Print metrics during execution for monitoring",
+            "7. API Verification (CRITICAL):",
+            "   - Check constructor signatures before use",
+            "   - Verify object attributes exist (e.g., SplitData structure)",
+            "   - Use only public APIs (no underscore-prefixed methods)",
         ]
 
         if self.cfg.agent.k_fold_validation > 1:
@@ -197,9 +191,9 @@ class MinimalAgent:
         prompt["Instructions"] |= {
             "Bugfix improvement sketch guideline": [
                 "1. ERROR DIAGNOSIS: Analyze the 'Execution output' specifically for API errors (AttributeError, TypeError, etc.).",
-                "2. DOCUMENTATION VERIFICATION: If the error involves OmniRec, Lenskit, or RecBole, you MUST search the documentation for the correct class/method signature before writing the fix.",
+                f"2. DOCUMENTATION VERIFICATION: If the error involves {VECTOR_STORE_NAMES} you MUST search the documentation for the correct class/method signature before writing the fix.",
                 "3. EXPLAIN THE FIX: Write 3-5 sentences describing the root cause and the verified solution. Cite the documentation if an API change was made.",
-                "4. DO NOT GUESS: If the documentation does not show the method you need, search for alternatives or 'tutorials' in the MCP server.",
+                "4. DO NOT GUESS: If the documentation does not show the method you need, search for alternatives or 'examples' in the MCP server.",
             ],
         }
         prompt["Instructions"] |= self._prompt_impl_guideline
@@ -221,7 +215,7 @@ class MinimalAgent:
         prompt: Any = {
             "Introduction": (
                 "You are an experienced recommender systems researcher. You are provided with a previously developed "
-                "implementation. Your task is to improve it based on the current experimental stage."
+                "implementation. Your task is to improve it to meet the research task requirements and address any issues identified in the 'Performance Analysis'."
             ),
             "Research task": self.task_desc,
             "Memory": self.memory_summary if self.memory_summary else "",
@@ -260,19 +254,19 @@ class MinimalAgent:
             await Query()
             .with_mcp(self._mcp_docs)
             .with_system(
-                "You are a Senior Recommender Systems Engineer specializing in the OmniRec library.\n"
-                "You work in a strict 'Test-Driven' and 'Doc-Driven' environment.\n"
-                "### OPERATIONAL CONSTRAINTS:\n"
-                "1. MANDATORY SEARCH: You are prohibited from generating code until you have performed at least two search queries.\n"
-                "- Query 1: Broad search for the class/tutorial.\n"
-                "- Query 2: Specific search for method signatures and parameter types.\n"
-                "2. CITATION RULE: In your 'nl_text' field, you MUST start with a section titled '## Documentation Verified'. List every OmniRec method you used and the parameters you confirmed via the search tool.\n"
-                "3. THE 'NO-GUESS' ARCHITECTURE: If the documentation tool does not return a specific parameter you need, do not 'hallucinate' it. Instead, search for 'OmniRec [ClassName] examples' to see it in context.\n"
-                "4. VERSION AWARENESS: You are using OmniRec v0.2.0. Disregard pre-trained knowledge of Lenskit or RecBole if it conflicts with the current OmniRec documentation retrieved via MCP.\n"
-                "### THE THREE-PHASE PROTOCOL:\n"
-                "Phase 1 (Identify): Analyze the task and list the 3-5 key OmniRec components needed.\n"
-                "Phase 2 (Verify): For EACH component, call the MCP tool. If the search result is a list of methods, you MUST perform a follow-up search on the specific method signature/\n"
-                "Phase 3 (Implement): Only when you can 'see' the documentation in your context window are you allowed to populate the PlanAndCode fields."
+                f"You are a Senior Recommender Systems Engineer specializing in the OmniRec library. "
+                f"Available documentation (OmniRec and libraries that OmniRec can use): {VECTOR_STORE_NAMES}.\n"
+                "\n"
+                "Search documentation to verify API details. Process:\n"
+                "1. Identify needed components → 2. Search + verify each → 3. Document findings → 4. Implement\n"
+                "\n"
+                "Verify in documentation:\n"
+                "- Function signatures (parameter names, types, valid ranges)\n"
+                "- Object attributes (use public APIs only, not _private)\n"
+                "- Data structures and return types\n"
+                "\n"
+                "In 'nl_text', include '## Documentation Verified' section listing all verified methods.\n"
+                "Search for examples and Verify critical details in documentation."
             )
             .run(prompt, PlanAndCode)
         )
@@ -280,33 +274,25 @@ class MinimalAgent:
         nl_text = plan_and_code_result.nl_text
         code = strip_markdown_fences(plan_and_code_result.code)
         return nl_text, code
-    
-    # Alternative, shorter system prompt:
-    """
-        f"CRITICAL: Before writing code, search the respective documentation. You have access to comprehensive documentation for these libraries: {VECTOR_STORE_NAMES}. Always verify the following technical details in the documentation before using them in your code: "
-        "1) Exact function signatures (parameter names, types, valid value ranges), "
-        "2) Object attributes (use public APIs, not private _attributes), "
-        "3) Data structures."
-        "Never guess - always verify in docs."
-    """
 
     async def _select_datasets(self) -> list[str]:
         """Select appropriate datasets for the research task using LLM."""
         prompt: Prompt = {
             "Instruction:": (
-                f"You are a recommender system researcher who wants to implement a given research task. "
-                f"Your first task is to select suitable datasets for the task. "
-                f"Please first look at the research task and see if it specifies any datasets:\n{self.task_desc}\n"
-                "Select the identifiers of the specified datasets or if none are specified choose appropriate datasets from the list of available datasets below."
-                "Your response MUST just be a simple list of dataset identifiers."
-                f"Here are all available datasets with their identifiers and brief statistics:\n{get_datasets_table()}"
+                f"You are a recommender system researcher selecting datasets for a research task.\n\n"
+                f"Research task:\n{self.task_desc}\n\n"
+                "Instructions:\n"
+                "1. Check if the research task specifies any datasets\n"
+                "2. If specified, select those datasets; otherwise choose appropriate ones from the list below\n"
+                "3. Return only a list of dataset identifiers\n\n"
+                f"Available datasets:\n{get_datasets_table()}"
             )
         }
         result = (
             await Query()
             .with_mcp(self._mcp_docs)
             .with_system(
-                "If you need information about dataset characteristics or recommender system domains, search the OmniRec documentation for dataset usage."
+                "Search OmniRec documentation for dataset characteristics and usage patterns if needed."
             )
             .run(prompt, SelectDatasets)
         )
@@ -315,32 +301,40 @@ class MinimalAgent:
     async def _set_code_requirements(self):
         logger.info("Engineering code requirements...")
         requirements_prompt = f"""
-        ROLE:
-        You are an expert recommender systems researcher with extensive experience in designing and implementing experiments to advance the field.
+        You are an expert recommender systems researcher defining experiment requirements.
 
-        CONTEXT:
-        You are provided with the following research task:
-        {self.task_desc}
-        And here are the selected datasets for this task:
-        {self.selected_datasets}
+        Research task: {self.task_desc}
+        Selected datasets: {self.selected_datasets}
 
-        GOAL:
-        Formulate a clear, concise list of essential requirements that the code implementation must fulfill to successfully address this research task.
+        Generate requirements that specify critical aspects of the experiment that must be fulfilled.
 
-        CRITICAL REQUIREMENT GUIDELINES:
-        1. Function over Form: You MUST only focus on whats really necessary for the experiment to work.
-        2. Specificity: Each requirement must be actionable and directly related to the research task.
-        3. Scope: Requirements should be specific enough for the task but broad enough to allow for valid implementation variations.
-        4. Atomicity: Requirements MUST NOT include any sub-requirements and must be atomic.
-        5. Coverage: Include all critical conceptual (!IMPORTANT!) and technical requirements necessary for a successful experiment. DO NOT add unnecessary requirements.
-        6. Success Criteria: A successful experiment means the code is technically AND conceptually correct and follows best practices, runs without errors, and produces meaningful results that align with the research task. The data splitting, algorithm configuration and evaluation MUST BE suitable for the provided data (explicit or implicit) and the research task.
-        7. Style: Avoid vague and verbose language. Keep each requirement as concise and precise as possible.
+        PRINCIPLES:
+
+        1. Minimal and necessary: Only include requirements essential for THIS specific research task
+        - If removing a requirement would make the experiment fail or meaningless, keep it
+        - If a requirement is general best practice but not necessary for this task, exclude it
+
+        2. Abstraction: State objectives and constraints at an appropriate level
+        - Avoid excessive implementation details (exact formulas, nested conditional logic, code-level instructions)
+        - Include critical technical specifications where they matter (framework to use, specific datasets, evaluation metrics, split ratios)
+
+        3. Atomicity: Each requirement should test one distinct aspect of the experiment
+
+        4. Coverage: Include requirements for all essential aspects:
+        - Data loading and preprocessing
+        - Experimental methodology (data splitting, reproducibility requirements)
+        - Model/algorithm selection and configuration
+        - Training procedures
+        - Evaluation methodology and metrics
+        - Critical outputs and results
+
+        Include both technical requirements (correct tool/API usage) and conceptual requirements (methodologically sound experiment design), but keep it as minimal as possible.
         """
         requirements_result = (
             await Query()
             .with_mcp(self._mcp_docs)
             .with_system(
-                "Search documentation technical details of the OmniRec framework and selected datasets to ensure requirements are feasible. Prioritize implementation guides and API references."
+                "Reference documentation for OmniRec framework and dataset details if needed to ensure requirements are feasible. Prioritize implementation guides and API references."
             )
             .run(requirements_prompt, CodeRequirements)
         )
@@ -351,31 +345,34 @@ class MinimalAgent:
 
         # Requirements reflection round
         reflection_prompt = f"""
-        You are an expert recommender systems researcher conducting a quality review.
-        Your colleague generated code requirements that, when fulfilled, should result in a successful implementation of the research task.
-        This is the research task:
-        {self.task_desc}
+        Quality review: Ensure requirements are minimal, atomic, and sufficient for the research task.
 
-        And here are the generated requirements:
-        {self.code_requirements}
+        Research task: {self.task_desc}
+        Generated requirements: {self.code_requirements}
 
-        GOAL:
-        Review these requirements critically but fairly and provide an updated, refined list.
+        REVIEW CRITERIA:
 
-        GUIDELINES:
-        1. Verification: Verify that the requirements meet ALL these criteria:
-           - Specificity & Atomicity: Each requirement MUST BE specific, actionable, and atomic (no sub-requirements).
-           - Relevance & Scope: Requirements MUST BE directly relevant but broad enough to allow for valid implementation variations (avoid over-specificity).
-           - Coverage: ALL critical technical AND conceptual aspects (!IMPORTANT!) are covered, including data splitting, algorithm configuration, and evaluation suitability for the provided data (explicit or implicit) and research task.
-           - Clarity: No vague, generic, redundant or unecessarily strict requirements are included.
-           - Focus: Requirements focus on successful experiment execution and meaningful results.
-        2. Refinement: Fix any issues found. Keep requirements that already meet the criteria unchanged.
+        1. Necessity: Is each requirement essential for THIS research task?
+        - Keep only requirements whose absence would make the experiment fail or invalid
+        - Remove general best practices, optimizations, or requirements not relevant to this specific task
+
+        2. Appropriate detail level: 
+        - Remove excessive implementation details (step-by-step procedures, exact formulas, nested logic)
+        - Retain critical technical specifications (which framework, which metrics, which methodology)
+
+        3. Atomicity: Each requirement tests one distinct aspect - split compound requirements
+
+        4. Coverage: All critical aspects covered for this specific task:
+        - Technical correctness (proper use of tools/APIs, data handling, reproducibility)
+        - Conceptual correctness (valid experimental design for the research question)
+
+        Refine the list: remove unnecessary requirements, simplify over-detailed ones, split compound ones, add missing critical aspects.
         """
         reflection_result = (
             await Query()
             .with_mcp(self._mcp_docs)
             .with_system(
-                "Verify requirements against documented best practices. Search the documentation to make sure that the technical details of the requirements are correct."
+                "Verify requirements against documented best practices. Reference documentation to confirm technical details are correct."
             )
             .run(reflection_prompt, CodeRequirements)
         )
@@ -419,7 +416,7 @@ class MinimalAgent:
                 await Query()
                 .with_mcp(self._mcp_docs)
                 .with_system(
-                    "When diagnosing bugs, search for usage examples in documentation. Look for common error patterns and correct API usage."
+                    "Search for usage examples in documentation when diagnosing API-related bugs. Look for common error patterns and correct API usage."
                 )
                 .run(review_prompt, ReviewFunction)
             )
@@ -485,7 +482,7 @@ class MinimalAgent:
                     await Query()
                     .with_mcp(self._mcp_docs)
                     .with_system(
-                        "Check implementation against documented APIs and examples. Search for usage documentation to verify correctness, prioritizing tutorials and user guides over source code."
+                        "Verify implementation against documented APIs when correctness is unclear. Reference usage documentation, prioritizing tutorials and user guides over source code."
                     )
                     .run(scoring_prompt, ScoreCode)
                 )
