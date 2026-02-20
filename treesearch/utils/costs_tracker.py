@@ -32,22 +32,6 @@ class TokenUsage:
     def _extract_usage(self, resp):
         pass
     
-    def print(self):
-        readable_time = datetime.fromtimestamp(self.timestamp).strftime('%Y-%m-%d %H:%M:%S')
-
-        print("=" * 50)
-        print("TOKEN USAGE STATISTICS")
-        print("=" * 50)
-        print(f"Model: {self.model or 'N/A'}")
-        print(f"Prompt Tokens: {self.prompt_tokens}")
-        print(f"Prompt USD: {self.prompt_USD}")
-        print(f"Completion Tokens: {self.completion_tokens}")
-        print(f"Completion USD: {self.completion_USD}")
-        print(f"Total Tokens: {self.total_tokens}")
-        print(f"Total USD: {self.total_USD}")
-        print(f"Timestamp: {readable_time}")
-        print("=" * 50)
-
     def __str__(self):
         return f"Used Tokens:  Prompt_Tokens={self.prompt_tokens}={self.prompt_USD}$ Completion_Tokens={self.completion_tokens}={self.completion_USD}$ Total_Tokens={self.total_tokens}={self.total_USD}$"
     
@@ -89,8 +73,7 @@ class CostsTracker:
         self.costsList = []
         self.out_dir = None
 
-
-    def __del__(self):
+    def saveSummarized(self):
         if self.out_dir is not None:
             with open(self.out_dir / "costs_log.csv", "a") as f:
                 total = self.sum()
@@ -103,19 +86,6 @@ class CostsTracker:
             with open(self.out_dir / "costs_log.csv", "a") as f:
                 f.write(f"{len(self.costsList)},{datetime.fromtimestamp(cost.timestamp).strftime('%Y-%m-%d %H:%M:%S')},{cost.model},{cost.prompt_tokens},{cost.prompt_USD},{cost.completion_tokens},{cost.completion_USD},{cost.total_tokens},{cost.total_USD}\n")
         
-    def print(self):
-        total = self.sum()
-        print("=" * 50)
-        print("TOTAL TOKEN USAGE STATISTICS")
-        print("=" * 50)
-        print(f"Prompt Tokens: {total['prompt_tokens']}")
-        print(f"Prompt USD: {total['prompt_USD']}")
-        print(f"Completion Tokens: {total['completion_tokens']}")
-        print(f"Completion USD: {total['completion_USD']}")
-        print(f"Total Tokens: {total['total_tokens']}")
-        print(f"Total USD: {total['total_USD']}")
-        print("=" * 50)
-
     def __str__(self):
         total = self.sum()
         return f"Total Used Tokens:  Prompt_Tokens={total['prompt_tokens']}={total['prompt_USD']}$ Completion_Tokens={total['completion_tokens']}={total['completion_USD']}$ Total_Tokens={total['total_tokens']}={total['total_USD']}$"
