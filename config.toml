@@ -3,11 +3,13 @@ out_dir = "./out"
 [treesearch]
 num_draft_nodes = 3
 debug_prob = 0.3
-epsilon = 0.2
+epsilon = 0.4
 max_iterations = 10
 
 [exec]
 timeout = 5400
+enable_type_checking = true
+max_type_check_attempts = 3
 
 [agent]
 k_fold_validation = 1

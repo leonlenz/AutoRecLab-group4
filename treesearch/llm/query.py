@@ -154,7 +154,7 @@ class Query:
                 usage = TokenUsageOpenAi(resp, self._model)
                 tracker.add(usage)
                 logger.info(usage)
-                
+
                 if response_schema:
                     try:
                         structured_resp: RT = resp["structured_response"]

@@ -10,6 +10,7 @@ from config import CONFIG_PATH, Config
 from treesearch.interpreter import Interpreter
 from treesearch.minimal_agent import MinimalAgent
 from treesearch.node import Node
+from treesearch.type_checker import TypeChecker
 from utils.log import _ROOT_LOGGER
 from utils.path import mkdir
 from viz import render_trees
@@ -35,6 +36,7 @@ class TreeSearch:
             evaluation_metrics=self._config.agent.evaluation_metrics,
         )
         self._interpreter = Interpreter(self._workspace, self._config.exec.timeout)
+        self._type_checker = TypeChecker(self._workspace)
 
     async def _async_init(self):
         await self._minimal_agent._async_init()
@@ -54,12 +56,12 @@ class TreeSearch:
     @property
     def best_good_node(self):
         good_nodes = self.good_nodes
-        good_nodes.sort(key=lambda n: n.score.score, reverse=True)
+        good_nodes.sort(key=lambda n: n.score.score * (1 / len(n.children) if n.children else 1), reverse=True)
         return good_nodes[0]
 
     def best_buggy_node(self):
         buggy_nodes = self.buggy_nodes
-        buggy_nodes.sort(key=lambda n: n.score.score, reverse=True)
+        buggy_nodes.sort(key=lambda n: n.score.score * (1 / len(n.children) if n.children else 1), reverse=True)
         return buggy_nodes[0]
 
     def select_next_node(self) -> Node:
@@ -125,7 +127,55 @@ class TreeSearch:
         await self.finalize_search(result_node=best_node)
 
     async def exec_node(self, node: Node) -> Node:
-        exec_result = self._interpreter.run(node.code)
+        # Type checking refinement loop
+        current_code = node.code
+        
+        if self._config.exec.enable_type_checking:
+            max_type_check_attempts = self._config.exec.max_type_check_attempts
+            
+            for attempt in range(1, max_type_check_attempts + 1):
+                node.type_check_attempts = attempt
+                logger.info(f"Type checking code (attempt {attempt}/{max_type_check_attempts})...")
+                
+                type_check_result = self._type_checker.check_code(current_code)
+                
+                if not type_check_result.has_errors:
+                    logger.info("Type checking passed!")
+                    node.type_check_passed = True
+                    break
+                
+                logger.warning(
+                    f"Type checking found {type_check_result.error_count} error(s) "
+                    f"(attempt {attempt}/{max_type_check_attempts})"
+                )
+                node.type_check_results.append(type_check_result)
+                
+                if attempt == max_type_check_attempts:
+                    logger.warning(
+                        "Max type checking attempts reached. Proceeding with execution despite type errors."
+                    )
+                    node.type_check_passed = False
+                    break
+                
+                logger.info("Attempting to fix type errors using LLM...")
+                try:
+                    fixed_code = await self._minimal_agent._fix_type_errors(
+                        current_code, type_check_result.format_errors_for_llm()
+                    )
+                    current_code = fixed_code
+                except Exception as e:
+                    logger.error(f"Failed to fix type errors: {e}")
+                    node.type_check_passed = False
+                    break
+        else:
+            logger.info("Type checking is disabled. Enable it in the config to refine code before execution.")
+            node.type_check_passed = None  # type: ignore
+        
+        # Always sync node.code with current_code so that what we execute
+        # matches what the agent sees later
+        node.code = current_code
+        
+        exec_result = self._interpreter.run(current_code)
         logger.debug(exec_result)
 
         node_dir = mkdir(self._checkpoint_dir / node.id)
