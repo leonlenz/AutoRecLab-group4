@@ -27,7 +27,7 @@ dependencies = [
     "mcp[cli]>=1.24.0",
     "numpy>=1.26.4",
     "openai>=1.108.1",
-    "omnirec",
+    "omnirec @ git+https://github.com/ISG-Siegen/OmniRec.git@develop",
     "pydantic-settings>=2.10.1",
     "pytest>=9.0.2",
     "python-dotenv>=1.2.0",
@@ -37,9 +37,18 @@ dependencies = [
     "tomli-w>=1.2.0",
 ]
 
+[project.scripts]
+embeddings = "cli.embeddings.main:main"
+
 [tool.uv.workspace]
 members = ["packages/dataloader"]
 
+[tool.uv]
+package = true
+
 [tool.uv.sources]
-dataloader = { workspace = true }
-omnirec = { git = "https://github.com/ISG-Siegen/OmniRec.git", branch = "develop" }
+dataloader = { workspace = true, editable = true }
+omnirec = { git = "https://github.com/ISG-Siegen/OmniRec.git", rev = "develop" }
+
+[tool.setuptools]
+packages = ["cli", "treesearch", "utils"]

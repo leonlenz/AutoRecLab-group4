@@ -7,12 +7,22 @@ RUN apt install -y graphviz git
 
 COPY pyproject.toml uv.lock .python-version /app/
 COPY packages/ /app/packages/
-RUN --mount=type=cache,target=/root/.cache/uv --mount=type=cache,target=/root/.local/share/uv/python uv sync
+
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=cache,target=/root/.local/share/uv/python \
+    uv sync --frozen --no-install-project
 
 COPY . /app
 
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=cache,target=/root/.local/share/uv/python \
+    uv sync --frozen
+
 RUN mkdir -p /app/ragEmbeddings
 RUN chmod +x /app/docker-entrypoint.sh
+
+# Fix entrypoint line endings:
+RUN sed -i 's/\r$//' /app/docker-entrypoint.sh
 
 RUN echo 'PS1="\[\e[96;1m\]AutoRecLab\[\e[0m\] \\$ "' >> /etc/bash.bashrc
 RUN echo 'source /app/.venv/bin/activate' >> /etc/bash.bashrc

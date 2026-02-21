@@ -7,7 +7,6 @@ from anytree import PreOrderIter
 
 from config import CONFIG_PATH, Config
 
-# from treesearch.minimal_agent import MinimalAgent
 from treesearch.interpreter import Interpreter
 from treesearch.minimal_agent import MinimalAgent
 from treesearch.node import Node
@@ -30,7 +29,11 @@ class TreeSearch:
 
         shutil.copy(CONFIG_PATH, self._out_dir)
 
-        self._minimal_agent = MinimalAgent(self._task_desc, self._config)
+        self._minimal_agent = MinimalAgent(
+            self._task_desc,
+            self._config,
+            evaluation_metrics=self._config.agent.evaluation_metrics,
+        )
         self._interpreter = Interpreter(self._workspace, self._config.exec.timeout)
 
     async def _async_init(self):
@@ -114,8 +117,12 @@ class TreeSearch:
 
         logger.warning("Found no satisfactory node; Using best node instead...")
 
-        best_node = self.best_good_node
-        await self.finalize_search(best_node)
+        if len(self.good_nodes) == 0:
+            logger.warning("No good nodes found; Using best buggy node...")
+            best_node = self.best_buggy_node()
+        else:
+            best_node = self.best_good_node
+        await self.finalize_search(result_node=best_node)
 
     async def exec_node(self, node: Node) -> Node:
         exec_result = self._interpreter.run(node.code)
@@ -160,10 +167,10 @@ class TreeSearch:
     @property
     def _task_desc(self) -> str:
         task_desc = """ You are an expert recommender systems research assistant who is looking to help the user with their requests.
-The user has some idea and you want to conduct creative experiments to gain scientific insights.
-Your aim is to run experiments to gather sufficient results to report back to the user.
-The idea is:\n
-"""
+                    The user has some idea and you want to conduct creative experiments to gain scientific insights.
+                    Your aim is to run experiments to gather sufficient results to report back to the user.
+                    The idea is:\n
+                    """
         task_desc += self._user_request
         return task_desc
 

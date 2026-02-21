@@ -18,10 +18,10 @@ def main():
     generate = sub.add_parser("generate")
 
     generators: dict[str, Preprocessor] = {
-        "--omnirec": GitRepoPreprocessor("https://github.com/ISG-Siegen/OmniRec", "develop"),
-        "--lenskit": GitRepoPreprocessor(
-            "https://github.com/lenskit/lkpy.git", "main"
+        "--omnirec": GitRepoPreprocessor(
+            "https://github.com/ISG-Siegen/OmniRec", "develop"
         ),
+        "--lenskit": GitRepoPreprocessor("https://github.com/lenskit/lkpy.git", "main"),
         "--recbole": GitRepoPreprocessor(
             "https://github.com/RUCAIBox/RecBole.git", "1.2.x"
         ),

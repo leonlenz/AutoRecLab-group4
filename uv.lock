@@ -937,7 +937,7 @@ wheels = [
 [[package]]
 name = "isg-science-agent"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "anthropic" },
     { name = "anytree" },
@@ -993,7 +993,7 @@ requires-dist = [
     { name = "matplotlib", specifier = ">=3.10.7" },
     { name = "mcp", extras = ["cli"], specifier = ">=1.24.0" },
     { name = "numpy", specifier = ">=1.26.4" },
-    { name = "omnirec", specifier = "==0.2.0" },
+    { name = "omnirec", git = "https://github.com/ISG-Siegen/OmniRec.git?rev=develop" },
     { name = "openai", specifier = ">=1.108.1" },
     { name = "pydantic-settings", specifier = ">=2.10.1" },
     { name = "pytest", specifier = ">=9.0.2" },
@@ -1973,7 +1973,7 @@ wheels = [
 [[package]]
 name = "omnirec"
 version = "0.2.0"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/ISG-Siegen/OmniRec.git?rev=develop#b92b287f21217c0eeb8db3b5fc4ee7c44afae02c" }
 dependencies = [
     { name = "cryptography" },
     { name = "dacite" },
@@ -1989,21 +1989,13 @@ dependencies = [
     { name = "uv" },
     { name = "xlrd" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/26/c5/9f646dec1110f3f515912cb7e4b87386a3fee8767df8f82b11bdb898096e/omnirec-0.2.0.tar.gz", hash = "sha256:b5476767585d472e04e1640cc9add3e1371b9ff5ad9c69429285ea12317fd2a9", size = 731297, upload-time = "2026-01-16T16:13:16.588Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/7f/15/46e98392090c10b2c81ce5cab16f7960695a43ba35c47d7d1672a1e07c23/omnirec-0.2.0-py3-none-any.whl", hash = "sha256:af3705dc5d790fcfa093e1ed190535e99c2ac16e0012064f01644a61abc0c8b3", size = 85390, upload-time = "2026-01-16T16:13:18.249Z" },
-]
 
 [[package]]
 name = "omnirec-runner"
 version = "0.1.1"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/ISG-Siegen/OmniRec.git?subdirectory=packages%2Fomnirec_runner&rev=develop#b92b287f21217c0eeb8db3b5fc4ee7c44afae02c" }
 dependencies = [
     { name = "rpyc" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/1f/27/ced51e758f8b136e5a34b5cad316d941dff73dde37a40b471b8b09e65863/omnirec_runner-0.1.1.tar.gz", hash = "sha256:7ee9be6028789ed53d194eb9b1d0e18a2848de83c7a76d603aa331fd8f6f159f", size = 8303, upload-time = "2025-10-23T15:29:53.649Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/8e/0e/e245113d9f6f4b55899f8da251315fe253c95e4c103ecec19ccb8b53eb20/omnirec_runner-0.1.1-py3-none-any.whl", hash = "sha256:984ca0c356f6dee260e00d94bdf3c1ee895be06b65ccf041a6d6f4372013ae62", size = 11488, upload-time = "2025-10-23T15:29:52.519Z" },
 ]
 
 [[package]]

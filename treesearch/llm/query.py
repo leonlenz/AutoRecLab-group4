@@ -16,8 +16,10 @@ from dataclasses import is_dataclass, fields as dc_fields
 
 from config import get_config
 from utils.log import _ROOT_LOGGER
+from treesearch.utils.costs_tracker import TokenUsageOpenAi, get_cost_tracker
 
 logger = _ROOT_LOGGER.getChild("llm")
+tracker = get_cost_tracker()
 
 ResponseFormatType: TypeAlias = type[SchemaT]
 RT = TypeVar("RT", bound=ResponseFormatType)
@@ -30,12 +32,12 @@ class MCPConnection:
     name: str
     connection: Connection
 
+@dataclass
+class CachedMCPData:
+    tools: list[BaseTool]
+    client: MultiServerMCPClient
 
-""" # TODO:
-- [x] limit number of tool calls (solved: implemented via max_iterations parameter)
-- [ ] the error handling in lines 75 - 80 is prob not ideal 
-"""
-
+_MCP_CACHE: dict[str, CachedMCPData] = {}
 
 class Query:
     def __init__(
@@ -149,6 +151,10 @@ class Query:
                 else:
                     print("\n==== NO AIMessage RETURNED ====\n")
 
+                usage = TokenUsageOpenAi(resp, self._model)
+                tracker.add(usage)
+                logger.info(usage)
+                
                 if response_schema:
                     try:
                         structured_resp: RT = resp["structured_response"]
@@ -191,14 +197,17 @@ class Query:
 
 
     async def _get_all_tools(self) -> list[BaseTool]:
-        tools = self._tools
-
-        connection_dict: dict[str, Connection] = {
-            mcp.name: mcp.connection for mcp in self._mcp_connections
-        }
-        client = MultiServerMCPClient(connection_dict)
-        tools.extend(await client.get_tools())
-
+        tools = list(self._tools)
+        for mcp in self._mcp_connections:
+            if mcp.name in _MCP_CACHE:
+                logger.debug(f"CACHE HIT: Using cached tools and connection for MCP '{mcp.name}'")
+                tools.extend(_MCP_CACHE[mcp.name].tools)
+            else:
+                logger.info(f"Initializing MCP connection and fetching tools for '{mcp.name}'")
+                client = MultiServerMCPClient({mcp.name: mcp.connection})
+                fetched_tools = await client.get_tools()
+                _MCP_CACHE[mcp.name] = CachedMCPData(client=client, tools=fetched_tools)
+                tools.extend(fetched_tools)
         return tools
 
 
