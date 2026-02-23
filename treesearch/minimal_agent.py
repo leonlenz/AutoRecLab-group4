@@ -240,6 +240,43 @@ class MinimalAgent:
         plan, code = await self.plan_and_code_query(prompt)
         return self._new_node(plan, code, parent_node)
 
+    async def _fix_type_errors(self, code: str, type_errors: str) -> str:
+        """
+        Fix type checking errors in code using agent
+
+        Args:
+            code: The code with type errors
+            type_errors: Formatted string describing the type errors
+
+        Returns:
+            str: Fixed code
+        """
+        prompt: Any = {
+            "Introduction": (
+                "You are a Senior Python Developer specializing in writing type-safe code. "
+                "Your task is to fix type checking errors found by the ty type checker."
+            ),
+            "Code with Type Errors": code,
+            "Type Checking Errors": type_errors,
+            "Instructions": {
+                "Type Error Fixing Guidelines": [
+                    "1. UNDERSTAND THE ERROR: Read each type error carefully and identify the root cause.",
+                    "2. FIX PRECISELY: Make minimal changes to fix the type errors. Don't refactor unrelated code.",
+                    "3. COMMON ISSUES: Watch for:",
+                    "   - Missing type annotations causing inference failures",
+                    "   - Incorrect argument types in function calls",
+                    "   - Using None without proper Optional typing",
+                    "   - Accessing attributes that don't exist",
+                    "   - Wrong number of arguments to functions",
+                    "4. PRESERVE LOGIC: The functionality must remain identical, only fix type issues.",
+                    "5. OUTPUT FORMAT: Return only the fixed code in the 'code' field, with all type errors resolved.",
+                ],
+            },
+        }
+
+        _, fixed_code = await self.plan_and_code_query(prompt)
+        return fixed_code
+
     def _new_node(self, plan: str, code: str, parent: Optional[Node] = None):
         return Node(
             plan=plan,

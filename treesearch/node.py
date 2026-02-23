@@ -8,6 +8,7 @@ from anytree import NodeMixin
 
 from treesearch.interpreter import ExecutionResult
 from treesearch.metric import MetricValue
+from treesearch.type_checker import TypeCheckResult
 from treesearch.utils.response import trim_long_string
 
 
@@ -88,6 +89,11 @@ class Node(NodeMixin):
 
     # ---- execution time feedback ----
     exec_time_feedback: str = field(default="")
+
+    # ---- type checking info ----
+    type_check_attempts: int = field(default=0)
+    type_check_passed: bool = field(default=False)
+    type_check_results: list[TypeCheckResult] = field(default_factory=list)
 
     # ---- ablation study ----
     ablation_name: Optional[str] = field(default=None)

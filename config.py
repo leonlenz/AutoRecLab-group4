@@ -15,6 +15,8 @@ class TreeSearchConfig(BaseSettings):
 
 class ExecConfig(BaseSettings):
     timeout: int = 3600
+    enable_type_checking: bool = True
+    max_type_check_attempts: int = 3
 
 
 class CodeConfig(BaseSettings):
