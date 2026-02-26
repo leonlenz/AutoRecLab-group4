@@ -9,6 +9,7 @@ from langchain.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import Connection
 from langchain_openai import ChatOpenAI
+from langgraph.errors import GraphRecursionError
 
 from config import get_config
 from utils.log import _ROOT_LOGGER
@@ -101,10 +102,32 @@ class Query:
             system_prompt=self._system_prompt,
         )
 
-        resp = await agent.ainvoke(
-            {"messages": [HumanMessage(input)]},
-            config={"recursion_limit": self._max_iterations},
-        )
+        try:
+            resp = await agent.ainvoke(
+                {"messages": [HumanMessage(input)]},
+                config={"recursion_limit": self._max_iterations},
+            )
+        except GraphRecursionError:
+            logger.warning(
+                "Recursion limit of %d reached. Forcing a direct response without tools.",
+                self._max_iterations,
+            )
+            forced_input = (
+                input
+                + "\n\n**IMPORTANT**: You have exhausted your allowed tool calls. "
+                "Based on all the research you have already done, provide your "
+                "final answer NOW without calling any more tools."
+            )
+            fallback_agent = create_agent(
+                model=model,
+                tools=[],
+                response_format=response_format,
+                system_prompt=self._system_prompt,
+            )
+            resp = await fallback_agent.ainvoke(
+                {"messages": [HumanMessage(forced_input)]},
+                config={"recursion_limit": self._max_iterations},
+            )
 
         usage = TokenUsageOpenAi(resp, self._model)
         tracker.add(usage)

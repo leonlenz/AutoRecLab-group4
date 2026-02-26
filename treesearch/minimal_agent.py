@@ -85,7 +85,7 @@ class MinimalAgent:
     def _prompt_impl_guideline(self):
         impl_guideline = [
             "Implementation Guidelines:",
-            f"1. Framework: Use OmniRec exclusively (wraps Lenskit, RecBole, RecPack, Elliot, etc.). Search these docs when unsure: {VECTOR_STORE_NAMES}",
+            f"1. Framework: Use OmniRec exclusively (wraps Lenskit, RecBole, RecPack, Elliot, etc.). Search these docs when unsure: {VECTOR_STORE_NAMES}. NEVER implement algorithms from scratch or call Lenskit/RecBole/other backend libraries directly — always go through the OmniRec API.",
             f"2. Datasets: Use only: {', '.join(self.selected_datasets)}",
             "3. Code Structure:",
             "   - Single-file Python script with `if __name__ == '__main__':`",
@@ -93,9 +93,8 @@ class MinimalAgent:
             "4. Environment Setup:",
             "   - Create working directory: `working_dir = os.path.join(os.getcwd(), 'working'); os.makedirs(working_dir, exist_ok=True)`",
             f"   - Complete execution within {humanize.naturaldelta(self.cfg.exec.timeout)}",
-            "5. Data Saving:",
-            "   - Store all metrics/losses in `experiment_data` dict",
-            "   - Save: `np.save(os.path.join(working_dir, 'experiment_data.npy'), experiment_data)`",
+            "5. Data Tracking:",
+            "   - Track all relevant data points (e.g., metrics, losses)",
             "6. Evaluation:",
             f"   - Metrics: {', '.join(self.evaluation_metrics) if self.evaluation_metrics else 'Choose appropriate metrics'}",
             "   - Print metrics during execution for monitoring",
@@ -294,6 +293,8 @@ class MinimalAgent:
                 f"You are a Senior Recommender Systems Engineer specializing in the OmniRec library. "
                 f"Available documentation (OmniRec and libraries that OmniRec can use): {VECTOR_STORE_NAMES}.\n"
                 "\n"
+                "CRITICAL: You MUST use OmniRec for all recommender system functionality. Do NOT fall back to raw Lenskit, RecBole, or any other backend library directly. If you cannot find the right OmniRec API, search the documentation further — do not bypass OmniRec.\n"
+                "\n"
                 "Search documentation to verify API details. Process:\n"
                 "1. Identify needed components → 2. Search + verify each → 3. Document findings → 4. Implement\n"
                 "\n"
@@ -360,7 +361,7 @@ class MinimalAgent:
         4. Coverage: Include requirements for all essential aspects:
         - Data loading and preprocessing
         - Experimental methodology (data splitting, reproducibility requirements)
-        - Model/algorithm selection and configuration
+        - Model/algorithm selection and configuration — ALWAYS include a requirement that OmniRec must be used for all recommender system functionality; raw backend libraries (Lenskit, RecBole, etc.) must not be called directly
         - Training procedures
         - Evaluation methodology and metrics
         - Critical outputs and results

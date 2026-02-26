@@ -25,8 +25,8 @@ dependencies = [
     "matplotlib>=3.10.7",
     "mcp[cli]>=1.24.0",
     "numpy>=1.26.4",
-    "openai>=1.108.1",
     "omnirec @ git+https://github.com/ISG-Siegen/OmniRec.git@develop",
+    "openai>=1.108.1",
     "pydantic-settings>=2.10.1",
     "pytest>=9.0.2",
     "python-dotenv>=1.2.0",
@@ -47,8 +47,7 @@ members = ["packages/dataloader"]
 package = true
 
 [tool.uv.sources]
-dataloader = { workspace = true, editable = true }
-omnirec = { git = "https://github.com/ISG-Siegen/OmniRec.git", rev = "develop" }
+dataloader = { workspace = true}
 
 [tool.setuptools]
 packages = ["cli", "treesearch", "utils"]
