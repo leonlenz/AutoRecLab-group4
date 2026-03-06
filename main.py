@@ -46,6 +46,8 @@ async def main():
     await ts._async_init()
     await ts.run()
 
+    tracker.saveSummarized()
+
 
 def get_args():
     parser = ArgumentParser("AutoRecLab")

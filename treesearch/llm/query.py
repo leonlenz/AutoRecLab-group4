@@ -14,6 +14,7 @@ from langchain.messages import AIMessage, HumanMessage
 from langchain_core.callbacks import BaseCallbackHandler
 from langgraph.errors import GraphRecursionError
 from dataclasses import is_dataclass, fields as dc_fields
+from langgraph.errors import GraphRecursionError
 
 from config import get_config
 from utils.log import _ROOT_LOGGER
@@ -161,14 +162,14 @@ class Query:
 
         # Set up the model based on mode
         if self._mode != "local":
-            model = ChatOpenAI(model=self._model, temperature=self._temperature)
+            model = ChatOpenAI(model=self._model, temperature=self._temperature, use_responses_api=True)
         else:
             model = ChatOpenAI(
                 model=self._local_model,
                 temperature=self._temperature,
                 base_url=self._local_base_url,
                 api_key="not needed",
-                use_responses_api=False,
+                use_responses_api=False, #TODO Try True with new llm models
                 
             
             )
@@ -202,23 +203,30 @@ class Query:
             try:
                 resp = await agent.ainvoke(
                     {"messages": [HumanMessage(input)]},
-                    config={
-                        "recursion_limit": self._max_iterations,
-                        "callbacks": [tool_buffer],
-                    },
+                    config={"recursion_limit": self._max_iterations},
+                )
+            except GraphRecursionError:
+                logger.warning(
+                    "Recursion limit of %d reached. Forcing a direct response without tools.",
+                    self._max_iterations,
+                )
+                forced_input = (
+                    input
+                    + "\n\n**IMPORTANT**: You have exhausted your allowed tool calls. "
+                    "Based on all the research you have already done, provide your "
+                    "final answer NOW without calling any more tools."
+                )
+                fallback_agent = create_agent(
+                    model=model,
+                    tools=[],
+                    response_format=response_format,
+                    system_prompt=self._system_prompt,
+                )
+                resp = await fallback_agent.ainvoke(
+                    {"messages": [HumanMessage(forced_input)]},
+                    config={"recursion_limit": self._max_iterations},
                 )
 
-                messages = resp.get("messages") or []
-                ai_messages = [m for m in reversed(messages) if isinstance(m, AIMessage)]
-                if ai_messages:
-                    last = ai_messages[0]
-                    print("\n==== RAW AIMessage.content (type) ====")
-                    print(type(last.content))
-                    print("==== RAW AIMessage.content (value) ====")
-                    print(repr(last.content))
-                    print("=====================================\n")
-                else:
-                    print("\n==== NO AIMessage RETURNED ====\n")
 
                 usage = TokenUsageOpenAi(resp, self._model)
                 tracker.add(usage)
