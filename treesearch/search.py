@@ -213,6 +213,7 @@ class TreeSearch:
 
     async def finalize_search(self, result_node: Node):
         self._interpreter.cleanup_session()
+        logger.info(f"Finalizing search with node: {result_node.id}")
         logger.info("Final response:")
         print(await self._minimal_agent._summarize(self._user_request, result_node))
 
