@@ -56,13 +56,13 @@ class TreeSearch:
     @property
     def best_good_node(self):
         good_nodes = self.good_nodes
-        good_nodes.sort(key=lambda n: n.score.score, reverse=True)
+        good_nodes.sort(key=lambda n: (n.score.score, n.ctime), reverse=True)
         return good_nodes[0]
 
     @property
     def best_buggy_node(self):
         buggy_nodes = self.buggy_nodes
-        buggy_nodes.sort(key=lambda n: n.score.score, reverse=True)
+        buggy_nodes.sort(key=lambda n: (n.score.score, n.ctime), reverse=True)
         return buggy_nodes[0]
 
     def select_next_node(self) -> Node:
