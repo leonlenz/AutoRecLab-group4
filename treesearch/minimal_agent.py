@@ -613,7 +613,7 @@ class MinimalAgent:
         }
 
         return (
-            await Query()
+            await Query(temperature=0.0)
             .with_mcp(self._mcp_docs)
             .with_system(
                 "If you need to explain results or metrics, search for documentation about evaluation metrics and their interpretation. Focus on user-facing explanations."

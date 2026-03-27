@@ -1,4 +1,4 @@
-from pprint import pprint
+from dataclasses import is_dataclass
 from typing import Annotated, Any, Optional, Sequence, TypeAlias, TypedDict, TypeVar
 
 from langchain.agents.structured_output import SchemaT
@@ -34,6 +34,7 @@ class Agent:
         self._default_budget = default_tool_budget
         self._tool_budget_warning = tool_budget_warning
 
+        self._response_schema = response_schema
         self._response_tool_name = None
         all_tools: list[BaseTool | RT] = list(tools)
         bind_params = {}
@@ -44,9 +45,6 @@ class Agent:
             )
             all_tools.append(response_schema)
             bind_params["tool_choice"] = "required"
-
-        pprint(f"{all_tools=}")
-        pprint(f"{bind_params=}")
 
         self._model = model.bind_tools(all_tools, **bind_params)
         self._tool_executor = ToolNode(tools)
@@ -108,13 +106,15 @@ class Agent:
         if isinstance(response, AIMessage) and response.tool_calls:
             for tool_call in response.tool_calls:
                 if tool_call["name"] == self._response_tool_name:
-                    output["structured_response"] = tool_call["args"]
+                    output["structured_response"] = self._coerce_structured_response(
+                        tool_call["args"]
+                    )
                     break
 
         return output
 
-    def _tools_with_budget(self, state: AgentState):
-        result = self._tool_executor.invoke(state)
+    async def _tools_with_budget(self, state: AgentState):
+        result = await self._tool_executor.ainvoke(state)
         return {**result, "tool_budget": state["tool_budget"] - 1}
 
     def _handle_budget_exceeded(self, state: AgentState):
@@ -144,3 +144,20 @@ class Agent:
             return "force_stop"
 
         return "end"
+
+    def _coerce_structured_response(self, args: dict[str, Any]) -> Any:
+        if self._response_schema is None:
+            return args
+
+        schema = self._response_schema
+
+        if hasattr(schema, "model_validate"):
+            return schema.model_validate(args)
+
+        if is_dataclass(schema):
+            return schema(**args)
+
+        try:
+            return schema(**args)
+        except TypeError:
+            return args

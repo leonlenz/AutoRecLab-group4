@@ -130,7 +130,7 @@ class Query:
         if not ai_messages:
             raise RuntimeError("No AIMessage found in response!")
 
-        return str(ai_messages[0].content)
+        return _extract_ai_message_text(ai_messages[0])
 
     async def _get_all_tools(self) -> list[BaseTool]:
         tools = list(self._tools)
@@ -199,3 +199,39 @@ def _prompt_to_md(prompt: Prompt | None, level=1) -> tuple[str, bool]:
     else:
         print(f"Invalid prompt type: {type(prompt)}")
         sys.exit(1)
+
+
+def _extract_ai_message_text(message: AIMessage) -> str:
+    """Extract plain text from a LangChain AIMessage across content formats."""
+
+    text_parts: list[str] = []
+
+    # Prefer LangChain's normalized block view when available.
+    content_blocks = getattr(message, "content_blocks", None)
+    if isinstance(content_blocks, list):
+        for block in content_blocks:
+            if isinstance(block, dict) and block.get("type") == "text":
+                text = block.get("text")
+                if isinstance(text, str) and text.strip():
+                    text_parts.append(text)
+
+    if text_parts:
+        return "\n".join(text_parts)
+
+    content = message.content
+    if isinstance(content, str):
+        return content
+
+    if isinstance(content, list):
+        for block in content:
+            if isinstance(block, str) and block.strip():
+                text_parts.append(block)
+            elif isinstance(block, dict) and block.get("type") == "text":
+                text = block.get("text")
+                if isinstance(text, str) and text.strip():
+                    text_parts.append(text)
+
+    if text_parts:
+        return "\n".join(text_parts)
+
+    return str(content)
