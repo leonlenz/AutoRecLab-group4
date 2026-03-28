@@ -2,18 +2,17 @@ import sys
 from dataclasses import dataclass
 from typing import Optional, Self, TypeAlias, TypeVar, overload
 
-from langchain.agents import create_agent
-from langchain.agents.structured_output import ProviderStrategy, ResponseFormat, SchemaT
+from langchain.agents.structured_output import SchemaT
 from langchain.messages import AIMessage, HumanMessage
 from langchain.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import Connection
 from langchain_openai import ChatOpenAI
-from langgraph.errors import GraphRecursionError
 
 from config import get_config
-from utils.log import _ROOT_LOGGER
+from treesearch.llm.graph import Agent
 from treesearch.utils.costs_tracker import TokenUsageOpenAi, get_cost_tracker
+from utils.log import _ROOT_LOGGER
 
 logger = _ROOT_LOGGER.getChild("llm")
 tracker = get_cost_tracker()
@@ -29,19 +28,22 @@ class MCPConnection:
     name: str
     connection: Connection
 
+
 @dataclass
 class CachedMCPData:
     tools: list[BaseTool]
     client: MultiServerMCPClient
 
+
 _MCP_CACHE: dict[str, CachedMCPData] = {}
+
 
 class Query:
     def __init__(
         self,
         model: str | None = None,
         temperature: float | None = None,
-        max_iterations: int = 25,
+        tool_budget: int = 20,
     ) -> None:
         self._mcp_connections: list[MCPConnection] = []
         self._tools: list[BaseTool] = []
@@ -59,7 +61,7 @@ class Query:
         else:
             self._temperature = temperature
 
-        self._max_iterations = max_iterations
+        self._tool_budget = tool_budget
 
     def with_tool(self, *tool: BaseTool) -> Self:
         self._tools.extend(tool)
@@ -73,6 +75,8 @@ class Query:
         self._system_prompt = system_prompt
         return self
 
+    # TODO: strict is currently unused with the custom langgraph
+    # I am not sure if we still need it.
     def non_strict(self) -> Self:
         self._strict = False
         return self
@@ -89,45 +93,24 @@ class Query:
         input = prompt_to_md(input)
         tools = await self._get_all_tools()
 
-        if response_schema is None:
-            response_format = None
-        else:
-            response_format = ProviderStrategy(response_schema, strict=self._strict)
-
-        model = ChatOpenAI(model=self._model, temperature=self._temperature, use_responses_api=True)
-        agent = create_agent(
-            model=model,
-            tools=tools,
-            response_format=response_format,
-            system_prompt=self._system_prompt,
+        model = ChatOpenAI(
+            model=self._model, temperature=self._temperature, use_responses_api=True
         )
 
-        try:
-            resp = await agent.ainvoke(
-                {"messages": [HumanMessage(input)]},
-                config={"recursion_limit": self._max_iterations},
-            )
-        except GraphRecursionError:
-            logger.warning(
-                "Recursion limit of %d reached. Forcing a direct response without tools.",
-                self._max_iterations,
-            )
-            forced_input = (
-                input
-                + "\n\n**IMPORTANT**: You have exhausted your allowed tool calls. "
-                "Based on all the research you have already done, provide your "
-                "final answer NOW without calling any more tools."
-            )
-            fallback_agent = create_agent(
-                model=model,
-                tools=[],
-                response_format=response_format,
-                system_prompt=self._system_prompt,
-            )
-            resp = await fallback_agent.ainvoke(
-                {"messages": [HumanMessage(forced_input)]},
-                config={"recursion_limit": self._max_iterations},
-            )
+        agent = Agent(
+            model,
+            tools,
+            system_prompt=self._system_prompt,
+            response_schema=response_schema,
+        )
+
+        resp = await agent.app.ainvoke(
+            {
+                "messages": [HumanMessage(input)],
+                "tool_budget": self._tool_budget,
+                "structured_response": None,
+            }
+        )
 
         usage = TokenUsageOpenAi(resp, self._model)
         tracker.add(usage)
@@ -146,16 +129,20 @@ class Query:
         if not ai_messages:
             raise RuntimeError("No AIMessage found in response!")
 
-        return str(ai_messages[0].content)
+        return _extract_ai_message_text(ai_messages[0])
 
     async def _get_all_tools(self) -> list[BaseTool]:
         tools = list(self._tools)
         for mcp in self._mcp_connections:
             if mcp.name in _MCP_CACHE:
-                logger.debug(f"CACHE HIT: Using cached tools and connection for MCP '{mcp.name}'")
+                logger.debug(
+                    f"CACHE HIT: Using cached tools and connection for MCP '{mcp.name}'"
+                )
                 tools.extend(_MCP_CACHE[mcp.name].tools)
             else:
-                logger.info(f"Initializing MCP connection and fetching tools for '{mcp.name}'")
+                logger.info(
+                    f"Initializing MCP connection and fetching tools for '{mcp.name}'"
+                )
                 client = MultiServerMCPClient({mcp.name: mcp.connection})
                 fetched_tools = await client.get_tools()
                 _MCP_CACHE[mcp.name] = CachedMCPData(client=client, tools=fetched_tools)
@@ -211,3 +198,39 @@ def _prompt_to_md(prompt: Prompt | None, level=1) -> tuple[str, bool]:
     else:
         print(f"Invalid prompt type: {type(prompt)}")
         sys.exit(1)
+
+
+def _extract_ai_message_text(message: AIMessage) -> str:
+    """Extract plain text from a LangChain AIMessage across content formats."""
+
+    text_parts: list[str] = []
+
+    # Prefer LangChain's normalized block view when available.
+    content_blocks = getattr(message, "content_blocks", None)
+    if isinstance(content_blocks, list):
+        for block in content_blocks:
+            if isinstance(block, dict) and block.get("type") == "text":
+                text = block.get("text")
+                if isinstance(text, str) and text.strip():
+                    text_parts.append(text)
+
+    if text_parts:
+        return "\n".join(text_parts)
+
+    content = message.content
+    if isinstance(content, str):
+        return content
+
+    if isinstance(content, list):
+        for block in content:
+            if isinstance(block, str) and block.strip():
+                text_parts.append(block)
+            elif isinstance(block, dict) and block.get("type") == "text":
+                text = block.get("text")
+                if isinstance(text, str) and text.strip():
+                    text_parts.append(text)
+
+    if text_parts:
+        return "\n".join(text_parts)
+
+    return str(content)

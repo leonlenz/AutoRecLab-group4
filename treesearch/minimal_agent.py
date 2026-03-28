@@ -15,9 +15,9 @@ from treesearch.function_specs import (
 )
 from treesearch.interpreter import ExecutionResult
 from treesearch.llm.query import MCPConnection, Prompt, Query
+from treesearch.mcp.docs_search_server import VECTOR_STORE_NAMES
 from treesearch.node import Node, NodeScore, Requirement
 from treesearch.utils.available_datasets import get_datasets_table
-from treesearch.mcp.docs_search_server import VECTOR_STORE_NAMES
 from treesearch.utils.response import strip_markdown_fences
 from utils.log import _ROOT_LOGGER
 from utils.path import mkdir
@@ -287,7 +287,7 @@ class MinimalAgent:
     async def plan_and_code_query(self, prompt, retries=3) -> tuple[str, str]:
         """Generate a natural language plan + code in the same LLM call and split them apart."""
         plan_and_code_result = (
-            await Query(max_iterations=40)
+            await Query(tool_budget=40)
             .with_mcp(self._mcp_docs)
             .with_system(
                 f"You are a Senior Recommender Systems Engineer specializing in the OmniRec library. "
@@ -451,7 +451,7 @@ class MinimalAgent:
 
         try:
             review_result = (
-                await Query(max_iterations=40)
+                await Query(tool_budget=40)
                 .with_mcp(self._mcp_docs)
                 .with_system(
                     "Search for usage examples in documentation when diagnosing API-related bugs. Look for common error patterns and correct API usage."
@@ -517,7 +517,7 @@ class MinimalAgent:
 
             try:
                 scoring_result = (
-                    await Query(max_iterations=40)
+                    await Query(tool_budget=40)
                     .with_mcp(self._mcp_docs)
                     .with_system(
                         "Verify implementation against documented APIs when correctness is unclear. Reference usage documentation, prioritizing tutorials and user guides over source code."
@@ -613,7 +613,7 @@ class MinimalAgent:
         }
 
         return (
-            await Query()
+            await Query(temperature=0.0)
             .with_mcp(self._mcp_docs)
             .with_system(
                 "If you need to explain results or metrics, search for documentation about evaluation metrics and their interpretation. Focus on user-facing explanations."

@@ -21,6 +21,7 @@ dependencies = [
     "langchain-community>=0.4.1",
     "langchain-mcp-adapters>=0.2.1",
     "langchain-openai>=1.1.3",
+    "langgraph>=1.0.5",
     "lenskit==2025.6.2",
     "matplotlib>=3.10.7",
     "mcp[cli]>=1.24.0",
@@ -47,7 +48,7 @@ members = ["packages/dataloader"]
 package = true
 
 [tool.uv.sources]
-dataloader = { workspace = true}
+dataloader = { workspace = true }
 
 [tool.setuptools]
 packages = ["cli", "treesearch", "utils"]
