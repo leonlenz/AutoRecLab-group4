@@ -120,7 +120,6 @@ class Query:
             structured_resp: RT = resp["structured_response"]
             return structured_resp
 
-        # TODO: The extraction works different now for messages without a schema:
         messages = resp.get("messages")
         if messages is None or len(messages) == 0:
             raise RuntimeError("LLM did not return any message!")
