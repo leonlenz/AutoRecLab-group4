@@ -12,5 +12,5 @@ workspace = "./workspace"
 k_fold_validation = 1
 
 [agent.code]
-model = "gpt-5-mini"
+model = "gpt-5-nano"
 model_temp = 1.0
