@@ -3,12 +3,12 @@ from typing import Literal, get_args
 
 from dotenv import load_dotenv
 from langchain_community.vectorstores import FAISS
-from langchain_openai import OpenAIEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from mcp.server.fastmcp import FastMCP
 
 load_dotenv()
 mcp = FastMCP("Documentation search")
-embedding_model = OpenAIEmbeddings(model="text-embedding-3-large")
+embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 VECTOR_STORES_BASE_PTH = Path("./ragEmbeddings")
 VECTOR_STORE_NAMES = Literal["omnirec", "lenskit", "recbole"]

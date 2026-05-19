@@ -16,5 +16,5 @@ keep_only_relevant_files = false
 k_fold_validation = 1
 
 [agent.code]
-model = "gpt-5-mini"
+model = "gpt-5.4"
 model_temp = 1.0
