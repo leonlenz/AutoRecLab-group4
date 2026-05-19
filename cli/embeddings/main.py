@@ -4,7 +4,7 @@ from tempfile import TemporaryDirectory
 
 from dotenv import load_dotenv
 from langchain_community.vectorstores import FAISS
-from langchain_openai import OpenAIEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 from cli.embeddings.preprocessor import GitRepoPreprocessor, Preprocessor
 
@@ -34,7 +34,7 @@ def main():
     generate.add_argument("--chunk-size", type=int, default=4000)
     generate.add_argument("--chunk-overlap", type=int, default=200)
     generate.add_argument(
-        "--embedding-model", type=str, default="text-embedding-3-large"
+        "--embedding-model", type=str, default="sentence-transformers/all-MiniLM-L6-v2"
     )
     generate.add_argument("-o", "--out", type=Path, default=Path("./ragEmbeddings"))
     generate.add_argument(
@@ -48,7 +48,7 @@ def main():
             for dest in generator_destinations.keys():
                 setattr(args, dest, True)
 
-        embedding_model = OpenAIEmbeddings(model=args.embedding_model)
+        embedding_model = HuggingFaceEmbeddings(model_name=args.embedding_model)
         for dest, key in generator_destinations.items():
             if getattr(args, dest):
                 vector_store_pth: Path = args.out / dest
