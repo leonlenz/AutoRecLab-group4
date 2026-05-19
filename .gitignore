@@ -19,3 +19,7 @@ config.toml
 # Generated embeddings
 /ragEmbeddings/*
 !/ragEmbeddings/.gitkeep
+
+.idea/
+out/
+workspace/
