@@ -181,7 +181,11 @@ class TreeSearch:
         # Always sync node.code with current_code so that what we execute
         # matches what the agent sees later
         node.code = current_code
-        
+
+        # Snapshot workspace state before execution so pre-existing files are not moved
+        workspace_dir = Path(self._workspace)
+        files_before_exec = set(workspace_dir.rglob("*"))
+
         exec_result = self._interpreter.run(current_code)
         logger.debug(exec_result)
 
@@ -190,19 +194,22 @@ class TreeSearch:
         (node_dir / "out.log").write_text("".join(exec_result.term_out))
         (node_dir / "exec_result.pkl").write_bytes(pickle.dumps(exec_result))
 
-        # Move all generated files from the workspace to checkpoint for this node
-        workspace_dir = Path(self._workspace)
+        # Move only files that were newly generated during execution
         working_dir = workspace_dir / "working"
-        
-        # Collect files from workspace (excluding runfile.py and working dir)
+
+        # Collect files from workspace (excluding runfile.py, working dir, and pre-existing files)
         generated_files = [
             item for item in workspace_dir.iterdir()
             if item.name not in ("runfile.py", "working") and not item.name.startswith(".")
+            and item not in files_before_exec
         ]
         
-        # Also collect files from working subdirectory if it exists
+        # Also collect newly generated files from working subdirectory if it exists
         if working_dir.exists():
-            generated_files.extend(list(working_dir.iterdir()))
+            generated_files.extend([
+                item for item in working_dir.iterdir()
+                if item not in files_before_exec
+            ])
 
         # Keep only relevant files via whitelist
         if self._config.exec.keep_only_relevant_files:
