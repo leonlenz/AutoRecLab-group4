@@ -22,12 +22,18 @@ from treesearch.utils.available_datasets import get_datasets_table
 from treesearch.utils.response import strip_markdown_fences
 from utils.log import _ROOT_LOGGER
 from utils.path import mkdir
+from utils.workspace_context import (
+    find_project_root,
+    find_workspace_dir,
+    get_workspace_context_block,
+)
 
 logger = _ROOT_LOGGER.getChild("nodeAgent")
 
 
 class MinimalAgent:
     """A minimal agent class that only contains what's needed for processing nodes"""
+
 
     def __init__(
         self,
@@ -44,6 +50,14 @@ class MinimalAgent:
         self.evaluation_metrics = evaluation_metrics
         self.stage_name = stage_name
         self._out_dir = mkdir(Path(cfg.out_dir))
+
+        # Dynamically discover project root and workspace directories
+        # (these can differ between Docker, pip, and local runs)
+        self._project_root = find_project_root()
+        self._workspace_dir = find_workspace_dir()
+        logger.info(f"Project root: {self._project_root}")
+        logger.info(f"Workspace dir: {self._workspace_dir}")
+
         logger.info("Agent initialized!")
 
         # Setup MCP connections for documentation search
@@ -77,8 +91,15 @@ class MinimalAgent:
         ]
         pkg_str = ", ".join([f"`{p}`" for p in pkgs])
 
+        # Dynamically build workspace context so the LLM knows where files are
+        workspace_block = get_workspace_context_block(
+            project_root=self._project_root,
+            workspace_dir=self._workspace_dir,
+        )
+
         env_prompt = {
-            "Installed Packages": f"Your solution can use the following machine learning packages: {pkg_str}. You MUST use these libraries as much as possible instead of implementing from scratch."
+            "Installed Packages": f"Your solution can use the following machine learning packages: {pkg_str}. You MUST use these libraries as much as possible instead of implementing from scratch.",
+            "Workspace Context": workspace_block,
         }
         return env_prompt
 
@@ -94,12 +115,20 @@ class MinimalAgent:
             "4. Environment Setup:",
             "   - Create working directory: `working_dir = os.path.join(os.getcwd(), 'working'); os.makedirs(working_dir, exist_ok=True)`",
             f"   - Complete execution within {humanize.naturaldelta(self.cfg.exec.timeout)}",
-            "5. Data Tracking:",
+            "5. Data Loading:",
+            "   - Use the `dataloader` package for all standard datasets:",
+            "     ```python",
+            "     from dataloader.loaders.registry import _run_loader",
+            "     df = _run_loader('MovieLens100K')  # Downloads & caches automatically",
+            "     ```",
+            "   - For custom data files: place them in the workspace directory and reference by filename",
+            "     (code runs inside the workspace, so just use the filename directly)",
+            "6. Data Tracking:",
             "   - Track all relevant data points (e.g., metrics, losses)",
-            "6. Evaluation:",
+            "7. Evaluation:",
             f"   - Metrics: {', '.join(self.evaluation_metrics) if self.evaluation_metrics else 'Choose appropriate metrics'}",
             "   - Print metrics during execution for monitoring",
-            "7. API Verification (CRITICAL):",
+            "8. API Verification (CRITICAL):",
             "   - Check constructor signatures before use",
             "   - Verify object attributes exist (e.g., SplitData structure)",
             "   - Use only public APIs (no underscore-prefixed methods)",
@@ -287,6 +316,12 @@ class MinimalAgent:
 
     async def plan_and_code_query(self, prompt, retries=3) -> tuple[str, str]:
         """Generate a natural language plan + code in the same LLM call and split them apart."""
+        # Build workspace context block for the system prompt
+        workspace_block = get_workspace_context_block(
+            project_root=self._project_root,
+            workspace_dir=self._workspace_dir,
+        )
+
         plan_and_code_result = (
             await Query(tool_budget=40)
             .with_mcp(self._mcp_docs)
@@ -305,7 +340,10 @@ class MinimalAgent:
                 "- Data structures and return types\n"
                 "\n"
                 "In 'nl_text', include '## Documentation Verified' section listing all verified methods.\n"
-                "Search for examples and Verify critical details in documentation."
+                "Search for examples and Verify critical details in documentation.\n"
+                "\n"
+                "IMPORTANT — File system awareness:\n"
+                f"{workspace_block}"
             )
             .run(prompt, PlanAndCode)
         )
@@ -316,22 +354,32 @@ class MinimalAgent:
 
     async def _select_datasets(self) -> list[str]:
         """Select appropriate datasets for the research task using LLM."""
+        # Check for any custom/local data files the user might be referencing
+        workspace_block = get_workspace_context_block(
+            project_root=self._project_root,
+            workspace_dir=self._workspace_dir,
+        )
+
         prompt: Prompt = {
             "Instruction:": (
                 f"You are a recommender system researcher selecting datasets for a research task.\n\n"
                 f"Research task:\n{self.task_desc}\n\n"
                 "Instructions:\n"
                 "1. Check if the research task specifies any datasets\n"
-                "2. If specified, select those datasets; otherwise choose appropriate ones from the list below\n"
-                "3. Return only a list of dataset identifiers\n\n"
-                f"Available datasets:\n{get_datasets_table()}"
+                "2. Check the 'Workspace Context' below — if a data file matching the task is found, "
+                "the user likely wants to use that file (e.g., if they mention 'movielens.csv' and it exists on disk)\n"
+                "3. If the task doesn't specify a dataset, choose appropriate ones from the available datasets below\n"
+                "4. Return ONLY dataset identifiers from the list below, OR the filename if a local file is to be used\n\n"
+                f"Workspace Context:\n{workspace_block}\n\n"
+                f"Available datasets (use these identifiers if no local file matches):\n{get_datasets_table()}"
             )
         }
         result = (
             await Query()
             .with_mcp(self._mcp_docs)
             .with_system(
-                "Search OmniRec documentation for dataset characteristics and usage patterns if needed."
+                "Search OmniRec documentation for dataset characteristics and usage patterns if needed. "
+                "If the user mentioned a dataset by name, check if there's a matching file on disk in the workspace context."
             )
             .run(prompt, SelectDatasets)
         )
@@ -339,11 +387,18 @@ class MinimalAgent:
 
     async def _set_code_requirements(self):
         logger.info("Engineering code requirements...")
+        workspace_block = get_workspace_context_block(
+            project_root=self._project_root,
+            workspace_dir=self._workspace_dir,
+        )
         requirements_prompt = f"""
         You are an expert recommender systems researcher defining experiment requirements.
 
         Research task: {self.task_desc}
         Selected datasets: {self.selected_datasets}
+
+        Files available in workspace:
+        {workspace_block}
 
         Generate requirements that specify critical aspects of the experiment that must be fulfilled.
 
@@ -356,11 +411,12 @@ class MinimalAgent:
         2. Abstraction: State objectives and constraints at an appropriate level
         - Avoid excessive implementation details (exact formulas, nested conditional logic, code-level instructions)
         - Include critical technical specifications where they matter (framework to use, specific datasets, evaluation metrics, split ratios)
+        - If there are local data files, include a requirement about using the correct file path
 
         3. Atomicity: Each requirement should test one distinct aspect of the experiment
 
         4. Coverage: Include requirements for all essential aspects:
-        - Data loading and preprocessing
+        - Data loading and preprocessing (use correct paths for local files or dataloader for remote datasets)
         - Experimental methodology (data splitting, reproducibility requirements)
         - Model/algorithm selection and configuration — ALWAYS include a requirement that OmniRec must be used for all recommender system functionality; raw backend libraries (Lenskit, RecBole, etc.) must not be called directly
         - Training procedures
