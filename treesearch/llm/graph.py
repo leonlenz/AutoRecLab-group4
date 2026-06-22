@@ -44,7 +44,10 @@ class Agent:
                 response_schema, "__name__", "FinalResponse"
             )
             all_tools.append(response_schema)
-            bind_params["tool_choice"] = "required"
+            # DeepSeek-Modelle mit Thinking-Mode unterstützen kein tool_choice
+            model_name = getattr(model, "model_name", "") or getattr(model, "model", "")
+            if "deepseek" not in model_name.lower():
+                bind_params["tool_choice"] = "required"
 
         self._model = model.bind_tools(all_tools, **bind_params)
         self._tool_executor = ToolNode(tools)
@@ -133,16 +136,15 @@ class Agent:
         last_msg = state["messages"][-1]
 
         if isinstance(last_msg, AIMessage) and last_msg.tool_calls:
-            # If response tool was triggered, end graph
             for tool_call in last_msg.tool_calls:
                 if tool_call["name"] == self._response_tool_name:
                     return "end"
 
             if state["tool_budget"] > 0:
                 return "tools"
-
             return "force_stop"
 
+        # Kein Tool-Call oder keine AIMessage → beenden (wichtig für DeepSeek!)
         return "end"
 
     def _coerce_structured_response(self, args: dict[str, Any]) -> Any:

@@ -1,4 +1,4 @@
-from . import backend_anthropic, backend_openai
+from . import backend_anthropic, backend_openai, backend_deepseek
 from .utils import FunctionSpec, OutputType, PromptType, compile_prompt_to_md
 
 
@@ -50,10 +50,21 @@ def query(
         model_kwargs["max_completion_tokens"] = 100000  # max_tokens
         # remove 'temperature' from model_kwargs
         model_kwargs.pop("temperature", None)
+    elif "deepseek" in model.lower():
+        # DeepSeek reasoning models (v4-pro, v4-flash) support explicit thinking
+        model_kwargs["max_tokens"] = max_tokens
+        model_kwargs["thinking"] = {"type": "enabled"}
+        model_kwargs["reasoning_effort"] = "high"
     else:
         model_kwargs["max_tokens"] = max_tokens
 
-    query_func = backend_anthropic.query if "claude-" in model else backend_openai.query
+    # Wähle das passende Backend
+    if "deepseek" in model.lower():
+        query_func = backend_deepseek.query
+    elif "claude-" in model:
+        query_func = backend_anthropic.query
+    else:
+        query_func = backend_openai.query
     output, req_time, in_tok_count, out_tok_count, info = query_func(
         system_message=compile_prompt_to_md(system_message) if system_message else None,
         user_message=compile_prompt_to_md(user_message) if user_message else None,

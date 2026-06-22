@@ -1,7 +1,7 @@
 import sys
 from dataclasses import dataclass
 from typing import Optional, Self, TypeAlias, TypeVar, overload
-
+import os
 from langchain.agents.structured_output import SchemaT
 from langchain.messages import AIMessage, HumanMessage
 from langchain.tools import BaseTool
@@ -93,9 +93,27 @@ class Query:
         input = prompt_to_md(input)
         tools = await self._get_all_tools()
 
-        model = ChatOpenAI(
-            model=self._model, temperature=self._temperature, use_responses_api=True
-        )
+        # DeepSeek-Konfiguration
+        if "deepseek" in self._model.lower():
+            api_key = os.environ.get("DEEPSEEK_API_KEY")
+            if not api_key:
+                raise ValueError(
+                    "DEEPSEEK_API_KEY environment variable is required for DeepSeek models"
+                )
+            model = ChatOpenAI(
+                model=self._model,
+                temperature=self._temperature,
+                openai_api_key=api_key,
+                openai_api_base="https://api.deepseek.com/v1",
+                use_responses_api=False,
+                model_kwargs={"extra_body": {"thinking": {"type": "disabled"}}},
+            )
+        else:
+            model = ChatOpenAI(
+                model=self._model,
+                temperature=self._temperature,
+                use_responses_api=True,
+            )
 
         agent = Agent(
             model,
