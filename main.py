@@ -19,12 +19,12 @@ async def main():
     set_log_level(os.getenv("ISGSA_LOG", "INFO"))
 
     config = get_config()
-    out_dir = mkdir(config.out_dir)
+    base_out_dir = mkdir(config.out_dir)
     args = get_args()
 
     #Init workspace
     if args.init:
-        mkdir(out_dir / "workspace")
+        mkdir(base_out_dir / "workspace")
         return
 
 
@@ -46,38 +46,85 @@ async def main():
         config.agent.code = config.agent.code.model_copy(update={"model": args.model})
 
 
+    # Get user request (read once, reused for every run)
+    user_request = get_user_request(args)
+
+    if user_request is None or user_request.strip() == "":
+        logger.error("No request provided. Please provide a prompt using --prompt or --prompt-file, or type it manually.")
+        return
+
+
+    # Validate the number of runs
+    num_runs = args.runs
+    if num_runs < 1:
+        logger.error("--runs must be a positive integer (got %s).", num_runs)
+        return
+
+
+    # Run AutoRecLab once or multiple times with the same prompt
+    if num_runs == 1:
+        await run_once(config, base_out_dir, user_request, args)
+    else:
+        start_index = next_run_index(base_out_dir)
+        pad_width = max(2, len(str(start_index + num_runs - 1)))
+
+        for offset in range(num_runs):
+            run_number = start_index + offset
+            run_dir = mkdir(base_out_dir / f"run_{run_number:0{pad_width}d}")
+
+            logger.info(
+                f"===== Starting run {offset + 1}/{num_runs} "
+                f"(out dir: {run_dir}) ====="
+            )
+
+            # Each run gets its own out_dir and a fresh tracker state
+            config.out_dir = str(run_dir)
+            await run_once(config, run_dir, user_request, args)
+
+        logger.info(f"Finished all {num_runs} runs in {base_out_dir}")
+
+
+def get_user_request(args) -> str | None:
+    if args.prompt is not None:
+        return args.prompt
+
+    if args.prompt_file is not None:
+        with open(args.prompt_file, "r", encoding="utf-8") as f:
+            return f.read().strip()
+
+    user_req_lines: list[str] = []
+    print('Enter you request, write "!start" to start:')
+    while True:
+        line = input("> ")
+        if line.lower().strip().startswith("!start"):
+            break
+        user_req_lines.append(line)
+
+    return "\n".join(user_req_lines)
+
+
+def next_run_index(base_out_dir) -> int:
+    """Return the next available run number based on existing run_* folders."""
+    max_index = 0
+    for entry in base_out_dir.glob("run_*"):
+        if not entry.is_dir():
+            continue
+        suffix = entry.name[len("run_"):]
+        if suffix.isdigit():
+            max_index = max(max_index, int(suffix))
+    return max_index + 1
+
+
+async def run_once(config, out_dir, user_request: str, args):
+    # Start each run from a clean tracker state
+    cost_tracker.reset()
+    statistics_tracker.reset()
+
     # Prepare to run AutoRecLab
     attach_file_handler(out_dir)
     cost_tracker.set_out_dir(out_dir)
     statistics_tracker.set_out_dir(out_dir)
     require_executable("dot")
-
-
-    # Get user request
-    user_request = None
-
-    if args.prompt is not None:
-        user_request = args.prompt
-
-    elif args.prompt_file is not None:
-        with open(args.prompt_file, "r", encoding="utf-8") as f:
-            user_request = f.read().strip()
-
-    else:
-        user_req_lines: list[str] = []
-        print('Enter you request, write "!start" to start:')
-        while True:
-            line = input("> ")
-            if line.lower().strip().startswith("!start"):
-                break
-            user_req_lines.append(line)
-
-        user_request = "\n".join(user_req_lines)
-
-    if user_request is None or user_request.strip() == "":
-        logger.error("No request provided. Please provide a prompt using --prompt or --prompt-file, or type it manually.")
-        return
-    
 
     # Log the user request
     if not args.prompt_no_log:
@@ -85,14 +132,12 @@ async def main():
         with open(prompt_file, "w", encoding="utf-8") as f:
             f.write(user_request)
 
-
     # Start AutoRecLab
     logger.info("Starting AutoRecLab...")
     logger.debug(f"User request:\n{user_request}")
     ts = TreeSearch(user_request, config=config)
     await ts._async_init()
     await ts.run()
-
 
     # Summarize results
     cost_tracker.saveSummarized()
@@ -108,6 +153,14 @@ def get_args():
     parser.add_argument("--list-datasets", action="store_true")
     parser.add_argument("--list-models", action="store_true")
     parser.add_argument("--model", type=str, default=None)
+    parser.add_argument(
+        "--runs",
+        type=int,
+        default=1,
+        help="How often to run the program with the same prompt. "
+        "Each run is stored in its own numbered subfolder (run_001, run_002, ...) "
+        "inside the out directory.",
+    )
 
     return parser.parse_args()
 

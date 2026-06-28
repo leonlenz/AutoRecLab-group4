@@ -177,6 +177,16 @@ uv run main.py --list-models
 uv run main.py --model "gpt-4o"
 ```
 
+**Run the same prompt multiple times:**
+```bash
+uv run main.py --prompt "Build a recommender..." --runs 10
+```
+Each run is stored in its own numbered subfolder inside the out directory
+(`out/run_01`, `out/run_02`, ... `out/run_10`). Re-running continues the
+numbering from the highest existing `run_*` folder, so previous results are
+never overwritten. With `--runs 1` (the default) the output is written directly
+to `out/` as before.
+
 ## Embeddings / documentation index
 
 AutoRecLab uses FAISS vector stores in `ragEmbeddings/` for docs-aware coding.

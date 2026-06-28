@@ -93,6 +93,11 @@ class CostsTracker:
         self.costsList = []
         self.out_dir = None
 
+    def reset(self):
+        """Reset the tracker state so it can be reused for a fresh run."""
+        self.costsList = []
+        self.out_dir = None
+
     def saveSummarized(self):
         if self.out_dir is not None:
             with open(self.out_dir / "costs_log.csv", "a") as f:
