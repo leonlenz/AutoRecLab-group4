@@ -34,6 +34,13 @@ def set_log_level(level: str):
 
 
 def attach_file_handler(file_log_dir: Path, level=logging.DEBUG):
+    # Remove any previously attached file handlers so each run logs to its own
+    # debug.log instead of accumulating handlers across multiple runs.
+    for handler in list(_ROOT_LOGGER.handlers):
+        if isinstance(handler, logging.FileHandler):
+            _ROOT_LOGGER.removeHandler(handler)
+            handler.close()
+
     file_log_dir.mkdir(exist_ok=True, parents=True)
     file_handler = logging.FileHandler(file_log_dir / "debug.log", encoding="utf-8")
     file_handler.setLevel(logging.DEBUG)
