@@ -121,8 +121,13 @@ class Interpreter:
             output = res.stdout.splitlines(keepends=True)
         except subprocess.TimeoutExpired as e:
             if e.stdout:
-                # TODO: Handle/ignore decode errors:
-                output = e.stdout.decode().splitlines(keepends=True)
+                # The subprocess is started with text=True, so stdout is already
+                # a str. Guard against bytes too, just in case, and never let
+                # decoding crash the timeout handler.
+                stdout = e.stdout
+                if isinstance(stdout, bytes):
+                    stdout = stdout.decode(errors="replace")
+                output = stdout.splitlines(keepends=True)
             exec_time = self.timeout
             output.append(
                 f"TimeoutError: Execution exceeded the time limit of {humanize.naturaldelta(self.timeout)}"

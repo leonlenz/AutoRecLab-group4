@@ -177,6 +177,18 @@ uv run main.py --list-models
 uv run main.py --model "gpt-4o"
 ```
 
+**Use a Codex model for code generation:**
+```bash
+uv run main.py --model "gpt-5.3-codex" --reasoning-effort high
+```
+When the selected model is a Codex model, AutoRecLab uses it **only** for code
+generation and runs all non-coding calls (requirements, scoring, dataset
+selection, summary) on `agent.codex_noncode_model` (default `gpt-5.4`). For any
+non-Codex model, the same model is used for every call. `--reasoning-effort`
+(`low|medium|high|xhigh`) applies to the code-generation step on
+reasoning/Codex models; it is ignored for non-reasoning models, and Codex does
+not support `minimal`/`none`.
+
 ## Embeddings / documentation index
 
 AutoRecLab uses FAISS vector stores in `ragEmbeddings/` for docs-aware coding.
@@ -215,11 +227,23 @@ keep_only_relevant_files = false
 
 [agent]
 k_fold_validation = 1
+# Codex-only split (used only when agent.code.model is a Codex model):
+codex_noncode_model = "gpt-5.4"
+codex_noncode_reasoning_effort = "medium"
 
 [agent.code]
-model = "gpt-5-mini"
+model = "gpt-5.4-mini"
 model_temp = 1.0
+# Reasoning effort for the code-generation step on reasoning/Codex models:
+reasoning_effort = "high"
 ```
+
+Notes:
+- `model_temp` only applies to non-reasoning models. Reasoning/Codex models
+  (gpt-5.x, o-series, `*codex*`) reject non-default sampling parameters, so
+  temperature is omitted for them and quality is steered via `reasoning_effort`.
+- `reasoning_effort = "high"` increases quality but also cost and latency. Lower
+  it (e.g. `medium`) to reduce spend, especially on the default model.
 
 Environment override pattern:
 - Prefix: `ARL_`
@@ -228,7 +252,9 @@ Environment override pattern:
 Examples:
 - `ARL_out_dir=./sandbox`
 - `ARL_treesearch__max_iterations=8`
-- `ARL_agent__code__model=gpt-5-mini`
+- `ARL_agent__code__model=gpt-5.3-codex`
+- `ARL_agent__code__reasoning_effort=high`
+- `ARL_agent__codex_noncode_model=gpt-5.4`
 
 Logging level can be set via:
 - `ISGSA_LOG=DEBUG|INFO|WARNING|ERROR`

@@ -5,6 +5,21 @@ from pydantic_settings import BaseSettings, SettingsConfigDict, TomlConfigSettin
 
 CONFIG_PATH = Path("config.toml")
 
+# Model-family detection helpers.
+# Reasoning/Codex models (gpt-5.x, o-series, *codex*) reject non-default sampling
+# parameters (temperature, top_p, penalties, ...) and are instead steered via
+# `reasoning_effort`. The live LLM path uses these to decide what to send.
+_REASONING_MODEL_PREFIXES = ("gpt-5", "o1", "o3", "o4")
+
+
+def is_codex_model(model: str) -> bool:
+    return "codex" in model.lower()
+
+
+def is_reasoning_model(model: str) -> bool:
+    m = model.lower()
+    return m.startswith(_REASONING_MODEL_PREFIXES) or "codex" in m
+
 
 class TreeSearchConfig(BaseSettings):
     num_draft_nodes: int = 3
@@ -23,12 +38,39 @@ class ExecConfig(BaseSettings):
 class CodeConfig(BaseSettings):
     model: str = "gpt-5-mini"
     model_temp: float = 1.0
+    # Reasoning effort for the code-generation step on reasoning/Codex models
+    # (low | medium | high | xhigh). None omits the parameter and uses the
+    # model's own default. Ignored for non-reasoning models. Note: Codex models
+    # do NOT support "minimal" or "none".
+    reasoning_effort: str | None = "high"
 
 
 class AgentConfig(BaseSettings):
     k_fold_validation: int = 1
     evaluation_metrics: list[str] | None = None
     code: CodeConfig = CodeConfig()
+    # Codex-only split: when `code.model` is a Codex model, the actual code
+    # generation runs on it while every NON-coding LLM call (requirements,
+    # scoring, dataset selection, summary) runs on this model instead. For any
+    # non-Codex code model there is no split — the same model is used for both.
+    codex_noncode_model: str = "gpt-5.4"
+    codex_noncode_reasoning_effort: str | None = "medium"
+
+    def code_role(self) -> tuple[str, str | None]:
+        """(model, reasoning_effort) for the code-generation step."""
+        return self.code.model, self.code.reasoning_effort
+
+    def noncode_role(self) -> tuple[str, str | None]:
+        """(model, reasoning_effort) for non-coding LLM calls.
+
+        Splits to `codex_noncode_model` only when the code model is a Codex
+        model. Otherwise reuses the code model, but does not force the (possibly
+        high) codegen effort onto high-volume non-coding calls — it falls back
+        to the model default (None) to keep them cheap.
+        """
+        if is_codex_model(self.code.model):
+            return self.codex_noncode_model, self.codex_noncode_reasoning_effort
+        return self.code.model, None
 
 
 class Config(BaseSettings):

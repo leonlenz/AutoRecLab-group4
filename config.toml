@@ -14,7 +14,16 @@ keep_only_relevant_files = false
 
 [agent]
 k_fold_validation = 1
+# Codex-only split: when agent.code.model is a Codex model, non-coding calls
+# (requirements, scoring, dataset selection, summary) use these instead.
+# Ignored for non-Codex models (which use agent.code.model everywhere).
+codex_noncode_model = "gpt-5.4"
+codex_noncode_reasoning_effort = "medium"
 
 [agent.code]
 model = "gpt-5.4-mini"
 model_temp = 1.0
+# Reasoning effort for the code-generation step (low|medium|high|xhigh) on
+# reasoning/Codex models. Lower this to reduce cost/latency. Ignored for
+# non-reasoning models; Codex does not support "minimal"/"none".
+reasoning_effort = "high"

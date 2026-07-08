@@ -10,6 +10,7 @@ wheels/
 
 # Virtual environments
 .venv
+venv/
 
 # Config
 config.toml
@@ -21,3 +22,5 @@ config.toml
 !/ragEmbeddings/.gitkeep
 
 /out
+/.claude
+/.vscode

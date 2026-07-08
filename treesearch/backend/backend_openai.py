@@ -1,3 +1,13 @@
+"""DEPRECATED / UNUSED legacy OpenAI backend.
+
+The live LLM path is ``treesearch/llm/query.py`` (LangChain + OpenAI Responses
+API). Nothing in the agent calls this module's ``query`` anymore. It targets the
+Chat Completions endpoint, which does NOT support Responses-API-only models such
+as ``gpt-5.3-codex`` (and it unconditionally sends ``temperature``, which
+reasoning models reject). Do not revive it for Codex without porting to the
+Responses API and gating temperature/reasoning_effort by model family.
+"""
+
 import json
 import time
 

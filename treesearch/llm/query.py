@@ -9,13 +9,17 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.sessions import Connection
 from langchain_openai import ChatOpenAI
 
-from config import get_config
+from config import get_config, is_reasoning_model
 from treesearch.llm.graph import Agent
 from treesearch.utils.costs_tracker import TokenUsageOpenAi, get_cost_tracker
 from utils.log import _ROOT_LOGGER
 
 logger = _ROOT_LOGGER.getChild("llm")
 tracker = get_cost_tracker()
+
+# Sentinel so callers can explicitly pass reasoning_effort=None ("omit") and have
+# it honoured, while a missing argument still falls back to the config default.
+_UNSET = object()
 
 ResponseFormatType: TypeAlias = type[SchemaT]
 RT = TypeVar("RT", bound=ResponseFormatType)
@@ -44,6 +48,7 @@ class Query:
         model: str | None = None,
         temperature: float | None = None,
         tool_budget: int = 20,
+        reasoning_effort=_UNSET,
     ) -> None:
         self._mcp_connections: list[MCPConnection] = []
         self._tools: list[BaseTool] = []
@@ -60,6 +65,11 @@ class Query:
             self._temperature = config.agent.code.model_temp
         else:
             self._temperature = temperature
+
+        if reasoning_effort is _UNSET:
+            self._reasoning_effort = config.agent.code.reasoning_effort
+        else:
+            self._reasoning_effort = reasoning_effort
 
         self._tool_budget = tool_budget
 
@@ -93,9 +103,23 @@ class Query:
         input = prompt_to_md(input)
         tools = await self._get_all_tools()
 
-        model = ChatOpenAI(
-            model=self._model, temperature=self._temperature, use_responses_api=True
-        )
+        # Reasoning/Codex models reject non-default sampling params (temperature,
+        # top_p, ...) and are steered via reasoning_effort instead. Only send
+        # temperature for non-reasoning models; only send reasoning_effort when
+        # the model supports it and a level is configured. max_retries absorbs
+        # the intermittent 5xx that Codex + tool-calling can return.
+        model_kwargs = {
+            "model": self._model,
+            "use_responses_api": True,
+            "max_retries": 4,
+        }
+        if is_reasoning_model(self._model):
+            if self._reasoning_effort:
+                model_kwargs["reasoning_effort"] = self._reasoning_effort
+        else:
+            model_kwargs["temperature"] = self._temperature
+
+        model = ChatOpenAI(**model_kwargs)
 
         agent = Agent(
             model,
@@ -104,12 +128,18 @@ class Query:
             response_schema=response_schema,
         )
 
+        # LangGraph's recursion_limit counts super-steps (~2 per tool round:
+        # llm_call + tools). Its default of 25 is lower than what tool_budget
+        # allows, so an eager agent (e.g. Codex at high reasoning effort) hits
+        # the hard cap mid-search before the graph's own tool-budget logic can
+        # terminate it. Scale the cap to the budget so the budget governs.
         resp = await agent.app.ainvoke(
             {
                 "messages": [HumanMessage(input)],
                 "tool_budget": self._tool_budget,
                 "structured_response": None,
-            }
+            },
+            config={"recursion_limit": 2 * self._tool_budget + 15},
         )
 
         usage = TokenUsageOpenAi(resp, self._model)

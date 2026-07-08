@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 import humanize
+from langgraph.errors import GraphRecursionError
 
 from config import Config
 from treesearch.function_specs import (
@@ -44,7 +45,19 @@ class MinimalAgent:
         self.evaluation_metrics = evaluation_metrics
         self.stage_name = stage_name
         self._out_dir = mkdir(Path(cfg.out_dir))
-        logger.info("Agent initialized!")
+
+        # Resolve which model + reasoning effort to use for code generation vs.
+        # the non-coding LLM calls. These differ only when the configured model
+        # is a Codex model (see config.AgentConfig.noncode_role).
+        self._code_model, self._code_effort = cfg.agent.code_role()
+        self._noncode_model, self._noncode_effort = cfg.agent.noncode_role()
+        logger.info(
+            "Models -> code: %s (effort=%s), non-code: %s (effort=%s)",
+            self._code_model,
+            self._code_effort,
+            self._noncode_model,
+            self._noncode_effort,
+        )
 
         # Setup MCP connections for documentation search
         self._mcp_docs = MCPConnection(
@@ -54,6 +67,19 @@ class MinimalAgent:
                 "command": "python",
                 "args": ["-m", "treesearch.mcp.docs_search_server"],
             },
+        )
+        logger.info("Agent initialized!")
+
+    def _code_query(self, **kwargs) -> Query:
+        """A Query bound to the code-generation model and reasoning effort."""
+        return Query(
+            model=self._code_model, reasoning_effort=self._code_effort, **kwargs
+        )
+
+    def _reason_query(self, **kwargs) -> Query:
+        """A Query bound to the non-coding model and reasoning effort."""
+        return Query(
+            model=self._noncode_model, reasoning_effort=self._noncode_effort, **kwargs
         )
 
     async def _async_init(self):
@@ -286,9 +312,31 @@ class MinimalAgent:
         )
 
     async def plan_and_code_query(self, prompt, retries=3) -> tuple[str, str]:
+        """Generate a plan + code, retrying on transient errors (e.g. Codex 5xx).
+
+        Deterministic failures (e.g. GraphRecursionError) are re-raised
+        immediately — retrying would repeat the same expensive work and fail
+        the same way.
+        """
+        last_err: Optional[Exception] = None
+        for attempt in range(1, retries + 1):
+            try:
+                return await self._plan_and_code_once(prompt)
+            except GraphRecursionError:
+                raise
+            except Exception as e:  # retry transient failures only
+                last_err = e
+                logger.warning(
+                    "plan_and_code_query attempt %d/%d failed: %s", attempt, retries, e
+                )
+        raise RuntimeError(
+            f"plan_and_code_query failed after {retries} attempts"
+        ) from last_err
+
+    async def _plan_and_code_once(self, prompt) -> tuple[str, str]:
         """Generate a natural language plan + code in the same LLM call and split them apart."""
         plan_and_code_result = (
-            await Query(tool_budget=40)
+            await self._code_query(tool_budget=40)
             .with_mcp(self._mcp_docs)
             .with_system(
                 f"You are a Senior Recommender Systems Engineer specializing in the OmniRec library. "
@@ -328,7 +376,7 @@ class MinimalAgent:
             )
         }
         result = (
-            await Query()
+            await self._reason_query()
             .with_mcp(self._mcp_docs)
             .with_system(
                 "Search OmniRec documentation for dataset characteristics and usage patterns if needed."
@@ -370,7 +418,7 @@ class MinimalAgent:
         Include both technical requirements (correct tool/API usage) and conceptual requirements (methodologically sound experiment design), but keep it as minimal as possible.
         """
         requirements_result = (
-            await Query()
+            await self._reason_query()
             .with_mcp(self._mcp_docs)
             .with_system(
                 "Reference documentation for OmniRec framework and dataset details if needed to ensure requirements are feasible. Prioritize implementation guides and API references."
@@ -408,7 +456,7 @@ class MinimalAgent:
         Refine the list: remove unnecessary requirements, simplify over-detailed ones, split compound ones, add missing critical aspects.
         """
         reflection_result = (
-            await Query()
+            await self._reason_query()
             .with_mcp(self._mcp_docs)
             .with_system(
                 "Verify requirements against documented best practices. Reference documentation to confirm technical details are correct."
@@ -460,7 +508,7 @@ class MinimalAgent:
 
         try:
             review_result = (
-                await Query(tool_budget=40)
+                await self._reason_query(tool_budget=40)
                 .with_mcp(self._mcp_docs)
                 .with_system(
                     "Search for usage examples in documentation when diagnosing API-related bugs. Look for common error patterns and correct API usage."
@@ -531,7 +579,7 @@ class MinimalAgent:
 
             try:
                 scoring_result = (
-                    await Query(tool_budget=40)
+                    await self._reason_query(tool_budget=40)
                     .with_mcp(self._mcp_docs)
                     .with_system(
                         "Verify implementation against documented APIs when correctness is unclear. Reference usage documentation, prioritizing tutorials and user guides over source code."
@@ -573,7 +621,7 @@ class MinimalAgent:
 
             try:
                 confirm_result = (
-                    await Query(tool_budget=40)
+                    await self._reason_query(tool_budget=40)
                     .with_mcp(self._mcp_docs)
                     .with_system(
                         "Be conservative: if evidence for any requirement is unclear or absent, mark it as missing."
@@ -680,7 +728,7 @@ class MinimalAgent:
         }
 
         return (
-            await Query(temperature=0.0)
+            await self._reason_query(temperature=0.0)
             .with_mcp(self._mcp_docs)
             .with_system(
                 "If you need to explain results or metrics, search for documentation about evaluation metrics and their interpretation. Focus on user-facing explanations. Output must be clean Markdown suitable for saving as summary.md."

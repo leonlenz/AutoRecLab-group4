@@ -1,3 +1,7 @@
+# DEPRECATED / UNUSED legacy dispatcher (Chat Completions). The live path is
+# treesearch/llm/query.py (LangChain + Responses API). The o1 special-casing
+# below is stale and the Chat Completions backend it calls cannot reach
+# Responses-API-only models such as gpt-5.3-codex.
 from . import backend_anthropic, backend_openai
 from .utils import FunctionSpec, OutputType, PromptType, compile_prompt_to_md
 

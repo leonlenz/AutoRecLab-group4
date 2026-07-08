@@ -45,6 +45,12 @@ async def main():
     if args.model is not None:
         config.agent.code = config.agent.code.model_copy(update={"model": args.model})
 
+    # Override reasoning effort for the code-generation step if provided
+    if args.reasoning_effort is not None:
+        config.agent.code = config.agent.code.model_copy(
+            update={"reasoning_effort": args.reasoning_effort}
+        )
+
 
     # Prepare to run AutoRecLab
     attach_file_handler(out_dir)
@@ -108,6 +114,13 @@ def get_args():
     parser.add_argument("--list-datasets", action="store_true")
     parser.add_argument("--list-models", action="store_true")
     parser.add_argument("--model", type=str, default=None)
+    parser.add_argument(
+        "--reasoning-effort",
+        type=str,
+        default=None,
+        choices=["low", "medium", "high", "xhigh"],
+        help="Reasoning effort for the code-generation step (reasoning/Codex models only).",
+    )
 
     return parser.parse_args()
 

@@ -1,8 +1,13 @@
 {
-  "_comment": "OpenAI Model Pricing - All prices are in USD per 1 million tokens",
-  "_last_updated": "2026-05-01",
-  
+  "_comment": "OpenAI Model Pricing - All prices are in USD per 1 million tokens. Cached-input pricing is not modeled; cached tokens are billed at the full input rate (slight over-estimate). gpt-5.3-codex cached input is $0.175/1M.",
+  "_last_updated": "2026-06-22",
+
   "models": [
+    {
+        "model": "gpt-5.3-codex",
+        "input": 1.75,
+        "output": 14.0
+      },
     {
         "model": "gpt-5.5",
         "input": 5.0,
