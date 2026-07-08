@@ -146,6 +146,12 @@ class StatisticsTracker:
         self.checkpoint_dir = None
         self.nodes_ordered = []
 
+    def reset(self):
+        """Reset the tracker state so it can be reused for a fresh run."""
+        self.out_dir = None
+        self.checkpoint_dir = None
+        self.nodes_ordered = []
+
     def set_out_dir(self, out_dir):
         self.checkpoint_dir = os.path.join(out_dir, "checkpoint")
 
