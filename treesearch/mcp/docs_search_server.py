@@ -8,7 +8,9 @@ from mcp.server.fastmcp import FastMCP
 
 load_dotenv()
 mcp = FastMCP("Documentation search")
-embedding_model = OpenAIEmbeddings(model="text-embedding-3-large")
+embedding_model = OpenAIEmbeddings(
+    model="text-embedding-3-large", timeout=60, max_retries=2
+)
 
 VECTOR_STORES_BASE_PTH = Path("./ragEmbeddings")
 VECTOR_STORE_NAMES = Literal["omnirec", "lenskit", "recbole"]

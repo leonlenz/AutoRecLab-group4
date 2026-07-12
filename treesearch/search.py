@@ -2,6 +2,8 @@ import pickle
 import random
 import shutil
 import os
+import subprocess
+import tempfile
 from pathlib import Path
 
 from anytree import PreOrderIter
@@ -19,6 +21,49 @@ from viz import render_trees
 
 logger = _ROOT_LOGGER.getChild("treesearch")
 statistics_tracker = get_statistics_tracker()
+
+
+def _robust_remove(path) -> None:
+    """Delete a file or directory tree without ever crashing the run.
+
+    OmniRec provisions per-backend Python envs (e.g. omnirec_data/.../torch)
+    whose deeply nested files exceed the Windows 260-char MAX_PATH limit, so a
+    plain shutil.rmtree raises FileNotFoundError/WinError 3. Try a normal delete
+    first, then on Windows fall back to `robocopy /MIR` (which handles long paths
+    natively) to purge whatever remains. Failures are logged, never raised.
+    """
+    p = str(path)
+    try:
+        if os.path.isdir(p):
+            shutil.rmtree(p, ignore_errors=True)
+            if os.name == "nt" and os.path.isdir(p):
+                _robocopy_purge(p)
+        elif os.path.exists(p):
+            os.remove(p)
+    except Exception as e:  # never let cleanup crash the run
+        logger.warning(f"Failed to remove {path}: {e}")
+
+
+def _robocopy_purge(target: str) -> None:
+    """Windows long-path-safe directory removal.
+
+    Mirrors an empty directory over ``target`` (robocopy /MIR), which deletes all
+    of target's contents even when nested paths exceed MAX_PATH, then removes the
+    now-empty target.
+    """
+    empty = tempfile.mkdtemp(prefix="arl_empty_")
+    try:
+        subprocess.run(
+            ["robocopy", empty, target, "/MIR", "/NFL", "/NDL",
+             "/NJH", "/NJS", "/NC", "/NS", "/R:1", "/W:1"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        os.rmdir(target)
+    except Exception as e:
+        logger.warning(f"robocopy purge failed for {target}: {e}")
+    finally:
+        shutil.rmtree(empty, ignore_errors=True)
 
 
 class TreeSearch:
@@ -214,10 +259,7 @@ class TreeSearch:
                     keep.append(item)
                 else:
                     logger.debug(f"Removing {item.name}")
-                    if item.is_dir():
-                        shutil.rmtree(str(item))
-                    else:
-                        os.remove(str(item))
+                    _robust_remove(item)
 
             generated_files = keep
 

@@ -1,3 +1,4 @@
+import asyncio
 import sys
 from dataclasses import dataclass
 from typing import Optional, Self, TypeAlias, TypeVar, overload
@@ -20,6 +21,14 @@ tracker = get_cost_tracker()
 # Sentinel so callers can explicitly pass reasoning_effort=None ("omit") and have
 # it honoured, while a missing argument still falls back to the config default.
 _UNSET = object()
+
+# Per-request timeout (seconds) for a single OpenAI call. Combined with
+# max_retries, a stalled request fails fast and is retried instead of hanging.
+_REQUEST_TIMEOUT_S = 300
+# Hard ceiling (seconds) for one full agent run (the whole tool-calling loop).
+# Backstop against any await hanging forever — a stalled OpenAI/MCP request
+# once wedged a run for ~30h. Generous vs. a normal loop (a few minutes).
+_AGENT_RUN_TIMEOUT_S = 1800
 
 ResponseFormatType: TypeAlias = type[SchemaT]
 RT = TypeVar("RT", bound=ResponseFormatType)
@@ -112,6 +121,7 @@ class Query:
             "model": self._model,
             "use_responses_api": True,
             "max_retries": 4,
+            "timeout": _REQUEST_TIMEOUT_S,
         }
         if is_reasoning_model(self._model):
             if self._reasoning_effort:
@@ -133,14 +143,26 @@ class Query:
         # allows, so an eager agent (e.g. Codex at high reasoning effort) hits
         # the hard cap mid-search before the graph's own tool-budget logic can
         # terminate it. Scale the cap to the budget so the budget governs.
-        resp = await agent.app.ainvoke(
-            {
-                "messages": [HumanMessage(input)],
-                "tool_budget": self._tool_budget,
-                "structured_response": None,
-            },
-            config={"recursion_limit": 2 * self._tool_budget + 15},
-        )
+        # Wrap the whole agent run in a hard timeout so a stalled OpenAI/MCP
+        # await cannot hang the process indefinitely; the caller's retry/scoring
+        # logic then handles the resulting TimeoutError.
+        try:
+            resp = await asyncio.wait_for(
+                agent.app.ainvoke(
+                    {
+                        "messages": [HumanMessage(input)],
+                        "tool_budget": self._tool_budget,
+                        "structured_response": None,
+                    },
+                    config={"recursion_limit": 2 * self._tool_budget + 15},
+                ),
+                timeout=_AGENT_RUN_TIMEOUT_S,
+            )
+        except asyncio.TimeoutError as e:
+            raise TimeoutError(
+                f"Agent run exceeded {_AGENT_RUN_TIMEOUT_S}s (model={self._model}); "
+                "aborting to avoid a hang."
+            ) from e
 
         usage = TokenUsageOpenAi(resp, self._model)
         tracker.add(usage)
