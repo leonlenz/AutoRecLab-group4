@@ -1,0 +1,20 @@
+ID: eb31459a2c99427a80d7f28188edc9d9
+Position: 6
+Score: 0.5333333333333333
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 5400
+Lines of Code: 447
+Empty Lines: 71
+Comment Lines: 0
+Total Characters: 17942
+Libraries Imported: typing, json, os, importlib, numpy, omnirec, warnings, pandas
+Count of Libraries Imported: 8
+Functions: 15
+Classes: 0
+Average Arguments per Function: 1.9333333333333333
+Variable Assignments: 115
+Loops: 15
+Conditions: 17
+Insertions: 391
+Deletions: 352

@@ -1,0 +1,20 @@
+ID: 8bc5b87ba40a4f3eabd9b985373625c8
+Position: 0
+Score: 0.0
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 0.07839012145996094
+Lines of Code: 14
+Empty Lines: 3
+Comment Lines: 2
+Total Characters: 506
+Libraries Imported: json, math, statistics, os
+Count of Libraries Imported: 4
+Functions: 0
+Classes: 0
+Average Arguments per Function: 0
+Variable Assignments: 1
+Loops: 0
+Conditions: 1
+Insertions: 14
+Deletions: 0

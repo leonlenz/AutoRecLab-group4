@@ -1,0 +1,98 @@
+[2026/06/29 19:24:51] INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 100000                                                                      core_pruning.py:20
+                      INFO     Number of interactions after: 99287                                                                        core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                   feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                   feedback_conversion.py:25
+                      INFO     Number of interactions before: 99287                                                                feedback_conversion.py:26
+                      INFO     Number of interactions after: 82128                                                                 feedback_conversion.py:44
+Running seed=7, dataset=MovieLens100K ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:24:54] INFO     Runner started with pid: 78153                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                     coordinator.py:402
+[2026/06/29 19:25:04] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                 coordinator.py:402
+[2026/06/29 19:25:24] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                coordinator.py:402
+[2026/06/29 19:25:26] INFO     MovieLens100K/ImplicitMFScorer done!                                                                       coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+[2026/06/29 19:25:27] INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:25:29] INFO     Runner started with pid: 78250                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                        coordinator.py:402
+[2026/06/29 19:25:39] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                    coordinator.py:402
+[2026/06/29 19:25:49] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                   coordinator.py:402
+[2026/06/29 19:25:51] INFO     MovieLens100K/ItemKNNScorer done!                                                                          coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+[2026/06/29 19:25:52] INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:25:54] INFO     Runner started with pid: 78344                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                            coordinator.py:402
+[2026/06/29 19:26:04] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                        coordinator.py:402
+[2026/06/29 19:26:14] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                       coordinator.py:402
+[2026/06/29 19:26:17] INFO     MovieLens100K/PopScorer done!                                                                              coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-7a87dabf: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.22163308589607636 │ 0.18646596538750465 │ 0.1964366469316243  │ 0.22163308589607636 │ 0.17815482502651114 │ 0.18897136797454933 │
+│ LensKit.ItemKNNScor… │ 0.37645811240721105 │ 0.2554356846423704  │ 0.293968458713952   │ 0.37645811240721105 │ 0.22778366914103926 │ 0.27274655355249205 │
+│ LensKit.PopScorer-f… │ 0.26299045599151644 │ 0.16460133995672094 │ 0.17672829731323966 │ 0.26299045599151644 │ 0.14899257688229056 │ 0.15588547189819724 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                          algorithm fold    metric  k    value  seed       dataset
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.221633     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.196437     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.186466     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.221633     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.188971     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.178155     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.376458     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.293968     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.255436     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.376458     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.272747     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.227784     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.262990     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.176728     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.164601     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None Precision  1 0.262990     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None Precision  5 0.155885     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None Precision 10 0.148993     7 MovieLens100K
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 1324753                                                                     core_pruning.py:20
+[2026/06/29 19:26:19] INFO     Number of interactions after: 231780                                                                       core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                 feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                 feedback_conversion.py:25
+                      INFO     Number of interactions before: 231780                                                               feedback_conversion.py:26
+                      INFO     Number of interactions after: 203264                                                                feedback_conversion.py:44
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_09/workspace/runfile.py", line 189, in <module>
+    main()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_09/workspace/runfile.py", line 128, in main
+    res_df = run_single_seed(seed, dataset_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_09/workspace/runfile.py", line 69, in run_single_seed
+    ds = UserHoldout(validation_size=0.05, test_size=0.20).process(ds)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2919, in train_test_split
+    n_train, n_test = _validate_shuffle_split(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2499, in _validate_shuffle_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.0625 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+Program crashed with exception (see above) after a minute!

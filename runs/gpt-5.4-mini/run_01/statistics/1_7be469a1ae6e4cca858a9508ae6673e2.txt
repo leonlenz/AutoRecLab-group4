@@ -1,0 +1,20 @@
+ID: 7be469a1ae6e4cca858a9508ae6673e2
+Position: 1
+Score: 0.15384615384615385
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 2.381648063659668
+Lines of Code: 90
+Empty Lines: 15
+Comment Lines: 0
+Total Characters: 3267
+Libraries Imported: statistics, os, omnirec, collections, pandas
+Count of Libraries Imported: 5
+Functions: 2
+Classes: 0
+Average Arguments per Function: 1.0
+Variable Assignments: 19
+Loops: 6
+Conditions: 3
+Insertions: 58
+Deletions: 67

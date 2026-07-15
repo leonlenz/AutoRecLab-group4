@@ -1,0 +1,20 @@
+ID: 6f5cb18cbed94467aa2bb55ef6590d37
+Position: 3
+Score: 0.3333333333333333
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 9.281128406524658
+Lines of Code: 383
+Empty Lines: 58
+Comment Lines: 0
+Total Characters: 16313
+Libraries Imported: pandas, json, os, omnirec, typing, pathlib, lenskit, omnirec_runner, numpy
+Count of Libraries Imported: 9
+Functions: 14
+Classes: 0
+Average Arguments per Function: 1.1428571428571428
+Variable Assignments: 95
+Loops: 10
+Conditions: 25
+Insertions: 70
+Deletions: 11

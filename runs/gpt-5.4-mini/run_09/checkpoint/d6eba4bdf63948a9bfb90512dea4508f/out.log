@@ -1,0 +1,83 @@
+[2026/06/29 19:21:42] INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 100000                                                                      core_pruning.py:20
+                      INFO     Number of interactions after: 99287                                                                        core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                   feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                   feedback_conversion.py:25
+                      INFO     Number of interactions before: 99287                                                                feedback_conversion.py:26
+                      INFO     Number of interactions after: 82128                                                                 feedback_conversion.py:44
+Running seed=7, dataset=MovieLens100K ...
+[2026/06/29 19:21:43] INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:21:45] INFO     Runner started with pid: 77600                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                     coordinator.py:402
+[2026/06/29 19:21:55] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                 coordinator.py:402
+[2026/06/29 19:22:15] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                coordinator.py:402
+[2026/06/29 19:22:18] INFO     MovieLens100K/ImplicitMFScorer done!                                                                       coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:22:21] INFO     Runner started with pid: 77697                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                        coordinator.py:402
+[2026/06/29 19:22:31] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                    coordinator.py:402
+[2026/06/29 19:22:41] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                   coordinator.py:402
+[2026/06/29 19:22:43] INFO     MovieLens100K/ItemKNNScorer done!                                                                          coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:22:46] INFO     Runner started with pid: 77791                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                            coordinator.py:402
+[2026/06/29 19:22:56] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                        coordinator.py:402
+[2026/06/29 19:23:06] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                       coordinator.py:402
+[2026/06/29 19:23:08] INFO     MovieLens100K/PopScorer done!                                                                              coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-fa2ae422: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.2163308589607635  │ 0.1849939008662859  │ 0.1934311122769358  │ 0.2163308589607635  │ 0.1780487804878049  │ 0.18769883351007424 │
+│ LensKit.ItemKNNScor… │ 0.3404029692470838  │ 0.23717621799977862 │ 0.2747123254787592  │ 0.3404029692470838  │ 0.21187698833510074 │ 0.25705196182396606 │
+│ LensKit.PopScorer-f… │ 0.24390243902439024 │ 0.15716686951347467 │ 0.16836850725529484 │ 0.24390243902439024 │ 0.1428419936373277  │ 0.14952279957582185 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+Empty DataFrame
+Columns: [seed, dataset]
+Index: []
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+[2026/06/29 19:23:09] INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 1324753                                                                     core_pruning.py:20
+[2026/06/29 19:23:10] INFO     Number of interactions after: 231780                                                                       core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                 feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                 feedback_conversion.py:25
+                      INFO     Number of interactions before: 231780                                                               feedback_conversion.py:26
+                      INFO     Number of interactions after: 203264                                                                feedback_conversion.py:44
+Run failed for seed=7, dataset=Amazon2014VideoGames: With n_samples=1, test_size=0.125 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_09/workspace/runfile.py", line 182, in <module>
+    main()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_09/workspace/runfile.py", line 124, in main
+    res_df = run_single_seed(seed, dataset_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_09/workspace/runfile.py", line 54, in run_single_seed
+    ds = UserHoldout(validation_size=0.1, test_size=0.2).process(ds)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2919, in train_test_split
+    n_train, n_test = _validate_shuffle_split(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2499, in _validate_shuffle_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.125 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+Program crashed with exception (see above) after a minute!

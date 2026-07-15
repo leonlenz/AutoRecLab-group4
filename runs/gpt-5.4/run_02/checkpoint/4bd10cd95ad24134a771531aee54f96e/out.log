@@ -1,0 +1,52 @@
+
+Loading dataset: MovieLens100K
+[2026/07/08 18:27:11] INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+RecSysDataSet(name='MovieLens100K', variant='RawData', interactions=100000, columns=4, lineage_steps=0)
+                      INFO     Making data set implicit with threshold 4.                      feedback_conversion.py:21
+                      INFO     Minimum rating: 4                                               feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                               feedback_conversion.py:25
+                      INFO     Number of interactions before: 55375                            feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                             feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                   core_pruning.py:20
+[2026/07/08 18:27:12] INFO     Number of interactions after: 54413                                    core_pruning.py:63
+
+Loading dataset: Amazon2014VideoGames
+                      INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+RecSysDataSet(name='Amazon2014VideoGames', variant='RawData', interactions=1324753, columns=4, lineage_steps=0)
+                      INFO     Making data set implicit with threshold 4.                      feedback_conversion.py:21
+[2026/07/08 18:27:13] INFO     Minimum rating: 4.0                                             feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                             feedback_conversion.py:25
+                      INFO     Number of interactions before: 970030                           feedback_conversion.py:26
+                      INFO     Number of interactions after: 970030                            feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 970030                                  core_pruning.py:20
+[2026/07/08 18:27:15] INFO     Number of interactions after: 132209                                   core_pruning.py:63
+
+Loading dataset: HetrecLastFM
+                      INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+RecSysDataSet(name='HetrecLastFM', variant='RawData', interactions=71064, columns=4, lineage_steps=0)
+                      INFO     Making data set implicit with threshold 1.                      feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                               feedback_conversion.py:24
+                      INFO     Maximum rating: 1                                               feedback_conversion.py:25
+                      INFO     Number of interactions before: 71064                            feedback_conversion.py:26
+                      INFO     Number of interactions after: 71064                             feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                   core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                    core_pruning.py:63
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 432, in <module>
+    main()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 340, in main
+    split_ds = make_split_dataset(base_ds, label, seed, working_dir)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 136, in make_split_dataset
+    df = ensure_interaction_df(base_ds)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 93, in ensure_interaction_df
+    raise RuntimeError("Could not access dataset interactions as a pandas DataFrame using public methods/exports.")
+RuntimeError: Could not access dataset interactions as a pandas DataFrame using public methods/exports.
+Program crashed with exception (see above) after 6 seconds!

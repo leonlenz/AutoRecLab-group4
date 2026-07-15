@@ -1,0 +1,39 @@
+[2026/06/29 08:14:38] INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+                      INFO     Making data set implicit with threshold 3.                      feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                               feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                               feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                           feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                             feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                   core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                    core_pruning.py:63
+Loaded and preprocessed MovieLens100K: RecSysDataSet(name='MovieLens100K', variant='RawData', interactions=81697, columns=3, lineage_steps=2)
+                      INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+[2026/06/29 08:14:39] INFO     Making data set implicit with threshold 3.                      feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                             feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                             feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                          feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                           feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                 core_pruning.py:20
+[2026/06/29 08:14:40] INFO     Number of interactions after: 177572                                   core_pruning.py:63
+Loaded and preprocessed Amazon2014VideoGames: RecSysDataSet(name='Amazon2014VideoGames', variant='RawData', interactions=177572, columns=3, lineage_steps=2)
+                      INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                   core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                    core_pruning.py:63
+Loaded and preprocessed HetrecLastFM: RecSysDataSet(name='HetrecLastFM', variant='RawData', interactions=52551, columns=4, lineage_steps=1)
+
+Running experiments with seed=7
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/06/29 08:14:43] INFO     Runner started with pid: 29636                                         coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      CRITICAL Invalid dataset variant. Dataset has to be either FoldedData or        coordinator.py:223
+                               SplitData. Apply a datasplit beforehand                                                  
+                      INFO     Stopping runner...                                                     coordinator.py:445
+Program crashed with exception (see above) after 6 seconds!

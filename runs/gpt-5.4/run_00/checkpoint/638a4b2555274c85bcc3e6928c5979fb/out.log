@@ -1,0 +1,56 @@
+
+====================================================================================================
+Loading base dataset: MovieLens100K
+====================================================================================================
+[2026/06/28 08:09:55] INFO     Trying to download MovieLens100K from https://files.grouplens.org/datasets/movielens/ml-100k.zip...                                                registry.py:138
+
+  0%|          | 0.00/4.92M [00:00<?, ?B/s]
+ 21%|██▏       | 1.05M/4.92M [00:00<00:02, 1.58MB/s]
+ 43%|████▎     | 2.10M/4.92M [00:00<00:00, 3.09MB/s]
+ 85%|████████▌ | 4.19M/4.92M [00:00<00:00, 6.48MB/s]
+100%|██████████| 4.92M/4.92M [00:00<00:00, 5.52MB/s]
+[2026/06/28 08:09:57] INFO     Verifying checksum...                                                                                                                                   util.py:73
+                      INFO     Checksum verified successfully!                                                                                                                         util.py:76
+                      INFO     Loading MovieLens100K...                                                                                                                           registry.py:185
+                      INFO     Successfully loaded MovieLens100K!                                                                                                                 registry.py:188
+                      INFO     Canonicalizing raw data...                                                                                                                  recsys_data_set.py:232
+                      INFO     Dropping duplicate interactions...                                                                                                          recsys_data_set.py:252
+                      INFO     Number of interactions before: 100000                                                                                                       recsys_data_set.py:253
+                      INFO     Number of interactions after: 100000                                                                                                        recsys_data_set.py:257
+                      INFO     Normalizing identifiers...                                                                                                                  recsys_data_set.py:264
+                      INFO     Done.                                                                                                                                       recsys_data_set.py:270
+                      INFO     Normalizing timestamps...                                                                                                                   recsys_data_set.py:278
+                      INFO     Done.                                                                                                                                       recsys_data_set.py:293
+                      INFO     Canonicalized raw data in 0.0499s.                                                                                                          recsys_data_set.py:243
+                      INFO     Saving to /home/florian_dueck04/.omnirec/data/canon/MovieLens100K.csv...                                                                    recsys_data_set.py:244
+
+====================================================================================================
+Running dataset=MovieLens100K, seed=11
+====================================================================================================
+                      INFO     Pruning data set to 5-core.                                                                                                                     core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                                            core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                             core_pruning.py:63
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/workspace/runfile.py", line 248, in <module>
+    main()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/workspace/runfile.py", line 177, in main
+    split_dataset = preprocess_for_seed(base_dataset, seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/out/workspace/runfile.py", line 81, in preprocess_for_seed
+    return pipe.process(dataset)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/pipe.py", line 35, in process
+    data = self._steps[-1].process(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+Program crashed with exception (see above) after 7 seconds!

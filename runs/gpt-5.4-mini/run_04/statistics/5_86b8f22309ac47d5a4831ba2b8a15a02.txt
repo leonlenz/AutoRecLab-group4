@@ -1,0 +1,20 @@
+ID: 86b8f22309ac47d5a4831ba2b8a15a02
+Position: 5
+Score: 0.15384615384615385
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 4.524640798568726
+Lines of Code: 167
+Empty Lines: 27
+Comment Lines: 1
+Total Characters: 5688
+Libraries Imported: omnirec, collections, statistics, math, os
+Count of Libraries Imported: 5
+Functions: 8
+Classes: 0
+Average Arguments per Function: 1.125
+Variable Assignments: 30
+Loops: 12
+Conditions: 13
+Insertions: 151
+Deletions: 70

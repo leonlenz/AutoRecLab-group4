@@ -1,0 +1,1701 @@
+[2026/06/29 19:27:16] INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 100000                                                                      core_pruning.py:20
+                      INFO     Number of interactions after: 99287                                                                        core_pruning.py:63
+[2026/06/29 19:27:17] INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                   feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                   feedback_conversion.py:25
+                      INFO     Number of interactions before: 99287                                                                feedback_conversion.py:26
+                      INFO     Number of interactions after: 82128                                                                 feedback_conversion.py:44
+Running seed=7, dataset=MovieLens100K ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:27:20] INFO     Runner started with pid: 78608                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                     coordinator.py:402
+[2026/06/29 19:27:30] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                 coordinator.py:402
+[2026/06/29 19:27:50] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                coordinator.py:402
+[2026/06/29 19:27:52] INFO     MovieLens100K/ImplicitMFScorer done!                                                                       coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:27:55] INFO     Runner started with pid: 78700                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                        coordinator.py:402
+[2026/06/29 19:28:05] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                    coordinator.py:402
+[2026/06/29 19:28:15] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                   coordinator.py:402
+[2026/06/29 19:28:18] INFO     MovieLens100K/ItemKNNScorer done!                                                                          coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:28:20] INFO     Runner started with pid: 78824                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                            coordinator.py:402
+[2026/06/29 19:28:30] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                        coordinator.py:402
+[2026/06/29 19:28:40] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                       coordinator.py:402
+[2026/06/29 19:28:43] INFO     MovieLens100K/PopScorer done!                                                                              coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                          algorithm fold    metric  k    value  seed       dataset
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824     7 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694     7 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343     7 MovieLens100K
+       LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601     7 MovieLens100K
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 1324753                                                                     core_pruning.py:20
+[2026/06/29 19:28:45] INFO     Number of interactions after: 231780                                                                       core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                 feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                 feedback_conversion.py:25
+                      INFO     Number of interactions before: 231780                                                               feedback_conversion.py:26
+                      INFO     Number of interactions after: 203264                                                                feedback_conversion.py:44
+[WARN] Skipping seed=7, dataset=Amazon2014VideoGames: Dataset Amazon2014VideoGames is too sparse after preprocessing for user-based 80/20 holdout. Try revisiting preprocessing order or filtering strictness.
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                       core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                        core_pruning.py:63
+Running seed=7, dataset=HetrecLastFM ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:28:48] INFO     Runner started with pid: 78910                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ImplicitMFScorer                                                      coordinator.py:402
+[2026/06/29 19:28:58] INFO     Running phase 'Predict' for HetrecLastFM/ImplicitMFScorer                                                  coordinator.py:402
+[2026/06/29 19:29:18] INFO     Running phase 'Evaluate' for HetrecLastFM/ImplicitMFScorer                                                 coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:29:21] INFO     Runner started with pid: 79008                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ItemKNNScorer                                                         coordinator.py:402
+[2026/06/29 19:29:31] INFO     Running phase 'Predict' for HetrecLastFM/ItemKNNScorer                                                     coordinator.py:402
+[2026/06/29 19:29:41] INFO     Running phase 'Evaluate' for HetrecLastFM/ItemKNNScorer                                                    coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:29:46] INFO     Runner started with pid: 79101                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/PopScorer                                                             coordinator.py:402
+[2026/06/29 19:29:56] INFO     Running phase 'Predict' for HetrecLastFM/PopScorer                                                         coordinator.py:402
+[2026/06/29 19:30:06] INFO     Running phase 'Evaluate' for HetrecLastFM/PopScorer                                                        coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                          algorithm fold    metric  k    value  seed      dataset
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155     7 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183     7 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737     7 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155     7 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824     7 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159     7 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776     7 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462     7 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298     7 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776     7 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694     7 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547     7 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573     7 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064     7 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184     7 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573     7 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343     7 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601     7 HetrecLastFM
+[2026/06/29 19:30:07] INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 100000                                                                      core_pruning.py:20
+                      INFO     Number of interactions after: 99287                                                                        core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                   feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                   feedback_conversion.py:25
+                      INFO     Number of interactions before: 99287                                                                feedback_conversion.py:26
+                      INFO     Number of interactions after: 82128                                                                 feedback_conversion.py:44
+Running seed=13, dataset=MovieLens100K ...
+[2026/06/29 19:30:08] INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:30:13] INFO     Runner started with pid: 79191                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                     coordinator.py:402
+[2026/06/29 19:30:23] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                 coordinator.py:402
+[2026/06/29 19:31:03] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                coordinator.py:402
+[2026/06/29 19:31:08] INFO     MovieLens100K/ImplicitMFScorer done!                                                                       coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+[2026/06/29 19:31:09] INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:31:14] INFO     Runner started with pid: 79293                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                        coordinator.py:402
+[2026/06/29 19:31:24] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                    coordinator.py:402
+[2026/06/29 19:31:34] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                   coordinator.py:402
+[2026/06/29 19:31:36] INFO     MovieLens100K/ItemKNNScorer done!                                                                          coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:31:39] INFO     Runner started with pid: 79392                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                            coordinator.py:402
+[2026/06/29 19:31:49] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                        coordinator.py:402
+[2026/06/29 19:31:59] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                       coordinator.py:402
+[2026/06/29 19:32:02] INFO     MovieLens100K/PopScorer done!                                                                              coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.20360551431601273 │ 0.16819585689560562 │ 0.18409008442557392 │ 0.20360551431601273 │ 0.15832449628844117 │ 0.17815482502651114 │
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ItemKNNScor… │ 0.27465535524920465 │ 0.2106098714984709  │ 0.23834920494623915 │ 0.27465535524920465 │ 0.19331919406150586 │ 0.22778366914103926 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.PopScorer-f… │ 0.1823966065747614  │ 0.142700364133309   │ 0.1519739836924838  │ 0.1823966065747614  │ 0.13382820784729588 │ 0.14188759278897137 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                           algorithm fold    metric  k    value  seed       dataset
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155    13 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183    13 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737    13 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155    13 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824    13 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159    13 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776    13 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462    13 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298    13 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776    13 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694    13 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547    13 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573    13 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064    13 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184    13 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573    13 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343    13 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601    13 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  1 0.203606    13 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  5 0.184090    13 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG 10 0.168196    13 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  1 0.203606    13 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  5 0.178155    13 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision 10 0.158324    13 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  1 0.274655    13 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  5 0.238349    13 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG 10 0.210610    13 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  1 0.274655    13 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  5 0.227784    13 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision 10 0.193319    13 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  1 0.182397    13 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  5 0.151974    13 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG 10 0.142700    13 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision  1 0.182397    13 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision  5 0.141888    13 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision 10 0.133828    13 MovieLens100K
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 1324753                                                                     core_pruning.py:20
+[2026/06/29 19:32:03] INFO     Number of interactions after: 231780                                                                       core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                 feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                 feedback_conversion.py:25
+                      INFO     Number of interactions before: 231780                                                               feedback_conversion.py:26
+                      INFO     Number of interactions after: 203264                                                                feedback_conversion.py:44
+[WARN] Skipping seed=13, dataset=Amazon2014VideoGames: Dataset Amazon2014VideoGames is too sparse after preprocessing for user-based 80/20 holdout. Try revisiting preprocessing order or filtering strictness.
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                       core_pruning.py:20
+[2026/06/29 19:32:04] INFO     Number of interactions after: 52551                                                                        core_pruning.py:63
+Running seed=13, dataset=HetrecLastFM ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:32:07] INFO     Runner started with pid: 79476                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ImplicitMFScorer                                                      coordinator.py:402
+[2026/06/29 19:32:17] INFO     Running phase 'Predict' for HetrecLastFM/ImplicitMFScorer                                                  coordinator.py:402
+[2026/06/29 19:32:37] INFO     Running phase 'Evaluate' for HetrecLastFM/ImplicitMFScorer                                                 coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:32:40] INFO     Runner started with pid: 79577                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ItemKNNScorer                                                         coordinator.py:402
+[2026/06/29 19:32:50] INFO     Running phase 'Predict' for HetrecLastFM/ItemKNNScorer                                                     coordinator.py:402
+[2026/06/29 19:33:00] INFO     Running phase 'Evaluate' for HetrecLastFM/ItemKNNScorer                                                    coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:33:02] INFO     Runner started with pid: 79669                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/PopScorer                                                             coordinator.py:402
+[2026/06/29 19:33:13] INFO     Running phase 'Predict' for HetrecLastFM/PopScorer                                                         coordinator.py:402
+[2026/06/29 19:33:23] INFO     Running phase 'Evaluate' for HetrecLastFM/PopScorer                                                        coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.20360551431601273 │ 0.16819585689560562 │ 0.18409008442557392 │ 0.20360551431601273 │ 0.15832449628844117 │ 0.17815482502651114 │
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ItemKNNScor… │ 0.27465535524920465 │ 0.2106098714984709  │ 0.23834920494623915 │ 0.27465535524920465 │ 0.19331919406150586 │ 0.22778366914103926 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.PopScorer-f… │ 0.1823966065747614  │ 0.142700364133309   │ 0.1519739836924838  │ 0.1823966065747614  │ 0.13382820784729588 │ 0.14188759278897137 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                           algorithm fold    metric  k    value  seed      dataset
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155    13 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183    13 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737    13 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155    13 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824    13 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159    13 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776    13 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462    13 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298    13 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776    13 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694    13 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547    13 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573    13 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064    13 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184    13 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573    13 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343    13 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601    13 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  1 0.203606    13 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  5 0.184090    13 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG 10 0.168196    13 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  1 0.203606    13 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  5 0.178155    13 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision 10 0.158324    13 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  1 0.274655    13 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  5 0.238349    13 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG 10 0.210610    13 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  1 0.274655    13 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  5 0.227784    13 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision 10 0.193319    13 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  1 0.182397    13 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  5 0.151974    13 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG 10 0.142700    13 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision  1 0.182397    13 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision  5 0.141888    13 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision 10 0.133828    13 HetrecLastFM
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 100000                                                                      core_pruning.py:20
+                      INFO     Number of interactions after: 99287                                                                        core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                   feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                   feedback_conversion.py:25
+                      INFO     Number of interactions before: 99287                                                                feedback_conversion.py:26
+                      INFO     Number of interactions after: 82128                                                                 feedback_conversion.py:44
+Running seed=21, dataset=MovieLens100K ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:33:26] INFO     Runner started with pid: 79759                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                     coordinator.py:402
+[2026/06/29 19:33:36] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                 coordinator.py:402
+[2026/06/29 19:33:56] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                coordinator.py:402
+[2026/06/29 19:33:58] INFO     MovieLens100K/ImplicitMFScorer done!                                                                       coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:34:01] INFO     Runner started with pid: 79854                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                        coordinator.py:402
+[2026/06/29 19:34:11] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                    coordinator.py:402
+[2026/06/29 19:34:21] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                   coordinator.py:402
+[2026/06/29 19:34:23] INFO     MovieLens100K/ItemKNNScorer done!                                                                          coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:34:26] INFO     Runner started with pid: 79951                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                            coordinator.py:402
+[2026/06/29 19:34:36] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                        coordinator.py:402
+[2026/06/29 19:34:46] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                       coordinator.py:402
+[2026/06/29 19:34:48] INFO     MovieLens100K/PopScorer done!                                                                              coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.20360551431601273 │ 0.16819585689560562 │ 0.18409008442557392 │ 0.20360551431601273 │ 0.15832449628844117 │ 0.17815482502651114 │
+│ LensKit.ImplicitMFS… │ 0.17179215270413573 │ 0.15604774116575773 │ 0.16481035555478685 │ 0.17179215270413573 │ 0.15079533404029694 │ 0.16182396606574762 │
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ItemKNNScor… │ 0.27465535524920465 │ 0.2106098714984709  │ 0.23834920494623915 │ 0.27465535524920465 │ 0.19331919406150586 │ 0.22778366914103926 │
+│ LensKit.ItemKNNScor… │ 0.2979851537645811  │ 0.2081709053413374  │ 0.23588617795750513 │ 0.2979851537645811  │ 0.18981972428419935 │ 0.22311770943796394 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.PopScorer-f… │ 0.1823966065747614  │ 0.142700364133309   │ 0.1519739836924838  │ 0.1823966065747614  │ 0.13382820784729588 │ 0.14188759278897137 │
+│ LensKit.PopScorer-f… │ 0.18769883351007424 │ 0.14186900367546149 │ 0.15593024319479618 │ 0.18769883351007424 │ 0.13117709437963945 │ 0.14697773064687167 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                           algorithm fold    metric  k    value  seed       dataset
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155    21 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183    21 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737    21 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155    21 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824    21 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159    21 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776    21 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462    21 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298    21 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776    21 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694    21 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547    21 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573    21 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064    21 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184    21 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573    21 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343    21 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  1 0.203606    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  5 0.184090    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG 10 0.168196    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  1 0.203606    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  5 0.178155    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision 10 0.158324    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  1 0.274655    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  5 0.238349    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG 10 0.210610    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  1 0.274655    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  5 0.227784    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision 10 0.193319    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  1 0.182397    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  5 0.151974    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG 10 0.142700    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision  1 0.182397    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision  5 0.141888    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision 10 0.133828    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  1 0.171792    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  5 0.164810    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG 10 0.156048    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  1 0.171792    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  5 0.161824    21 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision 10 0.150795    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  1 0.297985    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  5 0.235886    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG 10 0.208171    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  1 0.297985    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  5 0.223118    21 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision 10 0.189820    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  1 0.187699    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  5 0.155930    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None      nDCG 10 0.141869    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None Precision  1 0.187699    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None Precision  5 0.146978    21 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None Precision 10 0.131177    21 MovieLens100K
+[2026/06/29 19:34:49] INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 1324753                                                                     core_pruning.py:20
+[2026/06/29 19:34:50] INFO     Number of interactions after: 231780                                                                       core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                 feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                 feedback_conversion.py:25
+                      INFO     Number of interactions before: 231780                                                               feedback_conversion.py:26
+                      INFO     Number of interactions after: 203264                                                                feedback_conversion.py:44
+[WARN] Skipping seed=21, dataset=Amazon2014VideoGames: Dataset Amazon2014VideoGames is too sparse after preprocessing for user-based 80/20 holdout. Try revisiting preprocessing order or filtering strictness.
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+[2026/06/29 19:34:51] INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                       core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                        core_pruning.py:63
+Running seed=21, dataset=HetrecLastFM ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:34:54] INFO     Runner started with pid: 80037                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ImplicitMFScorer                                                      coordinator.py:402
+[2026/06/29 19:35:04] INFO     Running phase 'Predict' for HetrecLastFM/ImplicitMFScorer                                                  coordinator.py:402
+[2026/06/29 19:35:24] INFO     Running phase 'Evaluate' for HetrecLastFM/ImplicitMFScorer                                                 coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:35:27] INFO     Runner started with pid: 80136                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ItemKNNScorer                                                         coordinator.py:402
+[2026/06/29 19:35:37] INFO     Running phase 'Predict' for HetrecLastFM/ItemKNNScorer                                                     coordinator.py:402
+[2026/06/29 19:35:47] INFO     Running phase 'Evaluate' for HetrecLastFM/ItemKNNScorer                                                    coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:35:49] INFO     Runner started with pid: 80230                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/PopScorer                                                             coordinator.py:402
+[2026/06/29 19:35:59] INFO     Running phase 'Predict' for HetrecLastFM/PopScorer                                                         coordinator.py:402
+[2026/06/29 19:36:09] INFO     Running phase 'Evaluate' for HetrecLastFM/PopScorer                                                        coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.20360551431601273 │ 0.16819585689560562 │ 0.18409008442557392 │ 0.20360551431601273 │ 0.15832449628844117 │ 0.17815482502651114 │
+│ LensKit.ImplicitMFS… │ 0.17179215270413573 │ 0.15604774116575773 │ 0.16481035555478685 │ 0.17179215270413573 │ 0.15079533404029694 │ 0.16182396606574762 │
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ItemKNNScor… │ 0.27465535524920465 │ 0.2106098714984709  │ 0.23834920494623915 │ 0.27465535524920465 │ 0.19331919406150586 │ 0.22778366914103926 │
+│ LensKit.ItemKNNScor… │ 0.2979851537645811  │ 0.2081709053413374  │ 0.23588617795750513 │ 0.2979851537645811  │ 0.18981972428419935 │ 0.22311770943796394 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.PopScorer-f… │ 0.1823966065747614  │ 0.142700364133309   │ 0.1519739836924838  │ 0.1823966065747614  │ 0.13382820784729588 │ 0.14188759278897137 │
+│ LensKit.PopScorer-f… │ 0.18769883351007424 │ 0.14186900367546149 │ 0.15593024319479618 │ 0.18769883351007424 │ 0.13117709437963945 │ 0.14697773064687167 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                           algorithm fold    metric  k    value  seed      dataset
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155    21 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183    21 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737    21 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155    21 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824    21 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159    21 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776    21 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462    21 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298    21 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776    21 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694    21 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547    21 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573    21 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064    21 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184    21 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573    21 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343    21 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  1 0.203606    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  5 0.184090    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG 10 0.168196    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  1 0.203606    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  5 0.178155    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision 10 0.158324    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  1 0.274655    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  5 0.238349    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG 10 0.210610    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  1 0.274655    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  5 0.227784    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision 10 0.193319    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  1 0.182397    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  5 0.151974    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG 10 0.142700    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision  1 0.182397    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision  5 0.141888    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision 10 0.133828    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  1 0.171792    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  5 0.164810    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG 10 0.156048    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  1 0.171792    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  5 0.161824    21 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision 10 0.150795    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  1 0.297985    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  5 0.235886    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG 10 0.208171    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  1 0.297985    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  5 0.223118    21 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision 10 0.189820    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  1 0.187699    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  5 0.155930    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None      nDCG 10 0.141869    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None Precision  1 0.187699    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None Precision  5 0.146978    21 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None Precision 10 0.131177    21 HetrecLastFM
+[2026/06/29 19:36:10] INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 100000                                                                      core_pruning.py:20
+                      INFO     Number of interactions after: 99287                                                                        core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                   feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                   feedback_conversion.py:25
+                      INFO     Number of interactions before: 99287                                                                feedback_conversion.py:26
+                      INFO     Number of interactions after: 82128                                                                 feedback_conversion.py:44
+Running seed=42, dataset=MovieLens100K ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:36:13] INFO     Runner started with pid: 80317                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                     coordinator.py:402
+[2026/06/29 19:36:23] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                 coordinator.py:402
+[2026/06/29 19:36:43] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                coordinator.py:402
+[2026/06/29 19:36:45] INFO     MovieLens100K/ImplicitMFScorer done!                                                                       coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+[2026/06/29 19:36:46] INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:36:48] INFO     Runner started with pid: 80414                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                        coordinator.py:402
+[2026/06/29 19:36:58] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                    coordinator.py:402
+[2026/06/29 19:37:08] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                   coordinator.py:402
+[2026/06/29 19:37:10] INFO     MovieLens100K/ItemKNNScorer done!                                                                          coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+[2026/06/29 19:37:11] INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:37:13] INFO     Runner started with pid: 80508                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                            coordinator.py:402
+[2026/06/29 19:37:23] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                        coordinator.py:402
+[2026/06/29 19:37:33] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                       coordinator.py:402
+[2026/06/29 19:37:36] INFO     MovieLens100K/PopScorer done!                                                                              coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.20360551431601273 │ 0.16819585689560562 │ 0.18409008442557392 │ 0.20360551431601273 │ 0.15832449628844117 │ 0.17815482502651114 │
+│ LensKit.ImplicitMFS… │ 0.17179215270413573 │ 0.15604774116575773 │ 0.16481035555478685 │ 0.17179215270413573 │ 0.15079533404029694 │ 0.16182396606574762 │
+│ LensKit.ImplicitMFS… │ 0.176033934252386   │ 0.1596278375217805  │ 0.1699107795469436  │ 0.176033934252386   │ 0.1540827147401909  │ 0.168186638388123   │
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ItemKNNScor… │ 0.27465535524920465 │ 0.2106098714984709  │ 0.23834920494623915 │ 0.27465535524920465 │ 0.19331919406150586 │ 0.22778366914103926 │
+│ LensKit.ItemKNNScor… │ 0.2979851537645811  │ 0.2081709053413374  │ 0.23588617795750513 │ 0.2979851537645811  │ 0.18981972428419935 │ 0.22311770943796394 │
+│ LensKit.ItemKNNScor… │ 0.30116648992576883 │ 0.21016803672385354 │ 0.2393479972878268  │ 0.30116648992576883 │ 0.1897136797454931  │ 0.22375397667020147 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.PopScorer-f… │ 0.1823966065747614  │ 0.142700364133309   │ 0.1519739836924838  │ 0.1823966065747614  │ 0.13382820784729588 │ 0.14188759278897137 │
+│ LensKit.PopScorer-f… │ 0.18769883351007424 │ 0.14186900367546149 │ 0.15593024319479618 │ 0.18769883351007424 │ 0.13117709437963945 │ 0.14697773064687167 │
+│ LensKit.PopScorer-f… │ 0.20360551431601273 │ 0.14526465939248837 │ 0.1657620578294414  │ 0.20360551431601273 │ 0.13170731707317074 │ 0.15630965005302228 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                           algorithm fold    metric  k    value  seed       dataset
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155    42 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183    42 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737    42 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155    42 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824    42 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159    42 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776    42 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462    42 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298    42 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776    42 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694    42 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547    42 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573    42 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064    42 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184    42 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573    42 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343    42 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  1 0.203606    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  5 0.184090    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG 10 0.168196    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  1 0.203606    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  5 0.178155    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision 10 0.158324    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  1 0.274655    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  5 0.238349    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG 10 0.210610    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  1 0.274655    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  5 0.227784    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision 10 0.193319    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  1 0.182397    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  5 0.151974    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG 10 0.142700    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision  1 0.182397    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision  5 0.141888    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision 10 0.133828    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  1 0.171792    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  5 0.164810    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG 10 0.156048    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  1 0.171792    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  5 0.161824    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision 10 0.150795    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  1 0.297985    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  5 0.235886    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG 10 0.208171    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  1 0.297985    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  5 0.223118    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision 10 0.189820    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  1 0.187699    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  5 0.155930    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None      nDCG 10 0.141869    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None Precision  1 0.187699    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None Precision  5 0.146978    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None Precision 10 0.131177    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG  1 0.176034    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG  5 0.169911    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG 10 0.159628    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision  1 0.176034    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision  5 0.168187    42 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision 10 0.154083    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG  1 0.301166    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG  5 0.239348    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG 10 0.210168    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision  1 0.301166    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision  5 0.223754    42 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision 10 0.189714    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None      nDCG  1 0.203606    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None      nDCG  5 0.165762    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None      nDCG 10 0.145265    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None Precision  1 0.203606    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None Precision  5 0.156310    42 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None Precision 10 0.131707    42 MovieLens100K
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 1324753                                                                     core_pruning.py:20
+[2026/06/29 19:37:37] INFO     Number of interactions after: 231780                                                                       core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                 feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                 feedback_conversion.py:25
+                      INFO     Number of interactions before: 231780                                                               feedback_conversion.py:26
+                      INFO     Number of interactions after: 203264                                                                feedback_conversion.py:44
+[WARN] Skipping seed=42, dataset=Amazon2014VideoGames: Dataset Amazon2014VideoGames is too sparse after preprocessing for user-based 80/20 holdout. Try revisiting preprocessing order or filtering strictness.
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+[2026/06/29 19:37:38] INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                       core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                        core_pruning.py:63
+Running seed=42, dataset=HetrecLastFM ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:37:41] INFO     Runner started with pid: 80597                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ImplicitMFScorer                                                      coordinator.py:402
+[2026/06/29 19:37:51] INFO     Running phase 'Predict' for HetrecLastFM/ImplicitMFScorer                                                  coordinator.py:402
+[2026/06/29 19:38:11] INFO     Running phase 'Evaluate' for HetrecLastFM/ImplicitMFScorer                                                 coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:38:14] INFO     Runner started with pid: 80692                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ItemKNNScorer                                                         coordinator.py:402
+[2026/06/29 19:38:24] INFO     Running phase 'Predict' for HetrecLastFM/ItemKNNScorer                                                     coordinator.py:402
+[2026/06/29 19:38:34] INFO     Running phase 'Evaluate' for HetrecLastFM/ItemKNNScorer                                                    coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:38:36] INFO     Runner started with pid: 80812                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/PopScorer                                                             coordinator.py:402
+[2026/06/29 19:38:46] INFO     Running phase 'Predict' for HetrecLastFM/PopScorer                                                         coordinator.py:402
+[2026/06/29 19:38:56] INFO     Running phase 'Evaluate' for HetrecLastFM/PopScorer                                                        coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.20360551431601273 │ 0.16819585689560562 │ 0.18409008442557392 │ 0.20360551431601273 │ 0.15832449628844117 │ 0.17815482502651114 │
+│ LensKit.ImplicitMFS… │ 0.17179215270413573 │ 0.15604774116575773 │ 0.16481035555478685 │ 0.17179215270413573 │ 0.15079533404029694 │ 0.16182396606574762 │
+│ LensKit.ImplicitMFS… │ 0.176033934252386   │ 0.1596278375217805  │ 0.1699107795469436  │ 0.176033934252386   │ 0.1540827147401909  │ 0.168186638388123   │
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ItemKNNScor… │ 0.27465535524920465 │ 0.2106098714984709  │ 0.23834920494623915 │ 0.27465535524920465 │ 0.19331919406150586 │ 0.22778366914103926 │
+│ LensKit.ItemKNNScor… │ 0.2979851537645811  │ 0.2081709053413374  │ 0.23588617795750513 │ 0.2979851537645811  │ 0.18981972428419935 │ 0.22311770943796394 │
+│ LensKit.ItemKNNScor… │ 0.30116648992576883 │ 0.21016803672385354 │ 0.2393479972878268  │ 0.30116648992576883 │ 0.1897136797454931  │ 0.22375397667020147 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.PopScorer-f… │ 0.1823966065747614  │ 0.142700364133309   │ 0.1519739836924838  │ 0.1823966065747614  │ 0.13382820784729588 │ 0.14188759278897137 │
+│ LensKit.PopScorer-f… │ 0.18769883351007424 │ 0.14186900367546149 │ 0.15593024319479618 │ 0.18769883351007424 │ 0.13117709437963945 │ 0.14697773064687167 │
+│ LensKit.PopScorer-f… │ 0.20360551431601273 │ 0.14526465939248837 │ 0.1657620578294414  │ 0.20360551431601273 │ 0.13170731707317074 │ 0.15630965005302228 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                           algorithm fold    metric  k    value  seed      dataset
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155    42 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183    42 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737    42 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155    42 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824    42 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159    42 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776    42 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462    42 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298    42 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776    42 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694    42 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547    42 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573    42 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064    42 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184    42 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573    42 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343    42 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  1 0.203606    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  5 0.184090    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG 10 0.168196    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  1 0.203606    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  5 0.178155    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision 10 0.158324    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  1 0.274655    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  5 0.238349    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG 10 0.210610    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  1 0.274655    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  5 0.227784    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision 10 0.193319    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  1 0.182397    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  5 0.151974    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG 10 0.142700    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision  1 0.182397    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision  5 0.141888    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision 10 0.133828    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  1 0.171792    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  5 0.164810    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG 10 0.156048    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  1 0.171792    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  5 0.161824    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision 10 0.150795    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  1 0.297985    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  5 0.235886    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG 10 0.208171    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  1 0.297985    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  5 0.223118    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision 10 0.189820    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  1 0.187699    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  5 0.155930    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None      nDCG 10 0.141869    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None Precision  1 0.187699    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None Precision  5 0.146978    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None Precision 10 0.131177    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG  1 0.176034    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG  5 0.169911    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG 10 0.159628    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision  1 0.176034    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision  5 0.168187    42 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision 10 0.154083    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG  1 0.301166    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG  5 0.239348    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG 10 0.210168    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision  1 0.301166    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision  5 0.223754    42 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision 10 0.189714    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None      nDCG  1 0.203606    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None      nDCG  5 0.165762    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None      nDCG 10 0.145265    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None Precision  1 0.203606    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None Precision  5 0.156310    42 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None Precision 10 0.131707    42 HetrecLastFM
+[2026/06/29 19:38:57] INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 100000                                                                      core_pruning.py:20
+                      INFO     Number of interactions after: 99287                                                                        core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                   feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                   feedback_conversion.py:25
+                      INFO     Number of interactions before: 99287                                                                feedback_conversion.py:26
+                      INFO     Number of interactions after: 82128                                                                 feedback_conversion.py:44
+Running seed=84, dataset=MovieLens100K ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:39:00] INFO     Runner started with pid: 80901                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                     coordinator.py:402
+[2026/06/29 19:39:10] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                 coordinator.py:402
+[2026/06/29 19:39:30] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                coordinator.py:402
+[2026/06/29 19:39:32] INFO     MovieLens100K/ImplicitMFScorer done!                                                                       coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+[2026/06/29 19:39:33] INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:39:35] INFO     Runner started with pid: 80996                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                        coordinator.py:402
+[2026/06/29 19:39:45] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                    coordinator.py:402
+[2026/06/29 19:39:55] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                   coordinator.py:402
+[2026/06/29 19:39:58] INFO     MovieLens100K/ItemKNNScorer done!                                                                          coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:40:00] INFO     Runner started with pid: 81093                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                            coordinator.py:402
+[2026/06/29 19:40:10] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                        coordinator.py:402
+[2026/06/29 19:40:20] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                       coordinator.py:402
+[2026/06/29 19:40:23] INFO     MovieLens100K/PopScorer done!                                                                              coordinator.py:373
+                      INFO     Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.20360551431601273 │ 0.16819585689560562 │ 0.18409008442557392 │ 0.20360551431601273 │ 0.15832449628844117 │ 0.17815482502651114 │
+│ LensKit.ImplicitMFS… │ 0.17179215270413573 │ 0.15604774116575773 │ 0.16481035555478685 │ 0.17179215270413573 │ 0.15079533404029694 │ 0.16182396606574762 │
+│ LensKit.ImplicitMFS… │ 0.176033934252386   │ 0.1596278375217805  │ 0.1699107795469436  │ 0.176033934252386   │ 0.1540827147401909  │ 0.168186638388123   │
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ImplicitMFS… │ 0.18133616118769882 │ 0.1630653132719868  │ 0.175087962688568   │ 0.18133616118769882 │ 0.15599151643690348 │ 0.17158006362672323 │
+│ LensKit.ItemKNNScor… │ 0.27465535524920465 │ 0.2106098714984709  │ 0.23834920494623915 │ 0.27465535524920465 │ 0.19331919406150586 │ 0.22778366914103926 │
+│ LensKit.ItemKNNScor… │ 0.2979851537645811  │ 0.2081709053413374  │ 0.23588617795750513 │ 0.2979851537645811  │ 0.18981972428419935 │ 0.22311770943796394 │
+│ LensKit.ItemKNNScor… │ 0.30116648992576883 │ 0.21016803672385354 │ 0.2393479972878268  │ 0.30116648992576883 │ 0.1897136797454931  │ 0.22375397667020147 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.ItemKNNScor… │ 0.26617179215270415 │ 0.2067209430851493  │ 0.23691497073551934 │ 0.26617179215270415 │ 0.18844114528101805 │ 0.22629904559915165 │
+│ LensKit.PopScorer-f… │ 0.1823966065747614  │ 0.142700364133309   │ 0.1519739836924838  │ 0.1823966065747614  │ 0.13382820784729588 │ 0.14188759278897137 │
+│ LensKit.PopScorer-f… │ 0.18769883351007424 │ 0.14186900367546149 │ 0.15593024319479618 │ 0.18769883351007424 │ 0.13117709437963945 │ 0.14697773064687167 │
+│ LensKit.PopScorer-f… │ 0.20360551431601273 │ 0.14526465939248837 │ 0.1657620578294414  │ 0.20360551431601273 │ 0.13170731707317074 │ 0.15630965005302228 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+│ LensKit.PopScorer-f… │ 0.21208907741251326 │ 0.14921725310856493 │ 0.1588843074478713  │ 0.21208907741251326 │ 0.1378579003181336  │ 0.14464475079533404 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                           algorithm fold    metric  k    value  seed       dataset
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155    84 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183    84 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737    84 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155    84 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824    84 MovieLens100K
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159    84 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776    84 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462    84 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298    84 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776    84 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694    84 MovieLens100K
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547    84 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573    84 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064    84 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184    84 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573    84 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343    84 MovieLens100K
+        LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  1 0.203606    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  5 0.184090    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG 10 0.168196    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  1 0.203606    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  5 0.178155    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision 10 0.158324    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  1 0.274655    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  5 0.238349    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG 10 0.210610    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  1 0.274655    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  5 0.227784    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision 10 0.193319    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  1 0.182397    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  5 0.151974    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None      nDCG 10 0.142700    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision  1 0.182397    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision  5 0.141888    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-13 None Precision 10 0.133828    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  1 0.171792    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  5 0.164810    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG 10 0.156048    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  1 0.171792    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  5 0.161824    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision 10 0.150795    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  1 0.297985    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  5 0.235886    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG 10 0.208171    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  1 0.297985    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  5 0.223118    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision 10 0.189820    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  1 0.187699    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  5 0.155930    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None      nDCG 10 0.141869    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None Precision  1 0.187699    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None Precision  5 0.146978    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-21 None Precision 10 0.131177    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG  1 0.176034    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG  5 0.169911    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG 10 0.159628    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision  1 0.176034    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision  5 0.168187    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision 10 0.154083    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG  1 0.301166    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG  5 0.239348    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG 10 0.210168    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision  1 0.301166    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision  5 0.223754    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision 10 0.189714    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None      nDCG  1 0.203606    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None      nDCG  5 0.165762    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None      nDCG 10 0.145265    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None Precision  1 0.203606    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None Precision  5 0.156310    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-42 None Precision 10 0.131707    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None      nDCG  1 0.181336    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None      nDCG  5 0.175088    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None      nDCG 10 0.163065    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None Precision  1 0.181336    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None Precision  5 0.171580    84 MovieLens100K
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None Precision 10 0.155992    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-84 None      nDCG  1 0.266172    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-84 None      nDCG  5 0.236915    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-84 None      nDCG 10 0.206721    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-84 None Precision  1 0.266172    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-84 None Precision  5 0.226299    84 MovieLens100K
+   LensKit.ItemKNNScorer-c3d66610-84 None Precision 10 0.188441    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-84 None      nDCG  1 0.212089    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-84 None      nDCG  5 0.158884    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-84 None      nDCG 10 0.149217    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-84 None Precision  1 0.212089    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-84 None Precision  5 0.144645    84 MovieLens100K
+       LensKit.PopScorer-f4aa5539-84 None Precision 10 0.137858    84 MovieLens100K
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 1324753                                                                     core_pruning.py:20
+[2026/06/29 19:40:25] INFO     Number of interactions after: 231780                                                                       core_pruning.py:63
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                 feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                 feedback_conversion.py:25
+                      INFO     Number of interactions before: 231780                                                               feedback_conversion.py:26
+                      INFO     Number of interactions after: 203264                                                                feedback_conversion.py:44
+[WARN] Skipping seed=84, dataset=Amazon2014VideoGames: Dataset Amazon2014VideoGames is too sparse after preprocessing for user-based 80/20 holdout. Try revisiting preprocessing order or filtering strictness.
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                       core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                        core_pruning.py:63
+Running seed=84, dataset=HetrecLastFM ...
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:40:28] INFO     Runner started with pid: 81182                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ImplicitMFScorer                                                      coordinator.py:402
+[2026/06/29 19:40:38] INFO     Running phase 'Predict' for HetrecLastFM/ImplicitMFScorer                                                  coordinator.py:402
+[2026/06/29 19:40:58] INFO     Running phase 'Evaluate' for HetrecLastFM/ImplicitMFScorer                                                 coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:41:01] INFO     Runner started with pid: 81277                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/ItemKNNScorer                                                         coordinator.py:402
+[2026/06/29 19:41:11] INFO     Running phase 'Predict' for HetrecLastFM/ItemKNNScorer                                                     coordinator.py:402
+[2026/06/29 19:41:21] INFO     Running phase 'Evaluate' for HetrecLastFM/ItemKNNScorer                                                    coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/florian_dueck04/.omnirec/data/envs/LensKit_env                         envs.py:48
+                      INFO     Starting runner...                                                                                         coordinator.py:272
+[2026/06/29 19:41:23] INFO     Runner started with pid: 81372                                                                             coordinator.py:297
+                      INFO     Connecting to runner...                                                                                    coordinator.py:135
+                      INFO     Running phase 'Fit' for HetrecLastFM/PopScorer                                                             coordinator.py:402
+[2026/06/29 19:41:33] INFO     Running phase 'Predict' for HetrecLastFM/PopScorer                                                         coordinator.py:402
+[2026/06/29 19:41:43] INFO     Running phase 'Evaluate' for HetrecLastFM/PopScorer                                                        coordinator.py:402
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 365, in run_split
+    self._evaluator.run_evaluation(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/evaluation.py", line 54, in run_evaluation
+    mr = m.calculate(predictions, test)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 74, in calculate
+    top_k_dict = self.make_topk_dict(predictions)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/metrics/ranking.py", line 24, in make_topk_dict
+    for user, group in predictions.sort_values("rank").groupby("user"):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 7211, in sort_values
+    k = self._get_label_or_level_values(by[0], axis=axis)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 1914, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'rank'
+                      CRITICAL Stopping runner...                                                                                         coordinator.py:445
+                                                         MovieLens100K-56c539d7: Evaluation Results                                                         
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFS… │ 0.20360551431601273 │ 0.16819585689560562 │ 0.18409008442557392 │ 0.20360551431601273 │ 0.15832449628844117 │ 0.17815482502651114 │
+│ LensKit.ImplicitMFS… │ 0.17179215270413573 │ 0.15604774116575773 │ 0.16481035555478685 │ 0.17179215270413573 │ 0.15079533404029694 │ 0.16182396606574762 │
+│ LensKit.ImplicitMFS… │ 0.176033934252386   │ 0.1596278375217805  │ 0.1699107795469436  │ 0.176033934252386   │ 0.1540827147401909  │ 0.168186638388123   │
+│ LensKit.ImplicitMFS… │ 0.17815482502651114 │ 0.15673728036957918 │ 0.16618311142630743 │ 0.17815482502651114 │ 0.15015906680805938 │ 0.16182396606574762 │
+│ LensKit.ImplicitMFS… │ 0.18133616118769882 │ 0.1630653132719868  │ 0.175087962688568   │ 0.18133616118769882 │ 0.15599151643690348 │ 0.17158006362672323 │
+│ LensKit.ItemKNNScor… │ 0.27465535524920465 │ 0.2106098714984709  │ 0.23834920494623915 │ 0.27465535524920465 │ 0.19331919406150586 │ 0.22778366914103926 │
+│ LensKit.ItemKNNScor… │ 0.2979851537645811  │ 0.2081709053413374  │ 0.23588617795750513 │ 0.2979851537645811  │ 0.18981972428419935 │ 0.22311770943796394 │
+│ LensKit.ItemKNNScor… │ 0.30116648992576883 │ 0.21016803672385354 │ 0.2393479972878268  │ 0.30116648992576883 │ 0.1897136797454931  │ 0.22375397667020147 │
+│ LensKit.ItemKNNScor… │ 0.2767762460233298  │ 0.2072979524682111  │ 0.23546222873205688 │ 0.2767762460233298  │ 0.1885471898197243  │ 0.22269353128313893 │
+│ LensKit.ItemKNNScor… │ 0.26617179215270415 │ 0.2067209430851493  │ 0.23691497073551934 │ 0.26617179215270415 │ 0.18844114528101805 │ 0.22629904559915165 │
+│ LensKit.PopScorer-f… │ 0.1823966065747614  │ 0.142700364133309   │ 0.1519739836924838  │ 0.1823966065747614  │ 0.13382820784729588 │ 0.14188759278897137 │
+│ LensKit.PopScorer-f… │ 0.18769883351007424 │ 0.14186900367546149 │ 0.15593024319479618 │ 0.18769883351007424 │ 0.13117709437963945 │ 0.14697773064687167 │
+│ LensKit.PopScorer-f… │ 0.20360551431601273 │ 0.14526465939248837 │ 0.1657620578294414  │ 0.20360551431601273 │ 0.13170731707317074 │ 0.15630965005302228 │
+│ LensKit.PopScorer-f… │ 0.2205726405090138  │ 0.1441836522275698  │ 0.15506392397602373 │ 0.2205726405090138  │ 0.1316012725344645  │ 0.13934252386002122 │
+│ LensKit.PopScorer-f… │ 0.21208907741251326 │ 0.14921725310856493 │ 0.1588843074478713  │ 0.21208907741251326 │ 0.1378579003181336  │ 0.14464475079533404 │
+└──────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                           algorithm fold    metric  k    value  seed      dataset
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  1 0.178155    84 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG  5 0.166183    84 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None      nDCG 10 0.156737    84 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  1 0.178155    84 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision  5 0.161824    84 HetrecLastFM
+ LensKit.ImplicitMFScorer-f0dd7ecb-7 None Precision 10 0.150159    84 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  1 0.276776    84 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG  5 0.235462    84 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None      nDCG 10 0.207298    84 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  1 0.276776    84 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision  5 0.222694    84 HetrecLastFM
+    LensKit.ItemKNNScorer-c3d66610-7 None Precision 10 0.188547    84 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  1 0.220573    84 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG  5 0.155064    84 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None      nDCG 10 0.144184    84 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision  1 0.220573    84 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision  5 0.139343    84 HetrecLastFM
+        LensKit.PopScorer-f4aa5539-7 None Precision 10 0.131601    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  1 0.203606    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG  5 0.184090    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None      nDCG 10 0.168196    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  1 0.203606    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision  5 0.178155    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-13 None Precision 10 0.158324    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  1 0.274655    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG  5 0.238349    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None      nDCG 10 0.210610    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  1 0.274655    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision  5 0.227784    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-13 None Precision 10 0.193319    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  1 0.182397    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG  5 0.151974    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None      nDCG 10 0.142700    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision  1 0.182397    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision  5 0.141888    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-13 None Precision 10 0.133828    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  1 0.171792    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG  5 0.164810    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None      nDCG 10 0.156048    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  1 0.171792    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision  5 0.161824    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-21 None Precision 10 0.150795    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  1 0.297985    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG  5 0.235886    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None      nDCG 10 0.208171    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  1 0.297985    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision  5 0.223118    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-21 None Precision 10 0.189820    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  1 0.187699    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None      nDCG  5 0.155930    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None      nDCG 10 0.141869    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None Precision  1 0.187699    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None Precision  5 0.146978    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-21 None Precision 10 0.131177    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG  1 0.176034    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG  5 0.169911    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None      nDCG 10 0.159628    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision  1 0.176034    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision  5 0.168187    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-42 None Precision 10 0.154083    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG  1 0.301166    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG  5 0.239348    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None      nDCG 10 0.210168    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision  1 0.301166    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision  5 0.223754    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-42 None Precision 10 0.189714    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None      nDCG  1 0.203606    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None      nDCG  5 0.165762    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None      nDCG 10 0.145265    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None Precision  1 0.203606    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None Precision  5 0.156310    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-42 None Precision 10 0.131707    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None      nDCG  1 0.181336    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None      nDCG  5 0.175088    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None      nDCG 10 0.163065    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None Precision  1 0.181336    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None Precision  5 0.171580    84 HetrecLastFM
+LensKit.ImplicitMFScorer-f0dd7ecb-84 None Precision 10 0.155992    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-84 None      nDCG  1 0.266172    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-84 None      nDCG  5 0.236915    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-84 None      nDCG 10 0.206721    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-84 None Precision  1 0.266172    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-84 None Precision  5 0.226299    84 HetrecLastFM
+   LensKit.ItemKNNScorer-c3d66610-84 None Precision 10 0.188441    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-84 None      nDCG  1 0.212089    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-84 None      nDCG  5 0.158884    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-84 None      nDCG 10 0.149217    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-84 None Precision  1 0.212089    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-84 None Precision  5 0.144645    84 HetrecLastFM
+       LensKit.PopScorer-f4aa5539-84 None Precision 10 0.137858    84 HetrecLastFM
+
+Aggregate summary by dataset/algorithm/metric/k:
+      dataset                            algorithm    metric  k  n_runs     mean          std           cv      min      max
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision  1       4 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision  5       4 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision 10       4 0.158324 0.000000e+00 0.000000e+00 0.158324 0.158324
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG  1       4 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG  5       4 0.184090 0.000000e+00 0.000000e+00 0.184090 0.184090
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG 10       4 0.168196 0.000000e+00 0.000000e+00 0.168196 0.168196
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision  1       3 0.171792 0.000000e+00 0.000000e+00 0.171792 0.171792
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision  5       3 0.161824 0.000000e+00 0.000000e+00 0.161824 0.161824
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision 10       3 0.150795 0.000000e+00 0.000000e+00 0.150795 0.150795
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG  1       3 0.171792 0.000000e+00 0.000000e+00 0.171792 0.171792
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG  5       3 0.164810 0.000000e+00 0.000000e+00 0.164810 0.164810
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG 10       3 0.156048 0.000000e+00 0.000000e+00 0.156048 0.156048
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision  1       2 0.176034 0.000000e+00 0.000000e+00 0.176034 0.176034
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision  5       2 0.168187 0.000000e+00 0.000000e+00 0.168187 0.168187
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision 10       2 0.154083 0.000000e+00 0.000000e+00 0.154083 0.154083
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG  1       2 0.176034 0.000000e+00 0.000000e+00 0.176034 0.176034
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG  5       2 0.169911 0.000000e+00 0.000000e+00 0.169911 0.169911
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG 10       2 0.159628 0.000000e+00 0.000000e+00 0.159628 0.159628
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision  1       5 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision  5       5 0.161824 0.000000e+00 0.000000e+00 0.161824 0.161824
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision 10       5 0.150159 0.000000e+00 0.000000e+00 0.150159 0.150159
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG  1       5 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG  5       5 0.166183 0.000000e+00 0.000000e+00 0.166183 0.166183
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG 10       5 0.156737 0.000000e+00 0.000000e+00 0.156737 0.156737
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-84 Precision  1       1 0.181336 0.000000e+00 0.000000e+00 0.181336 0.181336
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-84 Precision  5       1 0.171580 0.000000e+00 0.000000e+00 0.171580 0.171580
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-84 Precision 10       1 0.155992 0.000000e+00 0.000000e+00 0.155992 0.155992
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-84      nDCG  1       1 0.181336 0.000000e+00 0.000000e+00 0.181336 0.181336
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-84      nDCG  5       1 0.175088 0.000000e+00 0.000000e+00 0.175088 0.175088
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-84      nDCG 10       1 0.163065 0.000000e+00 0.000000e+00 0.163065 0.163065
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13 Precision  1       4 0.274655 0.000000e+00 0.000000e+00 0.274655 0.274655
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13 Precision  5       4 0.227784 0.000000e+00 0.000000e+00 0.227784 0.227784
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13 Precision 10       4 0.193319 0.000000e+00 0.000000e+00 0.193319 0.193319
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13      nDCG  1       4 0.274655 0.000000e+00 0.000000e+00 0.274655 0.274655
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13      nDCG  5       4 0.238349 0.000000e+00 0.000000e+00 0.238349 0.238349
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13      nDCG 10       4 0.210610 0.000000e+00 0.000000e+00 0.210610 0.210610
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21 Precision  1       3 0.297985 0.000000e+00 0.000000e+00 0.297985 0.297985
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21 Precision  5       3 0.223118 0.000000e+00 0.000000e+00 0.223118 0.223118
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21 Precision 10       3 0.189820 0.000000e+00 0.000000e+00 0.189820 0.189820
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21      nDCG  1       3 0.297985 0.000000e+00 0.000000e+00 0.297985 0.297985
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21      nDCG  5       3 0.235886 0.000000e+00 0.000000e+00 0.235886 0.235886
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21      nDCG 10       3 0.208171 0.000000e+00 0.000000e+00 0.208171 0.208171
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42 Precision  1       2 0.301166 0.000000e+00 0.000000e+00 0.301166 0.301166
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42 Precision  5       2 0.223754 0.000000e+00 0.000000e+00 0.223754 0.223754
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42 Precision 10       2 0.189714 0.000000e+00 0.000000e+00 0.189714 0.189714
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42      nDCG  1       2 0.301166 0.000000e+00 0.000000e+00 0.301166 0.301166
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42      nDCG  5       2 0.239348 0.000000e+00 0.000000e+00 0.239348 0.239348
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42      nDCG 10       2 0.210168 0.000000e+00 0.000000e+00 0.210168 0.210168
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7 Precision  1       5 0.276776 0.000000e+00 0.000000e+00 0.276776 0.276776
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7 Precision  5       5 0.222694 0.000000e+00 0.000000e+00 0.222694 0.222694
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7 Precision 10       5 0.188547 0.000000e+00 0.000000e+00 0.188547 0.188547
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7      nDCG  1       5 0.276776 0.000000e+00 0.000000e+00 0.276776 0.276776
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7      nDCG  5       5 0.235462 3.103168e-17 1.317905e-16 0.235462 0.235462
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7      nDCG 10       5 0.207298 0.000000e+00 0.000000e+00 0.207298 0.207298
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-84 Precision  1       1 0.266172 0.000000e+00 0.000000e+00 0.266172 0.266172
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-84 Precision  5       1 0.226299 0.000000e+00 0.000000e+00 0.226299 0.226299
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-84 Precision 10       1 0.188441 0.000000e+00 0.000000e+00 0.188441 0.188441
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-84      nDCG  1       1 0.266172 0.000000e+00 0.000000e+00 0.266172 0.266172
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-84      nDCG  5       1 0.236915 0.000000e+00 0.000000e+00 0.236915 0.236915
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-84      nDCG 10       1 0.206721 0.000000e+00 0.000000e+00 0.206721 0.206721
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13 Precision  1       4 0.182397 0.000000e+00 0.000000e+00 0.182397 0.182397
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13 Precision  5       4 0.141888 0.000000e+00 0.000000e+00 0.141888 0.141888
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13 Precision 10       4 0.133828 0.000000e+00 0.000000e+00 0.133828 0.133828
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13      nDCG  1       4 0.182397 0.000000e+00 0.000000e+00 0.182397 0.182397
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13      nDCG  5       4 0.151974 0.000000e+00 0.000000e+00 0.151974 0.151974
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13      nDCG 10       4 0.142700 0.000000e+00 0.000000e+00 0.142700 0.142700
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21 Precision  1       3 0.187699 0.000000e+00 0.000000e+00 0.187699 0.187699
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21 Precision  5       3 0.146978 0.000000e+00 0.000000e+00 0.146978 0.146978
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21 Precision 10       3 0.131177 0.000000e+00 0.000000e+00 0.131177 0.131177
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21      nDCG  1       3 0.187699 0.000000e+00 0.000000e+00 0.187699 0.187699
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21      nDCG  5       3 0.155930 0.000000e+00 0.000000e+00 0.155930 0.155930
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21      nDCG 10       3 0.141869 0.000000e+00 0.000000e+00 0.141869 0.141869
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42 Precision  1       2 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42 Precision  5       2 0.156310 0.000000e+00 0.000000e+00 0.156310 0.156310
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42 Precision 10       2 0.131707 0.000000e+00 0.000000e+00 0.131707 0.131707
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42      nDCG  1       2 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42      nDCG  5       2 0.165762 0.000000e+00 0.000000e+00 0.165762 0.165762
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42      nDCG 10       2 0.145265 0.000000e+00 0.000000e+00 0.145265 0.145265
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7 Precision  1       5 0.220573 3.103168e-17 1.406869e-16 0.220573 0.220573
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7 Precision  5       5 0.139343 0.000000e+00 0.000000e+00 0.139343 0.139343
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7 Precision 10       5 0.131601 0.000000e+00 0.000000e+00 0.131601 0.131601
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7      nDCG  1       5 0.220573 3.103168e-17 1.406869e-16 0.220573 0.220573
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7      nDCG  5       5 0.155064 0.000000e+00 0.000000e+00 0.155064 0.155064
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7      nDCG 10       5 0.144184 0.000000e+00 0.000000e+00 0.144184 0.144184
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-84 Precision  1       1 0.212089 0.000000e+00 0.000000e+00 0.212089 0.212089
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-84 Precision  5       1 0.144645 0.000000e+00 0.000000e+00 0.144645 0.144645
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-84 Precision 10       1 0.137858 0.000000e+00 0.000000e+00 0.137858 0.137858
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-84      nDCG  1       1 0.212089 0.000000e+00 0.000000e+00 0.212089 0.212089
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-84      nDCG  5       1 0.158884 0.000000e+00 0.000000e+00 0.158884 0.158884
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-84      nDCG 10       1 0.149217 0.000000e+00 0.000000e+00 0.149217 0.149217
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision  1       4 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision  5       4 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision 10       4 0.158324 0.000000e+00 0.000000e+00 0.158324 0.158324
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG  1       4 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG  5       4 0.184090 0.000000e+00 0.000000e+00 0.184090 0.184090
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG 10       4 0.168196 0.000000e+00 0.000000e+00 0.168196 0.168196
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision  1       3 0.171792 0.000000e+00 0.000000e+00 0.171792 0.171792
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision  5       3 0.161824 0.000000e+00 0.000000e+00 0.161824 0.161824
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision 10       3 0.150795 0.000000e+00 0.000000e+00 0.150795 0.150795
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG  1       3 0.171792 0.000000e+00 0.000000e+00 0.171792 0.171792
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG  5       3 0.164810 0.000000e+00 0.000000e+00 0.164810 0.164810
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG 10       3 0.156048 0.000000e+00 0.000000e+00 0.156048 0.156048
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision  1       2 0.176034 0.000000e+00 0.000000e+00 0.176034 0.176034
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision  5       2 0.168187 0.000000e+00 0.000000e+00 0.168187 0.168187
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision 10       2 0.154083 0.000000e+00 0.000000e+00 0.154083 0.154083
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG  1       2 0.176034 0.000000e+00 0.000000e+00 0.176034 0.176034
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG  5       2 0.169911 0.000000e+00 0.000000e+00 0.169911 0.169911
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG 10       2 0.159628 0.000000e+00 0.000000e+00 0.159628 0.159628
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision  1       5 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision  5       5 0.161824 0.000000e+00 0.000000e+00 0.161824 0.161824
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision 10       5 0.150159 0.000000e+00 0.000000e+00 0.150159 0.150159
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG  1       5 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG  5       5 0.166183 0.000000e+00 0.000000e+00 0.166183 0.166183
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG 10       5 0.156737 0.000000e+00 0.000000e+00 0.156737 0.156737
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-84 Precision  1       1 0.181336 0.000000e+00 0.000000e+00 0.181336 0.181336
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-84 Precision  5       1 0.171580 0.000000e+00 0.000000e+00 0.171580 0.171580
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-84 Precision 10       1 0.155992 0.000000e+00 0.000000e+00 0.155992 0.155992
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-84      nDCG  1       1 0.181336 0.000000e+00 0.000000e+00 0.181336 0.181336
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-84      nDCG  5       1 0.175088 0.000000e+00 0.000000e+00 0.175088 0.175088
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-84      nDCG 10       1 0.163065 0.000000e+00 0.000000e+00 0.163065 0.163065
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13 Precision  1       4 0.274655 0.000000e+00 0.000000e+00 0.274655 0.274655
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13 Precision  5       4 0.227784 0.000000e+00 0.000000e+00 0.227784 0.227784
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13 Precision 10       4 0.193319 0.000000e+00 0.000000e+00 0.193319 0.193319
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13      nDCG  1       4 0.274655 0.000000e+00 0.000000e+00 0.274655 0.274655
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13      nDCG  5       4 0.238349 0.000000e+00 0.000000e+00 0.238349 0.238349
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13      nDCG 10       4 0.210610 0.000000e+00 0.000000e+00 0.210610 0.210610
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21 Precision  1       3 0.297985 0.000000e+00 0.000000e+00 0.297985 0.297985
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21 Precision  5       3 0.223118 0.000000e+00 0.000000e+00 0.223118 0.223118
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21 Precision 10       3 0.189820 0.000000e+00 0.000000e+00 0.189820 0.189820
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21      nDCG  1       3 0.297985 0.000000e+00 0.000000e+00 0.297985 0.297985
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21      nDCG  5       3 0.235886 0.000000e+00 0.000000e+00 0.235886 0.235886
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21      nDCG 10       3 0.208171 0.000000e+00 0.000000e+00 0.208171 0.208171
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42 Precision  1       2 0.301166 0.000000e+00 0.000000e+00 0.301166 0.301166
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42 Precision  5       2 0.223754 0.000000e+00 0.000000e+00 0.223754 0.223754
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42 Precision 10       2 0.189714 0.000000e+00 0.000000e+00 0.189714 0.189714
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42      nDCG  1       2 0.301166 0.000000e+00 0.000000e+00 0.301166 0.301166
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42      nDCG  5       2 0.239348 0.000000e+00 0.000000e+00 0.239348 0.239348
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42      nDCG 10       2 0.210168 0.000000e+00 0.000000e+00 0.210168 0.210168
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7 Precision  1       5 0.276776 0.000000e+00 0.000000e+00 0.276776 0.276776
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7 Precision  5       5 0.222694 0.000000e+00 0.000000e+00 0.222694 0.222694
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7 Precision 10       5 0.188547 0.000000e+00 0.000000e+00 0.188547 0.188547
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7      nDCG  1       5 0.276776 0.000000e+00 0.000000e+00 0.276776 0.276776
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7      nDCG  5       5 0.235462 3.103168e-17 1.317905e-16 0.235462 0.235462
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7      nDCG 10       5 0.207298 0.000000e+00 0.000000e+00 0.207298 0.207298
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-84 Precision  1       1 0.266172 0.000000e+00 0.000000e+00 0.266172 0.266172
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-84 Precision  5       1 0.226299 0.000000e+00 0.000000e+00 0.226299 0.226299
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-84 Precision 10       1 0.188441 0.000000e+00 0.000000e+00 0.188441 0.188441
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-84      nDCG  1       1 0.266172 0.000000e+00 0.000000e+00 0.266172 0.266172
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-84      nDCG  5       1 0.236915 0.000000e+00 0.000000e+00 0.236915 0.236915
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-84      nDCG 10       1 0.206721 0.000000e+00 0.000000e+00 0.206721 0.206721
+MovieLens100K        LensKit.PopScorer-f4aa5539-13 Precision  1       4 0.182397 0.000000e+00 0.000000e+00 0.182397 0.182397
+MovieLens100K        LensKit.PopScorer-f4aa5539-13 Precision  5       4 0.141888 0.000000e+00 0.000000e+00 0.141888 0.141888
+MovieLens100K        LensKit.PopScorer-f4aa5539-13 Precision 10       4 0.133828 0.000000e+00 0.000000e+00 0.133828 0.133828
+MovieLens100K        LensKit.PopScorer-f4aa5539-13      nDCG  1       4 0.182397 0.000000e+00 0.000000e+00 0.182397 0.182397
+MovieLens100K        LensKit.PopScorer-f4aa5539-13      nDCG  5       4 0.151974 0.000000e+00 0.000000e+00 0.151974 0.151974
+MovieLens100K        LensKit.PopScorer-f4aa5539-13      nDCG 10       4 0.142700 0.000000e+00 0.000000e+00 0.142700 0.142700
+MovieLens100K        LensKit.PopScorer-f4aa5539-21 Precision  1       3 0.187699 0.000000e+00 0.000000e+00 0.187699 0.187699
+MovieLens100K        LensKit.PopScorer-f4aa5539-21 Precision  5       3 0.146978 0.000000e+00 0.000000e+00 0.146978 0.146978
+MovieLens100K        LensKit.PopScorer-f4aa5539-21 Precision 10       3 0.131177 0.000000e+00 0.000000e+00 0.131177 0.131177
+MovieLens100K        LensKit.PopScorer-f4aa5539-21      nDCG  1       3 0.187699 0.000000e+00 0.000000e+00 0.187699 0.187699
+MovieLens100K        LensKit.PopScorer-f4aa5539-21      nDCG  5       3 0.155930 0.000000e+00 0.000000e+00 0.155930 0.155930
+MovieLens100K        LensKit.PopScorer-f4aa5539-21      nDCG 10       3 0.141869 0.000000e+00 0.000000e+00 0.141869 0.141869
+MovieLens100K        LensKit.PopScorer-f4aa5539-42 Precision  1       2 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606
+MovieLens100K        LensKit.PopScorer-f4aa5539-42 Precision  5       2 0.156310 0.000000e+00 0.000000e+00 0.156310 0.156310
+MovieLens100K        LensKit.PopScorer-f4aa5539-42 Precision 10       2 0.131707 0.000000e+00 0.000000e+00 0.131707 0.131707
+MovieLens100K        LensKit.PopScorer-f4aa5539-42      nDCG  1       2 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606
+MovieLens100K        LensKit.PopScorer-f4aa5539-42      nDCG  5       2 0.165762 0.000000e+00 0.000000e+00 0.165762 0.165762
+MovieLens100K        LensKit.PopScorer-f4aa5539-42      nDCG 10       2 0.145265 0.000000e+00 0.000000e+00 0.145265 0.145265
+MovieLens100K         LensKit.PopScorer-f4aa5539-7 Precision  1       5 0.220573 3.103168e-17 1.406869e-16 0.220573 0.220573
+MovieLens100K         LensKit.PopScorer-f4aa5539-7 Precision  5       5 0.139343 0.000000e+00 0.000000e+00 0.139343 0.139343
+MovieLens100K         LensKit.PopScorer-f4aa5539-7 Precision 10       5 0.131601 0.000000e+00 0.000000e+00 0.131601 0.131601
+MovieLens100K         LensKit.PopScorer-f4aa5539-7      nDCG  1       5 0.220573 3.103168e-17 1.406869e-16 0.220573 0.220573
+MovieLens100K         LensKit.PopScorer-f4aa5539-7      nDCG  5       5 0.155064 0.000000e+00 0.000000e+00 0.155064 0.155064
+MovieLens100K         LensKit.PopScorer-f4aa5539-7      nDCG 10       5 0.144184 0.000000e+00 0.000000e+00 0.144184 0.144184
+MovieLens100K        LensKit.PopScorer-f4aa5539-84 Precision  1       1 0.212089 0.000000e+00 0.000000e+00 0.212089 0.212089
+MovieLens100K        LensKit.PopScorer-f4aa5539-84 Precision  5       1 0.144645 0.000000e+00 0.000000e+00 0.144645 0.144645
+MovieLens100K        LensKit.PopScorer-f4aa5539-84 Precision 10       1 0.137858 0.000000e+00 0.000000e+00 0.137858 0.137858
+MovieLens100K        LensKit.PopScorer-f4aa5539-84      nDCG  1       1 0.212089 0.000000e+00 0.000000e+00 0.212089 0.212089
+MovieLens100K        LensKit.PopScorer-f4aa5539-84      nDCG  5       1 0.158884 0.000000e+00 0.000000e+00 0.158884 0.158884
+MovieLens100K        LensKit.PopScorer-f4aa5539-84      nDCG 10       1 0.149217 0.000000e+00 0.000000e+00 0.149217 0.149217
+
+Short statistical analysis:
+      dataset                            algorithm    metric  k  n_runs     mean          std           cv      min      max  range
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision  1       4 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision  5       4 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision 10       4 0.158324 0.000000e+00 0.000000e+00 0.158324 0.158324    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG  1       4 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG  5       4 0.184090 0.000000e+00 0.000000e+00 0.184090 0.184090    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG 10       4 0.168196 0.000000e+00 0.000000e+00 0.168196 0.168196    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision  1       3 0.171792 0.000000e+00 0.000000e+00 0.171792 0.171792    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision  5       3 0.161824 0.000000e+00 0.000000e+00 0.161824 0.161824    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision 10       3 0.150795 0.000000e+00 0.000000e+00 0.150795 0.150795    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG  1       3 0.171792 0.000000e+00 0.000000e+00 0.171792 0.171792    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG  5       3 0.164810 0.000000e+00 0.000000e+00 0.164810 0.164810    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG 10       3 0.156048 0.000000e+00 0.000000e+00 0.156048 0.156048    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision  1       2 0.176034 0.000000e+00 0.000000e+00 0.176034 0.176034    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision  5       2 0.168187 0.000000e+00 0.000000e+00 0.168187 0.168187    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision 10       2 0.154083 0.000000e+00 0.000000e+00 0.154083 0.154083    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG  1       2 0.176034 0.000000e+00 0.000000e+00 0.176034 0.176034    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG  5       2 0.169911 0.000000e+00 0.000000e+00 0.169911 0.169911    0.0
+ HetrecLastFM LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG 10       2 0.159628 0.000000e+00 0.000000e+00 0.159628 0.159628    0.0
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision  1       5 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155    0.0
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision  5       5 0.161824 0.000000e+00 0.000000e+00 0.161824 0.161824    0.0
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision 10       5 0.150159 0.000000e+00 0.000000e+00 0.150159 0.150159    0.0
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG  1       5 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155    0.0
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG  5       5 0.166183 0.000000e+00 0.000000e+00 0.166183 0.166183    0.0
+ HetrecLastFM  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG 10       5 0.156737 0.000000e+00 0.000000e+00 0.156737 0.156737    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13 Precision  1       4 0.274655 0.000000e+00 0.000000e+00 0.274655 0.274655    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13 Precision  5       4 0.227784 0.000000e+00 0.000000e+00 0.227784 0.227784    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13 Precision 10       4 0.193319 0.000000e+00 0.000000e+00 0.193319 0.193319    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13      nDCG  1       4 0.274655 0.000000e+00 0.000000e+00 0.274655 0.274655    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13      nDCG  5       4 0.238349 0.000000e+00 0.000000e+00 0.238349 0.238349    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-13      nDCG 10       4 0.210610 0.000000e+00 0.000000e+00 0.210610 0.210610    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21 Precision  1       3 0.297985 0.000000e+00 0.000000e+00 0.297985 0.297985    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21 Precision  5       3 0.223118 0.000000e+00 0.000000e+00 0.223118 0.223118    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21 Precision 10       3 0.189820 0.000000e+00 0.000000e+00 0.189820 0.189820    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21      nDCG  1       3 0.297985 0.000000e+00 0.000000e+00 0.297985 0.297985    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21      nDCG  5       3 0.235886 0.000000e+00 0.000000e+00 0.235886 0.235886    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-21      nDCG 10       3 0.208171 0.000000e+00 0.000000e+00 0.208171 0.208171    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42 Precision  1       2 0.301166 0.000000e+00 0.000000e+00 0.301166 0.301166    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42 Precision  5       2 0.223754 0.000000e+00 0.000000e+00 0.223754 0.223754    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42 Precision 10       2 0.189714 0.000000e+00 0.000000e+00 0.189714 0.189714    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42      nDCG  1       2 0.301166 0.000000e+00 0.000000e+00 0.301166 0.301166    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42      nDCG  5       2 0.239348 0.000000e+00 0.000000e+00 0.239348 0.239348    0.0
+ HetrecLastFM    LensKit.ItemKNNScorer-c3d66610-42      nDCG 10       2 0.210168 0.000000e+00 0.000000e+00 0.210168 0.210168    0.0
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7 Precision  1       5 0.276776 0.000000e+00 0.000000e+00 0.276776 0.276776    0.0
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7 Precision  5       5 0.222694 0.000000e+00 0.000000e+00 0.222694 0.222694    0.0
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7 Precision 10       5 0.188547 0.000000e+00 0.000000e+00 0.188547 0.188547    0.0
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7      nDCG  1       5 0.276776 0.000000e+00 0.000000e+00 0.276776 0.276776    0.0
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7      nDCG  5       5 0.235462 3.103168e-17 1.317905e-16 0.235462 0.235462    0.0
+ HetrecLastFM     LensKit.ItemKNNScorer-c3d66610-7      nDCG 10       5 0.207298 0.000000e+00 0.000000e+00 0.207298 0.207298    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13 Precision  1       4 0.182397 0.000000e+00 0.000000e+00 0.182397 0.182397    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13 Precision  5       4 0.141888 0.000000e+00 0.000000e+00 0.141888 0.141888    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13 Precision 10       4 0.133828 0.000000e+00 0.000000e+00 0.133828 0.133828    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13      nDCG  1       4 0.182397 0.000000e+00 0.000000e+00 0.182397 0.182397    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13      nDCG  5       4 0.151974 0.000000e+00 0.000000e+00 0.151974 0.151974    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-13      nDCG 10       4 0.142700 0.000000e+00 0.000000e+00 0.142700 0.142700    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21 Precision  1       3 0.187699 0.000000e+00 0.000000e+00 0.187699 0.187699    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21 Precision  5       3 0.146978 0.000000e+00 0.000000e+00 0.146978 0.146978    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21 Precision 10       3 0.131177 0.000000e+00 0.000000e+00 0.131177 0.131177    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21      nDCG  1       3 0.187699 0.000000e+00 0.000000e+00 0.187699 0.187699    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21      nDCG  5       3 0.155930 0.000000e+00 0.000000e+00 0.155930 0.155930    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-21      nDCG 10       3 0.141869 0.000000e+00 0.000000e+00 0.141869 0.141869    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42 Precision  1       2 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42 Precision  5       2 0.156310 0.000000e+00 0.000000e+00 0.156310 0.156310    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42 Precision 10       2 0.131707 0.000000e+00 0.000000e+00 0.131707 0.131707    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42      nDCG  1       2 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42      nDCG  5       2 0.165762 0.000000e+00 0.000000e+00 0.165762 0.165762    0.0
+ HetrecLastFM        LensKit.PopScorer-f4aa5539-42      nDCG 10       2 0.145265 0.000000e+00 0.000000e+00 0.145265 0.145265    0.0
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7 Precision  1       5 0.220573 3.103168e-17 1.406869e-16 0.220573 0.220573    0.0
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7 Precision  5       5 0.139343 0.000000e+00 0.000000e+00 0.139343 0.139343    0.0
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7 Precision 10       5 0.131601 0.000000e+00 0.000000e+00 0.131601 0.131601    0.0
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7      nDCG  1       5 0.220573 3.103168e-17 1.406869e-16 0.220573 0.220573    0.0
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7      nDCG  5       5 0.155064 0.000000e+00 0.000000e+00 0.155064 0.155064    0.0
+ HetrecLastFM         LensKit.PopScorer-f4aa5539-7      nDCG 10       5 0.144184 0.000000e+00 0.000000e+00 0.144184 0.144184    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision  1       4 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision  5       4 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13 Precision 10       4 0.158324 0.000000e+00 0.000000e+00 0.158324 0.158324    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG  1       4 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG  5       4 0.184090 0.000000e+00 0.000000e+00 0.184090 0.184090    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-13      nDCG 10       4 0.168196 0.000000e+00 0.000000e+00 0.168196 0.168196    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision  1       3 0.171792 0.000000e+00 0.000000e+00 0.171792 0.171792    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision  5       3 0.161824 0.000000e+00 0.000000e+00 0.161824 0.161824    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21 Precision 10       3 0.150795 0.000000e+00 0.000000e+00 0.150795 0.150795    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG  1       3 0.171792 0.000000e+00 0.000000e+00 0.171792 0.171792    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG  5       3 0.164810 0.000000e+00 0.000000e+00 0.164810 0.164810    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-21      nDCG 10       3 0.156048 0.000000e+00 0.000000e+00 0.156048 0.156048    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision  1       2 0.176034 0.000000e+00 0.000000e+00 0.176034 0.176034    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision  5       2 0.168187 0.000000e+00 0.000000e+00 0.168187 0.168187    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42 Precision 10       2 0.154083 0.000000e+00 0.000000e+00 0.154083 0.154083    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG  1       2 0.176034 0.000000e+00 0.000000e+00 0.176034 0.176034    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG  5       2 0.169911 0.000000e+00 0.000000e+00 0.169911 0.169911    0.0
+MovieLens100K LensKit.ImplicitMFScorer-f0dd7ecb-42      nDCG 10       2 0.159628 0.000000e+00 0.000000e+00 0.159628 0.159628    0.0
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision  1       5 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155    0.0
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision  5       5 0.161824 0.000000e+00 0.000000e+00 0.161824 0.161824    0.0
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7 Precision 10       5 0.150159 0.000000e+00 0.000000e+00 0.150159 0.150159    0.0
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG  1       5 0.178155 0.000000e+00 0.000000e+00 0.178155 0.178155    0.0
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG  5       5 0.166183 0.000000e+00 0.000000e+00 0.166183 0.166183    0.0
+MovieLens100K  LensKit.ImplicitMFScorer-f0dd7ecb-7      nDCG 10       5 0.156737 0.000000e+00 0.000000e+00 0.156737 0.156737    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13 Precision  1       4 0.274655 0.000000e+00 0.000000e+00 0.274655 0.274655    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13 Precision  5       4 0.227784 0.000000e+00 0.000000e+00 0.227784 0.227784    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13 Precision 10       4 0.193319 0.000000e+00 0.000000e+00 0.193319 0.193319    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13      nDCG  1       4 0.274655 0.000000e+00 0.000000e+00 0.274655 0.274655    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13      nDCG  5       4 0.238349 0.000000e+00 0.000000e+00 0.238349 0.238349    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-13      nDCG 10       4 0.210610 0.000000e+00 0.000000e+00 0.210610 0.210610    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21 Precision  1       3 0.297985 0.000000e+00 0.000000e+00 0.297985 0.297985    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21 Precision  5       3 0.223118 0.000000e+00 0.000000e+00 0.223118 0.223118    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21 Precision 10       3 0.189820 0.000000e+00 0.000000e+00 0.189820 0.189820    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21      nDCG  1       3 0.297985 0.000000e+00 0.000000e+00 0.297985 0.297985    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21      nDCG  5       3 0.235886 0.000000e+00 0.000000e+00 0.235886 0.235886    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-21      nDCG 10       3 0.208171 0.000000e+00 0.000000e+00 0.208171 0.208171    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42 Precision  1       2 0.301166 0.000000e+00 0.000000e+00 0.301166 0.301166    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42 Precision  5       2 0.223754 0.000000e+00 0.000000e+00 0.223754 0.223754    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42 Precision 10       2 0.189714 0.000000e+00 0.000000e+00 0.189714 0.189714    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42      nDCG  1       2 0.301166 0.000000e+00 0.000000e+00 0.301166 0.301166    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42      nDCG  5       2 0.239348 0.000000e+00 0.000000e+00 0.239348 0.239348    0.0
+MovieLens100K    LensKit.ItemKNNScorer-c3d66610-42      nDCG 10       2 0.210168 0.000000e+00 0.000000e+00 0.210168 0.210168    0.0
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7 Precision  1       5 0.276776 0.000000e+00 0.000000e+00 0.276776 0.276776    0.0
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7 Precision  5       5 0.222694 0.000000e+00 0.000000e+00 0.222694 0.222694    0.0
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7 Precision 10       5 0.188547 0.000000e+00 0.000000e+00 0.188547 0.188547    0.0
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7      nDCG  1       5 0.276776 0.000000e+00 0.000000e+00 0.276776 0.276776    0.0
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7      nDCG  5       5 0.235462 3.103168e-17 1.317905e-16 0.235462 0.235462    0.0
+MovieLens100K     LensKit.ItemKNNScorer-c3d66610-7      nDCG 10       5 0.207298 0.000000e+00 0.000000e+00 0.207298 0.207298    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-13 Precision  1       4 0.182397 0.000000e+00 0.000000e+00 0.182397 0.182397    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-13 Precision  5       4 0.141888 0.000000e+00 0.000000e+00 0.141888 0.141888    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-13 Precision 10       4 0.133828 0.000000e+00 0.000000e+00 0.133828 0.133828    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-13      nDCG  1       4 0.182397 0.000000e+00 0.000000e+00 0.182397 0.182397    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-13      nDCG  5       4 0.151974 0.000000e+00 0.000000e+00 0.151974 0.151974    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-13      nDCG 10       4 0.142700 0.000000e+00 0.000000e+00 0.142700 0.142700    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-21 Precision  1       3 0.187699 0.000000e+00 0.000000e+00 0.187699 0.187699    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-21 Precision  5       3 0.146978 0.000000e+00 0.000000e+00 0.146978 0.146978    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-21 Precision 10       3 0.131177 0.000000e+00 0.000000e+00 0.131177 0.131177    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-21      nDCG  1       3 0.187699 0.000000e+00 0.000000e+00 0.187699 0.187699    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-21      nDCG  5       3 0.155930 0.000000e+00 0.000000e+00 0.155930 0.155930    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-21      nDCG 10       3 0.141869 0.000000e+00 0.000000e+00 0.141869 0.141869    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-42 Precision  1       2 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-42 Precision  5       2 0.156310 0.000000e+00 0.000000e+00 0.156310 0.156310    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-42 Precision 10       2 0.131707 0.000000e+00 0.000000e+00 0.131707 0.131707    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-42      nDCG  1       2 0.203606 0.000000e+00 0.000000e+00 0.203606 0.203606    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-42      nDCG  5       2 0.165762 0.000000e+00 0.000000e+00 0.165762 0.165762    0.0
+MovieLens100K        LensKit.PopScorer-f4aa5539-42      nDCG 10       2 0.145265 0.000000e+00 0.000000e+00 0.145265 0.145265    0.0
+MovieLens100K         LensKit.PopScorer-f4aa5539-7 Precision  1       5 0.220573 3.103168e-17 1.406869e-16 0.220573 0.220573    0.0
+MovieLens100K         LensKit.PopScorer-f4aa5539-7 Precision  5       5 0.139343 0.000000e+00 0.000000e+00 0.139343 0.139343    0.0
+MovieLens100K         LensKit.PopScorer-f4aa5539-7 Precision 10       5 0.131601 0.000000e+00 0.000000e+00 0.131601 0.131601    0.0
+MovieLens100K         LensKit.PopScorer-f4aa5539-7      nDCG  1       5 0.220573 3.103168e-17 1.406869e-16 0.220573 0.220573    0.0
+MovieLens100K         LensKit.PopScorer-f4aa5539-7      nDCG  5       5 0.155064 0.000000e+00 0.000000e+00 0.155064 0.155064    0.0
+MovieLens100K         LensKit.PopScorer-f4aa5539-7      nDCG 10       5 0.144184 0.000000e+00 0.000000e+00 0.144184 0.144184    0.0
+Execution time: 14 minutes (time limit is an hour).

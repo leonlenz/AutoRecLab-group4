@@ -1,0 +1,48 @@
+[2026/06/28 17:06:56] INFO     Canonicalized data set already exists, skipping download and canonicalization.                         recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                   feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                   feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                               feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                 feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                       core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                        core_pruning.py:63
+[2026/06/28 17:06:57] INFO     Making data set implicit with threshold 3.                                                          feedback_conversion.py:21
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'rating'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 80, in <module>
+    ds = preprocess_dataset(raw, ds_name, seed)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 41, in preprocess_dataset
+    return pipe.process(ds)
+           ^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/pipe.py", line 34, in process
+    data = step.process(data)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/feedback_conversion.py", line 22, in _process
+    min_rating = dataset.min_rating()
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/recsys_data_set.py", line 366, in min_rating
+    return self._data.df["rating"].min()
+           ~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'rating'
+Program crashed with exception (see above) after 5 seconds!

@@ -1,0 +1,20 @@
+ID: 534ee76670794deea549a6993460f7a9
+Position: 1
+Score: 0.2727272727272727
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 0.07151532173156738
+Lines of Code: 17
+Empty Lines: 3
+Comment Lines: 8
+Total Characters: 1049
+Libraries Imported: os
+Count of Libraries Imported: 1
+Functions: 0
+Classes: 0
+Average Arguments per Function: 0
+Variable Assignments: 1
+Loops: 0
+Conditions: 0
+Insertions: 15
+Deletions: 91

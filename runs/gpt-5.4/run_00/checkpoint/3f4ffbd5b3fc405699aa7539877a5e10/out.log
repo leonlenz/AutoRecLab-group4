@@ -1,0 +1,38 @@
+
+====================================================================================================
+Loading and preprocessing base dataset: MovieLens100K
+====================================================================================================
+[2026/06/28 08:19:47] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                              recsys_data_set.py:205
+[2026/06/28 08:19:48] INFO     Making data set implicit with threshold 1.                                                                                               feedback_conversion.py:21
+                      INFO     Minimum rating: 4                                                                                                                        feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                                        feedback_conversion.py:25
+                      INFO     Number of interactions before: 55375                                                                                                     feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                                      feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                                     core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                                            core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                             core_pruning.py:63
+
+====================================================================================================
+Running dataset=MovieLens100K, seed=11
+====================================================================================================
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/workspace/runfile.py", line 411, in <module>
+    main()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/workspace/runfile.py", line 342, in main
+    split_dataset = build_seed_split(base_dataset, seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/out/workspace/runfile.py", line 69, in build_seed_split
+    return splitter.process(dataset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+Program crashed with exception (see above) after 2 seconds!

@@ -1,0 +1,20 @@
+ID: d598bbecb4064d0c8db12ed11126253f
+Position: 1
+Score: 0.0
+Is Buggy: False
+Is Satisfactory: False
+Execution Time: 0.07304024696350098
+Lines of Code: 1
+Empty Lines: 0
+Comment Lines: 0
+Total Characters: 9
+Libraries Imported: os
+Count of Libraries Imported: 1
+Functions: 0
+Classes: 0
+Average Arguments per Function: 0
+Variable Assignments: 0
+Loops: 0
+Conditions: 0
+Insertions: 0
+Deletions: 18

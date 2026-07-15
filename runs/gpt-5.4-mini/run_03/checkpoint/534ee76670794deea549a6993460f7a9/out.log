@@ -1,0 +1,4 @@
+Working directory: /home/florian_dueck04/AutoRecLab-group4/out/run_03/workspace/working
+Planned datasets: MovieLens100K, Amazon2014VideoGames, HetrecLastFM
+Planned algorithms: LensKit.PopScorer, LensKit.ItemKNNScorer, LensKit.ImplicitMFScorer
+Execution time: a moment (time limit is an hour).

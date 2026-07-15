@@ -1,0 +1,20 @@
+ID: 9946248cc79447f8bd8274f180478c17
+Position: 2
+Score: 0.6363636363636364
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 5400
+Lines of Code: 531
+Empty Lines: 77
+Comment Lines: 0
+Total Characters: 21260
+Libraries Imported: shutil, math, json, os, pandas, typing, pathlib, omnirec, numpy
+Count of Libraries Imported: 9
+Functions: 20
+Classes: 0
+Average Arguments per Function: 1.65
+Variable Assignments: 119
+Loops: 15
+Conditions: 34
+Insertions: 467
+Deletions: 220

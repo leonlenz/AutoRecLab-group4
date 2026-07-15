@@ -1,0 +1,20 @@
+ID: 8a92fc8ce5ac414d89aac9437f5c8581
+Position: 1
+Score: 0.5555555555555556
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 5400
+Lines of Code: 341
+Empty Lines: 75
+Comment Lines: 7
+Total Characters: 11821
+Libraries Imported: contextlib, omnirec, os, itertools, numpy, sklearn, shutil, pandas, re
+Count of Libraries Imported: 9
+Functions: 12
+Classes: 1
+Average Arguments per Function: 1.25
+Variable Assignments: 79
+Loops: 10
+Conditions: 18
+Insertions: 271
+Deletions: 237

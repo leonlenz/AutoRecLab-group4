@@ -1,0 +1,23 @@
+Working directory: /home/florian_dueck04/AutoRecLab-group4/out/run_04/workspace/working
+Split seeds: [7, 21, 42, 84, 123]
+Loading MovieLens100K...
+[2026/06/29 08:09:27] INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+                      INFO     Making data set implicit with threshold 3.                      feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                               feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                               feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                           feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                             feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                   core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                    core_pruning.py:63
+Running experiment for dataset=MovieLens100K, seed=7...
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/06/29 08:09:30] INFO     Runner started with pid: 28660                                         coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      CRITICAL Invalid dataset variant. Dataset has to be either FoldedData or        coordinator.py:223
+                               SplitData. Apply a datasplit beforehand                                                  
+                      INFO     Stopping runner...                                                     coordinator.py:445
+Program crashed with exception (see above) after 4 seconds!

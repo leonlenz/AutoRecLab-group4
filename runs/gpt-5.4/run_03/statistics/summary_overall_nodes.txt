@@ -1,0 +1,16 @@
+Total Nodes: 7
+Average Score: 0.26666666666666666
+Average Execution Time: 785.6783393110547
+Average Lines of Code: 306.2857142857143
+Average Empty Lines: 48.285714285714285
+Average Comment Lines: 0.0
+Average Total Characters: 12233.0
+Average Count of Libraries Imported: 7.285714285714286
+Average Functions: 13.0
+Average Classes: 0.5714285714285714
+Average Arguments per Function: 1.180540293040293
+Average Variable Assignments: 83.71428571428571
+Average Loops: 10.428571428571429
+Average Conditions: 22.428571428571427
+Average Insertions: 214.57142857142858
+Average Deletions: 152.57142857142858

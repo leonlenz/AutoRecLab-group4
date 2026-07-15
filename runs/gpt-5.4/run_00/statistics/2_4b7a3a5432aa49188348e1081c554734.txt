@@ -1,0 +1,20 @@
+ID: 4b7a3a5432aa49188348e1081c554734
+Position: 2
+Score: 0.2
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 141.6287558078766
+Lines of Code: 453
+Empty Lines: 67
+Comment Lines: 0
+Total Characters: 16421
+Libraries Imported: hashlib, math, os, pandas, scipy, json, pathlib, omnirec, numpy
+Count of Libraries Imported: 9
+Functions: 19
+Classes: 0
+Average Arguments per Function: 1.5789473684210527
+Variable Assignments: 126
+Loops: 20
+Conditions: 39
+Insertions: 397
+Deletions: 247

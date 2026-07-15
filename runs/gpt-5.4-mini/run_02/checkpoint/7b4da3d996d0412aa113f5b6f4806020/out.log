@@ -1,0 +1,18 @@
+[2026/06/29 03:24:04] INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+                      INFO     Making data set implicit with threshold 3.                      feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                               feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                               feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                           feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                             feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                   core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                    core_pruning.py:63
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 164, in <module>
+    main()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 129, in main
+    split_ds = base_ds.replace_data(type(base_ds._data)(train_df, None, test_df) if hasattr(base_ds._data, '__class__') else base_ds)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: RawData.__init__() takes 2 positional arguments but 4 were given
+Program crashed with exception (see above) after 3 seconds!

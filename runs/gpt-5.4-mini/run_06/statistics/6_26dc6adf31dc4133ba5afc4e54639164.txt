@@ -1,0 +1,20 @@
+ID: 26dc6adf31dc4133ba5afc4e54639164
+Position: 6
+Score: 0.3333333333333333
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 5150.669005155563
+Lines of Code: 133
+Empty Lines: 22
+Comment Lines: 0
+Total Characters: 4711
+Libraries Imported: json, os, collections, omnirec, pandas, scipy, numpy, re
+Count of Libraries Imported: 8
+Functions: 7
+Classes: 0
+Average Arguments per Function: 0.5714285714285714
+Variable Assignments: 31
+Loops: 5
+Conditions: 5
+Insertions: 95
+Deletions: 116

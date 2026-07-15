@@ -1,0 +1,13 @@
+usage: runfile.py [-h] {run_job,aggregate,run_all} ...
+
+OmniRec seed-sensitivity experiment
+
+positional arguments:
+  {run_job,aggregate,run_all}
+    run_job             Run one dataset/seed job
+    aggregate           Aggregate completed jobs
+    run_all             Run all dataset/seed jobs then aggregate
+
+options:
+  -h, --help            show this help message and exit
+Execution time: a second (time limit is an hour).

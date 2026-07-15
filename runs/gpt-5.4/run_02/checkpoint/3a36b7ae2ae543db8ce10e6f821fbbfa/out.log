@@ -1,0 +1,45 @@
+Working directory: /home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/working
+Seeds: [11, 23, 37, 53, 71]
+
+Notes:
+- OmniRec documented MakeImplicit(3) examples use ratings >= 3, while the request specifies ratings > 3.
+- OmniRec 0.2.0 documentation exposes NDCG/HR/Recall but not Precision, so Precision@k is computed from OmniRec checkpoint predictions.
+- All recommender functionality (loading, preprocessing, splitting, training, prediction generation) uses OmniRec APIs only.
+
+Loading dataset: MovieLens100K
+[2026/07/08 16:49:34] INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+RecSysDataSet(name='MovieLens100K', variant='RawData', interactions=100000, columns=4, lineage_steps=0)
+                      INFO     Making data set implicit with threshold 3.                      feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                               feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                               feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                           feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                             feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                   core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                    core_pruning.py:63
+1. MakeImplicit(threshold=3) [runtime=0.0101s]
+2. CorePruning(core=5) [runtime=0.0423s]
+
+=== Dataset=MovieLens100K Seed=11 ===
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 380, in <module>
+    main()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 274, in main
+    split_ds, train_df, val_df, test_df = build_seed_split(raw_ds, seed)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 112, in build_seed_split
+    split_ds = splitter.process(raw_ds)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+Program crashed with exception (see above) after a second!

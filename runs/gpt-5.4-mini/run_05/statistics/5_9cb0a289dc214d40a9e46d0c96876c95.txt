@@ -1,0 +1,20 @@
+ID: 9cb0a289dc214d40a9e46d0c96876c95
+Position: 5
+Score: 0.0
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 1.6808617115020752
+Lines of Code: 81
+Empty Lines: 15
+Comment Lines: 0
+Total Characters: 2870
+Libraries Imported: json, omnirec, statistics, math, os
+Count of Libraries Imported: 5
+Functions: 3
+Classes: 0
+Average Arguments per Function: 0.6666666666666666
+Variable Assignments: 12
+Loops: 2
+Conditions: 2
+Insertions: 47
+Deletions: 98

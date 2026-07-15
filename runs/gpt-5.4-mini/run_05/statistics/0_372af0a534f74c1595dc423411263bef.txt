@@ -1,0 +1,20 @@
+ID: 372af0a534f74c1595dc423411263bef
+Position: 0
+Score: 0.0
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 0.5191078186035156
+Lines of Code: 19
+Empty Lines: 5
+Comment Lines: 3
+Total Characters: 666
+Libraries Imported: itertools, pandas, os, numpy
+Count of Libraries Imported: 4
+Functions: 1
+Classes: 0
+Average Arguments per Function: 0.0
+Variable Assignments: 1
+Loops: 0
+Conditions: 1
+Insertions: 19
+Deletions: 0

@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 383, in <module>
+    main()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 291, in main
+    patch_omnirec_lenskit_runner()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 30, in patch_omnirec_lenskit_runner
+    import omnirec_runner.lenskit_runner as lk_runner_mod
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 3, in <module>
+    import binpickle
+ModuleNotFoundError: No module named 'binpickle'
+Program crashed with exception (see above) after 9 seconds!

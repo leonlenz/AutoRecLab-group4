@@ -1,0 +1,20 @@
+ID: ad76fe0ae61f4ca3b964339fa3f9aaa3
+Position: 4
+Score: 0.0
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 0.0775289535522461
+Lines of Code: 1
+Empty Lines: 0
+Comment Lines: 0
+Total Characters: 13
+Libraries Imported: 
+Count of Libraries Imported: 0
+Functions: 0
+Classes: 0
+Average Arguments per Function: 0
+Variable Assignments: 0
+Loops: 0
+Conditions: 0
+Insertions: 1
+Deletions: 383

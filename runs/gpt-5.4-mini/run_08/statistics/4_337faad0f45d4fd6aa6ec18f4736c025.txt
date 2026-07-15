@@ -1,0 +1,20 @@
+ID: 337faad0f45d4fd6aa6ec18f4736c025
+Position: 4
+Score: 0.08333333333333333
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 4861.650689840317
+Lines of Code: 142
+Empty Lines: 28
+Comment Lines: 1
+Total Characters: 4685
+Libraries Imported: omnirec, pandas, numpy, dataclasses, os
+Count of Libraries Imported: 5
+Functions: 5
+Classes: 1
+Average Arguments per Function: 1.2
+Variable Assignments: 31
+Loops: 3
+Conditions: 6
+Insertions: 124
+Deletions: 150

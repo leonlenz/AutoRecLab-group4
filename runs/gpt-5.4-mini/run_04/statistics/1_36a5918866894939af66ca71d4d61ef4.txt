@@ -1,0 +1,20 @@
+ID: 36a5918866894939af66ca71d4d61ef4
+Position: 1
+Score: 0.0
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 1.4562573432922363
+Lines of Code: 160
+Empty Lines: 30
+Comment Lines: 6
+Total Characters: 6071
+Libraries Imported: json, omnirec, lenskit, random, pandas, typing, dataclasses, numpy, math, os
+Count of Libraries Imported: 10
+Functions: 8
+Classes: 0
+Average Arguments per Function: 1.875
+Variable Assignments: 42
+Loops: 6
+Conditions: 4
+Insertions: 155
+Deletions: 9

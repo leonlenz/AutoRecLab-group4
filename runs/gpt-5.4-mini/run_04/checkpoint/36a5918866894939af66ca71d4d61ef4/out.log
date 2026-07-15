@@ -1,0 +1,21 @@
+[2026/06/29 06:43:35] INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+Traceback (most recent call last):
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_04/workspace/runfile.py", line 160, in <module>
+    run_experiment()
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_04/workspace/runfile.py", line 123, in run_experiment
+    pipeline = _build_preprocess_pipeline(Pipe, CorePruning, MakeImplicit, UserHoldout, needs_implicit, seed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/out/run_04/workspace/runfile.py", line 49, in _build_preprocess_pipeline
+    steps.append(UserHoldout(validation_size=0.2, test_size=0.2, random_state=seed))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 40, in wrapped_init
+    bound = sig.bind_partial(self, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/inspect.py", line 3287, in bind_partial
+    return self._bind(args, kwargs, partial=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/florian_dueck04/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/inspect.py", line 3269, in _bind
+    raise TypeError(
+TypeError: got an unexpected keyword argument 'random_state'
+Program crashed with exception (see above) after a second!

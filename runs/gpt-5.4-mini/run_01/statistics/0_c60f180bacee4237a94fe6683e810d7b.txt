@@ -1,0 +1,20 @@
+ID: c60f180bacee4237a94fe6683e810d7b
+Position: 0
+Score: 0.0
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 5.352784156799316
+Lines of Code: 99
+Empty Lines: 18
+Comment Lines: 7
+Total Characters: 3700
+Libraries Imported: random, numpy, math, os, omnirec, collections, pandas, json
+Count of Libraries Imported: 8
+Functions: 5
+Classes: 0
+Average Arguments per Function: 1.0
+Variable Assignments: 23
+Loops: 4
+Conditions: 3
+Insertions: 99
+Deletions: 0

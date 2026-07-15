@@ -1,0 +1,838 @@
+Using OmniRec-only pipeline.
+OmniRec documents UserHoldout(validation_size, test_size) for train/val/test splitting; using validation_size=0.001 and test_size=0.2.
+This script is resumable: completed dataset/seed conditions are skipped and prior checkpoints are preserved.
+Loading and preprocessing MovieLens100K
+[2026/07/08 23:39:20] INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+                      INFO     Making data set implicit with threshold 3.                      feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                               feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                               feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                           feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                             feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                   core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                    core_pruning.py:63
+Loading and preprocessing Amazon2014VideoGames
+                      INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+                      INFO     Making data set implicit with threshold 3.                      feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                             feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                             feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                          feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                           feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                 core_pruning.py:20
+[2026/07/08 23:39:22] INFO     Number of interactions after: 177572                                   core_pruning.py:63
+Loading and preprocessing HetrecLastFM
+                      INFO     Canonicalized data set already exists, skipping download and       recsys_data_set.py:205
+                               canonicalization.                                                                        
+                      INFO     Pruning data set to 5-core.                                            core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                   core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                    core_pruning.py:63
+Running dataset=MovieLens100K, seed=11, split=train/val/test ~= 0.799/0.001/0.20
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:39:25] INFO     Runner started with pid: 285377                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                 coordinator.py:402
+[2026/07/08 23:39:35] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer             coordinator.py:402
+[2026/07/08 23:39:55] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer            coordinator.py:402
+[2026/07/08 23:39:56] INFO     MovieLens100K/ImplicitMFScorer done!                                   coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+[2026/07/08 23:39:57] INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:39:59] INFO     Runner started with pid: 285470                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                    coordinator.py:402
+[2026/07/08 23:40:09] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                coordinator.py:402
+[2026/07/08 23:40:19] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer               coordinator.py:402
+[2026/07/08 23:40:21] INFO     MovieLens100K/ItemKNNScorer done!                                      coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:40:23] INFO     Runner started with pid: 285569                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                        coordinator.py:402
+[2026/07/08 23:40:33] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                    coordinator.py:402
+[2026/07/08 23:40:43] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                   coordinator.py:402
+[2026/07/08 23:40:45] INFO     MovieLens100K/PopScorer done!                                          coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                                MovieLens100K-d6f3ec58: Evaluation Results                                
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-aa1ed12e-11 │ 0.1951219512195122  │ 0.18548197258357083 │ 0.18883655601831348 │
+│ LensKit.ItemKNNScorer-6bc6c8cf-11    │ 0.39236479321314954 │ 0.2707947633751966  │ 0.3165182376254727  │
+│ LensKit.PopScorer-f4aa5539-11        │ 0.2608695652173913  │ 0.17293898481632244 │ 0.18731853045578617 │
+└──────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+
+=== Metrics for MovieLens100K seed 11 ===
+      dataset seed algorithm_short     NDCG                   Precision                  
+                                          1        5       10         1        5       10
+MovieLens100K   11             ALS 0.195122 0.188837 0.185482  0.195122 0.186002 0.182397
+MovieLens100K   11         ItemKNN 0.392365 0.316518 0.270795  0.392365 0.295652 0.240403
+MovieLens100K   11             Pop 0.260870 0.187319 0.172939  0.260870 0.169883 0.157900
+
+=== Post-preprocessing dataset summaries ===
+             dataset  n_interactions  n_users  n_items  min_user_interactions  min_item_interactions  has_rating_col
+       MovieLens100K           81697      943     1203                      6                      5               0
+Amazon2014VideoGames          177572    18813     8691                      5                      5               0
+        HetrecLastFM           52551     1090     3646                      5                      5               1
+
+=== Per-seed split statistics ===
+      dataset  seed  n_train  n_val  n_test  train_share  val_share  test_share  n_users_train  n_users_val  n_users_test  n_items_train  n_items_test
+MovieLens100K    11    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1151
+
+=== Per-run results ===
+      dataset  seed                            algorithm algorithm_short  fold      name  k    value
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  5 0.188837
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG 10 0.185482
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  5 0.186002
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision 10 0.182397
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  5 0.316518
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG 10 0.270795
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  5 0.295652
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision 10 0.240403
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  5 0.187319
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG 10 0.172939
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  5 0.169883
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision 10 0.157900
+
+=== Aggregated results over seeds ===
+      dataset algorithm_short      name  k     mean  std      min      max   median  count  cv
+MovieLens100K             ALS      NDCG  1 0.195122  NaN 0.195122 0.195122 0.195122      1 0.0
+MovieLens100K             ALS      NDCG  5 0.188837  NaN 0.188837 0.188837 0.188837      1 0.0
+MovieLens100K             ALS      NDCG 10 0.185482  NaN 0.185482 0.185482 0.185482      1 0.0
+MovieLens100K             ALS Precision  1 0.195122  NaN 0.195122 0.195122 0.195122      1 0.0
+MovieLens100K             ALS Precision  5 0.186002  NaN 0.186002 0.186002 0.186002      1 0.0
+MovieLens100K             ALS Precision 10 0.182397  NaN 0.182397 0.182397 0.182397      1 0.0
+MovieLens100K         ItemKNN      NDCG  1 0.392365  NaN 0.392365 0.392365 0.392365      1 0.0
+MovieLens100K         ItemKNN      NDCG  5 0.316518  NaN 0.316518 0.316518 0.316518      1 0.0
+MovieLens100K         ItemKNN      NDCG 10 0.270795  NaN 0.270795 0.270795 0.270795      1 0.0
+MovieLens100K         ItemKNN Precision  1 0.392365  NaN 0.392365 0.392365 0.392365      1 0.0
+MovieLens100K         ItemKNN Precision  5 0.295652  NaN 0.295652 0.295652 0.295652      1 0.0
+MovieLens100K         ItemKNN Precision 10 0.240403  NaN 0.240403 0.240403 0.240403      1 0.0
+MovieLens100K             Pop      NDCG  1 0.260870  NaN 0.260870 0.260870 0.260870      1 0.0
+MovieLens100K             Pop      NDCG  5 0.187319  NaN 0.187319 0.187319 0.187319      1 0.0
+MovieLens100K             Pop      NDCG 10 0.172939  NaN 0.172939 0.172939 0.172939      1 0.0
+MovieLens100K             Pop Precision  1 0.260870  NaN 0.260870 0.260870 0.260870      1 0.0
+MovieLens100K             Pop Precision  5 0.169883  NaN 0.169883 0.169883 0.169883      1 0.0
+MovieLens100K             Pop Precision 10 0.157900  NaN 0.157900 0.157900 0.157900      1 0.0
+
+=== Across-seed variability analysis ===
+      dataset algorithm    metric  k     mean  std  range  cv  n_seeds  min_seed_value  max_seed_value
+MovieLens100K       ALS      NDCG  1 0.195122  0.0    0.0 0.0        1        0.195122        0.195122
+MovieLens100K       ALS      NDCG  5 0.188837  0.0    0.0 0.0        1        0.188837        0.188837
+MovieLens100K       ALS      NDCG 10 0.185482  0.0    0.0 0.0        1        0.185482        0.185482
+MovieLens100K       ALS Precision  1 0.195122  0.0    0.0 0.0        1        0.195122        0.195122
+MovieLens100K       ALS Precision  5 0.186002  0.0    0.0 0.0        1        0.186002        0.186002
+MovieLens100K       ALS Precision 10 0.182397  0.0    0.0 0.0        1        0.182397        0.182397
+MovieLens100K   ItemKNN      NDCG  1 0.392365  0.0    0.0 0.0        1        0.392365        0.392365
+MovieLens100K   ItemKNN      NDCG  5 0.316518  0.0    0.0 0.0        1        0.316518        0.316518
+MovieLens100K   ItemKNN      NDCG 10 0.270795  0.0    0.0 0.0        1        0.270795        0.270795
+MovieLens100K   ItemKNN Precision  1 0.392365  0.0    0.0 0.0        1        0.392365        0.392365
+MovieLens100K   ItemKNN Precision  5 0.295652  0.0    0.0 0.0        1        0.295652        0.295652
+MovieLens100K   ItemKNN Precision 10 0.240403  0.0    0.0 0.0        1        0.240403        0.240403
+MovieLens100K       Pop      NDCG  1 0.260870  0.0    0.0 0.0        1        0.260870        0.260870
+MovieLens100K       Pop      NDCG  5 0.187319  0.0    0.0 0.0        1        0.187319        0.187319
+MovieLens100K       Pop      NDCG 10 0.172939  0.0    0.0 0.0        1        0.172939        0.172939
+MovieLens100K       Pop Precision  1 0.260870  0.0    0.0 0.0        1        0.260870        0.260870
+MovieLens100K       Pop Precision  5 0.169883  0.0    0.0 0.0        1        0.169883        0.169883
+MovieLens100K       Pop Precision 10 0.157900  0.0    0.0 0.0        1        0.157900        0.157900
+
+=== Pairwise seed-matched algorithm differences ===
+      dataset    metric  k  algo_a  algo_b  mean_diff  std_diff  min_diff  max_diff  n_pairs
+MovieLens100K      NDCG  1     ALS ItemKNN  -0.197243       0.0 -0.197243 -0.197243        1
+MovieLens100K      NDCG  1     ALS     Pop  -0.065748       0.0 -0.065748 -0.065748        1
+MovieLens100K      NDCG  1 ItemKNN     Pop   0.131495       0.0  0.131495  0.131495        1
+MovieLens100K      NDCG  5     ALS ItemKNN  -0.127682       0.0 -0.127682 -0.127682        1
+MovieLens100K      NDCG  5     ALS     Pop   0.001518       0.0  0.001518  0.001518        1
+MovieLens100K      NDCG  5 ItemKNN     Pop   0.129200       0.0  0.129200  0.129200        1
+MovieLens100K      NDCG 10     ALS ItemKNN  -0.085313       0.0 -0.085313 -0.085313        1
+MovieLens100K      NDCG 10     ALS     Pop   0.012543       0.0  0.012543  0.012543        1
+MovieLens100K      NDCG 10 ItemKNN     Pop   0.097856       0.0  0.097856  0.097856        1
+MovieLens100K Precision  1     ALS ItemKNN  -0.197243       0.0 -0.197243 -0.197243        1
+MovieLens100K Precision  1     ALS     Pop  -0.065748       0.0 -0.065748 -0.065748        1
+MovieLens100K Precision  1 ItemKNN     Pop   0.131495       0.0  0.131495  0.131495        1
+MovieLens100K Precision  5     ALS ItemKNN  -0.109650       0.0 -0.109650 -0.109650        1
+MovieLens100K Precision  5     ALS     Pop   0.016119       0.0  0.016119  0.016119        1
+MovieLens100K Precision  5 ItemKNN     Pop   0.125769       0.0  0.125769  0.125769        1
+MovieLens100K Precision 10     ALS ItemKNN  -0.058006       0.0 -0.058006 -0.058006        1
+MovieLens100K Precision 10     ALS     Pop   0.024496       0.0  0.024496  0.024496        1
+MovieLens100K Precision 10 ItemKNN     Pop   0.082503       0.0  0.082503  0.082503        1
+Running dataset=MovieLens100K, seed=29, split=train/val/test ~= 0.799/0.001/0.20
+[2026/07/08 23:40:53] INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:40:55] INFO     Runner started with pid: 285658                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                 coordinator.py:402
+[2026/07/08 23:41:05] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer             coordinator.py:402
+[2026/07/08 23:41:25] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer            coordinator.py:402
+[2026/07/08 23:41:27] INFO     MovieLens100K/ImplicitMFScorer done!                                   coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:41:29] INFO     Runner started with pid: 285753                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+[2026/07/08 23:41:30] INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                    coordinator.py:402
+[2026/07/08 23:41:40] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                coordinator.py:402
+[2026/07/08 23:41:50] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer               coordinator.py:402
+[2026/07/08 23:41:51] INFO     MovieLens100K/ItemKNNScorer done!                                      coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:41:54] INFO     Runner started with pid: 285849                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                        coordinator.py:402
+[2026/07/08 23:42:04] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                    coordinator.py:402
+[2026/07/08 23:42:14] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                   coordinator.py:402
+[2026/07/08 23:42:16] INFO     MovieLens100K/PopScorer done!                                          coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                               MovieLens100K-d6f3ec58: Evaluation Results                                
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                            ┃ NDCG@1              ┃ NDCG@10            ┃ NDCG@5              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-aa1ed12e-29 │ 0.21314952279957583 │ 0.1972400577947985 │ 0.20642143435043775 │
+│ LensKit.ItemKNNScorer-6bc6c8cf-29    │ 0.3997879109225875  │ 0.2735910548724459 │ 0.3182102005571659  │
+│ LensKit.PopScorer-f4aa5539-29        │ 0.2916224814422057  │ 0.1875553341036001 │ 0.20191502851567328 │
+└──────────────────────────────────────┴─────────────────────┴────────────────────┴─────────────────────┘
+
+=== Metrics for MovieLens100K seed 29 ===
+      dataset seed algorithm_short     NDCG                   Precision                  
+                                          1        5       10         1        5       10
+MovieLens100K   29             ALS 0.213150 0.206421 0.197240  0.213150 0.205302 0.192471
+MovieLens100K   29         ItemKNN 0.399788 0.318210 0.273591  0.399788 0.297561 0.243902
+MovieLens100K   29             Pop 0.291622 0.201915 0.187555  0.291622 0.181548 0.170944
+
+=== Post-preprocessing dataset summaries ===
+             dataset  n_interactions  n_users  n_items  min_user_interactions  min_item_interactions  has_rating_col
+       MovieLens100K           81697      943     1203                      6                      5               0
+Amazon2014VideoGames          177572    18813     8691                      5                      5               0
+        HetrecLastFM           52551     1090     3646                      5                      5               1
+
+=== Per-seed split statistics ===
+      dataset  seed  n_train  n_val  n_test  train_share  val_share  test_share  n_users_train  n_users_val  n_users_test  n_items_train  n_items_test
+MovieLens100K    11    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1151
+MovieLens100K    29    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1141
+
+=== Per-run results ===
+      dataset  seed                            algorithm algorithm_short  fold      name  k    value
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  5 0.188837
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG 10 0.185482
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  5 0.186002
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision 10 0.182397
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  5 0.316518
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG 10 0.270795
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  5 0.295652
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision 10 0.240403
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  5 0.187319
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG 10 0.172939
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  5 0.169883
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision 10 0.157900
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG  1 0.213150
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG  5 0.206421
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG 10 0.197240
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision  1 0.213150
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision  5 0.205302
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision 10 0.192471
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG  1 0.399788
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG  5 0.318210
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG 10 0.273591
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision  1 0.399788
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision  5 0.297561
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision 10 0.243902
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG  1 0.291622
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG  5 0.201915
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG 10 0.187555
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision  1 0.291622
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision  5 0.181548
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision 10 0.170944
+
+=== Aggregated results over seeds ===
+      dataset algorithm_short      name  k     mean      std      min      max   median  count       cv
+MovieLens100K             ALS      NDCG  1 0.204136 0.012747 0.195122 0.213150 0.204136      2 0.062446
+MovieLens100K             ALS      NDCG  5 0.197629 0.012434 0.188837 0.206421 0.197629      2 0.062918
+MovieLens100K             ALS      NDCG 10 0.191361 0.008314 0.185482 0.197240 0.191361      2 0.043448
+MovieLens100K             ALS Precision  1 0.204136 0.012747 0.195122 0.213150 0.204136      2 0.062446
+MovieLens100K             ALS Precision  5 0.195652 0.013647 0.186002 0.205302 0.195652      2 0.069753
+MovieLens100K             ALS Precision 10 0.187434 0.007124 0.182397 0.192471 0.187434      2 0.038006
+MovieLens100K         ItemKNN      NDCG  1 0.396076 0.005249 0.392365 0.399788 0.396076      2 0.013252
+MovieLens100K         ItemKNN      NDCG  5 0.317364 0.001196 0.316518 0.318210 0.317364      2 0.003770
+MovieLens100K         ItemKNN      NDCG 10 0.272193 0.001977 0.270795 0.273591 0.272193      2 0.007264
+MovieLens100K         ItemKNN Precision  1 0.396076 0.005249 0.392365 0.399788 0.396076      2 0.013252
+MovieLens100K         ItemKNN Precision  5 0.296607 0.001350 0.295652 0.297561 0.296607      2 0.004551
+MovieLens100K         ItemKNN Precision 10 0.242153 0.002474 0.240403 0.243902 0.242153      2 0.010219
+MovieLens100K             Pop      NDCG  1 0.276246 0.021746 0.260870 0.291622 0.276246      2 0.078718
+MovieLens100K             Pop      NDCG  5 0.194617 0.010321 0.187319 0.201915 0.194617      2 0.053034
+MovieLens100K             Pop      NDCG 10 0.180247 0.010335 0.172939 0.187555 0.180247      2 0.057340
+MovieLens100K             Pop Precision  1 0.276246 0.021746 0.260870 0.291622 0.276246      2 0.078718
+MovieLens100K             Pop Precision  5 0.175716 0.008248 0.169883 0.181548 0.175716      2 0.046941
+MovieLens100K             Pop Precision 10 0.164422 0.009223 0.157900 0.170944 0.164422      2 0.056094
+
+=== Across-seed variability analysis ===
+      dataset algorithm    metric  k     mean      std    range       cv  n_seeds  min_seed_value  max_seed_value
+MovieLens100K       ALS      NDCG  1 0.204136 0.012747 0.018028 0.062446        2        0.195122        0.213150
+MovieLens100K       ALS      NDCG  5 0.197629 0.012434 0.017585 0.062918        2        0.188837        0.206421
+MovieLens100K       ALS      NDCG 10 0.191361 0.008314 0.011758 0.043448        2        0.185482        0.197240
+MovieLens100K       ALS Precision  1 0.204136 0.012747 0.018028 0.062446        2        0.195122        0.213150
+MovieLens100K       ALS Precision  5 0.195652 0.013647 0.019300 0.069753        2        0.186002        0.205302
+MovieLens100K       ALS Precision 10 0.187434 0.007124 0.010074 0.038006        2        0.182397        0.192471
+MovieLens100K   ItemKNN      NDCG  1 0.396076 0.005249 0.007423 0.013252        2        0.392365        0.399788
+MovieLens100K   ItemKNN      NDCG  5 0.317364 0.001196 0.001692 0.003770        2        0.316518        0.318210
+MovieLens100K   ItemKNN      NDCG 10 0.272193 0.001977 0.002796 0.007264        2        0.270795        0.273591
+MovieLens100K   ItemKNN Precision  1 0.396076 0.005249 0.007423 0.013252        2        0.392365        0.399788
+MovieLens100K   ItemKNN Precision  5 0.296607 0.001350 0.001909 0.004551        2        0.295652        0.297561
+MovieLens100K   ItemKNN Precision 10 0.242153 0.002474 0.003499 0.010219        2        0.240403        0.243902
+MovieLens100K       Pop      NDCG  1 0.276246 0.021746 0.030753 0.078718        2        0.260870        0.291622
+MovieLens100K       Pop      NDCG  5 0.194617 0.010321 0.014596 0.053034        2        0.187319        0.201915
+MovieLens100K       Pop      NDCG 10 0.180247 0.010335 0.014616 0.057340        2        0.172939        0.187555
+MovieLens100K       Pop Precision  1 0.276246 0.021746 0.030753 0.078718        2        0.260870        0.291622
+MovieLens100K       Pop Precision  5 0.175716 0.008248 0.011665 0.046941        2        0.169883        0.181548
+MovieLens100K       Pop Precision 10 0.164422 0.009223 0.013043 0.056094        2        0.157900        0.170944
+
+=== Pairwise seed-matched algorithm differences ===
+      dataset    metric  k  algo_a  algo_b  mean_diff  std_diff  min_diff  max_diff  n_pairs
+MovieLens100K      NDCG  1     ALS ItemKNN  -0.191941  0.007498 -0.197243 -0.186638        2
+MovieLens100K      NDCG  1     ALS     Pop  -0.072110  0.008998 -0.078473 -0.065748        2
+MovieLens100K      NDCG  1 ItemKNN     Pop   0.119830  0.016497  0.108165  0.131495        2
+MovieLens100K      NDCG  5     ALS ItemKNN  -0.119735  0.011238 -0.127682 -0.111789        2
+MovieLens100K      NDCG  5     ALS     Pop   0.003012  0.002113  0.001518  0.004506        2
+MovieLens100K      NDCG  5 ItemKNN     Pop   0.122747  0.009125  0.116295  0.129200        2
+MovieLens100K      NDCG 10     ALS ItemKNN  -0.080832  0.006337 -0.085313 -0.076351        2
+MovieLens100K      NDCG 10     ALS     Pop   0.011114  0.002021  0.009685  0.012543        2
+MovieLens100K      NDCG 10 ItemKNN     Pop   0.091946  0.008358  0.086036  0.097856        2
+MovieLens100K Precision  1     ALS ItemKNN  -0.191941  0.007498 -0.197243 -0.186638        2
+MovieLens100K Precision  1     ALS     Pop  -0.072110  0.008998 -0.078473 -0.065748        2
+MovieLens100K Precision  1 ItemKNN     Pop   0.119830  0.016497  0.108165  0.131495        2
+MovieLens100K Precision  5     ALS ItemKNN  -0.100954  0.012298 -0.109650 -0.092259        2
+MovieLens100K Precision  5     ALS     Pop   0.019936  0.005399  0.016119  0.023754        2
+MovieLens100K Precision  5 ItemKNN     Pop   0.120891  0.006899  0.116013  0.125769        2
+MovieLens100K Precision 10     ALS ItemKNN  -0.054719  0.004649 -0.058006 -0.051432        2
+MovieLens100K Precision 10     ALS     Pop   0.023012  0.002100  0.021527  0.024496        2
+MovieLens100K Precision 10 ItemKNN     Pop   0.077731  0.006749  0.072959  0.082503        2
+Running dataset=MovieLens100K, seed=47, split=train/val/test ~= 0.799/0.001/0.20
+[2026/07/08 23:42:24] INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:42:26] INFO     Runner started with pid: 285939                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                 coordinator.py:402
+[2026/07/08 23:42:36] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer             coordinator.py:402
+[2026/07/08 23:42:56] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer            coordinator.py:402
+[2026/07/08 23:42:58] INFO     MovieLens100K/ImplicitMFScorer done!                                   coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:43:01] INFO     Runner started with pid: 286038                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                    coordinator.py:402
+[2026/07/08 23:43:11] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                coordinator.py:402
+[2026/07/08 23:43:21] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer               coordinator.py:402
+[2026/07/08 23:43:22] INFO     MovieLens100K/ItemKNNScorer done!                                      coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+[2026/07/08 23:43:23] INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:43:25] INFO     Runner started with pid: 286135                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                        coordinator.py:402
+[2026/07/08 23:43:35] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                    coordinator.py:402
+[2026/07/08 23:43:45] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                   coordinator.py:402
+[2026/07/08 23:43:47] INFO     MovieLens100K/PopScorer done!                                          coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                                MovieLens100K-d6f3ec58: Evaluation Results                                
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-aa1ed12e-47 │ 0.19830328738069988 │ 0.18229478678608813 │ 0.1899028036756664  │
+│ LensKit.ItemKNNScorer-6bc6c8cf-47    │ 0.39766702014846234 │ 0.27516102285767163 │ 0.3171126250071005  │
+│ LensKit.PopScorer-f4aa5539-47        │ 0.271474019088017   │ 0.18021558970734006 │ 0.19104533494996354 │
+└──────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+
+=== Metrics for MovieLens100K seed 47 ===
+      dataset seed algorithm_short     NDCG                   Precision                  
+                                          1        5       10         1        5       10
+MovieLens100K   47             ALS 0.198303 0.189903 0.182295  0.198303 0.186426 0.176776
+MovieLens100K   47         ItemKNN 0.397667 0.317113 0.275161  0.397667 0.295652 0.245811
+MovieLens100K   47             Pop 0.271474 0.191045 0.180216  0.271474 0.174549 0.166808
+
+=== Post-preprocessing dataset summaries ===
+             dataset  n_interactions  n_users  n_items  min_user_interactions  min_item_interactions  has_rating_col
+       MovieLens100K           81697      943     1203                      6                      5               0
+Amazon2014VideoGames          177572    18813     8691                      5                      5               0
+        HetrecLastFM           52551     1090     3646                      5                      5               1
+
+=== Per-seed split statistics ===
+      dataset  seed  n_train  n_val  n_test  train_share  val_share  test_share  n_users_train  n_users_val  n_users_test  n_items_train  n_items_test
+MovieLens100K    11    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1151
+MovieLens100K    29    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1141
+MovieLens100K    47    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1150
+
+=== Per-run results ===
+      dataset  seed                            algorithm algorithm_short  fold      name  k    value
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  5 0.188837
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG 10 0.185482
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  5 0.186002
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision 10 0.182397
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  5 0.316518
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG 10 0.270795
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  5 0.295652
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision 10 0.240403
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  5 0.187319
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG 10 0.172939
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  5 0.169883
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision 10 0.157900
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG  1 0.213150
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG  5 0.206421
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG 10 0.197240
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision  1 0.213150
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision  5 0.205302
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision 10 0.192471
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG  1 0.399788
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG  5 0.318210
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG 10 0.273591
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision  1 0.399788
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision  5 0.297561
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision 10 0.243902
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG  1 0.291622
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG  5 0.201915
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG 10 0.187555
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision  1 0.291622
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision  5 0.181548
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision 10 0.170944
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN      NDCG  1 0.198303
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN      NDCG  5 0.189903
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN      NDCG 10 0.182295
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN Precision  1 0.198303
+... (54 rows total)
+
+=== Aggregated results over seeds ===
+      dataset algorithm_short      name  k     mean      std      min      max   median  count       cv
+MovieLens100K             ALS      NDCG  1 0.202192 0.009622 0.195122 0.213150 0.198303      3 0.047590
+MovieLens100K             ALS      NDCG  5 0.195054 0.009859 0.188837 0.206421 0.189903      3 0.050546
+MovieLens100K             ALS      NDCG 10 0.188339 0.007872 0.182295 0.197240 0.185482      3 0.041795
+MovieLens100K             ALS Precision  1 0.202192 0.009622 0.195122 0.213150 0.198303      3 0.047590
+MovieLens100K             ALS Precision  5 0.192577 0.011023 0.186002 0.205302 0.186426      3 0.057237
+MovieLens100K             ALS Precision 10 0.183881 0.007952 0.176776 0.192471 0.182397      3 0.043245
+MovieLens100K         ItemKNN      NDCG  1 0.396607 0.003823 0.392365 0.399788 0.397667      3 0.009641
+MovieLens100K         ItemKNN      NDCG  5 0.317280 0.000858 0.316518 0.318210 0.317113      3 0.002705
+MovieLens100K         ItemKNN      NDCG 10 0.273182 0.002212 0.270795 0.275161 0.273591      3 0.008096
+MovieLens100K         ItemKNN Precision  1 0.396607 0.003823 0.392365 0.399788 0.397667      3 0.009641
+MovieLens100K         ItemKNN Precision  5 0.296288 0.001102 0.295652 0.297561 0.295652      3 0.003720
+MovieLens100K         ItemKNN Precision 10 0.243372 0.002743 0.240403 0.245811 0.243902      3 0.011270
+MovieLens100K             Pop      NDCG  1 0.274655 0.015621 0.260870 0.291622 0.271474      3 0.056876
+MovieLens100K             Pop      NDCG  5 0.193426 0.007584 0.187319 0.201915 0.191045      3 0.039208
+MovieLens100K             Pop      NDCG 10 0.180237 0.007308 0.172939 0.187555 0.180216      3 0.040548
+MovieLens100K             Pop Precision  1 0.274655 0.015621 0.260870 0.291622 0.271474      3 0.056876
+MovieLens100K             Pop Precision  5 0.175327 0.005871 0.169883 0.181548 0.174549      3 0.033487
+MovieLens100K             Pop Precision 10 0.165217 0.006666 0.157900 0.170944 0.166808      3 0.040345
+
+=== Across-seed variability analysis ===
+      dataset algorithm    metric  k     mean      std    range       cv  n_seeds  min_seed_value  max_seed_value
+MovieLens100K       ALS      NDCG  1 0.202192 0.009622 0.018028 0.047590        3        0.195122        0.213150
+MovieLens100K       ALS      NDCG  5 0.195054 0.009859 0.017585 0.050546        3        0.188837        0.206421
+MovieLens100K       ALS      NDCG 10 0.188339 0.007872 0.014945 0.041795        3        0.182295        0.197240
+MovieLens100K       ALS Precision  1 0.202192 0.009622 0.018028 0.047590        3        0.195122        0.213150
+MovieLens100K       ALS Precision  5 0.192577 0.011023 0.019300 0.057237        3        0.186002        0.205302
+MovieLens100K       ALS Precision 10 0.183881 0.007952 0.015695 0.043245        3        0.176776        0.192471
+MovieLens100K   ItemKNN      NDCG  1 0.396607 0.003823 0.007423 0.009641        3        0.392365        0.399788
+MovieLens100K   ItemKNN      NDCG  5 0.317280 0.000858 0.001692 0.002705        3        0.316518        0.318210
+MovieLens100K   ItemKNN      NDCG 10 0.273182 0.002212 0.004366 0.008096        3        0.270795        0.275161
+MovieLens100K   ItemKNN Precision  1 0.396607 0.003823 0.007423 0.009641        3        0.392365        0.399788
+MovieLens100K   ItemKNN Precision  5 0.296288 0.001102 0.001909 0.003720        3        0.295652        0.297561
+MovieLens100K   ItemKNN Precision 10 0.243372 0.002743 0.005408 0.011270        3        0.240403        0.245811
+MovieLens100K       Pop      NDCG  1 0.274655 0.015621 0.030753 0.056876        3        0.260870        0.291622
+MovieLens100K       Pop      NDCG  5 0.193426 0.007584 0.014596 0.039208        3        0.187319        0.201915
+MovieLens100K       Pop      NDCG 10 0.180237 0.007308 0.014616 0.040548        3        0.172939        0.187555
+MovieLens100K       Pop Precision  1 0.274655 0.015621 0.030753 0.056876        3        0.260870        0.291622
+MovieLens100K       Pop Precision  5 0.175327 0.005871 0.011665 0.033487        3        0.169883        0.181548
+MovieLens100K       Pop Precision 10 0.165217 0.006666 0.013043 0.040345        3        0.157900        0.170944
+
+=== Pairwise seed-matched algorithm differences ===
+      dataset    metric  k  algo_a  algo_b  mean_diff  std_diff  min_diff  max_diff  n_pairs
+MovieLens100K      NDCG  1     ALS ItemKNN  -0.194415  0.006818 -0.199364 -0.186638        3
+MovieLens100K      NDCG  1     ALS     Pop  -0.072464  0.006392 -0.078473 -0.065748        3
+MovieLens100K      NDCG  1 ItemKNN     Pop   0.121951  0.012230  0.108165  0.131495        3
+MovieLens100K      NDCG  5     ALS ItemKNN  -0.122227  0.009043 -0.127682 -0.111789        3
+MovieLens100K      NDCG  5     ALS     Pop   0.001627  0.002826 -0.001143  0.004506        3
+MovieLens100K      NDCG  5 ItemKNN     Pop   0.123854  0.006731  0.116295  0.129200        3
+MovieLens100K      NDCG 10     ALS ItemKNN  -0.084843  0.008268 -0.092866 -0.076351        3
+MovieLens100K      NDCG 10     ALS     Pop   0.008102  0.005408  0.002079  0.012543        3
+MovieLens100K      NDCG 10 ItemKNN     Pop   0.092946  0.006159  0.086036  0.097856        3
+MovieLens100K Precision  1     ALS ItemKNN  -0.194415  0.006818 -0.199364 -0.186638        3
+MovieLens100K Precision  1     ALS     Pop  -0.072464  0.006392 -0.078473 -0.065748        3
+MovieLens100K Precision  1 ItemKNN     Pop   0.121951  0.012230  0.108165  0.131495        3
+MovieLens100K Precision  5     ALS ItemKNN  -0.103712  0.009921 -0.109650 -0.092259        3
+MovieLens100K Precision  5     ALS     Pop   0.017250  0.006019  0.011877  0.023754        3
+MovieLens100K Precision  5 ItemKNN     Pop   0.120961  0.004880  0.116013  0.125769        3
+MovieLens100K Precision 10     ALS ItemKNN  -0.059491  0.008895 -0.069035 -0.051432        3
+MovieLens100K Precision 10     ALS     Pop   0.018664  0.007676  0.009968  0.024496        3
+MovieLens100K Precision 10 ItemKNN     Pop   0.078155  0.004828  0.072959  0.082503        3
+Running dataset=MovieLens100K, seed=71, split=train/val/test ~= 0.799/0.001/0.20
+[2026/07/08 23:44:04] INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:44:11] INFO     Runner started with pid: 286224                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                 coordinator.py:402
+[2026/07/08 23:44:21] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer             coordinator.py:402
+[2026/07/08 23:44:41] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer            coordinator.py:402
+[2026/07/08 23:44:43] INFO     MovieLens100K/ImplicitMFScorer done!                                   coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:44:46] INFO     Runner started with pid: 286321                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                    coordinator.py:402
+[2026/07/08 23:44:56] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                coordinator.py:402
+[2026/07/08 23:45:06] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer               coordinator.py:402
+[2026/07/08 23:45:08] INFO     MovieLens100K/ItemKNNScorer done!                                      coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:45:10] INFO     Runner started with pid: 286425                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                        coordinator.py:402
+[2026/07/08 23:45:20] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                    coordinator.py:402
+[2026/07/08 23:45:30] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                   coordinator.py:402
+[2026/07/08 23:45:32] INFO     MovieLens100K/PopScorer done!                                          coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                                MovieLens100K-d6f3ec58: Evaluation Results                                
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-aa1ed12e-71 │ 0.19936373276776245 │ 0.1945651520934254  │ 0.20146480590956525 │
+│ LensKit.ItemKNNScorer-6bc6c8cf-71    │ 0.4305408271474019  │ 0.2812317343632467  │ 0.32651243975991445 │
+│ LensKit.PopScorer-f4aa5539-71        │ 0.2576882290562036  │ 0.18217690558230326 │ 0.20327976528408323 │
+└──────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+
+=== Metrics for MovieLens100K seed 71 ===
+      dataset seed algorithm_short     NDCG                   Precision                  
+                                          1        5       10         1        5       10
+MovieLens100K   71             ALS 0.199364 0.201465 0.194565  0.199364 0.200636 0.191410
+MovieLens100K   71         ItemKNN 0.430541 0.326512 0.281232  0.430541 0.299682 0.248038
+MovieLens100K   71             Pop 0.257688 0.203280 0.182177  0.257688 0.188123 0.166278
+
+=== Post-preprocessing dataset summaries ===
+             dataset  n_interactions  n_users  n_items  min_user_interactions  min_item_interactions  has_rating_col
+       MovieLens100K           81697      943     1203                      6                      5               0
+Amazon2014VideoGames          177572    18813     8691                      5                      5               0
+        HetrecLastFM           52551     1090     3646                      5                      5               1
+
+=== Per-seed split statistics ===
+      dataset  seed  n_train  n_val  n_test  train_share  val_share  test_share  n_users_train  n_users_val  n_users_test  n_items_train  n_items_test
+MovieLens100K    11    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1151
+MovieLens100K    29    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1141
+MovieLens100K    47    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1150
+MovieLens100K    71    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1146
+
+=== Per-run results ===
+      dataset  seed                            algorithm algorithm_short  fold      name  k    value
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  5 0.188837
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG 10 0.185482
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  5 0.186002
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision 10 0.182397
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  5 0.316518
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG 10 0.270795
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  5 0.295652
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision 10 0.240403
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  5 0.187319
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG 10 0.172939
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  5 0.169883
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision 10 0.157900
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG  1 0.213150
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG  5 0.206421
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG 10 0.197240
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision  1 0.213150
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision  5 0.205302
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision 10 0.192471
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG  1 0.399788
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG  5 0.318210
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG 10 0.273591
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision  1 0.399788
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision  5 0.297561
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision 10 0.243902
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG  1 0.291622
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG  5 0.201915
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG 10 0.187555
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision  1 0.291622
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision  5 0.181548
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision 10 0.170944
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN      NDCG  1 0.198303
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN      NDCG  5 0.189903
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN      NDCG 10 0.182295
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN Precision  1 0.198303
+... (72 rows total)
+
+=== Aggregated results over seeds ===
+      dataset algorithm_short      name  k     mean      std      min      max   median  count       cv
+MovieLens100K             ALS      NDCG  1 0.201485 0.007983 0.195122 0.213150 0.198834      4 0.039620
+MovieLens100K             ALS      NDCG  5 0.196656 0.008665 0.188837 0.206421 0.195684      4 0.044061
+MovieLens100K             ALS      NDCG 10 0.189895 0.007141 0.182295 0.197240 0.190024      4 0.037607
+MovieLens100K             ALS Precision  1 0.201485 0.007983 0.195122 0.213150 0.198834      4 0.039620
+MovieLens100K             ALS Precision  5 0.194592 0.009861 0.186002 0.205302 0.193531      4 0.050674
+MovieLens100K             ALS Precision 10 0.185764 0.007505 0.176776 0.192471 0.186903      4 0.040402
+MovieLens100K         ItemKNN      NDCG  1 0.405090 0.017252 0.392365 0.430541 0.398727      4 0.042588
+MovieLens100K         ItemKNN      NDCG  5 0.319588 0.004669 0.316518 0.326512 0.317661      4 0.014609
+MovieLens100K         ItemKNN      NDCG 10 0.275195 0.004411 0.270795 0.281232 0.274376      4 0.016030
+MovieLens100K         ItemKNN Precision  1 0.405090 0.017252 0.392365 0.430541 0.398727      4 0.042588
+MovieLens100K         ItemKNN Precision  5 0.297137 0.001921 0.295652 0.299682 0.296607      4 0.006464
+MovieLens100K         ItemKNN Precision 10 0.244539 0.003234 0.240403 0.248038 0.244857      4 0.013225
+MovieLens100K             Pop      NDCG  1 0.270414 0.015318 0.257688 0.291622 0.266172      4 0.056648
+MovieLens100K             Pop      NDCG  5 0.195890 0.007913 0.187319 0.203280 0.196480      4 0.040396
+MovieLens100K             Pop      NDCG 10 0.180722 0.006045 0.172939 0.187555 0.181196      4 0.033452
+MovieLens100K             Pop Precision  1 0.270414 0.015318 0.257688 0.291622 0.266172      4 0.056648
+MovieLens100K             Pop Precision  5 0.178526 0.007995 0.169883 0.188123 0.178049      4 0.044782
+MovieLens100K             Pop Precision 10 0.165483 0.005468 0.157900 0.170944 0.166543      4 0.033044
+
+=== Across-seed variability analysis ===
+      dataset algorithm    metric  k     mean      std    range       cv  n_seeds  min_seed_value  max_seed_value
+MovieLens100K       ALS      NDCG  1 0.201485 0.007983 0.018028 0.039620        4        0.195122        0.213150
+MovieLens100K       ALS      NDCG  5 0.196656 0.008665 0.017585 0.044061        4        0.188837        0.206421
+MovieLens100K       ALS      NDCG 10 0.189895 0.007141 0.014945 0.037607        4        0.182295        0.197240
+MovieLens100K       ALS Precision  1 0.201485 0.007983 0.018028 0.039620        4        0.195122        0.213150
+MovieLens100K       ALS Precision  5 0.194592 0.009861 0.019300 0.050674        4        0.186002        0.205302
+MovieLens100K       ALS Precision 10 0.185764 0.007505 0.015695 0.040402        4        0.176776        0.192471
+MovieLens100K   ItemKNN      NDCG  1 0.405090 0.017252 0.038176 0.042588        4        0.392365        0.430541
+MovieLens100K   ItemKNN      NDCG  5 0.319588 0.004669 0.009994 0.014609        4        0.316518        0.326512
+MovieLens100K   ItemKNN      NDCG 10 0.275195 0.004411 0.010437 0.016030        4        0.270795        0.281232
+MovieLens100K   ItemKNN Precision  1 0.405090 0.017252 0.038176 0.042588        4        0.392365        0.430541
+MovieLens100K   ItemKNN Precision  5 0.297137 0.001921 0.004030 0.006464        4        0.295652        0.299682
+MovieLens100K   ItemKNN Precision 10 0.244539 0.003234 0.007635 0.013225        4        0.240403        0.248038
+MovieLens100K       Pop      NDCG  1 0.270414 0.015318 0.033934 0.056648        4        0.257688        0.291622
+MovieLens100K       Pop      NDCG  5 0.195890 0.007913 0.015961 0.040396        4        0.187319        0.203280
+MovieLens100K       Pop      NDCG 10 0.180722 0.006045 0.014616 0.033452        4        0.172939        0.187555
+MovieLens100K       Pop Precision  1 0.270414 0.015318 0.033934 0.056648        4        0.257688        0.291622
+MovieLens100K       Pop Precision  5 0.178526 0.007995 0.018240 0.044782        4        0.169883        0.188123
+MovieLens100K       Pop Precision 10 0.165483 0.005468 0.013043 0.033044        4        0.157900        0.170944
+
+=== Pairwise seed-matched algorithm differences ===
+      dataset    metric  k  algo_a  algo_b  mean_diff  std_diff  min_diff  max_diff  n_pairs
+MovieLens100K      NDCG  1     ALS ItemKNN  -0.203606  0.019205 -0.231177 -0.186638        4
+MovieLens100K      NDCG  1     ALS     Pop  -0.068929  0.008787 -0.078473 -0.058324        4
+MovieLens100K      NDCG  1 ItemKNN     Pop   0.134677  0.027339  0.108165  0.172853        4
+MovieLens100K      NDCG  5     ALS ItemKNN  -0.122932  0.007517 -0.127682 -0.111789        4
+MovieLens100K      NDCG  5     ALS     Pop   0.000767  0.002879 -0.001815  0.004506        4
+MovieLens100K      NDCG  5 ItemKNN     Pop   0.123699  0.005505  0.116295  0.129200        4
+MovieLens100K      NDCG 10     ALS ItemKNN  -0.085299  0.006812 -0.092866 -0.076351        4
+MovieLens100K      NDCG 10     ALS     Pop   0.009174  0.004908  0.002079  0.012543        4
+MovieLens100K      NDCG 10 ItemKNN     Pop   0.094473  0.005884  0.086036  0.099055        4
+MovieLens100K Precision  1     ALS ItemKNN  -0.203606  0.019205 -0.231177 -0.186638        4
+MovieLens100K Precision  1     ALS     Pop  -0.068929  0.008787 -0.078473 -0.058324        4
+MovieLens100K Precision  1 ItemKNN     Pop   0.134677  0.027339  0.108165  0.172853        4
+MovieLens100K Precision  5     ALS ItemKNN  -0.102545  0.008429 -0.109650 -0.092259        4
+MovieLens100K Precision  5     ALS     Pop   0.016066  0.005455  0.011877  0.023754        4
+MovieLens100K Precision  5 ItemKNN     Pop   0.118611  0.006162  0.111559  0.125769        4
+MovieLens100K Precision 10     ALS ItemKNN  -0.058775  0.007403 -0.069035 -0.051432        4
+MovieLens100K Precision 10     ALS     Pop   0.020281  0.007052  0.009968  0.025133        4
+MovieLens100K Precision 10 ItemKNN     Pop   0.079056  0.004335  0.072959  0.082503        4
+Running dataset=MovieLens100K, seed=97, split=train/val/test ~= 0.799/0.001/0.20
+[2026/07/08 23:45:40] INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:45:42] INFO     Runner started with pid: 286511                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                 coordinator.py:402
+[2026/07/08 23:45:52] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer             coordinator.py:402
+[2026/07/08 23:46:12] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer            coordinator.py:402
+[2026/07/08 23:46:14] INFO     MovieLens100K/ImplicitMFScorer done!                                   coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:46:17] INFO     Runner started with pid: 286606                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                    coordinator.py:402
+[2026/07/08 23:46:27] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                coordinator.py:402
+[2026/07/08 23:46:37] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer               coordinator.py:402
+[2026/07/08 23:46:39] INFO     MovieLens100K/ItemKNNScorer done!                                      coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:46:41] INFO     Runner started with pid: 286702                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                        coordinator.py:402
+[2026/07/08 23:46:51] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                    coordinator.py:402
+[2026/07/08 23:47:01] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                   coordinator.py:402
+[2026/07/08 23:47:03] INFO     MovieLens100K/PopScorer done!                                          coordinator.py:373
+                      INFO     Stopping runner...                                                     coordinator.py:445
+                                MovieLens100K-d6f3ec58: Evaluation Results                                
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-aa1ed12e-97 │ 0.1919406150583245  │ 0.1880411795600864  │ 0.19466410031414813 │
+│ LensKit.ItemKNNScorer-6bc6c8cf-97    │ 0.4209968186638388  │ 0.28267028083760326 │ 0.32465261946588736 │
+│ LensKit.PopScorer-f4aa5539-97        │ 0.28525980911983034 │ 0.18376053996787356 │ 0.20213238778136192 │
+└──────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+
+=== Metrics for MovieLens100K seed 97 ===
+      dataset seed algorithm_short     NDCG                   Precision                  
+                                          1        5       10         1        5       10
+MovieLens100K   97             ALS 0.191941 0.194664 0.188041  0.191941 0.194910 0.184942
+MovieLens100K   97         ItemKNN 0.420997 0.324653 0.282670  0.420997 0.301803 0.252704
+MovieLens100K   97             Pop 0.285260 0.202132 0.183761  0.285260 0.184305 0.166808
+
+=== Post-preprocessing dataset summaries ===
+             dataset  n_interactions  n_users  n_items  min_user_interactions  min_item_interactions  has_rating_col
+       MovieLens100K           81697      943     1203                      6                      5               0
+Amazon2014VideoGames          177572    18813     8691                      5                      5               0
+        HetrecLastFM           52551     1090     3646                      5                      5               1
+
+=== Per-seed split statistics ===
+      dataset  seed  n_train  n_val  n_test  train_share  val_share  test_share  n_users_train  n_users_val  n_users_test  n_items_train  n_items_test
+MovieLens100K    11    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1151
+MovieLens100K    29    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1141
+MovieLens100K    47    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1150
+MovieLens100K    71    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1146
+MovieLens100K    97    64047    943   16707     0.783958   0.011543      0.2045            943          943           943           1203          1150
+
+=== Per-run results ===
+      dataset  seed                            algorithm algorithm_short  fold      name  k    value
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG  5 0.188837
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN      NDCG 10 0.185482
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  1 0.195122
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision  5 0.186002
+MovieLens100K    11 LensKit.ImplicitMFScorer-aa1ed12e-11             ALS   NaN Precision 10 0.182397
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG  5 0.316518
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN      NDCG 10 0.270795
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  1 0.392365
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision  5 0.295652
+MovieLens100K    11    LensKit.ItemKNNScorer-6bc6c8cf-11         ItemKNN   NaN Precision 10 0.240403
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG  5 0.187319
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN      NDCG 10 0.172939
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  1 0.260870
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision  5 0.169883
+MovieLens100K    11        LensKit.PopScorer-f4aa5539-11             Pop   NaN Precision 10 0.157900
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG  1 0.213150
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG  5 0.206421
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN      NDCG 10 0.197240
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision  1 0.213150
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision  5 0.205302
+MovieLens100K    29 LensKit.ImplicitMFScorer-aa1ed12e-29             ALS   NaN Precision 10 0.192471
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG  1 0.399788
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG  5 0.318210
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN      NDCG 10 0.273591
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision  1 0.399788
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision  5 0.297561
+MovieLens100K    29    LensKit.ItemKNNScorer-6bc6c8cf-29         ItemKNN   NaN Precision 10 0.243902
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG  1 0.291622
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG  5 0.201915
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN      NDCG 10 0.187555
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision  1 0.291622
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision  5 0.181548
+MovieLens100K    29        LensKit.PopScorer-f4aa5539-29             Pop   NaN Precision 10 0.170944
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN      NDCG  1 0.198303
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN      NDCG  5 0.189903
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN      NDCG 10 0.182295
+MovieLens100K    47 LensKit.ImplicitMFScorer-aa1ed12e-47             ALS   NaN Precision  1 0.198303
+... (90 rows total)
+
+=== Aggregated results over seeds ===
+      dataset algorithm_short      name  k     mean      std      min      max   median  count       cv
+MovieLens100K             ALS      NDCG  1 0.199576 0.008125 0.191941 0.213150 0.198303      5 0.040710
+MovieLens100K             ALS      NDCG  5 0.196258 0.007557 0.188837 0.206421 0.194664      5 0.038504
+MovieLens100K             ALS      NDCG 10 0.189525 0.006240 0.182295 0.197240 0.188041      5 0.032924
+MovieLens100K             ALS Precision  1 0.199576 0.008125 0.191941 0.213150 0.198303      5 0.040710
+MovieLens100K             ALS Precision  5 0.194655 0.008541 0.186002 0.205302 0.194910      5 0.043877
+MovieLens100K             ALS Precision 10 0.185599 0.006510 0.176776 0.192471 0.184942      5 0.035076
+MovieLens100K         ItemKNN      NDCG  1 0.408271 0.016548 0.392365 0.430541 0.399788      5 0.040531
+MovieLens100K         ItemKNN      NDCG  5 0.320601 0.004635 0.316518 0.326512 0.318210      5 0.014456
+MovieLens100K         ItemKNN      NDCG 10 0.276690 0.005077 0.270795 0.282670 0.275161      5 0.018348
+MovieLens100K         ItemKNN Precision  1 0.408271 0.016548 0.392365 0.430541 0.399788      5 0.040531
+MovieLens100K         ItemKNN Precision  5 0.298070 0.002668 0.295652 0.301803 0.297561      5 0.008952
+MovieLens100K         ItemKNN Precision 10 0.246172 0.004602 0.240403 0.252704 0.245811      5 0.018694
+MovieLens100K             Pop      NDCG  1 0.273383 0.014835 0.257688 0.291622 0.271474      5 0.054264
+MovieLens100K             Pop      NDCG  5 0.197138 0.007400 0.187319 0.203280 0.201915      5 0.037536
+MovieLens100K             Pop      NDCG 10 0.181329 0.005409 0.172939 0.187555 0.182177      5 0.029830
+MovieLens100K             Pop Precision  1 0.273383 0.014835 0.257688 0.291622 0.271474      5 0.054264
+MovieLens100K             Pop Precision  5 0.179682 0.007390 0.169883 0.188123 0.181548      5 0.041130
+MovieLens100K             Pop Precision 10 0.165748 0.004773 0.157900 0.170944 0.166808      5 0.028794
+
+=== Across-seed variability analysis ===
+      dataset algorithm    metric  k     mean      std    range       cv  n_seeds  min_seed_value  max_seed_value
+MovieLens100K       ALS      NDCG  1 0.199576 0.008125 0.021209 0.040710        5        0.191941        0.213150
+MovieLens100K       ALS      NDCG  5 0.196258 0.007557 0.017585 0.038504        5        0.188837        0.206421
+MovieLens100K       ALS      NDCG 10 0.189525 0.006240 0.014945 0.032924        5        0.182295        0.197240
+MovieLens100K       ALS Precision  1 0.199576 0.008125 0.021209 0.040710        5        0.191941        0.213150
+MovieLens100K       ALS Precision  5 0.194655 0.008541 0.019300 0.043877        5        0.186002        0.205302
+MovieLens100K       ALS Precision 10 0.185599 0.006510 0.015695 0.035076        5        0.176776        0.192471
+MovieLens100K   ItemKNN      NDCG  1 0.408271 0.016548 0.038176 0.040531        5        0.392365        0.430541
+MovieLens100K   ItemKNN      NDCG  5 0.320601 0.004635 0.009994 0.014456        5        0.316518        0.326512
+MovieLens100K   ItemKNN      NDCG 10 0.276690 0.005077 0.011876 0.018348        5        0.270795        0.282670
+MovieLens100K   ItemKNN Precision  1 0.408271 0.016548 0.038176 0.040531        5        0.392365        0.430541
+MovieLens100K   ItemKNN Precision  5 0.298070 0.002668 0.006151 0.008952        5        0.295652        0.301803
+MovieLens100K   ItemKNN Precision 10 0.246172 0.004602 0.012301 0.018694        5        0.240403        0.252704
+MovieLens100K       Pop      NDCG  1 0.273383 0.014835 0.033934 0.054264        5        0.257688        0.291622
+MovieLens100K       Pop      NDCG  5 0.197138 0.007400 0.015961 0.037536        5        0.187319        0.203280
+MovieLens100K       Pop      NDCG 10 0.181329 0.005409 0.014616 0.029830        5        0.172939        0.187555
+MovieLens100K       Pop Precision  1 0.273383 0.014835 0.033934 0.054264        5        0.257688        0.291622
+MovieLens100K       Pop Precision  5 0.179682 0.007390 0.018240 0.041130        5        0.169883        0.188123
+MovieLens100K       Pop Precision 10 0.165748 0.004773 0.013043 0.028794        5        0.157900        0.170944
+
+=== Pairwise seed-matched algorithm differences ===
+      dataset    metric  k  algo_a  algo_b  mean_diff  std_diff  min_diff  max_diff  n_pairs
+MovieLens100K      NDCG  1     ALS ItemKNN  -0.208696  0.020154 -0.231177 -0.186638        5
+MovieLens100K      NDCG  1     ALS     Pop  -0.073807  0.013300 -0.093319 -0.058324        5
+MovieLens100K      NDCG  1 ItemKNN     Pop   0.134889  0.023681  0.108165  0.172853        5
+MovieLens100K      NDCG  5     ALS ItemKNN  -0.124343  0.007234 -0.129989 -0.111789        5
+MovieLens100K      NDCG  5     ALS     Pop  -0.000880  0.004447 -0.007468  0.004506        5
+MovieLens100K      NDCG  5 ItemKNN     Pop   0.123463  0.004796  0.116295  0.129200        5
+MovieLens100K      NDCG 10     ALS ItemKNN  -0.087165  0.007226 -0.094629 -0.076351        5
+MovieLens100K      NDCG 10     ALS     Pop   0.008195  0.004781  0.002079  0.012543        5
+MovieLens100K      NDCG 10 ItemKNN     Pop   0.095360  0.005468  0.086036  0.099055        5
+MovieLens100K Precision  1     ALS ItemKNN  -0.208696  0.020154 -0.231177 -0.186638        5
+MovieLens100K Precision  1     ALS     Pop  -0.073807  0.013300 -0.093319 -0.058324        5
+MovieLens100K Precision  1 ItemKNN     Pop   0.134889  0.023681  0.108165  0.172853        5
+MovieLens100K Precision  5     ALS ItemKNN  -0.103415  0.007555 -0.109650 -0.092259        5
+MovieLens100K Precision  5     ALS     Pop   0.014973  0.005318  0.010604  0.023754        5
+MovieLens100K Precision  5 ItemKNN     Pop   0.118388  0.005360  0.111559  0.125769        5
+MovieLens100K Precision 10     ALS ItemKNN  -0.060573  0.007567 -0.069035 -0.051432        5
+MovieLens100K Precision 10     ALS     Pop   0.019852  0.006183  0.009968  0.025133        5
+MovieLens100K Precision 10 ItemKNN     Pop   0.080424  0.004843  0.072959  0.085896        5
+Running dataset=Amazon2014VideoGames, seed=11, split=train/val/test ~= 0.799/0.001/0.20
+[2026/07/08 23:47:22] INFO     Reusing existing env 'LensKit_env' at                                          envs.py:48
+                               /home/florian_dueck04/.omnirec/data/envs/LensKit_env                                     
+                      INFO     Starting runner...                                                     coordinator.py:272
+[2026/07/08 23:47:24] INFO     Runner started with pid: 286796                                        coordinator.py:297
+                      INFO     Connecting to runner...                                                coordinator.py:135
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ImplicitMFScorer          coordinator.py:402
+[2026/07/08 23:47:54] INFO     Running phase 'Predict' for Amazon2014VideoGames/ImplicitMFScorer      coordinator.py:402
+[2026/07/08 23:53:35] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/ImplicitMFScorer     coordinator.py:402
+Program crashed with exception (see above) after 18 minutes!
