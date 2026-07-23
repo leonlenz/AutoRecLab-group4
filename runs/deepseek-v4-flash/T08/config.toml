@@ -1,0 +1,20 @@
+out_dir = "./out"
+
+[treesearch]
+num_draft_nodes = 2
+debug_prob = 0.3
+epsilon = 0.4
+max_iterations = 5
+
+[exec]
+timeout = 5400
+enable_type_checking = true
+max_type_check_attempts = 3
+keep_only_relevant_files = false
+
+[agent]
+k_fold_validation = 1
+
+[agent.code]
+model = "gpt-5.4-mini"
+model_temp = 1.0

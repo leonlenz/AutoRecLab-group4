@@ -11,8 +11,8 @@ wheels/
 # Virtual environments
 .venv
 
-# Config
-config.toml
+# Config (root only; per-run configs under runs/ are tracked)
+/config.toml
 
 /sandbox
 
