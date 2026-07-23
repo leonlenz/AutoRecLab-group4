@@ -1,0 +1,71 @@
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:588: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "first_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:590: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "last_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:588: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "first_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:590: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "last_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:760.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:49.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/knn/item.py:156: DataWarning: Ratings seem to have the same value, centering is not recommended.
+  warnings.warn(
+mean-centered ratings are all 0, bias probably meaningless
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/collection/_base.py:146: DataWarning: no key specified, inferring from _id columns
+  return ListILC.from_df(df, key)
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:760.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:49.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:588: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "first_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:590: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "last_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:588: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "first_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:590: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "last_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:760.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:49.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/knn/item.py:156: DataWarning: Ratings seem to have the same value, centering is not recommended.
+  warnings.warn(
+mean-centered ratings are all 0, bias probably meaningless
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/collection/_base.py:146: DataWarning: no key specified, inferring from _id columns
+  return ListILC.from_df(df, key)
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:760.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:49.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:588: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "first_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:590: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "last_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:588: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "first_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:590: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "last_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:760.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:49.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/knn/item.py:156: DataWarning: Ratings seem to have the same value, centering is not recommended.
+  warnings.warn(
+mean-centered ratings are all 0, bias probably meaningless
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/collection/_base.py:146: DataWarning: no key specified, inferring from _id columns
+  return ListILC.from_df(df, key)
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:760.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:378: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at /pytorch/aten/src/ATen/SparseCsrTensorImpl.cpp:49.)
+  return torch.sparse_csr_tensor(
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:588: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "first_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:590: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "last_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:588: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "first_time"] = pd.NaT
+/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/relationships.py:590: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'NaT' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  stats.loc[stats["count"] == 0, "last_time"] = pd.NaT

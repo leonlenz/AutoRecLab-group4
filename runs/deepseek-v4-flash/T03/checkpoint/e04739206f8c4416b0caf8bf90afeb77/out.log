@@ -1,0 +1,13 @@
+======================================================================
+Experiment: Impact of Data Split Random Seeds on Recommendation Accuracy
+======================================================================
+
+[Step 1] Loading and preprocessing datasets...
+
+[2026/07/08 14:59:19] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.5.                                                                                feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      CRITICAL Threshold must be an integer or a float between 0 and 1. Got <class 'float'> with value 3.5 instead.                        feedback_conversion.py:38
+Program crashed with exception (see above) after 4 seconds!

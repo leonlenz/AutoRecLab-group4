@@ -1,0 +1,18 @@
+{
+    "jobs": {
+        "MovieLens100K-c0b4b14e|LensKit.PopScorer-dc44ee64-42": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-774b8a2c|LensKit.PopScorer-dc44ee64-42": {
+            "next_phase": 1,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        }
+    }
+}

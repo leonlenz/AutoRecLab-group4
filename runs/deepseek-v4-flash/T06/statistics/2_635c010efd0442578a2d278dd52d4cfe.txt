@@ -1,0 +1,20 @@
+ID: 635c010efd0442578a2d278dd52d4cfe
+Position: 2
+Score: 0.6666666666666666
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 5400
+Lines of Code: 236
+Empty Lines: 35
+Comment Lines: 39
+Total Characters: 8338
+Libraries Imported: os, numpy, pathlib, json, omnirec, sys, typing, pandas
+Count of Libraries Imported: 8
+Functions: 1
+Classes: 1
+Average Arguments per Function: 2.0
+Variable Assignments: 29
+Loops: 8
+Conditions: 8
+Insertions: 202
+Deletions: 251

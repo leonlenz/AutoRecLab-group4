@@ -1,0 +1,687 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  Experiment: Quantifying Data Split Random Seed Effects on RS Accuracy  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+  Datasets: MovieLens100K, Amazon2014VideoGames, HetrecLastFM
+  Algorithms: PopScorer, ItemKNNScorer, ImplicitMFScorer
+  Seeds: [0, 1, 2, 3, 4]
+  Metrics: NDCG@[1,5,10], Precision@[1,5,10]
+  Working Dir: /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 0
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 0 ---
+  Downloading MovieLens 100K from https://files.grouplens.org/datasets/movielens/ml-100k.zip...
+  Download complete.
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded: 100000 interactions, 943 users, 1682 items
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52085 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.155080, Precision@1=0.155080
+        NDCG@5=0.148021, Precision@5=0.140107
+        NDCG@10=0.125970, Precision@10=0.112299
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on MovieLens100K seed 0: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.181818, Precision@1=0.181818
+        NDCG@5=0.155165, Precision@5=0.146524
+        NDCG@10=0.150867, Precision@10=0.144920
+
+  --- Processing Amazon2014VideoGames with seed 0 ---
+  Downloading Amazon Video Games from https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_Video_Games.csv...
+  Download complete.
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded: 1324753 interactions, 826767 users, 50210 items
+    Implicit conversion: 1324753 -> 970030 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 970030
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 14494 users, 6950 items
+    Splitting: 2898 test users out of 14494
+    Train: 126829 interactions, 14494 users, 6950 items
+    Test:  2898 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.010697, Precision@1=0.010697
+        NDCG@5=0.007489, Precision@5=0.006694
+        NDCG@10=0.006136, Precision@10=0.005176
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on Amazon2014VideoGames seed 0: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 231, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 194, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 108, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 83, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.044859, Precision@1=0.044859
+        NDCG@5=0.033416, Precision@5=0.030435
+        NDCG@10=0.028209, Precision@10=0.024396
+
+  --- Processing HetrecLastFM with seed 0 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/ISG-Siegen/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 0: HTTP Error 404: Not Found
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 1
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 1 ---
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded: 100000 interactions, 943 users, 1682 items
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52275 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.139037, Precision@1=0.139037
+        NDCG@5=0.125102, Precision@5=0.120856
+        NDCG@10=0.111468, Precision@10=0.104278
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on MovieLens100K seed 1: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.229947, Precision@1=0.229947
+        NDCG@5=0.171284, Precision@5=0.158289
+        NDCG@10=0.161680, Precision@10=0.150802
+
+  --- Processing Amazon2014VideoGames with seed 1 ---
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded: 1324753 interactions, 826767 users, 50210 items
+    Implicit conversion: 1324753 -> 970030 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 970030
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 14494 users, 6950 items
+    Splitting: 2898 test users out of 14494
+    Train: 127209 interactions, 14494 users, 6950 items
+    Test:  2898 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.010007, Precision@1=0.010007
+        NDCG@5=0.006907, Precision@5=0.006073
+        NDCG@10=0.005823, Precision@10=0.004934
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on Amazon2014VideoGames seed 1: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 231, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 194, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 108, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 83, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.048309, Precision@1=0.048309
+        NDCG@5=0.035410, Precision@5=0.031953
+        NDCG@10=0.029379, Precision@10=0.025017
+
+  --- Processing HetrecLastFM with seed 1 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/ISG-Siegen/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 1: HTTP Error 404: Not Found
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 2
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 2 ---
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded: 100000 interactions, 943 users, 1682 items
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52036 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.262032, Precision@1=0.262032
+        NDCG@5=0.180684, Precision@5=0.159358
+        NDCG@10=0.148263, Precision@10=0.123529
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on MovieLens100K seed 2: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.245989, Precision@1=0.245989
+        NDCG@5=0.196393, Precision@5=0.183957
+        NDCG@10=0.172624, Precision@10=0.156150
+
+  --- Processing Amazon2014VideoGames with seed 2 ---
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded: 1324753 interactions, 826767 users, 50210 items
+    Implicit conversion: 1324753 -> 970030 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 970030
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 14494 users, 6950 items
+    Splitting: 2898 test users out of 14494
+    Train: 126959 interactions, 14494 users, 6950 items
+    Test:  2898 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.010352, Precision@1=0.010352
+        NDCG@5=0.006439, Precision@5=0.005659
+        NDCG@10=0.005705, Precision@10=0.004969
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on Amazon2014VideoGames seed 2: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 231, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 194, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 108, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 83, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.044168, Precision@1=0.044168
+        NDCG@5=0.033530, Precision@5=0.030573
+        NDCG@10=0.027988, Precision@10=0.024086
+
+  --- Processing HetrecLastFM with seed 2 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/ISG-Siegen/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 2: HTTP Error 404: Not Found
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 3
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 3 ---
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded: 100000 interactions, 943 users, 1682 items
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52289 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.240642, Precision@1=0.240642
+        NDCG@5=0.166365, Precision@5=0.147594
+        NDCG@10=0.140916, Precision@10=0.120856
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on MovieLens100K seed 3: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.192513, Precision@1=0.192513
+        NDCG@5=0.168672, Precision@5=0.161497
+        NDCG@10=0.162085, Precision@10=0.155615
+
+  --- Processing Amazon2014VideoGames with seed 3 ---
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded: 1324753 interactions, 826767 users, 50210 items
+    Implicit conversion: 1324753 -> 970030 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 970030
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 14494 users, 6950 items
+    Splitting: 2898 test users out of 14494
+    Train: 127170 interactions, 14494 users, 6950 items
+    Test:  2898 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.004486, Precision@1=0.004486
+        NDCG@5=0.004843, Precision@5=0.004693
+        NDCG@10=0.004163, Precision@10=0.003796
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on Amazon2014VideoGames seed 3: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 231, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 194, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 108, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 83, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.048654, Precision@1=0.048654
+        NDCG@5=0.034962, Precision@5=0.031608
+        NDCG@10=0.028485, Precision@10=0.023948
+
+  --- Processing HetrecLastFM with seed 3 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/ISG-Siegen/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 3: HTTP Error 404: Not Found
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 4
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 4 ---
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded: 100000 interactions, 943 users, 1682 items
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52376 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.213904, Precision@1=0.213904
+        NDCG@5=0.152779, Precision@5=0.134759
+        NDCG@10=0.136230, Precision@10=0.119251
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on MovieLens100K seed 4: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.229947, Precision@1=0.229947
+        NDCG@5=0.169528, Precision@5=0.158289
+        NDCG@10=0.156787, Precision@10=0.145989
+
+  --- Processing Amazon2014VideoGames with seed 4 ---
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded: 1324753 interactions, 826767 users, 50210 items
+    Implicit conversion: 1324753 -> 970030 interactions (rating > 3.0)
+    Applying 5-core filtering...
+    Interactions before: 970030
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 14494 users, 6950 items
+    Splitting: 2898 test users out of 14494
+    Train: 126957 interactions, 14494 users, 6950 items
+    Test:  2898 users
+
+    --- Algorithm: PopScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 282, in run_experiment_for_seed
+    pipeline.train(train)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/pipeline/_impl.py", line 368, in train
+    comp.train(data, c_opts)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/knn/item.py", line 138, in train
+    rmat = data.interactions().matrix().scipy(field, layout="coo").astype(np.float32)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/relationships.py", line 598, in scipy
+    value_col = self._table.column(attribute)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 1796, in pyarrow.lib._Tabular.column
+  File "pyarrow/table.pxi", line 1733, in pyarrow.lib._Tabular._ensure_integer_index
+KeyError: 'Field "rating" does not exist in schema'
+      ✓ Completed PopScorer
+        NDCG@1=0.007246, Precision@1=0.007246
+        NDCG@5=0.005500, Precision@5=0.005038
+        NDCG@10=0.005164, Precision@10=0.004796
+
+    --- Algorithm: ItemKNNScorer ---
+      ✗ Error running ItemKNNScorer on Amazon2014VideoGames seed 4: 'Field "rating" does not exist in schema'
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 231, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 194, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 108, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 83, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+      ✓ Completed ImplicitMFScorer
+        NDCG@1=0.050035, Precision@1=0.050035
+        NDCG@5=0.034489, Precision@5=0.030642
+        NDCG@10=0.029029, Precision@10=0.024638
+
+  --- Processing HetrecLastFM with seed 4 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/ISG-Siegen/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 4: HTTP Error 404: Not Found
+
+======================================================================
+  COLLECTING AND ANALYZING RESULTS
+======================================================================
+
+Collected 120 metric records.
+
+==========================================================================================
+  RESULTS: Mean ± Std across 5 random seeds
+==========================================================================================
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  Dataset: Amazon2014VideoGames
+──────────────────────────────────────────────────────────────────────────────────────────
+
+  Algorithm: ImplicitMFScorer
+    NDCG@1: 0.047205 ± 0.002552 (n=5 seeds)
+    NDCG@5: 0.034362 ± 0.000875 (n=5 seeds)
+    NDCG@10: 0.028618 ± 0.000577 (n=5 seeds)
+    Precision@1: 0.047205 ± 0.002552 (n=5 seeds)
+    Precision@5: 0.031042 ± 0.000689 (n=5 seeds)
+    Precision@10: 0.024417 ± 0.000430 (n=5 seeds)
+
+  Algorithm: PopScorer
+    NDCG@1: 0.008558 ± 0.002655 (n=5 seeds)
+    NDCG@5: 0.006235 ± 0.001066 (n=5 seeds)
+    NDCG@10: 0.005398 ± 0.000775 (n=5 seeds)
+    Precision@1: 0.008558 ± 0.002655 (n=5 seeds)
+    Precision@5: 0.005631 ± 0.000800 (n=5 seeds)
+    Precision@10: 0.004734 ± 0.000542 (n=5 seeds)
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  Dataset: MovieLens100K
+──────────────────────────────────────────────────────────────────────────────────────────
+
+  Algorithm: ImplicitMFScorer
+    NDCG@1: 0.216043 ± 0.027424 (n=5 seeds)
+    NDCG@5: 0.172209 ± 0.014966 (n=5 seeds)
+    NDCG@10: 0.160808 ± 0.008016 (n=5 seeds)
+    Precision@1: 0.216043 ± 0.027424 (n=5 seeds)
+    Precision@5: 0.161711 ± 0.013684 (n=5 seeds)
+    Precision@10: 0.150695 ± 0.005231 (n=5 seeds)
+
+  Algorithm: PopScorer
+    NDCG@1: 0.202139 ± 0.053396 (n=5 seeds)
+    NDCG@5: 0.154590 ± 0.020830 (n=5 seeds)
+    NDCG@10: 0.132569 ± 0.014302 (n=5 seeds)
+    Precision@1: 0.202139 ± 0.053396 (n=5 seeds)
+    Precision@5: 0.140535 ± 0.014361 (n=5 seeds)
+    Precision@10: 0.116043 ± 0.007777 (n=5 seeds)
+
+======================================================================
+  EXPERIMENT COMPLETE
+======================================================================
+Execution time: 4 minutes (time limit is an hour).

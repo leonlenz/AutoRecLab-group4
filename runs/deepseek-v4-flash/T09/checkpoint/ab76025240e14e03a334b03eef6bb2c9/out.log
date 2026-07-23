@@ -1,0 +1,1499 @@
+========================================================================
+Loading datasets...
+========================================================================
+[2026/07/09 15:47:32] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  MovieLens100K loaded: 100000 interactions
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  Amazon2014VideoGames loaded: 1324753 interactions
+[2026/07/09 15:47:33] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  HetrecLastFM loaded: 71064 interactions
+
+========================================================================
+Seed 1/5: seed = 42
+========================================================================
+  Preprocessing MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Preprocessing Amazon2014VideoGames...
+[2026/07/09 15:47:34] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+[2026/07/09 15:47:35] INFO     Subsampling data set to fraction 0.1.                                                                                                 subsample.py:42
+                      INFO     Number of interactions before: 1324753                                                                                                subsample.py:43
+                      INFO     Number of interactions after: 132475                                                                                                  subsample.py:49
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 132475                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 96999                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 96999                                                                                               core_pruning.py:20
+                      WARNING  Data set is empty after pruning.                                                                                                   core_pruning.py:42
+                      INFO     Number of interactions after: 0                                                                                                    core_pruning.py:63
+    Preprocessing complete
+  Preprocessing HetrecLastFM...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Running experiments...
+[2026/07/09 15:47:36] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:47:40] INFO     Runner started with pid: 89953                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+[2026/07/09 15:47:41] INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 15:47:51] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 15:48:01] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 15:48:04] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/PopScorer                                                                             coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:48:14] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:48:17] INFO     Runner started with pid: 90110                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 15:48:28] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 15:48:38] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 15:48:41] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ItemKNNScorer                                                                         coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:48:51] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:48:54] INFO     Runner started with pid: 90272                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 15:49:04] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 15:49:24] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 15:49:27] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ImplicitMFScorer                                                                      coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:49:37] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                                                                MovieLens100K-0d1a6d94: Evaluation Results                                                                 
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                            ┃ NDCG@1              ┃ NDCG@10            ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-db8d01ec-42 │ 0.1791044776119403  │ 0.1545724727665247 │ 0.16806101700526596 │ 0.1791044776119403  │ 0.1464818763326226  │ 0.16375266524520254 │
+│ LensKit.ItemKNNScorer-5f816cf5-42    │ 0.2857142857142857  │ 0.2013149167063505 │ 0.23449819631934576 │ 0.2857142857142857  │ 0.17985074626865674 │ 0.22068230277185502 │
+│ LensKit.PopScorer-dc44ee64-42        │ 0.21002132196162046 │ 0.1373004112577501 │ 0.15594858316331656 │ 0.21002132196162046 │ 0.12174840085287847 │ 0.14136460554371003 │
+└──────────────────────────────────────┴─────────────────────┴────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+  Completed seed 42
+
+========================================================================
+Seed 2/5: seed = 123
+========================================================================
+  Preprocessing MovieLens100K...
+[2026/07/09 15:49:38] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Preprocessing Amazon2014VideoGames...
+[2026/07/09 15:49:39] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Subsampling data set to fraction 0.1.                                                                                                 subsample.py:42
+                      INFO     Number of interactions before: 1324753                                                                                                subsample.py:43
+                      INFO     Number of interactions after: 132475                                                                                                  subsample.py:49
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 132475                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 96884                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 96884                                                                                               core_pruning.py:20
+                      WARNING  Data set is empty after pruning.                                                                                                   core_pruning.py:42
+                      INFO     Number of interactions after: 0                                                                                                    core_pruning.py:63
+    Preprocessing complete
+  Preprocessing HetrecLastFM...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Running experiments...
+[2026/07/09 15:49:41] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:49:44] INFO     Runner started with pid: 90479                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 15:49:54] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 15:50:04] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 15:50:07] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/PopScorer                                                                             coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:50:17] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+[2026/07/09 15:50:18] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:50:21] INFO     Runner started with pid: 90631                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 15:50:31] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 15:50:41] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 15:50:44] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ItemKNNScorer                                                                         coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:50:54] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:50:58] INFO     Runner started with pid: 90794                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 15:51:08] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 15:51:28] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 15:51:31] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ImplicitMFScorer                                                                      coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:51:41] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                                                                 MovieLens100K-0d1a6d94: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                             ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-db8d01ec-123 │ 0.17164179104477612 │ 0.15586934694921226 │ 0.17117763742420417 │ 0.17164179104477612 │ 0.14712153518123666 │ 0.1678038379530917  │
+│ LensKit.ImplicitMFScorer-db8d01ec-42  │ 0.1791044776119403  │ 0.1545724727665247  │ 0.16806101700526596 │ 0.1791044776119403  │ 0.1464818763326226  │ 0.16375266524520254 │
+│ LensKit.ItemKNNScorer-5f816cf5-123    │ 0.3006396588486141  │ 0.2072788558821372  │ 0.24746982051649177 │ 0.3006396588486141  │ 0.18230277185501065 │ 0.23262260127931772 │
+│ LensKit.ItemKNNScorer-5f816cf5-42     │ 0.2857142857142857  │ 0.2013149167063505  │ 0.23449819631934576 │ 0.2857142857142857  │ 0.17985074626865674 │ 0.22068230277185502 │
+│ LensKit.PopScorer-dc44ee64-123        │ 0.21961620469083157 │ 0.13914900521035087 │ 0.161071305105718   │ 0.21961620469083157 │ 0.12238805970149254 │ 0.14733475479744138 │
+│ LensKit.PopScorer-dc44ee64-42         │ 0.21002132196162046 │ 0.1373004112577501  │ 0.15594858316331656 │ 0.21002132196162046 │ 0.12174840085287847 │ 0.14136460554371003 │
+└───────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+  Completed seed 123
+
+========================================================================
+Seed 3/5: seed = 456
+========================================================================
+  Preprocessing MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Preprocessing Amazon2014VideoGames...
+[2026/07/09 15:51:42] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+[2026/07/09 15:51:43] INFO     Subsampling data set to fraction 0.1.                                                                                                 subsample.py:42
+                      INFO     Number of interactions before: 1324753                                                                                                subsample.py:43
+                      INFO     Number of interactions after: 132475                                                                                                  subsample.py:49
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 132475                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 97038                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 97038                                                                                               core_pruning.py:20
+                      WARNING  Data set is empty after pruning.                                                                                                   core_pruning.py:42
+                      INFO     Number of interactions after: 0                                                                                                    core_pruning.py:63
+    Preprocessing complete
+  Preprocessing HetrecLastFM...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Running experiments...
+[2026/07/09 15:51:44] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:51:47] INFO     Runner started with pid: 90968                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+[2026/07/09 15:51:48] INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 15:51:58] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 15:52:08] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 15:52:11] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/PopScorer                                                                             coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:52:21] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:52:24] INFO     Runner started with pid: 91120                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 15:52:34] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 15:52:44] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 15:52:47] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ItemKNNScorer                                                                         coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:52:57] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+[2026/07/09 15:52:58] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:53:01] INFO     Runner started with pid: 91278                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 15:53:11] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 15:53:31] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 15:53:34] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ImplicitMFScorer                                                                      coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:53:44] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                                                                 MovieLens100K-0d1a6d94: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                             ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-db8d01ec-123 │ 0.17164179104477612 │ 0.15586934694921226 │ 0.17117763742420417 │ 0.17164179104477612 │ 0.14712153518123666 │ 0.1678038379530917  │
+│ LensKit.ImplicitMFScorer-db8d01ec-42  │ 0.1791044776119403  │ 0.1545724727665247  │ 0.16806101700526596 │ 0.1791044776119403  │ 0.1464818763326226  │ 0.16375266524520254 │
+│ LensKit.ImplicitMFScorer-db8d01ec-456 │ 0.19189765458422176 │ 0.15017639214791606 │ 0.1659619766206338  │ 0.19189765458422176 │ 0.1400852878464819  │ 0.15991471215351813 │
+│ LensKit.ItemKNNScorer-5f816cf5-123    │ 0.3006396588486141  │ 0.2072788558821372  │ 0.24746982051649177 │ 0.3006396588486141  │ 0.18230277185501065 │ 0.23262260127931772 │
+│ LensKit.ItemKNNScorer-5f816cf5-42     │ 0.2857142857142857  │ 0.2013149167063505  │ 0.23449819631934576 │ 0.2857142857142857  │ 0.17985074626865674 │ 0.22068230277185502 │
+│ LensKit.ItemKNNScorer-5f816cf5-456    │ 0.2995735607675906  │ 0.196575429228141   │ 0.23459761154013903 │ 0.2995735607675906  │ 0.17121535181236675 │ 0.21620469083155652 │
+│ LensKit.PopScorer-dc44ee64-123        │ 0.21961620469083157 │ 0.13914900521035087 │ 0.161071305105718   │ 0.21961620469083157 │ 0.12238805970149254 │ 0.14733475479744138 │
+│ LensKit.PopScorer-dc44ee64-42         │ 0.21002132196162046 │ 0.1373004112577501  │ 0.15594858316331656 │ 0.21002132196162046 │ 0.12174840085287847 │ 0.14136460554371003 │
+│ LensKit.PopScorer-dc44ee64-456        │ 0.22068230277185502 │ 0.13982540650383807 │ 0.16064200422960193 │ 0.22068230277185502 │ 0.12409381663113007 │ 0.1466950959488273  │
+└───────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+  Completed seed 456
+
+========================================================================
+Seed 4/5: seed = 789
+========================================================================
+  Preprocessing MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Preprocessing Amazon2014VideoGames...
+[2026/07/09 15:53:45] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+[2026/07/09 15:53:46] INFO     Subsampling data set to fraction 0.1.                                                                                                 subsample.py:42
+                      INFO     Number of interactions before: 1324753                                                                                                subsample.py:43
+                      INFO     Number of interactions after: 132475                                                                                                  subsample.py:49
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 132475                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 96793                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 96793                                                                                               core_pruning.py:20
+                      WARNING  Data set is empty after pruning.                                                                                                   core_pruning.py:42
+                      INFO     Number of interactions after: 0                                                                                                    core_pruning.py:63
+    Preprocessing complete
+  Preprocessing HetrecLastFM...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Running experiments...
+[2026/07/09 15:53:47] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:53:50] INFO     Runner started with pid: 91453                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+[2026/07/09 15:53:51] INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 15:54:01] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 15:54:11] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 15:54:14] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/PopScorer                                                                             coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:54:24] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:54:27] INFO     Runner started with pid: 91605                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 15:54:37] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 15:54:47] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 15:54:50] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ItemKNNScorer                                                                         coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:55:00] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+[2026/07/09 15:55:01] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:55:04] INFO     Runner started with pid: 91769                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 15:55:14] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 15:55:34] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 15:55:37] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ImplicitMFScorer                                                                      coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:55:47] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                                                                 MovieLens100K-0d1a6d94: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                             ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-db8d01ec-123 │ 0.17164179104477612 │ 0.15586934694921226 │ 0.17117763742420417 │ 0.17164179104477612 │ 0.14712153518123666 │ 0.1678038379530917  │
+│ LensKit.ImplicitMFScorer-db8d01ec-42  │ 0.1791044776119403  │ 0.1545724727665247  │ 0.16806101700526596 │ 0.1791044776119403  │ 0.1464818763326226  │ 0.16375266524520254 │
+│ LensKit.ImplicitMFScorer-db8d01ec-456 │ 0.19189765458422176 │ 0.15017639214791606 │ 0.1659619766206338  │ 0.19189765458422176 │ 0.1400852878464819  │ 0.15991471215351813 │
+│ LensKit.ImplicitMFScorer-db8d01ec-789 │ 0.19936034115138593 │ 0.1562017442870529  │ 0.16959102759633518 │ 0.19936034115138593 │ 0.1460554371002132  │ 0.16140724946695095 │
+│ LensKit.ItemKNNScorer-5f816cf5-123    │ 0.3006396588486141  │ 0.2072788558821372  │ 0.24746982051649177 │ 0.3006396588486141  │ 0.18230277185501065 │ 0.23262260127931772 │
+│ LensKit.ItemKNNScorer-5f816cf5-42     │ 0.2857142857142857  │ 0.2013149167063505  │ 0.23449819631934576 │ 0.2857142857142857  │ 0.17985074626865674 │ 0.22068230277185502 │
+│ LensKit.ItemKNNScorer-5f816cf5-456    │ 0.2995735607675906  │ 0.196575429228141   │ 0.23459761154013903 │ 0.2995735607675906  │ 0.17121535181236675 │ 0.21620469083155652 │
+│ LensKit.ItemKNNScorer-5f816cf5-789    │ 0.3187633262260128  │ 0.20370630499325693 │ 0.2399066195663855  │ 0.3187633262260128  │ 0.17675906183368872 │ 0.21769722814498935 │
+│ LensKit.PopScorer-dc44ee64-123        │ 0.21961620469083157 │ 0.13914900521035087 │ 0.161071305105718   │ 0.21961620469083157 │ 0.12238805970149254 │ 0.14733475479744138 │
+│ LensKit.PopScorer-dc44ee64-42         │ 0.21002132196162046 │ 0.1373004112577501  │ 0.15594858316331656 │ 0.21002132196162046 │ 0.12174840085287847 │ 0.14136460554371003 │
+│ LensKit.PopScorer-dc44ee64-456        │ 0.22068230277185502 │ 0.13982540650383807 │ 0.16064200422960193 │ 0.22068230277185502 │ 0.12409381663113007 │ 0.1466950959488273  │
+│ LensKit.PopScorer-dc44ee64-789        │ 0.208955223880597   │ 0.13761635399929434 │ 0.1613964797659979  │ 0.208955223880597   │ 0.12068230277185502 │ 0.14818763326226012 │
+└───────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+  Completed seed 789
+
+========================================================================
+Seed 5/5: seed = 1111
+========================================================================
+  Preprocessing MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Preprocessing Amazon2014VideoGames...
+[2026/07/09 15:55:48] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+[2026/07/09 15:55:49] INFO     Subsampling data set to fraction 0.1.                                                                                                 subsample.py:42
+                      INFO     Number of interactions before: 1324753                                                                                                subsample.py:43
+                      INFO     Number of interactions after: 132475                                                                                                  subsample.py:49
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 132475                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 97018                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 97018                                                                                               core_pruning.py:20
+                      WARNING  Data set is empty after pruning.                                                                                                   core_pruning.py:42
+                      INFO     Number of interactions after: 0                                                                                                    core_pruning.py:63
+    Preprocessing complete
+  Preprocessing HetrecLastFM...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+    Preprocessing complete
+  Running experiments...
+[2026/07/09 15:55:50] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:55:54] INFO     Runner started with pid: 91945                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 15:56:04] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 15:56:14] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 15:56:17] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/PopScorer                                                                             coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:56:27] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:56:30] INFO     Runner started with pid: 92095                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+[2026/07/09 15:56:31] INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 15:56:41] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 15:56:51] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 15:56:54] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ItemKNNScorer                                                                         coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:57:04] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 15:57:07] INFO     Runner started with pid: 92254                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 15:57:17] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 15:57:37] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 15:57:41] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ImplicitMFScorer                                                                      coordinator.py:402
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 212, in run
+    self.run_split(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 347, in run_split
+    self.wait_for_job(root._fit, root)
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/runner/coordinator.py", line 385, in wait_for_job
+    state = root._status(job_id)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/rpyc/core/async_.py", line 111, in value
+    raise self._obj
+_get_exception_class.<locals>.Derived: invalid ID type null
+
+========= Remote Traceback (1) =========
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 170, in _fit_job
+    self.fit()
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec_runner/lenskit_runner.py", line 60, in fit
+    dataset = from_interactions_df(self.train)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/adapt.py", line 164, in from_interactions_df
+    dsb.add_interactions(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 495, in add_interactions
+    self.add_relationships(
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 394, in add_relationships
+    self.add_entities(e_type, pc.unique(ids), duplicates="update")
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/lenskit/data/builder.py", line 283, in add_entities
+    raise TypeError(f"invalid ID type {ids.type}")
+TypeError: invalid ID type null
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 369, in _dispatch_request
+    res = self._HANDLERS[handler](self, *args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/rpyc/core/protocol.py", line 863, in _handle_call
+    return obj(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.omnirec/data/envs/LensKit_env/lib/python3.11/site-packages/omnirec_runner/runner.py", line 143, in _status
+    raise exc
+TypeError: invalid ID type null
+
+[2026/07/09 15:57:51] CRITICAL Stopping runner...                                                                                                                 coordinator.py:445
+                                                                  MovieLens100K-0d1a6d94: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                              ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-db8d01ec-1111 │ 0.1929637526652452  │ 0.15187329956967385 │ 0.1675405345730124  │ 0.1929637526652452  │ 0.14051172707889126 │ 0.1590618336886994  │
+│ LensKit.ImplicitMFScorer-db8d01ec-123  │ 0.17164179104477612 │ 0.15586934694921226 │ 0.17117763742420417 │ 0.17164179104477612 │ 0.14712153518123666 │ 0.1678038379530917  │
+│ LensKit.ImplicitMFScorer-db8d01ec-42   │ 0.1791044776119403  │ 0.1545724727665247  │ 0.16806101700526596 │ 0.1791044776119403  │ 0.1464818763326226  │ 0.16375266524520254 │
+│ LensKit.ImplicitMFScorer-db8d01ec-456  │ 0.19189765458422176 │ 0.15017639214791606 │ 0.1659619766206338  │ 0.19189765458422176 │ 0.1400852878464819  │ 0.15991471215351813 │
+│ LensKit.ImplicitMFScorer-db8d01ec-789  │ 0.19936034115138593 │ 0.1562017442870529  │ 0.16959102759633518 │ 0.19936034115138593 │ 0.1460554371002132  │ 0.16140724946695095 │
+│ LensKit.ItemKNNScorer-5f816cf5-1111    │ 0.31023454157782515 │ 0.20128041295037163 │ 0.2407986099419923  │ 0.31023454157782515 │ 0.17484008528784648 │ 0.2219616204690832  │
+│ LensKit.ItemKNNScorer-5f816cf5-123     │ 0.3006396588486141  │ 0.2072788558821372  │ 0.24746982051649177 │ 0.3006396588486141  │ 0.18230277185501065 │ 0.23262260127931772 │
+│ LensKit.ItemKNNScorer-5f816cf5-42      │ 0.2857142857142857  │ 0.2013149167063505  │ 0.23449819631934576 │ 0.2857142857142857  │ 0.17985074626865674 │ 0.22068230277185502 │
+│ LensKit.ItemKNNScorer-5f816cf5-456     │ 0.2995735607675906  │ 0.196575429228141   │ 0.23459761154013903 │ 0.2995735607675906  │ 0.17121535181236675 │ 0.21620469083155652 │
+│ LensKit.ItemKNNScorer-5f816cf5-789     │ 0.3187633262260128  │ 0.20370630499325693 │ 0.2399066195663855  │ 0.3187633262260128  │ 0.17675906183368872 │ 0.21769722814498935 │
+│ LensKit.PopScorer-dc44ee64-1111        │ 0.21961620469083157 │ 0.14161056020974927 │ 0.16486575690286062 │ 0.21961620469083157 │ 0.12409381663113007 │ 0.15053304904051173 │
+│ LensKit.PopScorer-dc44ee64-123         │ 0.21961620469083157 │ 0.13914900521035087 │ 0.161071305105718   │ 0.21961620469083157 │ 0.12238805970149254 │ 0.14733475479744138 │
+│ LensKit.PopScorer-dc44ee64-42          │ 0.21002132196162046 │ 0.1373004112577501  │ 0.15594858316331656 │ 0.21002132196162046 │ 0.12174840085287847 │ 0.14136460554371003 │
+│ LensKit.PopScorer-dc44ee64-456         │ 0.22068230277185502 │ 0.13982540650383807 │ 0.16064200422960193 │ 0.22068230277185502 │ 0.12409381663113007 │ 0.1466950959488273  │
+│ LensKit.PopScorer-dc44ee64-789         │ 0.208955223880597   │ 0.13761635399929434 │ 0.1613964797659979  │ 0.208955223880597   │ 0.12068230277185502 │ 0.14818763326226012 │
+└────────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+  Completed seed 1111
+
+========================================================================
+FINAL AGGREGATED RESULTS (mean +/- std across 5 seeds)
+========================================================================
+
+--- Dataset: MovieLens100K-0d1a6d94 ---
+
+  Algorithm: LensKit.ImplicitMFScorer-db8d01ec-1111
+          NDCG@1: 0.192964 +/- nan
+         NDCG@10: 0.151873 +/- nan
+          NDCG@5: 0.167541 +/- nan
+     Precision@1: 0.192964 +/- nan
+    Precision@10: 0.140512 +/- nan
+     Precision@5: 0.159062 +/- nan
+
+  Algorithm: LensKit.ImplicitMFScorer-db8d01ec-123
+          NDCG@1: 0.171642 +/- 0.000000
+         NDCG@10: 0.155869 +/- 0.000000
+          NDCG@5: 0.171178 +/- 0.000000
+     Precision@1: 0.171642 +/- 0.000000
+    Precision@10: 0.147122 +/- 0.000000
+     Precision@5: 0.167804 +/- 0.000000
+
+  Algorithm: LensKit.ImplicitMFScorer-db8d01ec-42
+          NDCG@1: 0.179104 +/- 0.000000
+         NDCG@10: 0.154572 +/- 0.000000
+          NDCG@5: 0.168061 +/- 0.000000
+     Precision@1: 0.179104 +/- 0.000000
+    Precision@10: 0.146482 +/- 0.000000
+     Precision@5: 0.163753 +/- 0.000000
+
+  Algorithm: LensKit.ImplicitMFScorer-db8d01ec-456
+          NDCG@1: 0.191898 +/- 0.000000
+         NDCG@10: 0.150176 +/- 0.000000
+          NDCG@5: 0.165962 +/- 0.000000
+     Precision@1: 0.191898 +/- 0.000000
+    Precision@10: 0.140085 +/- 0.000000
+     Precision@5: 0.159915 +/- 0.000000
+
+  Algorithm: LensKit.ImplicitMFScorer-db8d01ec-789
+          NDCG@1: 0.199360 +/- 0.000000
+         NDCG@10: 0.156202 +/- 0.000000
+          NDCG@5: 0.169591 +/- 0.000000
+     Precision@1: 0.199360 +/- 0.000000
+    Precision@10: 0.146055 +/- 0.000000
+     Precision@5: 0.161407 +/- 0.000000
+
+  Algorithm: LensKit.ItemKNNScorer-5f816cf5-1111
+          NDCG@1: 0.310235 +/- nan
+         NDCG@10: 0.201280 +/- nan
+          NDCG@5: 0.240799 +/- nan
+     Precision@1: 0.310235 +/- nan
+    Precision@10: 0.174840 +/- nan
+     Precision@5: 0.221962 +/- nan
+
+  Algorithm: LensKit.ItemKNNScorer-5f816cf5-123
+          NDCG@1: 0.300640 +/- 0.000000
+         NDCG@10: 0.207279 +/- 0.000000
+          NDCG@5: 0.247470 +/- 0.000000
+     Precision@1: 0.300640 +/- 0.000000
+    Precision@10: 0.182303 +/- 0.000000
+     Precision@5: 0.232623 +/- 0.000000
+
+  Algorithm: LensKit.ItemKNNScorer-5f816cf5-42
+          NDCG@1: 0.285714 +/- 0.000000
+         NDCG@10: 0.201315 +/- 0.000000
+          NDCG@5: 0.234498 +/- 0.000000
+     Precision@1: 0.285714 +/- 0.000000
+    Precision@10: 0.179851 +/- 0.000000
+     Precision@5: 0.220682 +/- 0.000000
+
+  Algorithm: LensKit.ItemKNNScorer-5f816cf5-456
+          NDCG@1: 0.299574 +/- 0.000000
+         NDCG@10: 0.196575 +/- 0.000000
+          NDCG@5: 0.234598 +/- 0.000000
+     Precision@1: 0.299574 +/- 0.000000
+    Precision@10: 0.171215 +/- 0.000000
+     Precision@5: 0.216205 +/- 0.000000
+
+  Algorithm: LensKit.ItemKNNScorer-5f816cf5-789
+          NDCG@1: 0.318763 +/- 0.000000
+         NDCG@10: 0.203706 +/- 0.000000
+          NDCG@5: 0.239907 +/- 0.000000
+     Precision@1: 0.318763 +/- 0.000000
+    Precision@10: 0.176759 +/- 0.000000
+     Precision@5: 0.217697 +/- 0.000000
+
+  Algorithm: LensKit.PopScorer-dc44ee64-1111
+          NDCG@1: 0.219616 +/- nan
+         NDCG@10: 0.141611 +/- nan
+          NDCG@5: 0.164866 +/- nan
+     Precision@1: 0.219616 +/- nan
+    Precision@10: 0.124094 +/- nan
+     Precision@5: 0.150533 +/- nan
+
+  Algorithm: LensKit.PopScorer-dc44ee64-123
+          NDCG@1: 0.219616 +/- 0.000000
+         NDCG@10: 0.139149 +/- 0.000000
+          NDCG@5: 0.161071 +/- 0.000000
+     Precision@1: 0.219616 +/- 0.000000
+    Precision@10: 0.122388 +/- 0.000000
+     Precision@5: 0.147335 +/- 0.000000
+
+  Algorithm: LensKit.PopScorer-dc44ee64-42
+          NDCG@1: 0.210021 +/- 0.000000
+         NDCG@10: 0.137300 +/- 0.000000
+          NDCG@5: 0.155949 +/- 0.000000
+     Precision@1: 0.210021 +/- 0.000000
+    Precision@10: 0.121748 +/- 0.000000
+     Precision@5: 0.141365 +/- 0.000000
+
+  Algorithm: LensKit.PopScorer-dc44ee64-456
+          NDCG@1: 0.220682 +/- 0.000000
+         NDCG@10: 0.139825 +/- 0.000000
+          NDCG@5: 0.160642 +/- 0.000000
+     Precision@1: 0.220682 +/- 0.000000
+    Precision@10: 0.124094 +/- 0.000000
+     Precision@5: 0.146695 +/- 0.000000
+
+  Algorithm: LensKit.PopScorer-dc44ee64-789
+          NDCG@1: 0.208955 +/- 0.000000
+         NDCG@10: 0.137616 +/- 0.000000
+          NDCG@5: 0.161396 +/- 0.000000
+     Precision@1: 0.208955 +/- 0.000000
+    Precision@10: 0.120682 +/- 0.000000
+     Precision@5: 0.148188 +/- 0.000000
+
+
+COMPACT SUMMARY TABLE
+------------------------------------------------------------------------
+Dataset                        Algorithm                    Metric     Mean         Std          N     
+------------------------------------------------------------------------
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@1     0.192964     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@10    0.151873     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@5     0.167541     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@1 0.192964     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@10 0.140512     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@5 0.159062     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@1     0.171642     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@10    0.155869     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@5     0.171178     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@1 0.171642     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@10 0.147122     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@5 0.167804     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@1     0.179104     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@10    0.154572     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@5     0.168061     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@1 0.179104     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@10 0.146482     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@5 0.163753     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@1     0.191898     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@10    0.150176     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@5     0.165962     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@1 0.191898     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@10 0.140085     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@5 0.159915     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@1     0.199360     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@10    0.156202     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 NDCG@5     0.169591     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@1 0.199360     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@10 0.146055     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ImplicitMFScorer-db8 Precision@5 0.161407     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@1     0.310235     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@10    0.201280     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@5     0.240799     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@1 0.310235     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@10 0.174840     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@5 0.221962     nan          1     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@1     0.300640     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@10    0.207279     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@5     0.247470     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@1 0.300640     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@10 0.182303     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@5 0.232623     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@1     0.285714     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@10    0.201315     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@5     0.234498     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@1 0.285714     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@10 0.179851     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@5 0.220682     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@1     0.299574     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@10    0.196575     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@5     0.234598     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@1 0.299574     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@10 0.171215     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@5 0.216205     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@1     0.318763     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@10    0.203706     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c NDCG@5     0.239907     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@1 0.318763     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@10 0.176759     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.ItemKNNScorer-5f816c Precision@5 0.217697     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 NDCG@1     0.219616     nan          1     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 NDCG@10    0.141611     nan          1     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 NDCG@5     0.164866     nan          1     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 Precision@1 0.219616     nan          1     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 Precision@10 0.124094     nan          1     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 Precision@5 0.150533     nan          1     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 NDCG@1     0.219616     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 NDCG@10    0.139149     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 NDCG@5     0.161071     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 Precision@1 0.219616     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 Precision@10 0.122388     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-1 Precision@5 0.147335     0.000000     4     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 NDCG@1     0.210021     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 NDCG@10    0.137300     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 NDCG@5     0.155949     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 Precision@1 0.210021     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 Precision@10 0.121748     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 Precision@5 0.141365     0.000000     5     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 NDCG@1     0.220682     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 NDCG@10    0.139825     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 NDCG@5     0.160642     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 Precision@1 0.220682     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 Precision@10 0.124094     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-4 Precision@5 0.146695     0.000000     3     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-7 NDCG@1     0.208955     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-7 NDCG@10    0.137616     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-7 NDCG@5     0.161396     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-7 Precision@1 0.208955     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-7 Precision@10 0.120682     0.000000     2     
+MovieLens100K-0d1a6d94         LensKit.PopScorer-dc44ee64-7 Precision@5 0.148188     0.000000     2     
+
+Experiment completed successfully!
+Execution time: 10 minutes (time limit is an hour).

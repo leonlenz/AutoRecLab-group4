@@ -1,0 +1,164 @@
+======================================================================
+EXPERIMENT: Impact of Data Split Random Seeds on RecSys Accuracy
+======================================================================
+
+######################################################################
+# DATASET: MovieLens100K
+######################################################################
+
+============================================================
+Loading and preprocessing: ml100k
+============================================================
+[2026/07/08 14:31:14] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  Original size: 100000 interactions
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+  After preprocessing: 81697 interactions
+  Users: 943, Items: 1203
+
+  Running 5 seed splits × 3 algorithms
+
+  --- Algorithm: ImplicitMF ---
+    Seed 42 (run 1/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 123 (run 2/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 456 (run 3/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 789 (run 4/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 1024 (run 5/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+
+  --- Algorithm: ItemKNN ---
+    Seed 42 (run 1/5)... (filtered 943 new users) ERROR: 'Field "rating" does not exist in schema'
+    Seed 123 (run 2/5)... (filtered 943 new users) ERROR: 'Field "rating" does not exist in schema'
+    Seed 456 (run 3/5)... (filtered 943 new users) ERROR: 'Field "rating" does not exist in schema'
+    Seed 789 (run 4/5)... (filtered 943 new users) ERROR: 'Field "rating" does not exist in schema'
+    Seed 1024 (run 5/5)... (filtered 943 new users) ERROR: 'Field "rating" does not exist in schema'
+
+  --- Algorithm: Pop ---
+    Seed 42 (run 1/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 123 (run 2/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 456 (run 3/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 789 (run 4/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 1024 (run 5/5)... (filtered 943 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+
+######################################################################
+# DATASET: Amazon Video Games 2014
+######################################################################
+
+============================================================
+Loading and preprocessing: amazon
+============================================================
+[2026/07/08 14:32:24] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  Original size: 1324753 interactions
+[2026/07/08 14:32:25] INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                                                                                       feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                                                                             core_pruning.py:20
+[2026/07/08 14:32:27] INFO     Number of interactions after: 177572                                                                                               core_pruning.py:63
+  After preprocessing: 177572 interactions
+  Users: 18813, Items: 8691
+
+  Running 5 seed splits × 3 algorithms
+
+  --- Algorithm: ImplicitMF ---
+    Seed 42 (run 1/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 123 (run 2/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 456 (run 3/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 789 (run 4/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 1024 (run 5/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+
+  --- Algorithm: ItemKNN ---
+    Seed 42 (run 1/5)... (filtered 18813 new users) ERROR: 'Field "rating" does not exist in schema'
+    Seed 123 (run 2/5)... (filtered 18813 new users) ERROR: 'Field "rating" does not exist in schema'
+    Seed 456 (run 3/5)... (filtered 18813 new users) ERROR: 'Field "rating" does not exist in schema'
+    Seed 789 (run 4/5)... (filtered 18813 new users) ERROR: 'Field "rating" does not exist in schema'
+    Seed 1024 (run 5/5)... (filtered 18813 new users) ERROR: 'Field "rating" does not exist in schema'
+
+  --- Algorithm: Pop ---
+    Seed 42 (run 1/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 123 (run 2/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 456 (run 3/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 789 (run 4/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 1024 (run 5/5)... (filtered 18813 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+
+######################################################################
+# DATASET: HetRec LastFM
+######################################################################
+
+============================================================
+Loading and preprocessing: lastfm
+============================================================
+[2026/07/08 14:40:47] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  Original size: 71064 interactions
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+  After preprocessing: 52551 interactions
+  Users: 1090, Items: 3646
+
+  Running 5 seed splits × 3 algorithms
+
+  --- Algorithm: ImplicitMF ---
+    Seed 42 (run 1/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 123 (run 2/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 456 (run 3/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 789 (run 4/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 1024 (run 5/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+
+  --- Algorithm: ItemKNN ---
+    Seed 42 (run 1/5)... (filtered 1090 new users) 2026-07-08 14:41:23 [warning  ] normalized ratings are zero, centering is not recommended feedback=explicit n_items=3646
+ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 123 (run 2/5)... (filtered 1090 new users) 2026-07-08 14:41:30 [warning  ] normalized ratings are zero, centering is not recommended feedback=explicit n_items=3646
+ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 456 (run 3/5)... (filtered 1090 new users) 2026-07-08 14:41:37 [warning  ] normalized ratings are zero, centering is not recommended feedback=explicit n_items=3646
+ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 789 (run 4/5)... (filtered 1090 new users) 2026-07-08 14:41:43 [warning  ] normalized ratings are zero, centering is not recommended feedback=explicit n_items=3646
+ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 1024 (run 5/5)... (filtered 1090 new users) 2026-07-08 14:41:50 [warning  ] normalized ratings are zero, centering is not recommended feedback=explicit n_items=3646
+ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+
+  --- Algorithm: Pop ---
+    Seed 42 (run 1/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 123 (run 2/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 456 (run 3/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 789 (run 4/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+    Seed 1024 (run 5/5)... (filtered 1090 new users) ERROR: 'MeasurementCollector' object has no attribute 'measure_run'
+
+
+======================================================================
+A GGREGATED RESULTS
+======================================================================
+
+Algorithm       Dataset                   Metric               Mean       Std        Min        Max       
+----------------------------------------------------------------------------------------------------
+
+
+======================================================================
+STATISTICAL ANALYSIS: Impact of Random Seed on Accuracy
+======================================================================
+
+For each (Algorithm, Dataset, Metric) combination, we computed
+the mean and standard deviation across 5 different random seeds.
+
+Key findings:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_03/workspace/runfile.py", line 343, in <module>
+    main()
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_03/workspace/runfile.py", line 288, in main
+    metric_cols = results_df[results_df['Metric'].str.contains('.mean$', regex=False) == False]
+                             ~~~~~~~~~~^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 417, in get_loc
+    raise KeyError(key)
+KeyError: 'Metric'
+Program crashed with exception (see above) after 11 minutes!

@@ -1,0 +1,484 @@
+================================================================================
+EXPERIMENT: Effect of Data Split Seeds on Recommendation Accuracy
+================================================================================
+
+============================================================
+Processing dataset: MovieLens100K
+============================================================
+
+  --- Seed 42 (1/5) ---
+    Loading MovieLens100K...
+[2026/07/09 02:09:15] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Applying preprocessing (5-core, implicit conversion if needed, split)...
+[2026/07/09 02:09:16] INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Dataset stats - interactions: {'train': 42024, 'val': 1134, 'test': 11255}
+    Running experiments with 3 algorithms...
+[2026/07/09 02:09:17] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:09:21] INFO     Runner started with pid: 25839                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 02:09:31] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 02:09:51] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 02:09:54] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:09:58] INFO     Runner started with pid: 25982                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 02:10:08] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 02:10:18] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 02:10:21] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:10:25] INFO     Runner started with pid: 26109                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 02:10:35] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 02:10:55] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 02:10:58] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                                                                 MovieLens100K-1b09c064: Evaluation Results                                                                 
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-f878b0da-42 │ 0.18976545842217485 │ 0.1469861657196256  │ 0.16050655880948805 │ 0.18976545842217485 │ 0.13699360341151387 │ 0.15245202558635396 │
+│ LensKit.ItemKNNScorer-5e95e5ec-42    │ 0.29116684841875684 │ 0.20755053040985658 │ 0.24187231633726572 │ 0.29116684841875684 │ 0.18571428571428572 │ 0.22857142857142856 │
+│ LensKit.PopScorer-f4aa5539-42        │ 0.21002132196162046 │ 0.13644882114350124 │ 0.15525925528860987 │ 0.21002132196162046 │ 0.12100213219616204 │ 0.14093816631130066 │
+└──────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+    Collected 18 result rows for MovieLens100K-1b09c064
+
+  --- Seed 123 (2/5) ---
+    Loading MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Applying preprocessing (5-core, implicit conversion if needed, split)...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+[2026/07/09 02:10:59] INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Dataset stats - interactions: {'train': 42024, 'val': 1134, 'test': 11255}
+    Running experiments with 3 algorithms...
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:11:03] INFO     Runner started with pid: 26229                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 02:11:13] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 02:11:23] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 02:11:26] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:11:30] INFO     Runner started with pid: 26341                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 02:11:40] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 02:11:50] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 02:11:53] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:11:56] INFO     Runner started with pid: 26465                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 02:12:06] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 02:12:26] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 02:12:29] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                                                                 MovieLens100K-1b09c064: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                             ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-f878b0da-123 │ 0.19829424307036247 │ 0.15655875471752093 │ 0.17277966334163256 │ 0.19829424307036247 │ 0.1455223880597015  │ 0.16460554371002134 │
+│ LensKit.ImplicitMFScorer-f878b0da-42  │ 0.18976545842217485 │ 0.1469861657196256  │ 0.16050655880948805 │ 0.18976545842217485 │ 0.13699360341151387 │ 0.15245202558635396 │
+│ LensKit.ItemKNNScorer-5e95e5ec-123    │ 0.30970556161395857 │ 0.2121948755529811  │ 0.25269726835935996 │ 0.30970556161395857 │ 0.18636859323882224 │ 0.23620501635768812 │
+│ LensKit.ItemKNNScorer-5e95e5ec-42     │ 0.29116684841875684 │ 0.20755053040985658 │ 0.24187231633726572 │ 0.29116684841875684 │ 0.18571428571428572 │ 0.22857142857142856 │
+│ LensKit.PopScorer-f4aa5539-123        │ 0.22174840085287847 │ 0.13919280714971402 │ 0.16129834378289126 │ 0.22174840085287847 │ 0.12185501066098081 │ 0.14626865671641792 │
+│ LensKit.PopScorer-f4aa5539-42         │ 0.21002132196162046 │ 0.13644882114350124 │ 0.15525925528860987 │ 0.21002132196162046 │ 0.12100213219616204 │ 0.14093816631130066 │
+└───────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+    Collected 36 result rows for MovieLens100K-1b09c064
+
+  --- Seed 456 (3/5) ---
+    Loading MovieLens100K...
+[2026/07/09 02:12:30] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Applying preprocessing (5-core, implicit conversion if needed, split)...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Dataset stats - interactions: {'train': 42024, 'val': 1134, 'test': 11255}
+    Running experiments with 3 algorithms...
+[2026/07/09 02:12:31] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:12:34] INFO     Runner started with pid: 26593                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 02:12:44] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 02:12:54] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 02:12:57] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:13:00] INFO     Runner started with pid: 26702                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+[2026/07/09 02:13:01] INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 02:13:11] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 02:13:21] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 02:13:23] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+[2026/07/09 02:13:24] INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:13:27] INFO     Runner started with pid: 26826                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 02:13:37] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 02:13:57] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 02:14:00] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                                                                 MovieLens100K-1b09c064: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                             ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-f878b0da-123 │ 0.19829424307036247 │ 0.15655875471752093 │ 0.17277966334163256 │ 0.19829424307036247 │ 0.1455223880597015  │ 0.16460554371002134 │
+│ LensKit.ImplicitMFScorer-f878b0da-42  │ 0.18976545842217485 │ 0.1469861657196256  │ 0.16050655880948805 │ 0.18976545842217485 │ 0.13699360341151387 │ 0.15245202558635396 │
+│ LensKit.ImplicitMFScorer-f878b0da-456 │ 0.18443496801705758 │ 0.15415852294579435 │ 0.16692912789714828 │ 0.18443496801705758 │ 0.1457356076759062  │ 0.16162046908315564 │
+│ LensKit.ItemKNNScorer-5e95e5ec-123    │ 0.30970556161395857 │ 0.2121948755529811  │ 0.25269726835935996 │ 0.30970556161395857 │ 0.18636859323882224 │ 0.23620501635768812 │
+│ LensKit.ItemKNNScorer-5e95e5ec-42     │ 0.29116684841875684 │ 0.20755053040985658 │ 0.24187231633726572 │ 0.29116684841875684 │ 0.18571428571428572 │ 0.22857142857142856 │
+│ LensKit.ItemKNNScorer-5e95e5ec-456    │ 0.31297709923664124 │ 0.20252583411478017 │ 0.2387888209806575  │ 0.31297709923664124 │ 0.1773173391494002  │ 0.21941112322791714 │
+│ LensKit.PopScorer-f4aa5539-123        │ 0.22174840085287847 │ 0.13919280714971402 │ 0.16129834378289126 │ 0.22174840085287847 │ 0.12185501066098081 │ 0.14626865671641792 │
+│ LensKit.PopScorer-f4aa5539-42         │ 0.21002132196162046 │ 0.13644882114350124 │ 0.15525925528860987 │ 0.21002132196162046 │ 0.12100213219616204 │ 0.14093816631130066 │
+│ LensKit.PopScorer-f4aa5539-456        │ 0.21961620469083157 │ 0.13863766728436341 │ 0.15967357493597645 │ 0.21961620469083157 │ 0.12270788912579958 │ 0.14562899786780384 │
+└───────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+    Collected 54 result rows for MovieLens100K-1b09c064
+
+  --- Seed 789 (4/5) ---
+    Loading MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Applying preprocessing (5-core, implicit conversion if needed, split)...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Dataset stats - interactions: {'train': 42024, 'val': 1134, 'test': 11255}
+    Running experiments with 3 algorithms...
+[2026/07/09 02:14:01] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:14:05] INFO     Runner started with pid: 26950                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 02:14:15] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 02:14:25] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 02:14:28] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:14:31] INFO     Runner started with pid: 27062                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 02:14:41] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 02:14:51] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 02:14:54] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:14:58] INFO     Runner started with pid: 27183                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 02:15:08] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 02:15:28] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 02:15:31] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                                                                 MovieLens100K-1b09c064: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                             ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-f878b0da-123 │ 0.19829424307036247 │ 0.15655875471752093 │ 0.17277966334163256 │ 0.19829424307036247 │ 0.1455223880597015  │ 0.16460554371002134 │
+│ LensKit.ImplicitMFScorer-f878b0da-42  │ 0.18976545842217485 │ 0.1469861657196256  │ 0.16050655880948805 │ 0.18976545842217485 │ 0.13699360341151387 │ 0.15245202558635396 │
+│ LensKit.ImplicitMFScorer-f878b0da-456 │ 0.18443496801705758 │ 0.15415852294579435 │ 0.16692912789714828 │ 0.18443496801705758 │ 0.1457356076759062  │ 0.16162046908315564 │
+│ LensKit.ImplicitMFScorer-f878b0da-789 │ 0.19402985074626866 │ 0.1588792590015489  │ 0.17466800657225456 │ 0.19402985074626866 │ 0.14818763326226012 │ 0.16673773987206825 │
+│ LensKit.ItemKNNScorer-5e95e5ec-123    │ 0.30970556161395857 │ 0.2121948755529811  │ 0.25269726835935996 │ 0.30970556161395857 │ 0.18636859323882224 │ 0.23620501635768812 │
+│ LensKit.ItemKNNScorer-5e95e5ec-42     │ 0.29116684841875684 │ 0.20755053040985658 │ 0.24187231633726572 │ 0.29116684841875684 │ 0.18571428571428572 │ 0.22857142857142856 │
+│ LensKit.ItemKNNScorer-5e95e5ec-456    │ 0.31297709923664124 │ 0.20252583411478017 │ 0.2387888209806575  │ 0.31297709923664124 │ 0.1773173391494002  │ 0.21941112322791714 │
+│ LensKit.ItemKNNScorer-5e95e5ec-789    │ 0.3173391494002181  │ 0.20787004777343424 │ 0.24328361417124092 │ 0.3173391494002181  │ 0.18222464558342422 │ 0.22246455834242093 │
+│ LensKit.PopScorer-f4aa5539-123        │ 0.22174840085287847 │ 0.13919280714971402 │ 0.16129834378289126 │ 0.22174840085287847 │ 0.12185501066098081 │ 0.14626865671641792 │
+│ LensKit.PopScorer-f4aa5539-42         │ 0.21002132196162046 │ 0.13644882114350124 │ 0.15525925528860987 │ 0.21002132196162046 │ 0.12100213219616204 │ 0.14093816631130066 │
+│ LensKit.PopScorer-f4aa5539-456        │ 0.21961620469083157 │ 0.13863766728436341 │ 0.15967357493597645 │ 0.21961620469083157 │ 0.12270788912579958 │ 0.14562899786780384 │
+│ LensKit.PopScorer-f4aa5539-789        │ 0.2068230277185501  │ 0.13746703002064659 │ 0.16108224304619417 │ 0.2068230277185501  │ 0.12078891257995736 │ 0.14818763326226012 │
+└───────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+    Collected 72 result rows for MovieLens100K-1b09c064
+
+  --- Seed 1024 (5/5) ---
+    Loading MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Applying preprocessing (5-core, implicit conversion if needed, split)...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+    Dataset stats - interactions: {'train': 42024, 'val': 1134, 'test': 11255}
+    Running experiments with 3 algorithms...
+[2026/07/09 02:15:32] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:15:35] INFO     Runner started with pid: 27306                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 02:15:45] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 02:15:55] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 02:15:58] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+[2026/07/09 02:15:59] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:16:02] INFO     Runner started with pid: 27416                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 02:16:12] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 02:16:22] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 02:16:25] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:16:28] INFO     Runner started with pid: 27543                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 02:16:38] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 02:16:58] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 02:17:02] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                                                                  MovieLens100K-1b09c064: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                              ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-f878b0da-1024 │ 0.17484008528784648 │ 0.14970812139994477 │ 0.16476772144290228 │ 0.17484008528784648 │ 0.1415778251599147  │ 0.16140724946695095 │
+│ LensKit.ImplicitMFScorer-f878b0da-123  │ 0.19829424307036247 │ 0.15655875471752093 │ 0.17277966334163256 │ 0.19829424307036247 │ 0.1455223880597015  │ 0.16460554371002134 │
+│ LensKit.ImplicitMFScorer-f878b0da-42   │ 0.18976545842217485 │ 0.1469861657196256  │ 0.16050655880948805 │ 0.18976545842217485 │ 0.13699360341151387 │ 0.15245202558635396 │
+│ LensKit.ImplicitMFScorer-f878b0da-456  │ 0.18443496801705758 │ 0.15415852294579435 │ 0.16692912789714828 │ 0.18443496801705758 │ 0.1457356076759062  │ 0.16162046908315564 │
+│ LensKit.ImplicitMFScorer-f878b0da-789  │ 0.19402985074626866 │ 0.1588792590015489  │ 0.17466800657225456 │ 0.19402985074626866 │ 0.14818763326226012 │ 0.16673773987206825 │
+│ LensKit.ItemKNNScorer-5e95e5ec-1024    │ 0.3238822246455834  │ 0.2031785520496481  │ 0.2395409763423746  │ 0.3238822246455834  │ 0.17600872410032717 │ 0.2163576881134133  │
+│ LensKit.ItemKNNScorer-5e95e5ec-123     │ 0.30970556161395857 │ 0.2121948755529811  │ 0.25269726835935996 │ 0.30970556161395857 │ 0.18636859323882224 │ 0.23620501635768812 │
+│ LensKit.ItemKNNScorer-5e95e5ec-42      │ 0.29116684841875684 │ 0.20755053040985658 │ 0.24187231633726572 │ 0.29116684841875684 │ 0.18571428571428572 │ 0.22857142857142856 │
+│ LensKit.ItemKNNScorer-5e95e5ec-456     │ 0.31297709923664124 │ 0.20252583411478017 │ 0.2387888209806575  │ 0.31297709923664124 │ 0.1773173391494002  │ 0.21941112322791714 │
+│ LensKit.ItemKNNScorer-5e95e5ec-789     │ 0.3173391494002181  │ 0.20787004777343424 │ 0.24328361417124092 │ 0.3173391494002181  │ 0.18222464558342422 │ 0.22246455834242093 │
+│ LensKit.PopScorer-f4aa5539-1024        │ 0.20149253731343283 │ 0.1347964930602312  │ 0.1591734555686835  │ 0.20149253731343283 │ 0.11769722814498934 │ 0.14584221748400855 │
+│ LensKit.PopScorer-f4aa5539-123         │ 0.22174840085287847 │ 0.13919280714971402 │ 0.16129834378289126 │ 0.22174840085287847 │ 0.12185501066098081 │ 0.14626865671641792 │
+│ LensKit.PopScorer-f4aa5539-42          │ 0.21002132196162046 │ 0.13644882114350124 │ 0.15525925528860987 │ 0.21002132196162046 │ 0.12100213219616204 │ 0.14093816631130066 │
+│ LensKit.PopScorer-f4aa5539-456         │ 0.21961620469083157 │ 0.13863766728436341 │ 0.15967357493597645 │ 0.21961620469083157 │ 0.12270788912579958 │ 0.14562899786780384 │
+│ LensKit.PopScorer-f4aa5539-789         │ 0.2068230277185501  │ 0.13746703002064659 │ 0.16108224304619417 │ 0.2068230277185501  │ 0.12078891257995736 │ 0.14818763326226012 │
+└────────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+    Collected 90 result rows for MovieLens100K-1b09c064
+
+============================================================
+Processing dataset: Amazon2014VideoGames
+============================================================
+
+  --- Seed 42 (1/5) ---
+    Loading Amazon2014VideoGames...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Applying preprocessing (5-core, implicit conversion if needed, split)...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 970030                                                                                        feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 970030                                                                                              core_pruning.py:20
+[2026/07/09 02:17:04] INFO     Number of interactions after: 132209                                                                                               core_pruning.py:63
+    Dataset stats - interactions: {'train': 86029, 'val': 14524, 'test': 31656}
+    Running experiments with 3 algorithms...
+[2026/07/09 02:17:20] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:17:23] INFO     Runner started with pid: 27674                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/PopScorer                                                                             coordinator.py:402
+[2026/07/09 02:17:33] INFO     Running phase 'Predict' for Amazon2014VideoGames/PopScorer                                                                         coordinator.py:402
+[2026/07/09 02:24:33] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/PopScorer                                                                        coordinator.py:402
+[2026/07/09 02:31:04] INFO     Amazon2014VideoGames/PopScorer done!                                                                                               coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:31:08] INFO     Runner started with pid: 28078                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ItemKNNScorer                                                                         coordinator.py:402
+[2026/07/09 02:31:18] INFO     Running phase 'Predict' for Amazon2014VideoGames/ItemKNNScorer                                                                     coordinator.py:402
+[2026/07/09 02:31:48] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/ItemKNNScorer                                                                    coordinator.py:402
+[2026/07/09 02:31:53] INFO     Amazon2014VideoGames/ItemKNNScorer done!                                                                                           coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+[2026/07/09 02:31:54] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:31:57] INFO     Runner started with pid: 28208                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ImplicitMFScorer                                                                      coordinator.py:402
+[2026/07/09 02:32:27] INFO     Running phase 'Predict' for Amazon2014VideoGames/ImplicitMFScorer                                                                  coordinator.py:402
+[2026/07/09 02:37:37] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/ImplicitMFScorer                                                                 coordinator.py:402
+[2026/07/09 02:45:19] INFO     Amazon2014VideoGames/ImplicitMFScorer done!                                                                                        coordinator.py:373
+[2026/07/09 02:45:20] INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                                                                  MovieLens100K-1b09c064: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                              ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-f878b0da-1024 │ 0.17484008528784648 │ 0.14970812139994477 │ 0.16476772144290228 │ 0.17484008528784648 │ 0.1415778251599147  │ 0.16140724946695095 │
+│ LensKit.ImplicitMFScorer-f878b0da-123  │ 0.19829424307036247 │ 0.15655875471752093 │ 0.17277966334163256 │ 0.19829424307036247 │ 0.1455223880597015  │ 0.16460554371002134 │
+│ LensKit.ImplicitMFScorer-f878b0da-42   │ 0.18976545842217485 │ 0.1469861657196256  │ 0.16050655880948805 │ 0.18976545842217485 │ 0.13699360341151387 │ 0.15245202558635396 │
+│ LensKit.ImplicitMFScorer-f878b0da-456  │ 0.18443496801705758 │ 0.15415852294579435 │ 0.16692912789714828 │ 0.18443496801705758 │ 0.1457356076759062  │ 0.16162046908315564 │
+│ LensKit.ImplicitMFScorer-f878b0da-789  │ 0.19402985074626866 │ 0.1588792590015489  │ 0.17466800657225456 │ 0.19402985074626866 │ 0.14818763326226012 │ 0.16673773987206825 │
+│ LensKit.ItemKNNScorer-5e95e5ec-1024    │ 0.3238822246455834  │ 0.2031785520496481  │ 0.2395409763423746  │ 0.3238822246455834  │ 0.17600872410032717 │ 0.2163576881134133  │
+│ LensKit.ItemKNNScorer-5e95e5ec-123     │ 0.30970556161395857 │ 0.2121948755529811  │ 0.25269726835935996 │ 0.30970556161395857 │ 0.18636859323882224 │ 0.23620501635768812 │
+│ LensKit.ItemKNNScorer-5e95e5ec-42      │ 0.29116684841875684 │ 0.20755053040985658 │ 0.24187231633726572 │ 0.29116684841875684 │ 0.18571428571428572 │ 0.22857142857142856 │
+│ LensKit.ItemKNNScorer-5e95e5ec-456     │ 0.31297709923664124 │ 0.20252583411478017 │ 0.2387888209806575  │ 0.31297709923664124 │ 0.1773173391494002  │ 0.21941112322791714 │
+│ LensKit.ItemKNNScorer-5e95e5ec-789     │ 0.3173391494002181  │ 0.20787004777343424 │ 0.24328361417124092 │ 0.3173391494002181  │ 0.18222464558342422 │ 0.22246455834242093 │
+│ LensKit.PopScorer-f4aa5539-1024        │ 0.20149253731343283 │ 0.1347964930602312  │ 0.1591734555686835  │ 0.20149253731343283 │ 0.11769722814498934 │ 0.14584221748400855 │
+│ LensKit.PopScorer-f4aa5539-123         │ 0.22174840085287847 │ 0.13919280714971402 │ 0.16129834378289126 │ 0.22174840085287847 │ 0.12185501066098081 │ 0.14626865671641792 │
+│ LensKit.PopScorer-f4aa5539-42          │ 0.21002132196162046 │ 0.13644882114350124 │ 0.15525925528860987 │ 0.21002132196162046 │ 0.12100213219616204 │ 0.14093816631130066 │
+│ LensKit.PopScorer-f4aa5539-456         │ 0.21961620469083157 │ 0.13863766728436341 │ 0.15967357493597645 │ 0.21961620469083157 │ 0.12270788912579958 │ 0.14562899786780384 │
+│ LensKit.PopScorer-f4aa5539-789         │ 0.2068230277185501  │ 0.13746703002064659 │ 0.16108224304619417 │ 0.2068230277185501  │ 0.12078891257995736 │ 0.14818763326226012 │
+└────────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                                                                Amazon2014VideoGames-a88e2e16: Evaluation Results                                                                 
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                            ┃ NDCG@1               ┃ NDCG@10              ┃ NDCG@5               ┃ Precision@1          ┃ Precision@10         ┃ Precision@5          ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-f878b0da-42 │ 0.045329101697254036 │ 0.02637799739263379  │ 0.03186687066302515  │ 0.045329101697254036 │ 0.022305781702773562 │ 0.028425555402235406 │
+│ LensKit.ItemKNNScorer-5e95e5ec-42    │ 0.04774835935732066  │ 0.029743612868010284 │ 0.03590246236561801  │ 0.04774835935732066  │ 0.025458248472505093 │ 0.032677076261597646 │
+│ LensKit.PopScorer-f4aa5539-42        │ 0.007106388850558852 │ 0.005696620680155015 │ 0.005988609110730349 │ 0.007106388850558852 │ 0.005443631847661102 │ 0.005629915827238858 │
+└──────────────────────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┘
+    Collected 90 result rows for MovieLens100K-1b09c064
+    Collected 18 result rows for Amazon2014VideoGames-a88e2e16
+
+  --- Seed 123 (2/5) ---
+    Loading Amazon2014VideoGames...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Applying preprocessing (5-core, implicit conversion if needed, split)...
+[2026/07/09 02:45:21] INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 970030                                                                                        feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 970030                                                                                              core_pruning.py:20
+[2026/07/09 02:45:22] INFO     Number of interactions after: 132209                                                                                               core_pruning.py:63
+    Dataset stats - interactions: {'train': 86029, 'val': 14524, 'test': 31656}
+    Running experiments with 3 algorithms...
+[2026/07/09 02:45:38] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:45:41] INFO     Runner started with pid: 28593                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/PopScorer                                                                             coordinator.py:402
+[2026/07/09 02:45:51] INFO     Running phase 'Predict' for Amazon2014VideoGames/PopScorer                                                                         coordinator.py:402
+[2026/07/09 02:51:31] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/PopScorer                                                                        coordinator.py:402
+[2026/07/09 02:57:56] INFO     Amazon2014VideoGames/PopScorer done!                                                                                               coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+[2026/07/09 02:57:57] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:58:00] INFO     Runner started with pid: 28929                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ItemKNNScorer                                                                         coordinator.py:402
+[2026/07/09 02:58:10] INFO     Running phase 'Predict' for Amazon2014VideoGames/ItemKNNScorer                                                                     coordinator.py:402
+[2026/07/09 02:58:40] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/ItemKNNScorer                                                                    coordinator.py:402
+[2026/07/09 02:58:46] INFO     Amazon2014VideoGames/ItemKNNScorer done!                                                                                           coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 02:58:49] INFO     Runner started with pid: 29057                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ImplicitMFScorer                                                                      coordinator.py:402
+[2026/07/09 02:59:19] INFO     Running phase 'Predict' for Amazon2014VideoGames/ImplicitMFScorer                                                                  coordinator.py:402
+[2026/07/09 03:06:20] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/ImplicitMFScorer                                                                 coordinator.py:402
+[2026/07/09 03:13:53] INFO     Amazon2014VideoGames/ImplicitMFScorer done!                                                                                        coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                                                                  MovieLens100K-1b09c064: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                              ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-f878b0da-1024 │ 0.17484008528784648 │ 0.14970812139994477 │ 0.16476772144290228 │ 0.17484008528784648 │ 0.1415778251599147  │ 0.16140724946695095 │
+│ LensKit.ImplicitMFScorer-f878b0da-123  │ 0.19829424307036247 │ 0.15655875471752093 │ 0.17277966334163256 │ 0.19829424307036247 │ 0.1455223880597015  │ 0.16460554371002134 │
+│ LensKit.ImplicitMFScorer-f878b0da-42   │ 0.18976545842217485 │ 0.1469861657196256  │ 0.16050655880948805 │ 0.18976545842217485 │ 0.13699360341151387 │ 0.15245202558635396 │
+│ LensKit.ImplicitMFScorer-f878b0da-456  │ 0.18443496801705758 │ 0.15415852294579435 │ 0.16692912789714828 │ 0.18443496801705758 │ 0.1457356076759062  │ 0.16162046908315564 │
+│ LensKit.ImplicitMFScorer-f878b0da-789  │ 0.19402985074626866 │ 0.1588792590015489  │ 0.17466800657225456 │ 0.19402985074626866 │ 0.14818763326226012 │ 0.16673773987206825 │
+│ LensKit.ItemKNNScorer-5e95e5ec-1024    │ 0.3238822246455834  │ 0.2031785520496481  │ 0.2395409763423746  │ 0.3238822246455834  │ 0.17600872410032717 │ 0.2163576881134133  │
+│ LensKit.ItemKNNScorer-5e95e5ec-123     │ 0.30970556161395857 │ 0.2121948755529811  │ 0.25269726835935996 │ 0.30970556161395857 │ 0.18636859323882224 │ 0.23620501635768812 │
+│ LensKit.ItemKNNScorer-5e95e5ec-42      │ 0.29116684841875684 │ 0.20755053040985658 │ 0.24187231633726572 │ 0.29116684841875684 │ 0.18571428571428572 │ 0.22857142857142856 │
+│ LensKit.ItemKNNScorer-5e95e5ec-456     │ 0.31297709923664124 │ 0.20252583411478017 │ 0.2387888209806575  │ 0.31297709923664124 │ 0.1773173391494002  │ 0.21941112322791714 │
+│ LensKit.ItemKNNScorer-5e95e5ec-789     │ 0.3173391494002181  │ 0.20787004777343424 │ 0.24328361417124092 │ 0.3173391494002181  │ 0.18222464558342422 │ 0.22246455834242093 │
+│ LensKit.PopScorer-f4aa5539-1024        │ 0.20149253731343283 │ 0.1347964930602312  │ 0.1591734555686835  │ 0.20149253731343283 │ 0.11769722814498934 │ 0.14584221748400855 │
+│ LensKit.PopScorer-f4aa5539-123         │ 0.22174840085287847 │ 0.13919280714971402 │ 0.16129834378289126 │ 0.22174840085287847 │ 0.12185501066098081 │ 0.14626865671641792 │
+│ LensKit.PopScorer-f4aa5539-42          │ 0.21002132196162046 │ 0.13644882114350124 │ 0.15525925528860987 │ 0.21002132196162046 │ 0.12100213219616204 │ 0.14093816631130066 │
+│ LensKit.PopScorer-f4aa5539-456         │ 0.21961620469083157 │ 0.13863766728436341 │ 0.15967357493597645 │ 0.21961620469083157 │ 0.12270788912579958 │ 0.14562899786780384 │
+│ LensKit.PopScorer-f4aa5539-789         │ 0.2068230277185501  │ 0.13746703002064659 │ 0.16108224304619417 │ 0.2068230277185501  │ 0.12078891257995736 │ 0.14818763326226012 │
+└────────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+                                                                 Amazon2014VideoGames-a88e2e16: Evaluation Results                                                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                             ┃ NDCG@1               ┃ NDCG@10              ┃ NDCG@5               ┃ Precision@1          ┃ Precision@10          ┃ Precision@5          ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-f878b0da-123 │ 0.05278046088036429  │ 0.031005072022674707 │ 0.03797915661937042  │ 0.05278046088036429  │ 0.025976266041120463  │ 0.03397267834966193  │
+│ LensKit.ImplicitMFScorer-f878b0da-42  │ 0.045329101697254036 │ 0.02637799739263379  │ 0.03186687066302515  │ 0.045329101697254036 │ 0.022305781702773562  │ 0.028425555402235406 │
+│ LensKit.ItemKNNScorer-5e95e5ec-123    │ 0.04879679144385027  │ 0.030202453072714425 │ 0.03747190466205446  │ 0.04879679144385027  │ 0.025423351158645278  │ 0.03409090909090909  │
+│ LensKit.ItemKNNScorer-5e95e5ec-42     │ 0.04774835935732066  │ 0.029743612868010284 │ 0.03590246236561801  │ 0.04774835935732066  │ 0.025458248472505093  │ 0.032677076261597646 │
+│ LensKit.PopScorer-f4aa5539-123        │ 0.007382365116599972 │ 0.00635327899600122  │ 0.006801375122199465 │ 0.007382365116599972 │ 0.0059265903132330626 │ 0.006402649372153996 │
+│ LensKit.PopScorer-f4aa5539-42         │ 0.007106388850558852 │ 0.005696620680155015 │ 0.005988609110730349 │ 0.007106388850558852 │ 0.005443631847661102  │ 0.005629915827238858 │
+└───────────────────────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┴───────────────────────┴──────────────────────┘
+    Collected 90 result rows for MovieLens100K-1b09c064
+    Collected 36 result rows for Amazon2014VideoGames-a88e2e16
+
+  --- Seed 456 (3/5) ---
+    Loading Amazon2014VideoGames...
+[2026/07/09 03:13:54] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Applying preprocessing (5-core, implicit conversion if needed, split)...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 970030                                                                                        feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 970030                                                                                              core_pruning.py:20
+[2026/07/09 03:13:56] INFO     Number of interactions after: 132209                                                                                               core_pruning.py:63
+    Dataset stats - interactions: {'train': 86029, 'val': 14524, 'test': 31656}
+    Running experiments with 3 algorithms...
+[2026/07/09 03:14:13] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 03:14:17] INFO     Runner started with pid: 29493                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+[2026/07/09 03:14:18] INFO     Running phase 'Fit' for Amazon2014VideoGames/PopScorer                                                                             coordinator.py:402
+[2026/07/09 03:14:28] INFO     Running phase 'Predict' for Amazon2014VideoGames/PopScorer                                                                         coordinator.py:402
+[2026/07/09 03:19:38] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/PopScorer                                                                        coordinator.py:402
+[2026/07/09 03:26:40] INFO     Amazon2014VideoGames/PopScorer done!                                                                                               coordinator.py:373
+[2026/07/09 03:26:41] INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 03:26:45] INFO     Runner started with pid: 29835                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ItemKNNScorer                                                                         coordinator.py:402
+[2026/07/09 03:26:55] INFO     Running phase 'Predict' for Amazon2014VideoGames/ItemKNNScorer                                                                     coordinator.py:402
+[2026/07/09 03:27:25] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/ItemKNNScorer                                                                    coordinator.py:402
+[2026/07/09 03:27:30] INFO     Amazon2014VideoGames/ItemKNNScorer done!                                                                                           coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 03:27:34] INFO     Runner started with pid: 29961                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for Amazon2014VideoGames/ImplicitMFScorer                                                                      coordinator.py:402
+[2026/07/09 03:28:04] INFO     Running phase 'Predict' for Amazon2014VideoGames/ImplicitMFScorer                                                                  coordinator.py:402
+[2026/07/09 03:33:24] INFO     Running phase 'Evaluate' for Amazon2014VideoGames/ImplicitMFScorer                                                                 coordinator.py:402
+TimeoutError: Execution exceeded the time limit of an hour

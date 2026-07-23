@@ -1,0 +1,37 @@
+Fixed runner written to: /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/fixed_lenskit_runner.py
+Registered FixedLensKit runner with OmniRec.
+================================================================================
+OMNIREC EXPERIMENT: RANDOM SEED EFFECT ON RECOMMENDER ACCURACY
+================================================================================
+
+######################################################################
+  SEED 42 (iteration 1/5)
+######################################################################
+    Random state set to: 42
+
+    ──────────────────────────────────────────────────
+    Preprocessing HetrecLastFM...
+[2026/07/08 23:51:41] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+      Steps: MakeImplicit=False, CorePruning=5, UserHoldout(val=0.0, test=0.2)
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 277, in <module>
+    processed_dataset = pipeline.process(dataset)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/pipe.py", line 35, in process
+    data = self._steps[-1].process(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+Program crashed with exception (see above) after 2 seconds!

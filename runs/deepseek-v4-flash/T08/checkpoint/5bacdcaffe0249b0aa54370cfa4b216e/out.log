@@ -1,0 +1,48 @@
+============================================================
+EXPERIMENT: Impact of Data Split Random Seeds on RecSys Accuracy
+============================================================
+Working directory: /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working
+Random seeds: [42, 123, 256, 789, 1024]
+
+############################################################
+Processing dataset: MovieLens100K
+############################################################
+
+============================================================
+Loading and preprocessing MovieLens100K...
+[2026/07/09 11:35:24] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  Loaded: 100000 interactions
+  Converting to implicit (rating >= 4)...
+  Applying 5-core pruning...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+  After preprocessing: 54413 interactions
+
+  --- Seed 42 ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 244, in <module>
+    main()
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 177, in main
+    result_df = run_seed_experiment(ds_name, raw_dataset, seed, results_dir)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 100, in run_seed_experiment
+    split_dataset = splitter.process(raw_dataset)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+Program crashed with exception (see above) after 2 seconds!

@@ -1,0 +1,202 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  Experiment: Quantifying Data Split Random Seed Effects on RS Accuracy  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+  Datasets: ['MovieLens100K', 'Amazon2014VideoGames', 'HetrecLastFM']
+  Algorithms: PopScorer, ItemKNNScorer, ImplicitMFScorer
+  Seeds: [0, 1, 2, 3, 4]
+  Metrics: NDCG@[1,5,10], Precision@[1,5,10]
+  Working Dir: /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 0
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 0 ---
+[2026/07/08 07:39:58] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+[2026/07/08 07:39:59] INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+  ERROR preprocessing MovieLens100K with seed 0: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing Amazon2014VideoGames with seed 0 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                                                                                       feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                                                                             core_pruning.py:20
+[2026/07/08 07:40:01] INFO     Number of interactions after: 177572                                                                                               core_pruning.py:63
+  ERROR preprocessing Amazon2014VideoGames with seed 0: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing HetrecLastFM with seed 0 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+[2026/07/08 07:40:02] INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+  ERROR preprocessing HetrecLastFM with seed 0: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 1
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 1 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+  ERROR preprocessing MovieLens100K with seed 1: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing Amazon2014VideoGames with seed 1 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                                                                                       feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                                                                             core_pruning.py:20
+[2026/07/08 07:40:04] INFO     Number of interactions after: 177572                                                                                               core_pruning.py:63
+  ERROR preprocessing Amazon2014VideoGames with seed 1: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing HetrecLastFM with seed 1 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+  ERROR preprocessing HetrecLastFM with seed 1: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 2
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 2 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+[2026/07/08 07:40:05] INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+  ERROR preprocessing MovieLens100K with seed 2: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing Amazon2014VideoGames with seed 2 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                                                                                       feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                                                                             core_pruning.py:20
+[2026/07/08 07:40:07] INFO     Number of interactions after: 177572                                                                                               core_pruning.py:63
+  ERROR preprocessing Amazon2014VideoGames with seed 2: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing HetrecLastFM with seed 2 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+  ERROR preprocessing HetrecLastFM with seed 2: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 3
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 3 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+  ERROR preprocessing MovieLens100K with seed 3: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing Amazon2014VideoGames with seed 3 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+[2026/07/08 07:40:08] INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                                                                                       feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                                                                             core_pruning.py:20
+[2026/07/08 07:40:10] INFO     Number of interactions after: 177572                                                                                               core_pruning.py:63
+  ERROR preprocessing Amazon2014VideoGames with seed 3: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing HetrecLastFM with seed 3 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+  ERROR preprocessing HetrecLastFM with seed 3: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 4
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 4 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+  ERROR preprocessing MovieLens100K with seed 4: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing Amazon2014VideoGames with seed 4 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+[2026/07/08 07:40:11] INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                                                                                       feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                                                                             core_pruning.py:20
+[2026/07/08 07:40:13] INFO     Number of interactions after: 177572                                                                                               core_pruning.py:63
+  ERROR preprocessing Amazon2014VideoGames with seed 4: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  --- Processing HetrecLastFM with seed 4 ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+  ERROR preprocessing HetrecLastFM with seed 4: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+======================================================================
+  COLLECTING AND ANALYZING RESULTS
+======================================================================
+
+No checkpoint directory found. Skipping analysis.
+Results may have been stored differently by the runner.
+
+======================================================================
+  EXPERIMENT COMPLETE
+======================================================================
+
+Results saved in: /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/checkpoints/
+Execution time: 16 seconds (time limit is an hour).

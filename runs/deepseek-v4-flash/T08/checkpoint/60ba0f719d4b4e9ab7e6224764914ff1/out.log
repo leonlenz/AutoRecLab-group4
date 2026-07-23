@@ -1,0 +1,57 @@
+======================================================================
+Loading MovieLens100K...
+[2026/07/09 11:25:29] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+Preprocessing MovieLens100K (MakeImplicit + CorePruning)...
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+[2026/07/09 11:25:30] INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+MovieLens100K after preprocessing: 81697 interactions
+Loading Amazon2014VideoGames...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+Preprocessing Amazon2014VideoGames (MakeImplicit + CorePruning)...
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                                                                                       feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                                                                             core_pruning.py:20
+[2026/07/09 11:25:32] INFO     Number of interactions after: 177572                                                                                               core_pruning.py:63
+Amazon2014VideoGames after preprocessing: 177572 interactions
+Loading HetrecLastFM...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+Preprocessing HetrecLastFM (CorePruning only)...
+[2026/07/09 11:25:33] INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+HetrecLastFM after preprocessing: 52551 interactions
+
+======================================================================
+RUNNING EXPERIMENTS WITH SEED = 42
+======================================================================
+
+--- Processing MovieLens100K with seed 42 ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 107, in <module>
+    ds_split = split_pipeline.process(ds_processed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/pipe.py", line 35, in process
+    data = self._steps[-1].process(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+Program crashed with exception (see above) after 10 seconds!

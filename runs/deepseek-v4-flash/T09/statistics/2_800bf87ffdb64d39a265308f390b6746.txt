@@ -1,0 +1,20 @@
+ID: 800bf87ffdb64d39a265308f390b6746
+Position: 2
+Score: 0.625
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 5400
+Lines of Code: 285
+Empty Lines: 44
+Comment Lines: 42
+Total Characters: 11793
+Libraries Imported: numpy, omnirec, sys, collections, sklearn, os, pandas, warnings
+Count of Libraries Imported: 8
+Functions: 3
+Classes: 1
+Average Arguments per Function: 1.6666666666666667
+Variable Assignments: 54
+Loops: 10
+Conditions: 2
+Insertions: 97
+Deletions: 18

@@ -1,0 +1,314 @@
+
+================================================================================
+Running with random seed = 42
+================================================================================
+
+  ── Dataset: MovieLens100K ──
+     Loading MovieLens100K ...
+[2026/07/09 16:51:14] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=42) ...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+[2026/07/09 16:51:15] INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: Amazon2014VideoGames ──
+     Loading Amazon2014VideoGames ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=42) ...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 970030                                                                                        feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 970030                                                                                              core_pruning.py:20
+[2026/07/09 16:51:17] INFO     Number of interactions after: 132209                                                                                               core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: HetrecLastFM ──
+     Loading HetrecLastFM ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=42) ...
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+================================================================================
+Running with random seed = 123
+================================================================================
+
+  ── Dataset: MovieLens100K ──
+     Loading MovieLens100K ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=123) ...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: Amazon2014VideoGames ──
+     Loading Amazon2014VideoGames ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=123) ...
+[2026/07/09 16:51:18] INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 970030                                                                                        feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 970030                                                                                              core_pruning.py:20
+[2026/07/09 16:51:20] INFO     Number of interactions after: 132209                                                                                               core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: HetrecLastFM ──
+     Loading HetrecLastFM ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=123) ...
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+================================================================================
+Running with random seed = 456
+================================================================================
+
+  ── Dataset: MovieLens100K ──
+     Loading MovieLens100K ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=456) ...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: Amazon2014VideoGames ──
+     Loading Amazon2014VideoGames ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=456) ...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 970030                                                                                        feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 970030                                                                                              core_pruning.py:20
+[2026/07/09 16:51:22] INFO     Number of interactions after: 132209                                                                                               core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: HetrecLastFM ──
+     Loading HetrecLastFM ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=456) ...
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+================================================================================
+Running with random seed = 789
+================================================================================
+
+  ── Dataset: MovieLens100K ──
+     Loading MovieLens100K ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=789) ...
+[2026/07/09 16:51:23] INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: Amazon2014VideoGames ──
+     Loading Amazon2014VideoGames ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=789) ...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 970030                                                                                        feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 970030                                                                                              core_pruning.py:20
+[2026/07/09 16:51:25] INFO     Number of interactions after: 132209                                                                                               core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: HetrecLastFM ──
+     Loading HetrecLastFM ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=789) ...
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+================================================================================
+Running with random seed = 999
+================================================================================
+
+  ── Dataset: MovieLens100K ──
+     Loading MovieLens100K ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=999) ...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: Amazon2014VideoGames ──
+     Loading Amazon2014VideoGames ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Converting explicit ratings > 3 to implicit ...
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=999) ...
+[2026/07/09 16:51:26] INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 970030                                                                                        feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 970030                                                                                              core_pruning.py:20
+[2026/07/09 16:51:28] INFO     Number of interactions after: 132209                                                                                               core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+  ── Dataset: HetrecLastFM ──
+     Loading HetrecLastFM ...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+     Applying 5-core filter ...
+     Splitting 80/20 per user (seed=999) ...
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+     ERROR: Preprocessing failed: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+================================================================================
+Consolidating results ...
+================================================================================
+
+Computing aggregate statistics (mean ± std across 5 seeds) ...
+
+Dataset                Algorithm  Metric       k    Mean       Std       
+----------------------------------------------------------------------
+Amazon2014VideoGames   ALS        NDCG         1    N/A        N/A       
+Amazon2014VideoGames   ALS        NDCG         5    N/A        N/A       
+Amazon2014VideoGames   ALS        NDCG         10   N/A        N/A       
+Amazon2014VideoGames   ALS        Precision    1    N/A        N/A       
+Amazon2014VideoGames   ALS        Precision    5    N/A        N/A       
+Amazon2014VideoGames   ALS        Precision    10   N/A        N/A       
+Amazon2014VideoGames   ItemKNN    NDCG         1    N/A        N/A       
+Amazon2014VideoGames   ItemKNN    NDCG         5    N/A        N/A       
+Amazon2014VideoGames   ItemKNN    NDCG         10   N/A        N/A       
+Amazon2014VideoGames   ItemKNN    Precision    1    N/A        N/A       
+Amazon2014VideoGames   ItemKNN    Precision    5    N/A        N/A       
+Amazon2014VideoGames   ItemKNN    Precision    10   N/A        N/A       
+Amazon2014VideoGames   Pop        NDCG         1    N/A        N/A       
+Amazon2014VideoGames   Pop        NDCG         5    N/A        N/A       
+Amazon2014VideoGames   Pop        NDCG         10   N/A        N/A       
+Amazon2014VideoGames   Pop        Precision    1    N/A        N/A       
+Amazon2014VideoGames   Pop        Precision    5    N/A        N/A       
+Amazon2014VideoGames   Pop        Precision    10   N/A        N/A       
+HetrecLastFM           ALS        NDCG         1    N/A        N/A       
+HetrecLastFM           ALS        NDCG         5    N/A        N/A       
+HetrecLastFM           ALS        NDCG         10   N/A        N/A       
+HetrecLastFM           ALS        Precision    1    N/A        N/A       
+HetrecLastFM           ALS        Precision    5    N/A        N/A       
+HetrecLastFM           ALS        Precision    10   N/A        N/A       
+HetrecLastFM           ItemKNN    NDCG         1    N/A        N/A       
+HetrecLastFM           ItemKNN    NDCG         5    N/A        N/A       
+HetrecLastFM           ItemKNN    NDCG         10   N/A        N/A       
+HetrecLastFM           ItemKNN    Precision    1    N/A        N/A       
+HetrecLastFM           ItemKNN    Precision    5    N/A        N/A       
+HetrecLastFM           ItemKNN    Precision    10   N/A        N/A       
+HetrecLastFM           Pop        NDCG         1    N/A        N/A       
+HetrecLastFM           Pop        NDCG         5    N/A        N/A       
+HetrecLastFM           Pop        NDCG         10   N/A        N/A       
+HetrecLastFM           Pop        Precision    1    N/A        N/A       
+HetrecLastFM           Pop        Precision    5    N/A        N/A       
+HetrecLastFM           Pop        Precision    10   N/A        N/A       
+MovieLens100K          ALS        NDCG         1    N/A        N/A       
+MovieLens100K          ALS        NDCG         5    N/A        N/A       
+MovieLens100K          ALS        NDCG         10   N/A        N/A       
+MovieLens100K          ALS        Precision    1    N/A        N/A       
+MovieLens100K          ALS        Precision    5    N/A        N/A       
+MovieLens100K          ALS        Precision    10   N/A        N/A       
+MovieLens100K          ItemKNN    NDCG         1    N/A        N/A       
+MovieLens100K          ItemKNN    NDCG         5    N/A        N/A       
+MovieLens100K          ItemKNN    NDCG         10   N/A        N/A       
+MovieLens100K          ItemKNN    Precision    1    N/A        N/A       
+MovieLens100K          ItemKNN    Precision    5    N/A        N/A       
+MovieLens100K          ItemKNN    Precision    10   N/A        N/A       
+MovieLens100K          Pop        NDCG         1    N/A        N/A       
+MovieLens100K          Pop        NDCG         5    N/A        N/A       
+MovieLens100K          Pop        NDCG         10   N/A        N/A       
+MovieLens100K          Pop        Precision    1    N/A        N/A       
+MovieLens100K          Pop        Precision    5    N/A        N/A       
+MovieLens100K          Pop        Precision    10   N/A        N/A       
+
+================================================================================
+Statistical Analysis: Impact of Seed Variation
+================================================================================
+
+Coefficient of Variation (std/mean) — higher = more sensitive to seed:
+
+Dataset                Algorithm  Metric       k    CV          
+------------------------------------------------------------
+
+Average seed sensitivity (CV) per algorithm across all datasets/metrics/k:
+
+Average seed sensitivity (CV) per dataset across all algorithms/metrics/k:
+
+Full results saved to: /home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/working/seed_variation_results.csv
+Raw per-seed results saved to: /home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/working/seed_variation_raw_results.csv
+
+================================================================================
+Experiment complete!
+================================================================================
+Execution time: 15 seconds (time limit is an hour).

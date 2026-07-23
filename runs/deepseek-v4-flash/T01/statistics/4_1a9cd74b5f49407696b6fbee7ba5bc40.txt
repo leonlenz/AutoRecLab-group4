@@ -1,0 +1,20 @@
+ID: 1a9cd74b5f49407696b6fbee7ba5bc40
+Position: 4
+Score: 0.2
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 280.58941984176636
+Lines of Code: 405
+Empty Lines: 86
+Comment Lines: 35
+Total Characters: 15068
+Libraries Imported: numpy, pandas, lenskit, urllib, typing, os, sys, traceback, omnirec, warnings
+Count of Libraries Imported: 10
+Functions: 12
+Classes: 0
+Average Arguments per Function: 0.5833333333333334
+Variable Assignments: 71
+Loops: 10
+Conditions: 17
+Insertions: 390
+Deletions: 220

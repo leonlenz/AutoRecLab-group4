@@ -1,0 +1,20 @@
+ID: aa4a60d14a594015aafa2008db3bcf7d
+Position: 1
+Score: 0.6666666666666666
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 5.652363061904907
+Lines of Code: 285
+Empty Lines: 45
+Comment Lines: 39
+Total Characters: 11214
+Libraries Imported: os, numpy, json, omnirec, sys, warnings, pandas
+Count of Libraries Imported: 7
+Functions: 1
+Classes: 0
+Average Arguments per Function: 0.0
+Variable Assignments: 50
+Loops: 18
+Conditions: 8
+Insertions: 251
+Deletions: 193

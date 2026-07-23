@@ -1,0 +1,38 @@
+======================================================================
+EXPERIMENT: Impact of Data Split Random Seeds on RecSys Accuracy
+======================================================================
+
+######################################################################
+# DATASET: MovieLens100K
+######################################################################
+
+============================================================
+Loading and preprocessing: ml100k
+============================================================
+[2026/07/08 15:17:53] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  Original size: 100000 interactions
+[2026/07/08 15:17:54] INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 55375                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 55375                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 54413                                                                                                core_pruning.py:63
+  After preprocessing: 54413 interactions
+  Users: 938, Items: 1008
+
+  Running 5 seed splits × 3 algorithms
+
+  --- Algorithm: ImplicitMF ---
+    Seed 42 (run 1/5)... Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_03/workspace/runfile.py", line 308, in <module>
+    main()
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_03/workspace/runfile.py", line 184, in main
+    summary = evaluate_run(recs, test_ilc)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_03/workspace/runfile.py", line 103, in evaluate_run
+    collector.add_collection_measurements(recs, truths)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MeasurementCollector' object has no attribute 'add_collection_measurements'
+Program crashed with exception (see above) after 11 seconds!

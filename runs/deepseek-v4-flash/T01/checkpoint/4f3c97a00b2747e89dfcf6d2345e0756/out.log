@@ -1,0 +1,207 @@
+======================================================================
+EXPERIMENT: Impact of data split random seeds on recommender accuracy
+======================================================================
+
+Datasets: MovieLens100K, Amazon2014VideoGames, HetrecLastFM
+Algorithms: ALS (ImplicitMF), ItemKNN, Pop
+Seeds: [0, 1, 2, 3, 4]
+Split: User-based 80/20 holdout
+Preprocessing: MakeImplicit(>=3), 5-core filtering
+Metrics: NDCG@k and Precision@k for k=1,5,10
+Working directory: /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working
+
+============================================================
+SEED 0 (1/5)
+============================================================
+  Random state set to: 0
+
+  --- Loading & Preprocessing Datasets ---
+
+  Processing MovieLens100K...
+[2026/07/08 08:43:19] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Loaded: 100000 interactions, users=943, items=1682
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 114, in <module>
+    ml100k_processed = ml100k_pipeline.process(ml100k_ds)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/pipe.py", line 35, in process
+    data = self._steps[-1].process(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+  ERROR in seed 0: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+============================================================
+SEED 1 (2/5)
+============================================================
+  Random state set to: 1
+
+  --- Loading & Preprocessing Datasets ---
+
+  Processing MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Loaded: 100000 interactions, users=943, items=1682
+[2026/07/08 08:43:20] INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 114, in <module>
+    ml100k_processed = ml100k_pipeline.process(ml100k_ds)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/pipe.py", line 35, in process
+    data = self._steps[-1].process(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+  ERROR in seed 1: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+============================================================
+SEED 2 (3/5)
+============================================================
+  Random state set to: 2
+
+  --- Loading & Preprocessing Datasets ---
+
+  Processing MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Loaded: 100000 interactions, users=943, items=1682
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 114, in <module>
+    ml100k_processed = ml100k_pipeline.process(ml100k_ds)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/pipe.py", line 35, in process
+    data = self._steps[-1].process(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+  ERROR in seed 2: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+============================================================
+SEED 3 (4/5)
+============================================================
+  Random state set to: 3
+
+  --- Loading & Preprocessing Datasets ---
+
+  Processing MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Loaded: 100000 interactions, users=943, items=1682
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 114, in <module>
+    ml100k_processed = ml100k_pipeline.process(ml100k_ds)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/pipe.py", line 35, in process
+    data = self._steps[-1].process(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+  ERROR in seed 3: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+============================================================
+SEED 4 (5/5)
+============================================================
+  Random state set to: 4
+
+  --- Loading & Preprocessing Datasets ---
+
+  Processing MovieLens100K...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+    Loaded: 100000 interactions, users=943, items=1682
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 114, in <module>
+    ml100k_processed = ml100k_pipeline.process(ml100k_ds)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/pipe.py", line 35, in process
+    data = self._steps[-1].process(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+  ERROR in seed 4: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+
+======================================================================
+STEP 5: Statistical Analysis - Mean and Std across seeds
+======================================================================
+No results collected. Exiting.
+Program crashed with exception (see above) after 2 seconds!

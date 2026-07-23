@@ -1,0 +1,61 @@
+================================================================================
+Loading datasets...
+================================================================================
+[2026/07/08 16:35:59] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+MovieLens100K loaded: 100000 interactions
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+Amazon2014VideoGames loaded: 1324753 interactions
+[2026/07/08 16:36:00] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+HetrecLastFM loaded: 71064 interactions
+
+================================================================================
+Preprocessing datasets...
+================================================================================
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+MovieLens100K after preprocessing: 81697 interactions
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                                                                                       feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                                                                             core_pruning.py:20
+[2026/07/08 16:36:02] INFO     Number of interactions after: 177572                                                                                               core_pruning.py:63
+Amazon2014VideoGames after preprocessing: 177572 interactions
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+[2026/07/08 16:36:03] INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+HetrecLastFM after preprocessing: 52551 interactions
+
+================================================================================
+Running full factorial experiment: 3 datasets x 3 algorithms x 5 seeds
+================================================================================
+
+============================================================
+Processing seed=42
+============================================================
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_04/workspace/runfile.py", line 219, in <module>
+    main()
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_04/workspace/runfile.py", line 110, in main
+    split_ds = splitter.process(ds_base)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+Program crashed with exception (see above) after 5 seconds!

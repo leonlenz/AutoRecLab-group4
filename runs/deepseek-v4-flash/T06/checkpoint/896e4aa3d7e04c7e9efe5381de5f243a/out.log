@@ -1,0 +1,114 @@
+================================================================================
+EXPERIMENT: Effect of Random Seeds on Recommender Accuracy
+================================================================================
+
+--- Loading dataset: MovieLens100K ---
+[2026/07/09 03:47:01] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  Loaded: 100000 interactions
+  Applying 5-core filtering...
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 100000                                                                                              core_pruning.py:20
+                      INFO     Number of interactions after: 99287                                                                                                core_pruning.py:63
+  After core pruning: 99287 interactions
+  Converting to implicit (threshold=4, i.e. ratings >= 4)...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 99287                                                                                        feedback_conversion.py:26
+                      INFO     Number of interactions after: 55165                                                                                         feedback_conversion.py:44
+  After implicit conversion: 55165 interactions
+
+--- Loading dataset: Amazon2014VideoGames ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  Loaded: 1324753 interactions
+  Applying 5-core filtering...
+[2026/07/09 03:47:02] INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1324753                                                                                             core_pruning.py:20
+[2026/07/09 03:47:04] INFO     Number of interactions after: 231780                                                                                               core_pruning.py:63
+  After core pruning: 231780 interactions
+  Converting to implicit (threshold=4, i.e. ratings >= 4)...
+                      INFO     Making data set implicit with threshold 4.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 231780                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 174989                                                                                        feedback_conversion.py:44
+  After implicit conversion: 174989 interactions
+
+--- Loading dataset: HetrecLastFM ---
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+  Loaded: 71064 interactions
+  Applying 5-core filtering...
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+  After core pruning: 52551 interactions
+  Dataset is already implicit, skipping conversion.
+
+======================================================================
+SEED 1/5: seed = 42
+======================================================================
+
+  --- Processing MovieLens100K ---
+    Train interactions: 37910
+    Validation interactions: 5840
+    Test interactions:  11415
+    Train users: 942, Test users: 942
+[2026/07/09 03:47:05] INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 03:47:09] INFO     Runner started with pid: 31327                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/PopScorer                                                                                    coordinator.py:402
+[2026/07/09 03:47:19] INFO     Running phase 'Predict' for MovieLens100K/PopScorer                                                                                coordinator.py:402
+[2026/07/09 03:47:29] INFO     Running phase 'Evaluate' for MovieLens100K/PopScorer                                                                               coordinator.py:402
+[2026/07/09 03:47:33] INFO     MovieLens100K/PopScorer done!                                                                                                      coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 03:47:37] INFO     Runner started with pid: 31441                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+                      INFO     Running phase 'Fit' for MovieLens100K/ItemKNNScorer                                                                                coordinator.py:402
+[2026/07/09 03:47:47] INFO     Running phase 'Predict' for MovieLens100K/ItemKNNScorer                                                                            coordinator.py:402
+[2026/07/09 03:47:57] INFO     Running phase 'Evaluate' for MovieLens100K/ItemKNNScorer                                                                           coordinator.py:402
+[2026/07/09 03:48:00] INFO     MovieLens100K/ItemKNNScorer done!                                                                                                  coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                      INFO     Reusing existing env 'LensKit_env' at /home/prv_tristan/.omnirec/data/envs/LensKit_env                                                     envs.py:48
+                      INFO     Starting runner...                                                                                                                 coordinator.py:272
+[2026/07/09 03:48:03] INFO     Runner started with pid: 31561                                                                                                     coordinator.py:297
+                      INFO     Connecting to runner...                                                                                                            coordinator.py:135
+[2026/07/09 03:48:04] INFO     Running phase 'Fit' for MovieLens100K/ImplicitMFScorer                                                                             coordinator.py:402
+[2026/07/09 03:48:34] INFO     Running phase 'Predict' for MovieLens100K/ImplicitMFScorer                                                                         coordinator.py:402
+[2026/07/09 03:48:54] INFO     Running phase 'Evaluate' for MovieLens100K/ImplicitMFScorer                                                                        coordinator.py:402
+[2026/07/09 03:48:57] INFO     MovieLens100K/ImplicitMFScorer done!                                                                                               coordinator.py:373
+                      INFO     Stopping runner...                                                                                                                 coordinator.py:445
+                                                                 MovieLens100K-fe752bc0: Evaluation Results                                                                 
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+┃ Algorithm                            ┃ NDCG@1              ┃ NDCG@10             ┃ NDCG@5              ┃ Precision@1         ┃ Precision@10        ┃ Precision@5         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+│ LensKit.ImplicitMFScorer-031d4df0-42 │ 0.18789808917197454 │ 0.14458919008511006 │ 0.15959944645479063 │ 0.18789808917197454 │ 0.13481953290870488 │ 0.1535031847133758  │
+│ LensKit.ItemKNNScorer-21e80da0-42    │ 0.2546245919477693  │ 0.1797840261636635  │ 0.2072844550344555  │ 0.2546245919477693  │ 0.16147986942328618 │ 0.194341675734494   │
+│ LensKit.PopScorer-dc44ee64-42        │ 0.18365180467091294 │ 0.12112051016607363 │ 0.13793246512028642 │ 0.18365180467091294 │ 0.10764331210191083 │ 0.12611464968152866 │
+└──────────────────────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+
+  --- Processing Amazon2014VideoGames ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 292, in <module>
+    main()
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 122, in main
+    split_ds = splitter.process(raw_ds)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 49, in _process
+    train, test = train_test_split(
+                  ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2919, in train_test_split
+    n_train, n_test = _validate_shuffle_split(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2499, in _validate_shuffle_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+Program crashed with exception (see above) after a minute!

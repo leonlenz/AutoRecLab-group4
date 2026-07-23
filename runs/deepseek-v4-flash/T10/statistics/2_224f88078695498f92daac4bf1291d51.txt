@@ -1,0 +1,20 @@
+ID: 224f88078695498f92daac4bf1291d51
+Position: 2
+Score: 0.7777777777777778
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 18.383954524993896
+Lines of Code: 421
+Empty Lines: 77
+Comment Lines: 52
+Total Characters: 16995
+Libraries Imported: pathlib, numpy, typing, sys, os, pandas, lenskit, warnings
+Count of Libraries Imported: 8
+Functions: 4
+Classes: 1
+Average Arguments per Function: 1.0
+Variable Assignments: 62
+Loops: 11
+Conditions: 20
+Insertions: 312
+Deletions: 99

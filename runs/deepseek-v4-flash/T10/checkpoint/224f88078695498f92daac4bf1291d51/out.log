@@ -1,0 +1,24 @@
+
+================================================================================
+Running with random seed = 42
+================================================================================
+
+  ── Dataset: MovieLens100K ──
+     Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/data/ml-100k.zip ...
+2026-07-09 16:36:24 [error    ] MovieLens data not found       path=/home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/data/ml-100k.zip
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 421, in <module>
+    main()
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 208, in main
+    dataset = load_dataset(ds_name)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 83, in load_dataset
+    ds = load_movielens(ML100K_PATH)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/movielens.py", line 452, in load_movielens
+    with _ml_detect_and_open(path) as ml:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/lenskit/data/movielens.py", line 542, in _ml_detect_and_open
+    raise FileNotFoundError(path)
+FileNotFoundError: /home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/data/ml-100k.zip
+Program crashed with exception (see above) after 18 seconds!

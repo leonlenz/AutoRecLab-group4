@@ -1,0 +1,20 @@
+ID: 5bacdcaffe0249b0aa54370cfa4b216e
+Position: 1
+Score: 0.125
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 2.3313679695129395
+Lines of Code: 244
+Empty Lines: 49
+Comment Lines: 27
+Total Characters: 8770
+Libraries Imported: omnirec, pandas, pathlib, sys, os, numpy, json
+Count of Libraries Imported: 7
+Functions: 3
+Classes: 0
+Average Arguments per Function: 2.0
+Variable Assignments: 30
+Loops: 9
+Conditions: 2
+Insertions: 216
+Deletions: 230

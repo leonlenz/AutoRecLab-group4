@@ -1,0 +1,75 @@
+================================================================================
+EXPERIMENT: Impact of random seed on recommender accuracy
+================================================================================
+
+Datasets: ['MovieLens100K', 'Amazon2014VideoGames', 'HetrecLastFM']
+Algorithms: ['ALS', 'ItemKNN', 'Pop']
+Seeds: [42, 123, 456, 789, 1111]
+Total conditions: 3 × 3 × 5 = 45
+
+================================================================================
+Phase 1: Preprocess all datasets (one-time)
+================================================================================
+
+--- MovieLens100K ---
+  Preprocessing MovieLens100K from scratch...
+[2026/07/08 12:36:31] INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1                                                                                                           feedback_conversion.py:24
+                      INFO     Maximum rating: 5                                                                                                           feedback_conversion.py:25
+                      INFO     Number of interactions before: 100000                                                                                       feedback_conversion.py:26
+                      INFO     Number of interactions after: 82520                                                                                         feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 82520                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 81697                                                                                                core_pruning.py:63
+  Saved cached preprocessed dataset to /home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/working/MovieLens100K_preprocessed.rsds
+  Done. Interactions: 81697
+
+--- Amazon2014VideoGames ---
+  Preprocessing Amazon2014VideoGames from scratch...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+[2026/07/08 12:36:32] INFO     Making data set implicit with threshold 3.                                                                                  feedback_conversion.py:21
+                      INFO     Minimum rating: 1.0                                                                                                         feedback_conversion.py:24
+                      INFO     Maximum rating: 5.0                                                                                                         feedback_conversion.py:25
+                      INFO     Number of interactions before: 1324753                                                                                      feedback_conversion.py:26
+                      INFO     Number of interactions after: 1094400                                                                                       feedback_conversion.py:44
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 1094400                                                                                             core_pruning.py:20
+[2026/07/08 12:36:34] INFO     Number of interactions after: 177572                                                                                               core_pruning.py:63
+  Saved cached preprocessed dataset to /home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/working/Amazon2014VideoGames_preprocessed.rsds
+  Done. Interactions: 177572
+
+--- HetrecLastFM ---
+  Preprocessing HetrecLastFM from scratch...
+                      INFO     Canonicalized data set already exists, skipping download and canonicalization.                                                 recsys_data_set.py:205
+                      INFO     Pruning data set to 5-core.                                                                                                        core_pruning.py:19
+                      INFO     Number of interactions before: 71064                                                                                               core_pruning.py:20
+                      INFO     Number of interactions after: 52551                                                                                                core_pruning.py:63
+  Saved cached preprocessed dataset to /home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/working/HetrecLastFM_preprocessed.rsds
+  Done. Interactions: 52551
+
+================================================================================
+Phase 2: Run experiment grid
+================================================================================
+
+──────────────────────────────────────────────────────────────────────
+Dataset: MovieLens100K
+──────────────────────────────────────────────────────────────────────
+
+  Seed 1/5 (seed=42)
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_02/workspace/runfile.py", line 158, in <module>
+    split_dataset = splitter.process(base_dataset)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/base.py", line 84, in process
+    new_ds = self._process(dataset)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/omnirec/preprocess/split.py", line 52, in _process
+    train, valid = train_test_split(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 208, in wrapper
+    validate_parameter_constraints(
+  File "/home/prv_tristan/AutoRecLab-group4/.venv/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got 0.0 instead.
+Program crashed with exception (see above) after 6 seconds!

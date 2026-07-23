@@ -1,0 +1,898 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  Experiment: Quantifying Data Split Random Seed Effects on RS Accuracy  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+  Datasets: MovieLens100K, Amazon2014VideoGames, HetrecLastFM
+  Algorithms: PopScorer, ItemKNNScorer, ImplicitMFScorer
+  Seeds: [0, 1, 2, 3, 4]
+  Metrics: NDCG@[1,5,10], Precision@[1,5,10]
+  Working Dir: /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 0
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 0 ---
+  Downloading MovieLens 100K from https://files.grouplens.org/datasets/movielens/ml-100k.zip...
+  Download complete.
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52085 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.181818
+        NDCG@5=0.149445
+        NDCG@10=0.152484
+        Precision@1=0.181818
+        Precision@5=0.135829
+        Precision@10=0.122995
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.315508
+        NDCG@5=0.257863
+        NDCG@10=0.252374
+        Precision@1=0.315508
+        Precision@5=0.222460
+        Precision@10=0.179679
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+        NDCG@1=0.165775
+        NDCG@5=0.182994
+        NDCG@10=0.200353
+        Precision@1=0.165775
+        Precision@5=0.159358
+        Precision@10=0.147059
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing Amazon2014VideoGames with seed 0 ---
+  Downloading Amazon Video Games from https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_Video_Games.csv...
+  Download complete.
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded
+    Implicit conversion: 1324752 -> 970029 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 970029
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 6950 users, 14494 items
+    Splitting: 1390 test users out of 6950
+    Train: 127007 interactions, 6950 users, 14494 items
+    Test:  1390 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.015108
+        NDCG@5=0.017542
+        NDCG@10=0.021364
+        Precision@1=0.015108
+        Precision@5=0.011079
+        Precision@10=0.009137
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.030935
+        NDCG@5=0.036962
+        NDCG@10=0.043009
+        Precision@1=0.030935
+        Precision@5=0.021439
+        Precision@10=0.017266
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 85, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 243, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 206, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 118, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 91, in download_lastfm
+    urllib.request.urlretrieve(url2, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 553, in error
+    result = self._call_chain(*args)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 745, in http_error_302
+    return self.parent.open(new, timeout=req.timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+        NDCG@1=0.052518
+        NDCG@5=0.055276
+        NDCG@10=0.062817
+        Precision@1=0.052518
+        Precision@5=0.031655
+        Precision@10=0.024029
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing HetrecLastFM with seed 0 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/mingfeiwang/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  Trying fallback URL: http://www.cs.cornell.edu/~shuochen/lme/data/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 0: HTTP Error 404: Not Found
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 1
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 1 ---
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52275 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.187166
+        NDCG@5=0.141462
+        NDCG@10=0.144608
+        Precision@1=0.187166
+        Precision@5=0.121925
+        Precision@10=0.108556
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.283422
+        NDCG@5=0.240680
+        NDCG@10=0.245544
+        Precision@1=0.283422
+        Precision@5=0.209626
+        Precision@10=0.172193
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+        NDCG@1=0.171123
+        NDCG@5=0.171769
+        NDCG@10=0.190917
+        Precision@1=0.171123
+        Precision@5=0.144385
+        Precision@10=0.129412
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing Amazon2014VideoGames with seed 1 ---
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded
+    Implicit conversion: 1324752 -> 970029 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 970029
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 6950 users, 14494 items
+    Splitting: 1390 test users out of 6950
+    Train: 126552 interactions, 6950 users, 14494 items
+    Test:  1390 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.015108
+        NDCG@5=0.014105
+        NDCG@10=0.017136
+        Precision@1=0.015108
+        Precision@5=0.009784
+        Precision@10=0.007986
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.028777
+        NDCG@5=0.037432
+        NDCG@10=0.042716
+        Precision@1=0.028777
+        Precision@5=0.023453
+        Precision@10=0.019065
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 85, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 243, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 206, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 118, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 91, in download_lastfm
+    urllib.request.urlretrieve(url2, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 553, in error
+    result = self._call_chain(*args)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 745, in http_error_302
+    return self.parent.open(new, timeout=req.timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+        NDCG@1=0.033813
+        NDCG@5=0.044357
+        NDCG@10=0.051794
+        Precision@1=0.033813
+        Precision@5=0.028489
+        Precision@10=0.022950
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing HetrecLastFM with seed 1 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/mingfeiwang/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  Trying fallback URL: http://www.cs.cornell.edu/~shuochen/lme/data/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 1: HTTP Error 404: Not Found
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 2
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 2 ---
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52036 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.251337
+        NDCG@5=0.194805
+        NDCG@10=0.179765
+        Precision@1=0.251337
+        Precision@5=0.174332
+        Precision@10=0.134225
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.331551
+        NDCG@5=0.288586
+        NDCG@10=0.275544
+        Precision@1=0.331551
+        Precision@5=0.251337
+        Precision@10=0.198396
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+        NDCG@1=0.165775
+        NDCG@5=0.188523
+        NDCG@10=0.205409
+        Precision@1=0.165775
+        Precision@5=0.167914
+        Precision@10=0.152941
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing Amazon2014VideoGames with seed 2 ---
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded
+    Implicit conversion: 1324752 -> 970029 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 970029
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 6950 users, 14494 items
+    Splitting: 1390 test users out of 6950
+    Train: 126888 interactions, 6950 users, 14494 items
+    Test:  1390 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.020144
+        NDCG@5=0.017340
+        NDCG@10=0.019255
+        Precision@1=0.020144
+        Precision@5=0.010935
+        Precision@10=0.008129
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.037410
+        NDCG@5=0.041223
+        NDCG@10=0.045189
+        Precision@1=0.037410
+        Precision@5=0.024317
+        Precision@10=0.017986
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 85, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 243, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 206, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 118, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 91, in download_lastfm
+    urllib.request.urlretrieve(url2, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 553, in error
+    result = self._call_chain(*args)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 745, in http_error_302
+    return self.parent.open(new, timeout=req.timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+        NDCG@1=0.038129
+        NDCG@5=0.045485
+        NDCG@10=0.056236
+        Precision@1=0.038129
+        Precision@5=0.027626
+        Precision@10=0.024460
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing HetrecLastFM with seed 2 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/mingfeiwang/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  Trying fallback URL: http://www.cs.cornell.edu/~shuochen/lme/data/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 2: HTTP Error 404: Not Found
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 3
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 3 ---
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52289 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.192513
+        NDCG@5=0.153392
+        NDCG@10=0.148680
+        Precision@1=0.192513
+        Precision@5=0.137968
+        Precision@10=0.112834
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.251337
+        NDCG@5=0.221799
+        NDCG@10=0.222314
+        Precision@1=0.251337
+        Precision@5=0.204278
+        Precision@10=0.168449
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+        NDCG@1=0.187166
+        NDCG@5=0.176198
+        NDCG@10=0.185888
+        Precision@1=0.187166
+        Precision@5=0.163636
+        Precision@10=0.140642
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing Amazon2014VideoGames with seed 3 ---
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded
+    Implicit conversion: 1324752 -> 970029 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 970029
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 6950 users, 14494 items
+    Splitting: 1390 test users out of 6950
+    Train: 127094 interactions, 6950 users, 14494 items
+    Test:  1390 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.017986
+        NDCG@5=0.018288
+        NDCG@10=0.020194
+        Precision@1=0.017986
+        Precision@5=0.009784
+        Precision@10=0.007194
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.037410
+        NDCG@5=0.041166
+        NDCG@10=0.046635
+        Precision@1=0.037410
+        Precision@5=0.023741
+        Precision@10=0.018417
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 85, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 243, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 206, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 118, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 91, in download_lastfm
+    urllib.request.urlretrieve(url2, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 553, in error
+    result = self._call_chain(*args)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 745, in http_error_302
+    return self.parent.open(new, timeout=req.timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+        NDCG@1=0.051799
+        NDCG@5=0.059246
+        NDCG@10=0.067011
+        Precision@1=0.051799
+        Precision@5=0.035683
+        Precision@10=0.026691
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing HetrecLastFM with seed 3 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/mingfeiwang/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  Trying fallback URL: http://www.cs.cornell.edu/~shuochen/lme/data/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 3: HTTP Error 404: Not Found
+
+======================================================================
+  RUNNING EXPERIMENTS FOR SEED = 4
+======================================================================
+
+
+  --- Processing MovieLens100K with seed 4 ---
+  Loading MovieLens 100K from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/ml-100k.zip
+    Loaded
+    Implicit conversion: 100000 -> 55375 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 55375
+    Interactions after: 54413
+    After preprocessing: 54413 interactions, 938 users, 1008 items
+    Splitting: 187 test users out of 938
+    Train: 52376 interactions, 938 users, 1008 items
+    Test:  187 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.219251
+        NDCG@5=0.158441
+        NDCG@10=0.149565
+        Precision@1=0.219251
+        Precision@5=0.139037
+        Precision@10=0.111230
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.294118
+        NDCG@5=0.240945
+        NDCG@10=0.238960
+        Precision@1=0.294118
+        Precision@5=0.209626
+        Precision@10=0.166845
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+        NDCG@1=0.139037
+        NDCG@5=0.169236
+        NDCG@10=0.191536
+        Precision@1=0.139037
+        Precision@5=0.156150
+        Precision@10=0.145455
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing Amazon2014VideoGames with seed 4 ---
+  Loading Amazon Video Games from /home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/working/data/amazon_video_games.csv
+    Loaded
+    Implicit conversion: 1324752 -> 970029 interactions (rating > 3.0, set to 1)
+    Applying 5-core filtering...
+    Interactions before: 970029
+    Interactions after: 132209
+    After preprocessing: 132209 interactions, 6950 users, 14494 items
+    Splitting: 1390 test users out of 6950
+    Train: 126977 interactions, 6950 users, 14494 items
+    Test:  1390 users
+
+    --- Algorithm: PopScorer ---
+        NDCG@1=0.022302
+        NDCG@5=0.020030
+        NDCG@10=0.022283
+        Precision@1=0.022302
+        Precision@5=0.011367
+        Precision@10=0.008561
+      ✓ Completed PopScorer
+
+    --- Algorithm: ItemKNNScorer ---
+        NDCG@1=0.026619
+        NDCG@5=0.034982
+        NDCG@10=0.041120
+        Precision@1=0.026619
+        Precision@5=0.022446
+        Precision@10=0.018345
+      ✓ Completed ItemKNNScorer
+
+    --- Algorithm: ImplicitMFScorer ---
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 85, in download_lastfm
+    urllib.request.urlretrieve(url, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 243, in run_experiment_for_seed
+    dataset = preprocess_dataset(dataset_key, seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 206, in preprocess_dataset
+    dataset = load_lastfm_dataset()
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 118, in load_lastfm_dataset
+    lfm_path = download_lastfm()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/AutoRecLab-group4/out/run_01/workspace/runfile.py", line 91, in download_lastfm
+    urllib.request.urlretrieve(url2, lfm_path)
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 240, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 553, in error
+    result = self._call_chain(*args)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 745, in http_error_302
+    return self.parent.open(new, timeout=req.timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/home/prv_tristan/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+        NDCG@1=0.046763
+        NDCG@5=0.046495
+        NDCG@10=0.054939
+        Precision@1=0.046763
+        Precision@5=0.029784
+        Precision@10=0.024388
+      ✓ Completed ImplicitMFScorer
+
+  --- Processing HetrecLastFM with seed 4 ---
+  Downloading Last.FM from https://raw.githubusercontent.com/mingfeiwang/OmniRec/main/data/hetrec2011-lastfm/user_artists.dat...
+  Trying fallback URL: http://www.cs.cornell.edu/~shuochen/lme/data/user_artists.dat...
+  ERROR preprocessing HetrecLastFM with seed 4: HTTP Error 404: Not Found
+
+======================================================================
+  COLLECTING AND ANALYZING RESULTS
+======================================================================
+
+Collected 180 metric records.
+
+==========================================================================================
+  RESULTS: Mean ± Std across 5 random seeds
+==========================================================================================
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  Dataset: Amazon2014VideoGames
+──────────────────────────────────────────────────────────────────────────────────────────
+
+  Algorithm: ImplicitMFScorer
+    NDCG@1: 0.044604 ± 0.008328 (n=5 seeds)
+    NDCG@5: 0.050172 ± 0.006665 (n=5 seeds)
+    NDCG@10: 0.058560 ± 0.006202 (n=5 seeds)
+    Precision@1: 0.044604 ± 0.008328 (n=5 seeds)
+    Precision@5: 0.030647 ± 0.003198 (n=5 seeds)
+    Precision@10: 0.024504 ± 0.001364 (n=5 seeds)
+
+  Algorithm: ItemKNNScorer
+    NDCG@1: 0.032230 ± 0.004969 (n=5 seeds)
+    NDCG@5: 0.038353 ± 0.002752 (n=5 seeds)
+    NDCG@10: 0.043734 ± 0.002175 (n=5 seeds)
+    Precision@1: 0.032230 ± 0.004969 (n=5 seeds)
+    Precision@5: 0.023079 ± 0.001140 (n=5 seeds)
+    Precision@10: 0.018216 ± 0.000658 (n=5 seeds)
+
+  Algorithm: PopScorer
+    NDCG@1: 0.018129 ± 0.003152 (n=5 seeds)
+    NDCG@5: 0.017461 ± 0.002154 (n=5 seeds)
+    NDCG@10: 0.020046 ± 0.001991 (n=5 seeds)
+    Precision@1: 0.018129 ± 0.003152 (n=5 seeds)
+    Precision@5: 0.010590 ± 0.000752 (n=5 seeds)
+    Precision@10: 0.008201 ± 0.000719 (n=5 seeds)
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  Dataset: MovieLens100K
+──────────────────────────────────────────────────────────────────────────────────────────
+
+  Algorithm: ImplicitMFScorer
+    NDCG@1: 0.165775 ± 0.017328 (n=5 seeds)
+    NDCG@5: 0.177744 ± 0.007972 (n=5 seeds)
+    NDCG@10: 0.194821 ± 0.007883 (n=5 seeds)
+    Precision@1: 0.165775 ± 0.017328 (n=5 seeds)
+    Precision@5: 0.158289 ± 0.008948 (n=5 seeds)
+    Precision@10: 0.143102 ± 0.008824 (n=5 seeds)
+
+  Algorithm: ItemKNNScorer
+    NDCG@1: 0.295187 ± 0.030813 (n=5 seeds)
+    NDCG@5: 0.249975 ± 0.025074 (n=5 seeds)
+    NDCG@10: 0.246947 ± 0.019492 (n=5 seeds)
+    Precision@1: 0.295187 ± 0.030813 (n=5 seeds)
+    Precision@5: 0.219465 ± 0.019033 (n=5 seeds)
+    Precision@10: 0.177112 ± 0.012886 (n=5 seeds)
+
+  Algorithm: PopScorer
+    NDCG@1: 0.206417 ± 0.028946 (n=5 seeds)
+    NDCG@5: 0.159509 ± 0.020684 (n=5 seeds)
+    NDCG@10: 0.155021 ± 0.014116 (n=5 seeds)
+    Precision@1: 0.206417 ± 0.028946 (n=5 seeds)
+    Precision@5: 0.141818 ± 0.019438 (n=5 seeds)
+    Precision@10: 0.117968 ± 0.010605 (n=5 seeds)
+
+======================================================================
+  EXPERIMENT COMPLETE
+======================================================================
+Execution time: 4 minutes (time limit is an hour).

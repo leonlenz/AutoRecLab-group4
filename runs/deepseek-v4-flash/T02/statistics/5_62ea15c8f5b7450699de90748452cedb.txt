@@ -1,0 +1,20 @@
+ID: 62ea15c8f5b7450699de90748452cedb
+Position: 5
+Score: 0.5555555555555556
+Is Buggy: True
+Is Satisfactory: False
+Execution Time: 6.949479103088379
+Lines of Code: 277
+Empty Lines: 54
+Comment Lines: 28
+Total Characters: 9879
+Libraries Imported: logging, numpy, pandas, pathlib, typing, os, sys, traceback, omnirec, warnings
+Count of Libraries Imported: 10
+Functions: 1
+Classes: 1
+Average Arguments per Function: 2.0
+Variable Assignments: 34
+Loops: 12
+Conditions: 5
+Insertions: 111
+Deletions: 62

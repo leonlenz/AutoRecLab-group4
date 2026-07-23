@@ -1,0 +1,179 @@
+{
+    "jobs": {
+        "MovieLens100K-43a5f96f|LensKit.PopScorer-dc44ee64-42": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.PopScorer-dc44ee64-42": {
+            "next_phase": 1,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.ItemKNNScorer-5f816cf5-42": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.ItemKNNScorer-5f816cf5-42": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "HetrecLastFM-558ae692|LensKit.ItemKNNScorer-5f816cf5-42": {
+            "next_phase": 2,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.ImplicitMFScorer-db8d01ec-42": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.ImplicitMFScorer-db8d01ec-42": {
+            "next_phase": 1,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.PopScorer-dc44ee64-123": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.PopScorer-dc44ee64-123": {
+            "next_phase": 1,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.ItemKNNScorer-5f816cf5-123": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.ItemKNNScorer-5f816cf5-123": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "HetrecLastFM-558ae692|LensKit.ItemKNNScorer-5f816cf5-123": {
+            "next_phase": 2,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.ImplicitMFScorer-db8d01ec-123": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.ImplicitMFScorer-db8d01ec-123": {
+            "next_phase": 1,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.PopScorer-dc44ee64-456": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.PopScorer-dc44ee64-456": {
+            "next_phase": 1,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.ItemKNNScorer-5f816cf5-456": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.ItemKNNScorer-5f816cf5-456": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "HetrecLastFM-558ae692|LensKit.ItemKNNScorer-5f816cf5-456": {
+            "next_phase": 2,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.ImplicitMFScorer-db8d01ec-456": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.ImplicitMFScorer-db8d01ec-456": {
+            "next_phase": 1,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.PopScorer-dc44ee64-789": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.PopScorer-dc44ee64-789": {
+            "next_phase": 1,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "MovieLens100K-43a5f96f|LensKit.ItemKNNScorer-5f816cf5-789": {
+            "next_phase": 3,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        },
+        "Amazon2014VideoGames-6343a395|LensKit.ItemKNNScorer-5f816cf5-789": {
+            "next_phase": 1,
+            "next_fold": null,
+            "config": {
+                "feedback": "implicit"
+            }
+        }
+    }
+}
